@@ -12,5 +12,6 @@ esbuild
         sourcemap: true,
         target: ["es2020"],
         platform: "node",
+        plugins: [],
     })
     .catch(() => process.exit(1));
