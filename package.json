@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node build.js && nodemon build/bundle.js",
-    "nodemon": "nodemon build/index.js",
+    "dev": "",
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.9",
     "express": "^4.18.2"
   },
   "devDependencies": {

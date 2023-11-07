@@ -1,23 +1,21 @@
 import express from "express";
 import path from "path";
-import fs from "fs";
 
-const getHTML = (fileName: string) => {
-    return fs.readFileSync(
-        path.resolve(__dirname, `../views/${fileName}`),
-        "utf-8"
-    );
-};
+console.log("--> hello 2");
 
-const app = express();
+// const viewsDir = path.resolve(__dirname, "../views");
 
-app.use(express.static(path.resolve(__dirname, "../views")));
+// const app = express();
 
-app.get("/", (req, res) => {
-    const html = getHTML("index.html");
-    res.send(html);
-});
+// app.use(express.static("../public"));
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-});
+// app.set("view engine", "ejs");
+// app.set("views", viewsDir);
+
+// app.get("/", (req, res) => {
+//     res.render("test");
+// });
+
+// app.listen(3000, () => {
+//     console.log("Server is running on http://localhost:3000");
+// });
