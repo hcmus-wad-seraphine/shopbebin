@@ -1,7 +1,7 @@
 const esbuild = require("esbuild");
 const path = require("path");
 
-const buildDir = path.resolve(__dirname, "./build");
+const buildDir = path.resolve(__dirname, "./public/dist");
 
 esbuild
     .build({

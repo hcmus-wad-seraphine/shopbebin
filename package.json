@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "",
+    "dev": "node build.js && node public/dist/bundle.js",
     "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

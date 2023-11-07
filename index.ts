@@ -1,21 +1,14 @@
 import express from "express";
-import path from "path";
+import RootRouter from "./routes";
 
-console.log("--> hello 2");
+const app = express();
 
-// const viewsDir = path.resolve(__dirname, "../views");
+app.set("view engine", "ejs");
 
-// const app = express();
+app.use(express.static("public"));
 
-// app.use(express.static("../public"));
+app.use("/", RootRouter);
 
-// app.set("view engine", "ejs");
-// app.set("views", viewsDir);
-
-// app.get("/", (req, res) => {
-//     res.render("test");
-// });
-
-// app.listen(3000, () => {
-//     console.log("Server is running on http://localhost:3000");
-// });
+app.listen(3000, () => {
+    console.log("Server is running on http://localhost:3000");
+});
