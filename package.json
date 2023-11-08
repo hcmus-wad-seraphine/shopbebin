@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "dev": "nodemon --exec \"node build.js && node public/dist/bundle.js\" -e ts,ejs",
     "build": "node build.js",
