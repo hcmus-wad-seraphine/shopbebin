@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "nodemon --exec \"node build.js && node public/dist/bundle.js\" -e ts,ejs",
     "build": "node build.js",
+    "start": "node public/dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
