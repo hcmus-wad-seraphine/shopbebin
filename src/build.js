@@ -1,12 +1,9 @@
 const esbuild = require("esbuild");
-const path = require("path");
-
-const buildDir = path.resolve(__dirname, "./public/dist");
 
 esbuild
     .build({
-        entryPoints: ["./index.js"],
-        outfile: path.join(buildDir, "bundle.js"),
+        entryPoints: ["src/index.ts"],
+        outfile: "public/dist/bundle.js",
         bundle: true,
         minify: true,
         sourcemap: true,

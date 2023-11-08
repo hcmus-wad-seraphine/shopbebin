@@ -3,6 +3,7 @@ import RootRouter from "./routes";
 
 const app = express();
 
+app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
