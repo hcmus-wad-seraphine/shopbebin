@@ -7,8 +7,10 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "dev": "nodemon --exec \"node build.js && node public/dist/bundle.js\" -e ts,ejs",
-    "build": "node build.js",
+    "dev": "nodemon --exec \"pnpm run build\" -e ts,ejs & pnpm run start",
+    "dev:brave": "nodemon --exec \"pnpm run build && osascript tools/refresh-brave.scpt & pnpm run start\" -e ts,ejs",
+    "dev:chrome": "nodemon --exec \"pnpm run build && osascript tools/refresh-chrome.scpt & pnpm run start\" -e ts,ejs",
+    "build": "node tools/build.js",
     "start": "node public/dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
