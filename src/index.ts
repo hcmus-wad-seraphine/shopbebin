@@ -1,5 +1,6 @@
 import express from "express";
 import RootRouter from "./routes";
+import LoginRouter from "./routes/login";
 import net from "net";
 
 const app = express();
@@ -24,6 +25,7 @@ server.once("error", (error) => {
 server.once("listening", () => {
     server.close();
     app.use("/", RootRouter);
+    app.use("/login", LoginRouter);
     app.listen(port, () => {
         console.log("--> Running on http://localhost:3000");
     });
