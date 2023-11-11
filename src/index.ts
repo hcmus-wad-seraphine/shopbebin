@@ -1,7 +1,9 @@
+import "dotenv/config";
 import express from "express";
 import RootRouter from "./routes";
 import LoginRouter from "./routes/login";
 import net from "net";
+import { sequelize } from "./models/db/sequlize";
 
 const app = express();
 
@@ -22,10 +24,19 @@ server.once("error", (error) => {
     }
 });
 
-server.once("listening", () => {
+server.once("listening", async () => {
     server.close();
+
+    try {
+        await sequelize.authenticate();
+        console.log("Connection has been established successfully.");
+    } catch (error) {
+        throw error;
+    }
+
     app.use("/", RootRouter);
     app.use("/login", LoginRouter);
+
     app.listen(port, () => {
         console.log("--> Running on http://localhost:3000");
     });
