@@ -1,3 +1,11 @@
-h1 {
-    color: darkcyan;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  div {
+    @apply flex;
+  }
+  body {
+  }
 }
