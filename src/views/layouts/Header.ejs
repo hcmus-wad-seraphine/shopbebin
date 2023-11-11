@@ -1,0 +1,14 @@
+<div class="bg-primary flex justify-between items-center px-10 py-4">
+    <div>
+        <img class="w-10" src="/favicon.ico" alt="logo" />
+        <span class="text-white">Shopbebin</span>
+    </div>
+    <div class="bg-white rounded-full px-5 h-8 flex items-center justify-between w-[400px]">
+        <input type="text" placeholder="Search" />
+        <i class="fas fa-search text-black"></i>
+    </div>
+    <div>
+        <%- include('../components/Navigator.ejs', {href: '/login' , name: 'Log In' }) %>
+    </div>
+
+</div>
