@@ -7,8 +7,9 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "dev:brave": "nodemon --exec \"node tools/build.js && node public/dist/bundle.js && osascript tools/refresh-brave.scpt\" -e ts,ejs --ignore src/index.ts",
-    "dev:chrome": "nodemon --exec \"node tools/build.js && node public/dist/bundle.js && osascript tools/refresh-chrome.scpt\" -e ts,ejs --ignore src/index.ts",
+    "watch:css": "npx tailwindcss -i ./public/css/index.css -o ./public/dist/output.css --watch",
+    "dev:brave": "pnpm watch:css & nodemon --exec \"node tools/build.js && node public/dist/bundle.js && osascript tools/refresh-brave.scpt\" -e ts,ejs --ignore src/index.ts",
+    "dev:chrome": "pnpm watch:css & nodemon --exec \"node tools/build.js && node public/dist/bundle.js && osascript tools/refresh-chrome.scpt\" -e ts,ejs --ignore src/index.ts",
     "build": "node tools/build.js",
     "start": "node public/dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
