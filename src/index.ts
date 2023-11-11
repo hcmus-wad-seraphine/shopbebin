@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import RootRouter from "./routes";
-import LoginRouter from "./routes/Login";
+import LoginRouter from "./routes/login";
 import net from "net";
 import { sequelize } from "./models/database/sequlize";
 
