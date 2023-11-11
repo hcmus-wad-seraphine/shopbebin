@@ -17,10 +17,8 @@ const port = 3000;
 const server = net.createServer();
 
 server.once("error", (error) => {
-    if (error.name === "EADDRINUSE") {
-        console.log(`Port ${port} is already in use.`);
-    } else {
-        console.error("Error starting server:", error);
+    if (!error.message.includes("EADDRINUSE")) {
+        console.error("Error starting server:", error.message);
     }
 });
 
