@@ -5,12 +5,33 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login Page</title>
+	<link rel="stylesheet" href="dist/output.css" />
+	<script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	Hello bebe
+	<%- include('layouts/Header.ejs') %>
+		<div class="flex-col px-[400px] py-[100px] gap-4">
+			<h2 class="font-semibold text-xl">Log In</h2>
+			<div class="flex-col">
+				<p>Username or email adress</p>
+				<%- include ('components/TextInput.ejs') %>
+			</div>
+			<div class="flex-col">
+				<p>Password</p>
+				<%- include ('components/TextInput.ejs') %>
+			</div>
+			<div class="justify-between">
+				<div class="justify-center items-center gap-2">
+					<div class="w-4 h-4 rounded-sm border-[1px] border-black"></div>
+					Remember me
+				</div>
+				<a>Forget password</a>
+			</div>
+			<a href="/admin" class="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center">Log
+				In</a>
+		</div>
 
-	<a href="/">Home</a>
 </body>
 
 </html>
