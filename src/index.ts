@@ -3,7 +3,7 @@ import express from "express";
 import RootRouter from "./routes";
 import AdminLoginRouter from "./routes/admin/login";
 import net from "net";
-import { sequelize } from "./models/database/sequlize";
+import { sequelize } from "./models/database/sequelize";
 
 const app = express();
 
