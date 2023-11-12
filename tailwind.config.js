@@ -7,7 +7,10 @@ module.exports = {
         'primary': '#7FA0F4',
         'secondary': '#D1A3FF',
         'black': '#525252',
-      }
+      },
+      fontFamily: {
+        'mono': ['"Poppins"'],
+      },
     },
   },
   plugins: [],
