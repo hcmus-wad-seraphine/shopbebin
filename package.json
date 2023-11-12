@@ -7,9 +7,13 @@
     "node": ">=16.0.0"
   },
   "scripts": {
-    "watch:css": "npx tailwindcss -i ./public/css/index.css -o ./public/dist/output.css --watch",
-    "dev:brave": "pnpm watch:css & nodemon --exec \"node tools/build.js && node public/dist/bundle.js && osascript tools/refresh-brave.scpt\" -e ts,ejs --ignore src/index.ts",
-    "dev:chrome": "pnpm watch:css & nodemon --exec \"node tools/build.js && node public/dist/bundle.js && osascript tools/refresh-chrome.scpt\" -e ts,ejs --ignore src/index.ts",
+    "watch-css": "npx tailwindcss -i ./public/css/index.css -o ./public/dist/output.css --watch",
+    "nodemon-view:brave": "nodemon --exec \"osascript tools/refresh-brave.scpt\" -e ejs",
+    "nodemon-view:chrome": "nodemon --exec \"osascript tools/refresh-chrome.scpt\" -e ejs",
+    "nodemon-code:brave": "nodemon --exec \"node tools/build.js && node public/dist/bundle.js\" -e ts",
+    "nodemon-code:chrome": "nodemon --exec \"node tools/build.js && node public/dist/bundle.js\" -e ts",
+    "dev:brave": "concurrently \"pnpm watch-css\" \"pnpm nodemon-view:brave\" \"pnpm nodemon-code:brave\" \"pnpm start\"",
+    "dev:chrome": "concurrently \"pnpm watch-css\" \"pnpm nodemon-view:chrome\" \"pnpm nodemon-code:chrome\" \"pnpm start\"",
     "build": "node tools/build.js",
     "start": "node public/dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +31,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.20",
+    "concurrently": "^8.2.2",
     "esbuild": "0.19.5",
     "nodemon": "^3.0.1",
     "tailwindcss": "^3.3.5",
