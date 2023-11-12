@@ -10,28 +10,8 @@
 </head>
 
 <body>
-	<%- include('layouts/Header.ejs') %>
-		<div class="flex-col px-[400px] py-[100px] gap-4">
-			<h2 class="font-semibold text-xl">Log In</h2>
-			<div class="flex-col">
-				<p>Username or email adress</p>
-				<%- include ('components/TextInput.ejs') %>
-			</div>
-			<div class="flex-col">
-				<p>Password</p>
-				<%- include ('components/TextInput.ejs') %>
-			</div>
-			<div class="justify-between">
-				<div class="justify-center items-center gap-2">
-					<div class="w-4 h-4 rounded-sm border-[1px] border-black"></div>
-					Remember me
-				</div>
-				<a>Forget password</a>
-			</div>
-			<a href="/login"
-				class="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center">Login</a>
-		</div>
-
+	<%- include('layouts/Header.ejs', {loginHref: '/' }) %>
+		<%- include('./components/UtilsBar/index.ejs') %>
 </body>
 
 </html>
