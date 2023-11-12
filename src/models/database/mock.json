@@ -1,0 +1,2083 @@
+{
+	"PaymentMethod": [
+		"COD",
+		"Bank",
+		"EWallet"
+	],
+	"User": [
+		{
+			"id": "3",
+			"phone_number": "555111222",
+			"email": "user3@example.com",
+			"password_hashed": "hashed_password_3",
+			"created_at": "2023-01-03T12:00:00Z",
+			"updated_at": "2023-01-03T12:00:00Z"
+		},
+		{
+			"id": "4",
+			"phone_number": "333444555",
+			"email": "user4@example.com",
+			"password_hashed": "hashed_password_4",
+			"created_at": "2023-01-04T12:00:00Z",
+			"updated_at": "2023-01-04T12:00:00Z"
+		},
+		{
+			"id": "5",
+			"phone_number": "666777888",
+			"email": "user5@example.com",
+			"password_hashed": "hashed_password_5",
+			"created_at": "2023-01-05T12:00:00Z",
+			"updated_at": "2023-01-05T12:00:00Z"
+		},
+		{
+			"id": "6",
+			"phone_number": "111222333",
+			"email": "user6@example.com",
+			"password_hashed": "hashed_password_6",
+			"created_at": "2023-01-06T12:00:00Z",
+			"updated_at": "2023-01-06T12:00:00Z"
+		},
+		{
+			"id": "7",
+			"phone_number": "999888777",
+			"email": "user7@example.com",
+			"password_hashed": "hashed_password_7",
+			"created_at": "2023-01-07T12:00:00Z",
+			"updated_at": "2023-01-07T12:00:00Z"
+		},
+		{
+			"id": "8",
+			"phone_number": "444555666",
+			"email": "user8@example.com",
+			"password_hashed": "hashed_password_8",
+			"created_at": "2023-01-08T12:00:00Z",
+			"updated_at": "2023-01-08T12:00:00Z"
+		},
+		{
+			"id": "9",
+			"phone_number": "888999000",
+			"email": "user9@example.com",
+			"password_hashed": "hashed_password_9",
+			"created_at": "2023-01-09T12:00:00Z",
+			"updated_at": "2023-01-09T12:00:00Z"
+		},
+		{
+			"id": "10",
+			"phone_number": "123123123",
+			"email": "user10@example.com",
+			"password_hashed": "hashed_password_10",
+			"created_at": "2023-01-10T12:00:00Z",
+			"updated_at": "2023-01-10T12:00:00Z"
+		},
+		{
+			"id": "11",
+			"phone_number": "456456456",
+			"email": "user11@example.com",
+			"password_hashed": "hashed_password_11",
+			"created_at": "2023-01-11T12:00:00Z",
+			"updated_at": "2023-01-11T12:00:00Z"
+		},
+		{
+			"id": "12",
+			"phone_number": "789789789",
+			"email": "user12@example.com",
+			"password_hashed": "hashed_password_12",
+			"created_at": "2023-01-12T12:00:00Z",
+			"updated_at": "2023-01-12T12:00:00Z"
+		}
+	],
+	"Address": [
+		{
+			"id": "1",
+			"unit_number": "123",
+			"street": "Main Street",
+			"district": "Downtown",
+			"city": "Cityville"
+		},
+		{
+			"id": "2",
+			"unit_number": "456",
+			"street": "Broadway",
+			"district": "Uptown",
+			"city": "Cityville"
+		},
+		{
+			"id": "3",
+			"unit_number": "789",
+			"street": "Oak Avenue",
+			"district": "Suburbia",
+			"city": "Cityville"
+		},
+		{
+			"id": "4",
+			"unit_number": "101",
+			"street": "Pine Street",
+			"district": "Forest Hills",
+			"city": "Cityville"
+		},
+		{
+			"id": "5",
+			"unit_number": "222",
+			"street": "Sunset Boulevard",
+			"district": "Hollywood",
+			"city": "Cityville"
+		},
+		{
+			"id": "6",
+			"unit_number": "345",
+			"street": "Highland Avenue",
+			"district": "Highland Park",
+			"city": "Cityville"
+		},
+		{
+			"id": "7",
+			"unit_number": "567",
+			"street": "Ocean Drive",
+			"district": "Seaside",
+			"city": "Cityville"
+		},
+		{
+			"id": "8",
+			"unit_number": "876",
+			"street": "Mountain View",
+			"district": "Mountain Valley",
+			"city": "Cityville"
+		},
+		{
+			"id": "9",
+			"unit_number": "987",
+			"street": "Maple Lane",
+			"district": "Maplewood",
+			"city": "Cityville"
+		},
+		{
+			"id": "10",
+			"unit_number": "456",
+			"street": "Cherry Street",
+			"district": "Cherrywood",
+			"city": "Cityville"
+		},
+		{
+			"id": "11",
+			"unit_number": "789",
+			"street": "Rose Avenue",
+			"district": "Rosewood",
+			"city": "Cityville"
+		},
+		{
+			"id": "12",
+			"unit_number": "321",
+			"street": "River Road",
+			"district": "Riverside",
+			"city": "Cityville"
+		}
+	],
+	"UserShippingAddress": [
+		{
+			"user_id": "1",
+			"address_id": "1",
+			"is_default": true
+		},
+		{
+			"user_id": "2",
+			"address_id": "2",
+			"is_default": true
+		}
+	],
+	"UserPayment": [
+		{
+			"user_id": "1",
+			"payment_id": "1",
+			"is_default": true
+		},
+		{
+			"user_id": "2",
+			"payment_id": "2",
+			"is_default": true
+		}
+	],
+	"PaymentProvider": [
+		{
+			"id": "1",
+			"name": "BankProvider",
+			"api_key": "bank_api_key_123",
+			"metadata": {
+				"key": "value"
+			}
+		},
+		{
+			"id": "2",
+			"name": "EWalletProvider",
+			"api_key": "ewallet_api_key_456",
+			"metadata": {
+				"key": "value"
+			}
+		}
+	],
+	"Payment": [
+		{
+			"id": "1",
+			"method": "Bank",
+			"provider_id": "1",
+			"provider_account_id": "1234567890123456"
+		},
+		{
+			"id": "2",
+			"method": "EWallet",
+			"provider_id": "2",
+			"provider_account_id": "user@example.com"
+		}
+	],
+	"ProductCategory": [
+		{
+			"id": "1",
+			"name": "Electronics"
+		},
+		{
+			"id": "2",
+			"name": "Clothing"
+		}
+	],
+	"Product": [
+		{
+			"id": "1",
+			"sku": "ELECT123",
+			"name": "Smartphone",
+			"description": "High-performance smartphone",
+			"price": 599.99,
+			"stock_quantity": 100,
+			"category_id": "1",
+			"vendor_id": "1",
+			"created_at": "2023-02-01T12:00:00Z",
+			"updated_at": "2023-02-01T12:00:00Z"
+		},
+		{
+			"id": "2",
+			"sku": "CLOTH456",
+			"name": "Casual T-Shirt",
+			"description": "Comfortable cotton T-shirt",
+			"price": 29.99,
+			"stock_quantity": 200,
+			"category_id": "2",
+			"vendor_id": "2",
+			"created_at": "2023-02-02T12:00:00Z",
+			"updated_at": "2023-02-02T12:00:00Z"
+		},
+		{
+			"id": "3",
+			"sku": "GADGET789",
+			"name": "Wireless Headphones",
+			"description": "Premium wireless headphones with noise cancellation",
+			"price": 149.99,
+			"stock_quantity": 50,
+			"category_id": "1",
+			"vendor_id": "3",
+			"created_at": "2023-02-03T12:00:00Z",
+			"updated_at": "2023-02-03T12:00:00Z"
+		},
+		{
+			"id": "4",
+			"sku": "DRESS123",
+			"name": "Formal Dress",
+			"description": "Elegant formal dress for special occasions",
+			"price": 79.99,
+			"stock_quantity": 100,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-02-04T12:00:00Z",
+			"updated_at": "2023-02-04T12:00:00Z"
+		},
+		{
+			"id": "5",
+			"sku": "CAMERA567",
+			"name": "Digital Camera",
+			"description": "High-resolution digital camera for photography enthusiasts",
+			"price": 399.99,
+			"stock_quantity": 30,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-02-05T12:00:00Z",
+			"updated_at": "2023-02-05T12:00:00Z"
+		},
+		{
+			"id": "6",
+			"sku": "SHOES789",
+			"name": "Running Shoes",
+			"description": "Comfortable and durable running shoes for fitness enthusiasts",
+			"price": 59.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-02-06T12:00:00Z",
+			"updated_at": "2023-02-06T12:00:00Z"
+		},
+		{
+			"id": "7",
+			"sku": "TABLE456",
+			"name": "Modern Coffee Table",
+			"description": "Sleek and modern coffee table for your living room",
+			"price": 129.99,
+			"stock_quantity": 20,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-02-07T12:00:00Z",
+			"updated_at": "2023-02-07T12:00:00Z"
+		},
+		{
+			"id": "8",
+			"sku": "BACKPACK123",
+			"name": "Travel Backpack",
+			"description": "Spacious and durable backpack for travel enthusiasts",
+			"price": 49.99,
+			"stock_quantity": 150,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-02-08T12:00:00Z",
+			"updated_at": "2023-02-08T12:00:00Z"
+		},
+		{
+			"id": "9",
+			"sku": "YOGAMAT789",
+			"name": "Non-Slip Yoga Mat",
+			"description": "High-quality non-slip yoga mat for your workout sessions",
+			"price": 24.99,
+			"stock_quantity": 100,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-02-09T12:00:00Z",
+			"updated_at": "2023-02-09T12:00:00Z"
+		},
+		{
+			"id": "10",
+			"sku": "HEADPHONES456",
+			"name": "Over-Ear Headphones",
+			"description": "Comfortable over-ear headphones with immersive sound",
+			"price": 129.99,
+			"stock_quantity": 60,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-02-10T12:00:00Z",
+			"updated_at": "2023-02-10T12:00:00Z"
+		},
+		{
+			"id": "11",
+			"sku": "JACKET123",
+			"name": "Waterproof Jacket",
+			"description": "Stylish and waterproof jacket for outdoor activities",
+			"price": 89.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-02-11T12:00:00Z",
+			"updated_at": "2023-02-11T12:00:00Z"
+		},
+		{
+			"id": "12",
+			"sku": "SMARTWATCH789",
+			"name": "Smartwatch",
+			"description": "Feature-rich smartwatch for fitness tracking and notifications",
+			"price": 199.99,
+			"stock_quantity": 40,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-02-12T12:00:00Z",
+			"updated_at": "2023-02-12T12:00:00Z"
+		},
+		{
+			"id": "13",
+			"sku": "LAPTOP456",
+			"name": "Laptop",
+			"description": "High-performance laptop for work and entertainment",
+			"price": 899.99,
+			"stock_quantity": 50,
+			"category_id": "1",
+			"vendor_id": "3",
+			"created_at": "2023-02-13T12:00:00Z",
+			"updated_at": "2023-02-13T12:00:00Z"
+		},
+		{
+			"id": "14",
+			"sku": "SUNGLASSES123",
+			"name": "Polarized Sunglasses",
+			"description": "Stylish polarized sunglasses for sun protection",
+			"price": 39.99,
+			"stock_quantity": 100,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-02-14T12:00:00Z",
+			"updated_at": "2023-02-14T12:00:00Z"
+		},
+		{
+			"id": "15",
+			"sku": "DRONE789",
+			"name": "Quadcopter Drone",
+			"description": "Remote-controlled quadcopter drone for aerial photography",
+			"price": 249.99,
+			"stock_quantity": 30,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-02-15T12:00:00Z",
+			"updated_at": "2023-02-15T12:00:00Z"
+		},
+		{
+			"id": "16",
+			"sku": "RUNNINGSHORTS456",
+			"name": "Running Shorts",
+			"description": "Lightweight and breathable running shorts for active lifestyles",
+			"price": 19.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-02-16T12:00:00Z",
+			"updated_at": "2023-02-16T12:00:00Z"
+		},
+		{
+			"id": "17",
+			"sku": "COFFEE_TABLE123",
+			"name": "Rustic Coffee Table",
+			"description": "Rustic-style coffee table for a cozy living room",
+			"price": 149.99,
+			"stock_quantity": 20,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-02-17T12:00:00Z",
+			"updated_at": "2023-02-17T12:00:00Z"
+		},
+		{
+			"id": "18",
+			"sku": "BACKPACK456",
+			"name": "Hiking Backpack",
+			"description": "Durable hiking backpack with multiple compartments",
+			"price": 69.99,
+			"stock_quantity": 150,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-02-18T12:00:00Z",
+			"updated_at": "2023-02-18T12:00:00Z"
+		},
+		{
+			"id": "19",
+			"sku": "YOGA_BLOCK123",
+			"name": "Yoga Block Set",
+			"description": "Set of yoga blocks for support and stability during yoga practice",
+			"price": 14.99,
+			"stock_quantity": 100,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-02-19T12:00:00Z",
+			"updated_at": "2023-02-19T12:00:00Z"
+		},
+		{
+			"id": "20",
+			"sku": "WIRELESS_EARBUDS789",
+			"name": "Wireless Earbuds",
+			"description": "Compact wireless earbuds with excellent sound quality",
+			"price": 79.99,
+			"stock_quantity": 60,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-02-20T12:00:00Z",
+			"updated_at": "2023-02-20T12:00:00Z"
+		},
+		{
+			"id": "21",
+			"sku": "JACKET456",
+			"name": "Windproof Jacket",
+			"description": "Windproof and water-resistant jacket for outdoor adventures",
+			"price": 99.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-02-21T12:00:00Z",
+			"updated_at": "2023-02-21T12:00:00Z"
+		},
+		{
+			"id": "22",
+			"sku": "FITNESS_TRACKER123",
+			"name": "Fitness Tracker",
+			"description": "Advanced fitness tracker with heart rate monitoring",
+			"price": 129.99,
+			"stock_quantity": 40,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-02-22T12:00:00Z",
+			"updated_at": "2023-02-22T12:00:00Z"
+		},
+		{
+			"id": "23",
+			"sku": "SMART_TV789",
+			"name": "Smart TV",
+			"description": "Ultra HD smart TV with built-in streaming services",
+			"price": 799.99,
+			"stock_quantity": 30,
+			"category_id": "3",
+			"vendor_id": "3",
+			"created_at": "2023-02-23T12:00:00Z",
+			"updated_at": "2023-02-23T12:00:00Z"
+		},
+		{
+			"id": "24",
+			"sku": "SNEAKERS456",
+			"name": "Fashion Sneakers",
+			"description": "Stylish and comfortable sneakers for everyday wear",
+			"price": 49.99,
+			"stock_quantity": 120,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-02-24T12:00:00Z",
+			"updated_at": "2023-02-24T12:00:00Z"
+		},
+		{
+			"id": "25",
+			"sku": "DRONE_ACCESSORY123",
+			"name": "Drone Accessory Kit",
+			"description": "Essential accessories for enhancing drone capabilities",
+			"price": 59.99,
+			"stock_quantity": 50,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-02-25T12:00:00Z",
+			"updated_at": "2023-02-25T12:00:00Z"
+		},
+		{
+			"id": "26",
+			"sku": "SWIMWEAR789",
+			"name": "Swimwear Set",
+			"description": "Fashionable swimwear set for beach outings",
+			"price": 34.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-02-26T12:00:00Z",
+			"updated_at": "2023-02-26T12:00:00Z"
+		},
+		{
+			"id": "27",
+			"sku": "SIDE_TABLE456",
+			"name": "Modern Side Table",
+			"description": "Compact and modern side table for versatile use",
+			"price": 79.99,
+			"stock_quantity": 25,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-02-27T12:00:00Z",
+			"updated_at": "2023-02-27T12:00:00Z"
+		},
+		{
+			"id": "28",
+			"sku": "TRAVEL_BACKPACK123",
+			"name": "Convertible Travel Backpack",
+			"description": "Versatile backpack with convertible features for travel",
+			"price": 89.99,
+			"stock_quantity": 100,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-02-28T12:00:00Z",
+			"updated_at": "2023-02-28T12:00:00Z"
+		},
+		{
+			"id": "29",
+			"sku": "EXERCISE_MAT789",
+			"name": "Exercise Mat",
+			"description": "High-density exercise mat for home workouts",
+			"price": 19.99,
+			"stock_quantity": 150,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-02-29T12:00:00Z",
+			"updated_at": "2023-02-29T12:00:00Z"
+		},
+		{
+			"id": "30",
+			"sku": "BLUETOOTH_SPEAKER456",
+			"name": "Bluetooth Speaker",
+			"description": "Portable Bluetooth speaker with immersive sound",
+			"price": 59.99,
+			"stock_quantity": 70,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-03-01T12:00:00Z",
+			"updated_at": "2023-03-01T12:00:00Z"
+		},
+		{
+			"id": "31",
+			"sku": "HIKING_JACKET123",
+			"name": "Lightweight Hiking Jacket",
+			"description": "Lightweight jacket for comfortable hiking experiences",
+			"price": 69.99,
+			"stock_quantity": 90,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-03-02T12:00:00Z",
+			"updated_at": "2023-03-02T12:00:00Z"
+		},
+		{
+			"id": "32",
+			"sku": "SMART_HOME_DEVICE789",
+			"name": "Smart Home Device",
+			"description": "Intelligent device for enhancing your home automation",
+			"price": 129.99,
+			"stock_quantity": 40,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-03-03T12:00:00Z",
+			"updated_at": "2023-03-03T12:00:00Z"
+		},
+		{
+			"id": "33",
+			"sku": "GAMING_CONSOLE123",
+			"name": "Gaming Console",
+			"description": "Next-gen gaming console for immersive gaming experiences",
+			"price": 499.99,
+			"stock_quantity": 15,
+			"category_id": "3",
+			"vendor_id": "3",
+			"created_at": "2023-03-04T12:00:00Z",
+			"updated_at": "2023-03-04T12:00:00Z"
+		},
+		{
+			"id": "34",
+			"sku": "DESIGNER_SHIRT456",
+			"name": "Designer Shirt",
+			"description": "High-quality designer shirt for a stylish look",
+			"price": 89.99,
+			"stock_quantity": 60,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-03-05T12:00:00Z",
+			"updated_at": "2023-03-05T12:00:00Z"
+		},
+		{
+			"id": "35",
+			"sku": "DRONE_CAMERA789",
+			"name": "Drone Camera Upgrade",
+			"description": "Upgrade your drone with a high-resolution camera",
+			"price": 79.99,
+			"stock_quantity": 40,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-03-06T12:00:00Z",
+			"updated_at": "2023-03-06T12:00:00Z"
+		},
+		{
+			"id": "36",
+			"sku": "SUMMER_DRESS456",
+			"name": "Summer Dress",
+			"description": "Light and breezy summer dress for warm days",
+			"price": 39.99,
+			"stock_quantity": 90,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-03-07T12:00:00Z",
+			"updated_at": "2023-03-07T12:00:00Z"
+		},
+		{
+			"id": "37",
+			"sku": "TV_STAND123",
+			"name": "Modern TV Stand",
+			"description": "Stylish TV stand with ample storage space",
+			"price": 129.99,
+			"stock_quantity": 25,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-03-08T12:00:00Z",
+			"updated_at": "2023-03-08T12:00:00Z"
+		},
+		{
+			"id": "38",
+			"sku": "TRAVEL_LUGGAGE789",
+			"name": "Hardshell Travel Luggage",
+			"description": "Durable and secure hardshell luggage for travel",
+			"price": 119.99,
+			"stock_quantity": 35,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-03-09T12:00:00Z",
+			"updated_at": "2023-03-09T12:00:00Z"
+		},
+		{
+			"id": "39",
+			"sku": "YOGA_STRAP123",
+			"name": "Adjustable Yoga Strap",
+			"description": "Versatile yoga strap for improving flexibility",
+			"price": 9.99,
+			"stock_quantity": 120,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-03-10T12:00:00Z",
+			"updated_at": "2023-03-10T12:00:00Z"
+		},
+		{
+			"id": "40",
+			"sku": "WIRELESS_MOUSE456",
+			"name": "Wireless Mouse",
+			"description": "Ergonomic wireless mouse for efficient computing",
+			"price": 29.99,
+			"stock_quantity": 80,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-03-11T12:00:00Z",
+			"updated_at": "2023-03-11T12:00:00Z"
+		},
+		{
+			"id": "41",
+			"sku": "RAIN_JACKET789",
+			"name": "Packable Rain Jacket",
+			"description": "Lightweight and packable rain jacket for unpredictable weather",
+			"price": 49.99,
+			"stock_quantity": 50,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-03-12T12:00:00Z",
+			"updated_at": "2023-03-12T12:00:00Z"
+		},
+		{
+			"id": "42",
+			"sku": "HOME_SECURITY_DEVICE123",
+			"name": "Smart Home Security Device",
+			"description": "Enhance your home security with smart technology",
+			"price": 159.99,
+			"stock_quantity": 30,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-03-13T12:00:00Z",
+			"updated_at": "2023-03-13T12:00:00Z"
+		},
+		{
+			"id": "43",
+			"sku": "SURFBOARD456",
+			"name": "Beginner's Surfboard",
+			"description": "Sturdy surfboard for beginners learning to ride the waves",
+			"price": 199.99,
+			"stock_quantity": 20,
+			"category_id": "3",
+			"vendor_id": "3",
+			"created_at": "2023-03-14T12:00:00Z",
+			"updated_at": "2023-03-14T12:00:00Z"
+		},
+		{
+			"id": "44",
+			"sku": "TENNIS_RACKET789",
+			"name": "Professional Tennis Racket",
+			"description": "High-performance tennis racket for advanced players",
+			"price": 129.99,
+			"stock_quantity": 15,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-03-15T12:00:00Z",
+			"updated_at": "2023-03-15T12:00:00Z"
+		},
+		{
+			"id": "45",
+			"sku": "DRONE_BATTERY123",
+			"name": "Extended Drone Battery",
+			"description": "Long-lasting battery for extended drone flight time",
+			"price": 49.99,
+			"stock_quantity": 40,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-03-16T12:00:00Z",
+			"updated_at": "2023-03-16T12:00:00Z"
+		},
+		{
+			"id": "46",
+			"sku": "BEACH_HAT456",
+			"name": "Wide-Brim Beach Hat",
+			"description": "Stylish wide-brim hat for sun protection at the beach",
+			"price": 19.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-03-17T12:00:00Z",
+			"updated_at": "2023-03-17T12:00:00Z"
+		},
+		{
+			"id": "47",
+			"sku": "BOOKSHELF123",
+			"name": "Modern Bookshelf",
+			"description": "Contemporary bookshelf for organizing your favorite reads",
+			"price": 89.99,
+			"stock_quantity": 25,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-03-18T12:00:00Z",
+			"updated_at": "2023-03-18T12:00:00Z"
+		},
+		{
+			"id": "48",
+			"sku": "TRAVEL_ACCESSORY789",
+			"name": "Travel Organizer Set",
+			"description": "Complete set of travel organizers for hassle-free trips",
+			"price": 34.99,
+			"stock_quantity": 60,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-03-19T12:00:00Z",
+			"updated_at": "2023-03-19T12:00:00Z"
+		},
+		{
+			"id": "49",
+			"sku": "YOGA_MAT123",
+			"name": "Eco-Friendly Yoga Mat",
+			"description": "Environmentally friendly yoga mat for conscious practice",
+			"price": 29.99,
+			"stock_quantity": 100,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-03-20T12:00:00Z",
+			"updated_at": "2023-03-20T12:00:00Z"
+		},
+		{
+			"id": "50",
+			"sku": "WIRELESS_KEYBOARD456",
+			"name": "Wireless Mechanical Keyboard",
+			"description": "Responsive wireless mechanical keyboard for efficient typing",
+			"price": 69.99,
+			"stock_quantity": 50,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-03-21T12:00:00Z",
+			"updated_at": "2023-03-21T12:00:00Z"
+		},
+		{
+			"id": "51",
+			"sku": "RAIN_BOOT789",
+			"name": "Fashionable Rain Boots",
+			"description": "Stylish rain boots for staying chic on rainy days",
+			"price": 44.99,
+			"stock_quantity": 70,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-03-22T12:00:00Z",
+			"updated_at": "2023-03-22T12:00:00Z"
+		},
+		{
+			"id": "52",
+			"sku": "SMART_THERMOSTAT123",
+			"name": "Smart Thermostat",
+			"description": "Energy-efficient smart thermostat for home climate control",
+			"price": 89.99,
+			"stock_quantity": 30,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-03-23T12:00:00Z",
+			"updated_at": "2023-03-23T12:00:00Z"
+		},
+		{
+			"id": "53",
+			"sku": "COFFEE_MAKER456",
+			"name": "Espresso Coffee Maker",
+			"description": "High-quality coffee maker for brewing delicious espresso",
+			"price": 149.99,
+			"stock_quantity": 25,
+			"category_id": "1",
+			"vendor_id": "3",
+			"created_at": "2023-03-24T12:00:00Z",
+			"updated_at": "2023-03-24T12:00:00Z"
+		},
+		{
+			"id": "54",
+			"sku": "SPORTS_SHOES789",
+			"name": "Athletic Sports Shoes",
+			"description": "Performance-oriented sports shoes for active individuals",
+			"price": 79.99,
+			"stock_quantity": 40,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-03-25T12:00:00Z",
+			"updated_at": "2023-03-25T12:00:00Z"
+		},
+		{
+			"id": "55",
+			"sku": "SMARTWATCH123",
+			"name": "Smart Fitness Watch",
+			"description": "Feature-rich smartwatch for tracking fitness activities",
+			"price": 129.99,
+			"stock_quantity": 30,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-03-26T12:00:00Z",
+			"updated_at": "2023-03-26T12:00:00Z"
+		},
+		{
+			"id": "56",
+			"sku": "SUNGLASSES456",
+			"name": "Polarized Sunglasses",
+			"description": "Fashionable polarized sunglasses for UV protection",
+			"price": 39.99,
+			"stock_quantity": 60,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-03-27T12:00:00Z",
+			"updated_at": "2023-03-27T12:00:00Z"
+		},
+		{
+			"id": "57",
+			"sku": "BEDSIDE_LAMP123",
+			"name": "Modern Bedside Lamp",
+			"description": "Contemporary lamp for stylish bedside lighting",
+			"price": 49.99,
+			"stock_quantity": 50,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-03-28T12:00:00Z",
+			"updated_at": "2023-03-28T12:00:00Z"
+		},
+		{
+			"id": "58",
+			"sku": "BACKPACK789",
+			"name": "Tech-Ready Laptop Backpack",
+			"description": "Laptop backpack with dedicated tech compartments",
+			"price": 89.99,
+			"stock_quantity": 35,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-03-29T12:00:00Z",
+			"updated_at": "2023-03-29T12:00:00Z"
+		},
+		{
+			"id": "59",
+			"sku": "YOGA_BLOCK123",
+			"name": "Cork Yoga Block",
+			"description": "Natural cork yoga block for improved poses",
+			"price": 14.99,
+			"stock_quantity": 80,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-03-30T12:00:00Z",
+			"updated_at": "2023-03-30T12:00:00Z"
+		},
+		{
+			"id": "60",
+			"sku": "PORTABLE_CHARGER456",
+			"name": "Portable Power Bank",
+			"description": "Compact portable charger for on-the-go device charging",
+			"price": 24.99,
+			"stock_quantity": 100,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-03-31T12:00:00Z",
+			"updated_at": "2023-03-31T12:00:00Z"
+		},
+		{
+			"id": "61",
+			"sku": "UMBRELLA789",
+			"name": "Windproof Travel Umbrella",
+			"description": "Sturdy and windproof umbrella for travel convenience",
+			"price": 19.99,
+			"stock_quantity": 120,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-04-01T12:00:00Z",
+			"updated_at": "2023-04-01T12:00:00Z"
+		},
+		{
+			"id": "62",
+			"sku": "SMART_HOME_CAMERA123",
+			"name": "Smart Home Security Camera",
+			"description": "Wireless security camera for home surveillance",
+			"price": 79.99,
+			"stock_quantity": 45,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-04-02T12:00:00Z",
+			"updated_at": "2023-04-02T12:00:00Z"
+		},
+		{
+			"id": "63",
+			"sku": "WIRELESS_EARBUDS456",
+			"name": "Wireless Earbuds",
+			"description": "High-quality wireless earbuds for immersive audio experience",
+			"price": 69.99,
+			"stock_quantity": 30,
+			"category_id": "1",
+			"vendor_id": "3",
+			"created_at": "2023-04-03T12:00:00Z",
+			"updated_at": "2023-04-03T12:00:00Z"
+		},
+		{
+			"id": "64",
+			"sku": "RUNNING_SHOES789",
+			"name": "Running Shoes",
+			"description": "Comfortable running shoes for enhanced performance",
+			"price": 49.99,
+			"stock_quantity": 40,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-04-04T12:00:00Z",
+			"updated_at": "2023-04-04T12:00:00Z"
+		},
+		{
+			"id": "65",
+			"sku": "SMART_THERMOS123",
+			"name": "Smart Thermos",
+			"description": "Temperature-controlled smart thermos for beverages on the go",
+			"price": 34.99,
+			"stock_quantity": 25,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-04-05T12:00:00Z",
+			"updated_at": "2023-04-05T12:00:00Z"
+		},
+		{
+			"id": "66",
+			"sku": "FASHION_SUNHAT456",
+			"name": "Fashionable Sun Hat",
+			"description": "Trendy sun hat for a stylish look in the sun",
+			"price": 24.99,
+			"stock_quantity": 60,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-04-06T12:00:00Z",
+			"updated_at": "2023-04-06T12:00:00Z"
+		},
+		{
+			"id": "67",
+			"sku": "SMART_HOME_LIGHTING123",
+			"name": "Smart Home Lighting Kit",
+			"description": "Intelligent lighting kit for smart home automation",
+			"price": 119.99,
+			"stock_quantity": 35,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-04-07T12:00:00Z",
+			"updated_at": "2023-04-07T12:00:00Z"
+		},
+		{
+			"id": "68",
+			"sku": "BACKPACK_ACCESSORY789",
+			"name": "Outdoor Backpack Accessory Kit",
+			"description": "Accessory kit for enhancing your outdoor backpack",
+			"price": 19.99,
+			"stock_quantity": 50,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-04-08T12:00:00Z",
+			"updated_at": "2023-04-08T12:00:00Z"
+		},
+		{
+			"id": "69",
+			"sku": "PILATES_MAT123",
+			"name": "Extra Thick Pilates Mat",
+			"description": "Thick and comfortable mat for Pilates workouts",
+			"price": 29.99,
+			"stock_quantity": 80,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-04-09T12:00:00Z",
+			"updated_at": "2023-04-09T12:00:00Z"
+		},
+		{
+			"id": "70",
+			"sku": "BLUETOOTH_SPEAKER456",
+			"name": "Waterproof Bluetooth Speaker",
+			"description": "Durable and waterproof speaker for outdoor adventures",
+			"price": 39.99,
+			"stock_quantity": 70,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-04-10T12:00:00Z",
+			"updated_at": "2023-04-10T12:00:00Z"
+		},
+		{
+			"id": "71",
+			"sku": "WINTER_SCARF789",
+			"name": "Cozy Winter Scarf",
+			"description": "Warm and cozy scarf for winter fashion",
+			"price": 14.99,
+			"stock_quantity": 100,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-04-11T12:00:00Z",
+			"updated_at": "2023-04-11T12:00:00Z"
+		},
+		{
+			"id": "72",
+			"sku": "HOME_SECURITY_ALARM123",
+			"name": "Smart Home Security Alarm",
+			"description": "Wireless security alarm system for home protection",
+			"price": 89.99,
+			"stock_quantity": 45,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-04-12T12:00:00Z",
+			"updated_at": "2023-04-12T12:00:00Z"
+		},
+		{
+			"id": "73",
+			"sku": "AIR_PURIFIER456",
+			"name": "Smart Air Purifier",
+			"description": "Intelligent air purifier for clean and fresh indoor air",
+			"price": 159.99,
+			"stock_quantity": 20,
+			"category_id": "1",
+			"vendor_id": "3",
+			"created_at": "2023-04-13T12:00:00Z",
+			"updated_at": "2023-04-13T12:00:00Z"
+		},
+		{
+			"id": "74",
+			"sku": "HIKING_BOOTS789",
+			"name": "Waterproof Hiking Boots",
+			"description": "Durable and waterproof boots for adventurous hikes",
+			"price": 89.99,
+			"stock_quantity": 30,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-04-14T12:00:00Z",
+			"updated_at": "2023-04-14T12:00:00Z"
+		},
+		{
+			"id": "75",
+			"sku": "SMART_HOME_PLUG123",
+			"name": "Smart Home Plug",
+			"description": "Remote-controlled smart plug for home automation",
+			"price": 19.99,
+			"stock_quantity": 50,
+			"category_id": "1",
+			"vendor_id": "5",
+			"created_at": "2023-04-15T12:00:00Z",
+			"updated_at": "2023-04-15T12:00:00Z"
+		},
+		{
+			"id": "76",
+			"sku": "SUNSCREEN456",
+			"name": "Broad Spectrum Sunscreen",
+			"description": "High SPF sunscreen for effective sun protection",
+			"price": 14.99,
+			"stock_quantity": 80,
+			"category_id": "2",
+			"vendor_id": "6",
+			"created_at": "2023-04-16T12:00:00Z",
+			"updated_at": "2023-04-16T12:00:00Z"
+		},
+		{
+			"id": "77",
+			"sku": "SMART_HOME_CAMERA789",
+			"name": "Outdoor Security Camera",
+			"description": "Weather-resistant outdoor camera for home security",
+			"price": 79.99,
+			"stock_quantity": 40,
+			"category_id": "3",
+			"vendor_id": "7",
+			"created_at": "2023-04-17T12:00:00Z",
+			"updated_at": "2023-04-17T12:00:00Z"
+		},
+		{
+			"id": "78",
+			"sku": "TRAVEL_BACKPACK123",
+			"name": "Expandable Travel Backpack",
+			"description": "Versatile backpack with expandable storage for travel",
+			"price": 59.99,
+			"stock_quantity": 35,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-04-18T12:00:00Z",
+			"updated_at": "2023-04-18T12:00:00Z"
+		},
+		{
+			"id": "79",
+			"sku": "YOGA_STRAP789",
+			"name": "Adjustable Yoga Strap",
+			"description": "Durable and adjustable strap for yoga practice",
+			"price": 9.99,
+			"stock_quantity": 70,
+			"category_id": "4",
+			"vendor_id": "9",
+			"created_at": "2023-04-19T12:00:00Z",
+			"updated_at": "2023-04-19T12:00:00Z"
+		},
+		{
+			"id": "80",
+			"sku": "BLUETOOTH_EARBUDS123",
+			"name": "Bluetooth Sports Earbuds",
+			"description": "Wireless earbuds designed for active sports enthusiasts",
+			"price": 49.99,
+			"stock_quantity": 60,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-04-20T12:00:00Z",
+			"updated_at": "2023-04-20T12:00:00Z"
+		},
+		{
+			"id": "81",
+			"sku": "BEANIE_HAT456",
+			"name": "Cozy Knit Beanie Hat",
+			"description": "Warm and stylish beanie for cold weather",
+			"price": 19.99,
+			"stock_quantity": 90,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-04-21T12:00:00Z",
+			"updated_at": "2023-04-21T12:00:00Z"
+		},
+		{
+			"id": "82",
+			"sku": "SMART_HOME_SENSOR789",
+			"name": "Smart Home Motion Sensor",
+			"description": "Motion sensor for smart home security and automation",
+			"price": 29.99,
+			"stock_quantity": 25,
+			"category_id": "4",
+			"vendor_id": "12",
+			"created_at": "2023-04-22T12:00:00Z",
+			"updated_at": "2023-04-22T12:00:00Z"
+		},
+		{
+			"id": "83",
+			"sku": "NEW_SKU_83",
+			"name": "New Product 83",
+			"description": "Description for New Product 83",
+			"price": 59.99,
+			"stock_quantity": 50,
+			"category_id": "3",
+			"vendor_id": "3",
+			"created_at": "2023-04-23T12:00:00Z",
+			"updated_at": "2023-04-23T12:00:00Z"
+		},
+		{
+			"id": "84",
+			"sku": "NEW_SKU_84",
+			"name": "New Product 84",
+			"description": "Description for New Product 84",
+			"price": 69.99,
+			"stock_quantity": 40,
+			"category_id": "1",
+			"vendor_id": "4",
+			"created_at": "2023-04-24T12:00:00Z",
+			"updated_at": "2023-04-24T12:00:00Z"
+		},
+		{
+			"id": "85",
+			"sku": "NEW_SKU_85",
+			"name": "New Product 85",
+			"description": "Description for New Product 85",
+			"price": 79.99,
+			"stock_quantity": 30,
+			"category_id": "2",
+			"vendor_id": "5",
+			"created_at": "2023-04-25T12:00:00Z",
+			"updated_at": "2023-04-25T12:00:00Z"
+		},
+		{
+			"id": "86",
+			"sku": "NEW_SKU_86",
+			"name": "New Product 86",
+			"description": "Description for New Product 86",
+			"price": 49.99,
+			"stock_quantity": 60,
+			"category_id": "3",
+			"vendor_id": "6",
+			"created_at": "2023-04-26T12:00:00Z",
+			"updated_at": "2023-04-26T12:00:00Z"
+		},
+		{
+			"id": "87",
+			"sku": "NEW_SKU_87",
+			"name": "New Product 87",
+			"description": "Description for New Product 87",
+			"price": 99.99,
+			"stock_quantity": 25,
+			"category_id": "1",
+			"vendor_id": "7",
+			"created_at": "2023-04-27T12:00:00Z",
+			"updated_at": "2023-04-27T12:00:00Z"
+		},
+		{
+			"id": "88",
+			"sku": "NEW_SKU_88",
+			"name": "New Product 88",
+			"description": "Description for New Product 88",
+			"price": 39.99,
+			"stock_quantity": 50,
+			"category_id": "2",
+			"vendor_id": "8",
+			"created_at": "2023-04-28T12:00:00Z",
+			"updated_at": "2023-04-28T12:00:00Z"
+		},
+		{
+			"id": "89",
+			"sku": "NEW_SKU_89",
+			"name": "New Product 89",
+			"description": "Description for New Product 89",
+			"price": 29.99,
+			"stock_quantity": 80,
+			"category_id": "3",
+			"vendor_id": "9",
+			"created_at": "2023-04-29T12:00:00Z",
+			"updated_at": "2023-04-29T12:00:00Z"
+		},
+		{
+			"id": "90",
+			"sku": "NEW_SKU_90",
+			"name": "New Product 90",
+			"description": "Description for New Product 90",
+			"price": 19.99,
+			"stock_quantity": 100,
+			"category_id": "1",
+			"vendor_id": "10",
+			"created_at": "2023-04-30T12:00:00Z",
+			"updated_at": "2023-04-30T12:00:00Z"
+		},
+		{
+			"id": "91",
+			"sku": "NEW_SKU_91",
+			"name": "New Product 91",
+			"description": "Description for New Product 91",
+			"price": 44.99,
+			"stock_quantity": 70,
+			"category_id": "2",
+			"vendor_id": "11",
+			"created_at": "2023-05-01T12:00:00Z",
+			"updated_at": "2023-05-01T12:00:00Z"
+		},
+		{
+			"id": "92",
+			"sku": "NEW_SKU_92",
+			"name": "New Product 92",
+			"description": "Description for New Product 92",
+			"price": 54.99,
+			"stock_quantity": 45,
+			"category_id": "3",
+			"vendor_id": "12",
+			"created_at": "2023-05-02T12:00:00Z",
+			"updated_at": "2023-05-02T12:00:00Z"
+		},
+		{
+			"id": "93",
+			"sku": "NEW_SKU_93",
+			"name": "New Product 93",
+			"description": "Description for New Product 93",
+			"price": 64.99,
+			"stock_quantity": 60,
+			"category_id": "1",
+			"vendor_id": "3",
+			"created_at": "2023-05-03T12:00:00Z",
+			"updated_at": "2023-05-03T12:00:00Z"
+		},
+		{
+			"id": "94",
+			"sku": "NEW_SKU_94",
+			"name": "New Product 94",
+			"description": "Description for New Product 94",
+			"price": 74.99,
+			"stock_quantity": 40,
+			"category_id": "2",
+			"vendor_id": "4",
+			"created_at": "2023-05-04T12:00:00Z",
+			"updated_at": "2023-05-04T12:00:00Z"
+		},
+		{
+			"id": "95",
+			"sku": "NEW_SKU_95",
+			"name": "New Product 95",
+			"description": "Description for New Product 95",
+			"price": 84.99,
+			"stock_quantity": 30,
+			"category_id": "3",
+			"vendor_id": "5",
+			"created_at": "2023-05-05T12:00:00Z",
+			"updated_at": "2023-05-05T12:00:00Z"
+		},
+		{
+			"id": "96",
+			"sku": "NEW_SKU_96",
+			"name": "New Product 96",
+			"description": "Description for New Product 96",
+			"price": 54.99,
+			"stock_quantity": 70,
+			"category_id": "1",
+			"vendor_id": "6",
+			"created_at": "2023-05-06T12:00:00Z",
+			"updated_at": "2023-05-06T12:00:00Z"
+		},
+		{
+			"id": "97",
+			"sku": "NEW_SKU_97",
+			"name": "New Product 97",
+			"description": "Description for New Product 97",
+			"price": 94.99,
+			"stock_quantity": 25,
+			"category_id": "2",
+			"vendor_id": "7",
+			"created_at": "2023-05-07T12:00:00Z",
+			"updated_at": "2023-05-07T12:00:00Z"
+		},
+		{
+			"id": "98",
+			"sku": "NEW_SKU_98",
+			"name": "New Product 98",
+			"description": "Description for New Product 98",
+			"price": 44.99,
+			"stock_quantity": 50,
+			"category_id": "3",
+			"vendor_id": "8",
+			"created_at": "2023-05-08T12:00:00Z",
+			"updated_at": "2023-05-08T12:00:00Z"
+		},
+		{
+			"id": "99",
+			"sku": "NEW_SKU_99",
+			"name": "New Product 99",
+			"description": "Description for New Product 99",
+			"price": 34.99,
+			"stock_quantity": 80,
+			"category_id": "1",
+			"vendor_id": "9",
+			"created_at": "2023-05-09T12:00:00Z",
+			"updated_at": "2023-05-09T12:00:00Z"
+		},
+		{
+			"id": "100",
+			"sku": "NEW_SKU_100",
+			"name": "New Product 100",
+			"description": "Description for New Product 100",
+			"price": 24.99,
+			"stock_quantity": 100,
+			"category_id": "2",
+			"vendor_id": "10",
+			"created_at": "2023-05-10T12:00:00Z",
+			"updated_at": "2023-05-10T12:00:00Z"
+		}
+	],
+	"ProductImage": [
+		{
+			"id": "1",
+			"product_id": "1",
+			"url": "https://example.com/images/smartphone.jpg"
+		},
+		{
+			"id": "2",
+			"product_id": "2",
+			"url": "https://example.com/images/tshirt.jpg"
+		},
+		{
+			"id": "3",
+			"product_id": "3",
+			"url": "https://example.com/images/air_purifier.jpg"
+		},
+		{
+			"id": "4",
+			"product_id": "4",
+			"url": "https://example.com/images/hiking_boots.jpg"
+		},
+		{
+			"id": "5",
+			"product_id": "5",
+			"url": "https://example.com/images/smart_home_plug.jpg"
+		},
+		{
+			"id": "6",
+			"product_id": "6",
+			"url": "https://example.com/images/sunscreen.jpg"
+		},
+		{
+			"id": "7",
+			"product_id": "7",
+			"url": "https://example.com/images/smart_home_camera.jpg"
+		},
+		{
+			"id": "8",
+			"product_id": "8",
+			"url": "https://example.com/images/travel_backpack.jpg"
+		},
+		{
+			"id": "9",
+			"product_id": "9",
+			"url": "https://example.com/images/yoga_strap.jpg"
+		},
+		{
+			"id": "10",
+			"product_id": "10",
+			"url": "https://example.com/images/bluetooth_earbuds.jpg"
+		},
+		{
+			"id": "11",
+			"product_id": "11",
+			"url": "https://example.com/images/beanie_hat.jpg"
+		},
+		{
+			"id": "12",
+			"product_id": "12",
+			"url": "https://example.com/images/smart_home_sensor.jpg"
+		},
+		{
+			"id": "13",
+			"product_id": "13",
+			"url": "https://example.com/images/smartwatch.jpg"
+		},
+		{
+			"id": "14",
+			"product_id": "14",
+			"url": "https://example.com/images/running_shoes.jpg"
+		},
+		{
+			"id": "15",
+			"product_id": "15",
+			"url": "https://example.com/images/portable_speaker.jpg"
+		},
+		{
+			"id": "16",
+			"product_id": "16",
+			"url": "https://example.com/images/laptop_sleeve.jpg"
+		},
+		{
+			"id": "17",
+			"product_id": "17",
+			"url": "https://example.com/images/travel_mug.jpg"
+		},
+		{
+			"id": "18",
+			"product_id": "18",
+			"url": "https://example.com/images/fitness_mat.jpg"
+		},
+		{
+			"id": "19",
+			"product_id": "19",
+			"url": "https://example.com/images/umbrella.jpg"
+		},
+		{
+			"id": "20",
+			"product_id": "20",
+			"url": "https://example.com/images/back_massager.jpg"
+		},
+		{
+			"id": "21",
+			"product_id": "21",
+			"url": "https://example.com/images/coffee_maker.jpg"
+		},
+		{
+			"id": "22",
+			"product_id": "22",
+			"url": "https://example.com/images/hiking_backpack.jpg"
+		},
+		{
+			"id": "23",
+			"product_id": "23",
+			"url": "https://example.com/images/office_chair.jpg"
+		},
+		{
+			"id": "24",
+			"product_id": "24",
+			"url": "https://example.com/images/fitness_tracker.jpg"
+		},
+		{
+			"id": "25",
+			"product_id": "25",
+			"url": "https://example.com/images/portable_charger.jpg"
+		},
+		{
+			"id": "26",
+			"product_id": "26",
+			"url": "https://example.com/images/standing_desk.jpg"
+		},
+		{
+			"id": "27",
+			"product_id": "27",
+			"url": "https://example.com/images/air_fryer.jpg"
+		},
+		{
+			"id": "28",
+			"product_id": "28",
+			"url": "https://example.com/images/water_bottle.jpg"
+		},
+		{
+			"id": "29",
+			"product_id": "29",
+			"url": "https://example.com/images/smart_light_bulbs.jpg"
+		},
+		{
+			"id": "30",
+			"product_id": "30",
+			"url": "https://example.com/images/microphone.jpg"
+		},
+		{
+			"id": "31",
+			"product_id": "31",
+			"url": "https://example.com/images/desk_organizer.jpg"
+		},
+		{
+			"id": "32",
+			"product_id": "32",
+			"url": "https://example.com/images/wireless_mouse.jpg"
+		},
+		{
+			"id": "33",
+			"product_id": "33",
+			"url": "https://example.com/images/cookware_set.jpg"
+		},
+		{
+			"id": "34",
+			"product_id": "34",
+			"url": "https://example.com/images/bike_lock.jpg"
+		},
+		{
+			"id": "35",
+			"product_id": "35",
+			"url": "https://example.com/images/bedding_set.jpg"
+		},
+		{
+			"id": "36",
+			"product_id": "36",
+			"url": "https://example.com/images/blender.jpg"
+		},
+		{
+			"id": "37",
+			"product_id": "37",
+			"url": "https://example.com/images/portable_projector.jpg"
+		},
+		{
+			"id": "38",
+			"product_id": "38",
+			"url": "https://example.com/images/camera_tripod.jpg"
+		},
+		{
+			"id": "39",
+			"product_id": "39",
+			"url": "https://example.com/images/robotic_vacuum.jpg"
+		},
+		{
+			"id": "40",
+			"product_id": "40",
+			"url": "https://example.com/images/smart_thermostat.jpg"
+		},
+		{
+			"id": "41",
+			"product_id": "41",
+			"url": "https://example.com/images/weight_bench.jpg"
+		},
+		{
+			"id": "42",
+			"product_id": "42",
+			"url": "https://example.com/images/headphones.jpg"
+		},
+		{
+			"id": "43",
+			"product_id": "43",
+			"url": "https://example.com/images/sleeping_bag.jpg"
+		},
+		{
+			"id": "44",
+			"product_id": "44",
+			"url": "https://example.com/images/digital_camera.jpg"
+		},
+		{
+			"id": "45",
+			"product_id": "45",
+			"url": "https://example.com/images/air_conditioner.jpg"
+		},
+		{
+			"id": "46",
+			"product_id": "46",
+			"url": "https://example.com/images/sports_water_bottle.jpg"
+		},
+		{
+			"id": "47",
+			"product_id": "47",
+			"url": "https://example.com/images/gaming_mouse.jpg"
+		},
+		{
+			"id": "48",
+			"product_id": "48",
+			"url": "https://example.com/images/yoga_mat.jpg"
+		},
+		{
+			"id": "49",
+			"product_id": "49",
+			"url": "https://example.com/images/external_hard_drive.jpg"
+		},
+		{
+			"id": "50",
+			"product_id": "50",
+			"url": "https://example.com/images/smart_scale.jpg"
+		},
+		{
+			"id": "51",
+			"product_id": "51",
+			"url": "https://example.com/images/wireless_keyboard.jpg"
+		},
+		{
+			"id": "52",
+			"product_id": "52",
+			"url": "https://example.com/images/backpack.jpg"
+		},
+		{
+			"id": "53",
+			"product_id": "53",
+			"url": "https://example.com/images/television.jpg"
+		},
+		{
+			"id": "54",
+			"product_id": "54",
+			"url": "https://example.com/images/massage_gun.jpg"
+		},
+		{
+			"id": "55",
+			"product_id": "55",
+			"url": "https://example.com/images/smart_doorbell.jpg"
+		},
+		{
+			"id": "56",
+			"product_id": "56",
+			"url": "https://example.com/images/dumbbell_set.jpg"
+		},
+		{
+			"id": "57",
+			"product_id": "57",
+			"url": "https://example.com/images/luggage_set.jpg"
+		},
+		{
+			"id": "58",
+			"product_id": "58",
+			"url": "https://example.com/images/smart_watch.jpg"
+		},
+		{
+			"id": "59",
+			"product_id": "59",
+			"url": "https://example.com/images/standing_fan.jpg"
+		},
+		{
+			"id": "60",
+			"product_id": "60",
+			"url": "https://example.com/images/fitness_band.jpg"
+		},
+		{
+			"id": "61",
+			"product_id": "61",
+			"url": "https://example.com/images/gaming_laptop.jpg"
+		},
+		{
+			"id": "62",
+			"product_id": "62",
+			"url": "https://example.com/images/smart_camera.jpg"
+		},
+		{
+			"id": "63",
+			"product_id": "63",
+			"url": "https://example.com/images/desk_chair.jpg"
+		},
+		{
+			"id": "64",
+			"product_id": "64",
+			"url": "https://example.com/images/portable_hard_drive.jpg"
+		},
+		{
+			"id": "65",
+			"product_id": "65",
+			"url": "https://example.com/images/bluetooth_speaker.jpg"
+		},
+		{
+			"id": "66",
+			"product_id": "66",
+			"url": "https://example.com/images/gaming_headset.jpg"
+		},
+		{
+			"id": "67",
+			"product_id": "67",
+			"url": "https://example.com/images/tablet.jpg"
+		},
+		{
+			"id": "68",
+			"product_id": "68",
+			"url": "https://example.com/images/digital_watch.jpg"
+		},
+		{
+			"id": "69",
+			"product_id": "69",
+			"url": "https://example.com/images/waterproof_backpack.jpg"
+		},
+		{
+			"id": "70",
+			"product_id": "70",
+			"url": "https://example.com/images/multiport_adapter.jpg"
+		},
+		{
+			"id": "71",
+			"product_id": "71",
+			"url": "https://example.com/images/robot_vacuum.jpg"
+		},
+		{
+			"id": "72",
+			"product_id": "72",
+			"url": "https://example.com/images/office_desk.jpg"
+		},
+		{
+			"id": "73",
+			"product_id": "73",
+			"url": "https://example.com/images/running_shorts.jpg"
+		},
+		{
+			"id": "74",
+			"product_id": "74",
+			"url": "https://example.com/images/smart_umbrella.jpg"
+		},
+		{
+			"id": "75",
+			"product_id": "75",
+			"url": "https://example.com/images/portable_projector.jpg"
+		},
+		{
+			"id": "76",
+			"product_id": "76",
+			"url": "https://example.com/images/digital_scale.jpg"
+		},
+		{
+			"id": "77",
+			"product_id": "77",
+			"url": "https://example.com/images/smart_lock.jpg"
+		},
+		{
+			"id": "78",
+			"product_id": "78",
+			"url": "https://example.com/images/smart_plug.jpg"
+		},
+		{
+			"id": "79",
+			"product_id": "79",
+			"url": "https://example.com/images/folding_chair.jpg"
+		},
+		{
+			"id": "80",
+			"product_id": "80",
+			"url": "https://example.com/images/laptop_stand.jpg"
+		},
+		{
+			"id": "81",
+			"product_id": "81",
+			"url": "https://example.com/images/coffee_grinder.jpg"
+		},
+		{
+			"id": "82",
+			"product_id": "82",
+			"url": "https://example.com/images/wireless_earbuds.jpg"
+		},
+		{
+			"id": "83",
+			"product_id": "83",
+			"url": "https://example.com/images/air_fryer.jpg"
+		},
+		{
+			"id": "84",
+			"product_id": "84",
+			"url": "https://example.com/images/back_massager.jpg"
+		},
+		{
+			"id": "85",
+			"product_id": "85",
+			"url": "https://example.com/images/smart_thermostat.jpg"
+		},
+		{
+			"id": "86",
+			"product_id": "86",
+			"url": "https://example.com/images/gaming_keyboard.jpg"
+		},
+		{
+			"id": "87",
+			"product_id": "87",
+			"url": "https://example.com/images/digital_photo_frame.jpg"
+		},
+		{
+			"id": "88",
+			"product_id": "88",
+			"url": "https://example.com/images/wall_clock.jpg"
+		},
+		{
+			"id": "89",
+			"product_id": "89",
+			"url": "https://example.com/images/portable_air_conditioner.jpg"
+		},
+		{
+			"id": "90",
+			"product_id": "90",
+			"url": "https://example.com/images/cordless_drill.jpg"
+		},
+		{
+			"id": "91",
+			"product_id": "91",
+			"url": "https://example.com/images/smart_mug.jpg"
+		},
+		{
+			"id": "92",
+			"product_id": "92",
+			"url": "https://example.com/images/gaming_monitor.jpg"
+		},
+		{
+			"id": "93",
+			"product_id": "93",
+			"url": "https://example.com/images/robotic_lawn_mower.jpg"
+		},
+		{
+			"id": "94",
+			"product_id": "94",
+			"url": "https://example.com/images/smart_mirror.jpg"
+		},
+		{
+			"id": "95",
+			"product_id": "95",
+			"url": "https://example.com/images/instant_pot.jpg"
+		},
+		{
+			"id": "96",
+			"product_id": "96",
+			"url": "https://example.com/images/digital_notebook.jpg"
+		},
+		{
+			"id": "97",
+			"product_id": "97",
+			"url": "https://example.com/images/air_purifier.jpg"
+		},
+		{
+			"id": "98",
+			"product_id": "98",
+			"url": "https://example.com/images/portable_heater.jpg"
+		},
+		{
+			"id": "99",
+			"product_id": "99",
+			"url": "https://example.com/images/robotic_vacuum.jpg"
+		},
+		{
+			"id": "100",
+			"product_id": "100",
+			"url": "https://example.com/images/desk_lamp.jpg"
+		}
+	],
+	"Vendor": [
+		{
+			"id": "3",
+			"name": "TechGadgets",
+			"contact_person": "Alex Johnson",
+			"phone_number": "777-888-999",
+			"email": "alex.johnson@techgadgets.com",
+			"created_at": "2023-03-03T12:00:00Z",
+			"updated_at": "2023-03-03T12:00:00Z"
+		},
+		{
+			"id": "4",
+			"name": "HomeEssentials",
+			"contact_person": "Emily Davis",
+			"phone_number": "222-333-444",
+			"email": "emily.davis@homeessentials.com",
+			"created_at": "2023-03-04T12:00:00Z",
+			"updated_at": "2023-03-04T12:00:00Z"
+		},
+		{
+			"id": "5",
+			"name": "OutdoorAdventure",
+			"contact_person": "Mark Wilson",
+			"phone_number": "555-666-777",
+			"email": "mark.wilson@outdooradventure.com",
+			"created_at": "2023-03-05T12:00:00Z",
+			"updated_at": "2023-03-05T12:00:00Z"
+		},
+		{
+			"id": "6",
+			"name": "FurnitureHub",
+			"contact_person": "Grace Brown",
+			"phone_number": "888-999-000",
+			"email": "grace.brown@furniturehub.com",
+			"created_at": "2023-03-06T12:00:00Z",
+			"updated_at": "2023-03-06T12:00:00Z"
+		},
+		{
+			"id": "7",
+			"name": "FitnessFusion",
+			"contact_person": "Ryan Miller",
+			"phone_number": "111-222-333",
+			"email": "ryan.miller@fitnessfusion.com",
+			"created_at": "2023-03-07T12:00:00Z",
+			"updated_at": "2023-03-07T12:00:00Z"
+		},
+		{
+			"id": "8",
+			"name": "BeautyBoutique",
+			"contact_person": "Sophia Taylor",
+			"phone_number": "444-555-666",
+			"email": "sophia.taylor@beautyboutique.com",
+			"created_at": "2023-03-08T12:00:00Z",
+			"updated_at": "2023-03-08T12:00:00Z"
+		},
+		{
+			"id": "9",
+			"name": "PetParadise",
+			"contact_person": "Oliver Clark",
+			"phone_number": "999-888-777",
+			"email": "oliver.clark@petparadise.com",
+			"created_at": "2023-03-09T12:00:00Z",
+			"updated_at": "2023-03-09T12:00:00Z"
+		},
+		{
+			"id": "10",
+			"name": "JewelryGem",
+			"contact_person": "Ella Turner",
+			"phone_number": "666-777-888",
+			"email": "ella.turner@jewelrygem.com",
+			"created_at": "2023-03-10T12:00:00Z",
+			"updated_at": "2023-03-10T12:00:00Z"
+		},
+		{
+			"id": "11",
+			"name": "BookBarn",
+			"contact_person": "Mason White",
+			"phone_number": "123-456-789",
+			"email": "mason.white@bookbarn.com",
+			"created_at": "2023-03-11T12:00:00Z",
+			"updated_at": "2023-03-11T12:00:00Z"
+		},
+		{
+			"id": "12",
+			"name": "TravelTreasures",
+			"contact_person": "Ava Harris",
+			"phone_number": "789-987-654",
+			"email": "ava.harris@traveltreasures.com",
+			"created_at": "2023-03-12T12:00:00Z",
+			"updated_at": "2023-03-12T12:00:00Z"
+		}
+	],
+	"Order": [
+		{
+			"id": "1",
+			"user_id": "1",
+			"created_at": "2023-04-01T12:00:00Z"
+		},
+		{
+			"id": "2",
+			"user_id": "2",
+			"created_at": "2023-04-02T12:00:00Z"
+		}
+	],
+	"OrderItem": [
+		{
+			"id": "1",
+			"order_id": "1",
+			"product_id": "1",
+			"quantity": 2,
+			"price": 1199.98
+		},
+		{
+			"id": "2",
+			"order_id": "2",
+			"product_id": "2",
+			"quantity": 3,
+			"price": 89.97
+		}
+	],
+	"UserReview": [
+		{
+			"id": "1",
+			"user_id": "1",
+			"product_id": "1",
+			"rating": 5,
+			"review_text": "Excellent product!",
+			"created_at": "2023-05-01T12:00:00Z"
+		},
+		{
+			"id": "2",
+			"user_id": "2",
+			"product_id": "2",
+			"rating": 4,
+			"review_text": "Comfortable and stylish.",
+			"created_at": "2023-05-02T12:00:00Z"
+		}
+	]
+}
