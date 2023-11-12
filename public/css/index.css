@@ -6,6 +6,10 @@
   div {
     @apply flex;
   }
+  input {
+    @apply outline-none;
+  }
   body {
+    @apply font-mono;
   }
 }

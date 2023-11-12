@@ -1,14 +1,19 @@
 <div class="bg-primary flex justify-between items-center px-10 py-4">
-    <div>
-        <img class="w-10" src="/favicon.ico" alt="logo" />
-        <span class="text-white">Shopbebin</span>
+    <div class="gap-2 items-center">
+        <img class="w-10 rounded-full" src="/favicon.ico" alt="logo" />
+        <span class="text-white text-2xl font-semibold">Shopbebin</span>
     </div>
-    <div class="bg-white rounded-full px-5 h-8 flex items-center justify-between w-[400px]">
-        <input type="text" placeholder="Search" />
+    <div class="bg-white rounded-full px-5 h-8  items-center justify-between w-[600px]">
+        <input type="text" placeholder="Search" class="flex-1" />
         <i class="fas fa-search text-black"></i>
     </div>
     <div>
-        <%- include('../components/Navigator.ejs', {href: '/login' , name: 'Log In' }) %>
+        <div>
+            <%- include('../components/Navigator.ejs', {href: '/contact' , name: 'Contact' }) %>
+        </div>
+        <div>
+            <%- include('../components/Navigator.ejs', {href: '/login' , name: 'Log In' }) %>
+        </div>
     </div>
 
 </div>

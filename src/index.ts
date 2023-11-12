@@ -1,43 +1,47 @@
 import "dotenv/config";
+import tcpPortUsed from "tcp-port-used";
+
 import express from "express";
+
+import { sequelize } from "./models/database/sequelize";
+
 import RootRouter from "./routes";
-import LoginRouter from "./routes/login";
-import net from "net";
-import { sequelize } from "./models/database/sequlize";
+import CustomerLoginRouter from "./routes/login";
 
-const app = express();
+import AdminRouter from "./routes/admin";
+import AdminLoginRouter from "./routes/admin/login";
 
-app.set("views", "./src/views");
-app.set("view engine", "ejs");
+const PORT = Number(process.env.PORT) || 3000;
 
-app.use(express.static("public"));
-
-const port = 3000;
-
-const server = net.createServer();
-
-server.once("error", (error) => {
-    if (!error.message.includes("EADDRINUSE")) {
-        console.error("Error starting server:", error.message);
-    }
-});
-
-server.once("listening", async () => {
-    server.close();
-
+const start = async () => {
     try {
         await sequelize.authenticate();
-        console.log("Connection has been established successfully.");
+        console.log("--> Connection has been established successfully.");
     } catch (error) {
         throw error;
     }
 
+    const app = express();
+
+    app.set("views", "./src/views");
+    app.set("view engine", "ejs");
+
+    app.use(express.static("public"));
+
     app.use("/", RootRouter);
-    app.use("/login", LoginRouter);
+    app.use("/login", CustomerLoginRouter);
 
-    app.listen(port, () => {
-        console.log("--> Running on http://localhost:3000");
-    });
-});
+    app.use("/admin", AdminRouter);
+    app.use("/admin/login", AdminLoginRouter);
 
-server.listen(port);
+    const portUsed = await tcpPortUsed.check(PORT);
+    if (!portUsed) {
+        app.listen(3000, () => {
+            console.log(`--> Running on http://localhost:${3000}`);
+        });
+    } else {
+        console.log(`--> Port ${PORT} is already in use.`);
+    }
+};
+
+start();
