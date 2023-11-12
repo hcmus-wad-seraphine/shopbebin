@@ -4,22 +4,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Test Page</title>
+	<title>Login Page</title>
 	<link rel="stylesheet" href="dist/output.css" />
 	<script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<%- include('layouts/Header.ejs') %>
+	<%- include('../layouts/Header.ejs') %>
 		<div class="flex-col px-[400px] py-[100px] gap-4">
-			<h2 class="font-semibold text-xl">Log In</h2>
+			<h2 class="font-semibold text-xl">Log in as Admin</h2>
 			<div class="flex-col">
 				<p>Username or email adress</p>
-				<%- include ('components/TextInput.ejs') %>
+				<%- include ('../components/TextInput.ejs') %>
 			</div>
 			<div class="flex-col">
 				<p>Password</p>
-				<%- include ('components/TextInput.ejs') %>
+				<%- include ('../components/TextInput.ejs') %>
 			</div>
 			<div class="justify-between">
 				<div class="justify-center items-center gap-2">

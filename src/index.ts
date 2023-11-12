@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import RootRouter from "./routes";
-import LoginRouter from "./routes/login";
+import AdminLoginRouter from "./routes/admin/login";
 import net from "net";
 import { sequelize } from "./models/database/sequlize";
 
@@ -33,7 +33,7 @@ server.once("listening", async () => {
     }
 
     app.use("/", RootRouter);
-    app.use("/login", LoginRouter);
+    app.use("/admin/login", AdminLoginRouter);
 
     app.listen(port, () => {
         console.log("--> Running on http://localhost:3000");
