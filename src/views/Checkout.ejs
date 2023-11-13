@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check out</title>
+    <link rel="stylesheet" href="./dist/output.css" />
+    <script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <%- include('layouts/Header.ejs', {loginHref: '/login' }) %>
+        <div class="flex-col py-10 items-center ">
+            <div class="flex-col">
+                <div class="flex-col gap-5 h-[500px] overflow-scroll py-5 px-10 border border-black rounded-2xl">
+                    <% products.slice(0,5).map((item)=> { %>
+                        <%- include('./components/ProductDisplay/ProductInCart.ejs', { name: item.name, price:
+                            item.price}) %>
+                            <% }) %>
+                </div>
+                <div class="flex-col">
+                    <div class="text-xl justify-between">
+                        <p class="font-semibold">Shipping fee
+                        </p>
+                        <p> $ 10 </p>
+                    </div>
+
+                    <% const total=products.slice(0,5).reduce((accumulator, currentValue)=> accumulator +
+                        currentValue.price,
+                        10 ); %>
+                        <div class="text-xl justify-between">
+                            <p class="font-semibold">Total
+                            </p>
+                            <p>
+                                $ <%= total %>
+                            </p>
+                        </div>
+                </div>
+                <div class="self-center">
+                    <%- include('./components/GradientButton.ejs', {component: 'Confirm' , href: '/checkout' }) %>
+                </div>
+            </div>
+
+        </div>
+
+
+</body>
+
+</html>
