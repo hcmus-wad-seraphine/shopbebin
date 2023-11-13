@@ -4,23 +4,21 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Test Page</title>
+	<title>Shopbebin</title>
 	<link rel="stylesheet" href="/css/output.css" />
 	<script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 	<%- include('layouts/Header.ejs', {loginHref: '/login' }) %>
-		<div class="flex-col px-10">
+		<div class="container">
 			<%- include('./components/UtilsBar/index.ejs') %>
-				<div class="justify-between">
-					<%- include ('./components/FilterArea/index.ejs', {categories: categories}) %>
-						<%- include ('./components/ProductDisplay/index.ejs', {products: products, pageNumber:
-							pageNumber}) %>
+				<div>
+					<%- include ('./components/FilterArea/index.ejs', {categories}) %>
+						<%- include ('./components/ProductDisplay/index.ejs', {products, pageNumber}) %>
 				</div>
 
 		</div>
-
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<div class="flex-col">
+<div class="grow-[7] flex-col items-center">
     <div class="w-[1000px] justify-between items-center flex-wrap px-10 py-10">
         <% products.slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9).map((item)=> { %>
             <%- include ('./ProductCard.ejs', {img: "../favicon.ico" , sku: item.sku, name: item.name, price:
