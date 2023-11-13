@@ -18,7 +18,10 @@
     .container {
         @apply mx-auto max-w-7xl flex flex-col;
     }
-    .btn {
+    .btn-primary {
+        @apply bg-primary rounded-md justify-center items-center px-8 py-2 text-white hover:transition hover:bg-secondary;
+    }
+    .btn-secondary {
         @apply bg-secondary text-white rounded-full px-10 py-2 justify-center self-center;
     }
 }

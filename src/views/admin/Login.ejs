@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shopbebin Admin</title>
-  <link rel="stylesheet" href="/css/output.css" />
-  <script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
-</head>
+<%- include('../layouts/Head.ejs', {title: 'Shopbebin Admin Login' }) %>
 
 <body>
-  <%- include('../layouts/Header.ejs', {loginHref: '/admin/login' }) %>
+  <%- include('../layouts/AdminHeader.ejs') %>
   <div class="flex-col px-[400px] py-[100px] gap-4">
     <h2 class="font-semibold text-xl">Log In</h2>
     <div class="flex-col">
@@ -28,7 +22,7 @@
       </div>
       <a>Forget password</a>
     </div>
-    <a href="/admin" class="btn">Login</a>
+    <a href="/admin" class="btn-secondary">Login</a>
   </div>
 </body>
 
