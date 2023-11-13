@@ -17,7 +17,7 @@ const start = async () => {
 
     const portUsed = await tcpPortUsed.check(PORT);
     if (!portUsed) {
-        app.listen(3000, () => {
+        app.listen(PORT, () => {
             console.log(`--> Running on http://localhost:${PORT}`);
         });
     } else {
