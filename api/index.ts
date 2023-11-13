@@ -1,9 +1,3 @@
-import express from "express";
-
-const app = express();
-
-app.use("/", (req, res) => {
-    res.send("Hello World!");
-});
+import app from "../src/app";
 
 export default app;
