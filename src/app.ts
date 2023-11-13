@@ -19,7 +19,7 @@ app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
 app.use(compression());
-app.use(express.static("/public"));
+app.use(express.static("public"));
 
 app.use("/", RootRouter);
 app.use("/login", CustomerLoginRouter);
