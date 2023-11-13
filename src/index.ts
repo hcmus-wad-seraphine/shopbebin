@@ -3,6 +3,8 @@ import tcpPortUsed from "tcp-port-used";
 
 import express from "express";
 
+import compression from "compression";
+
 import { sequelize } from "./models/database/sequelize";
 
 import RootRouter from "./routes";
@@ -29,6 +31,7 @@ const start = async () => {
     app.set("views", "./src/views");
     app.set("view engine", "ejs");
 
+    app.use(compression());
     app.use(express.static("public"));
 
     app.use("/", RootRouter);
