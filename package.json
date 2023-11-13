@@ -15,7 +15,6 @@
     "dev:brave": "concurrently \"pnpm watch-css\" \"pnpm nodemon-view:brave\" \"pnpm nodemon-code:brave\" \"pnpm start\"",
     "dev:chrome": "concurrently \"pnpm watch-css\" \"pnpm nodemon-view:chrome\" \"pnpm nodemon-code:chrome\" \"pnpm start\"",
     "build": "node tools/build.js",
-    "vercel-build": "echo '--> hello from vercel'",
     "start": "node public/dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
