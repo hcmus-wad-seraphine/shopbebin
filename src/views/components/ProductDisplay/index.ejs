@@ -1,25 +1,25 @@
 <div class="grow-[7] flex-col items-center">
-    <div class="w-[1000px] justify-between items-center flex-wrap px-10 py-10">
-        <% products.slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9).map((item)=> { %>
-            <%- include ('./ProductCard.ejs', {img: "../favicon.ico" , sku: item.sku, name: item.name, price:
+  <div class="w-[1000px] justify-between items-center flex-wrap px-10 py-10">
+    <% products.slice((pageNumber - 1) * 9, (pageNumber - 1) * 9 + 9).map((item)=> { %>
+    <%- include ('./ProductCard.ejs', {img: "../favicon.ico" , sku: item.sku, name: item.name, price:
                 item.price}) %>
-                <% }) %>
-    </div>
+    <% }) %>
+  </div>
 
-    <div class="items-center gap-1 justify-center">
-        <div class="bg-secondary/80 px-4 py-2 rounded-md">
-            <i class="fa-solid fa-play fa-rotate-180"></i>
-        </div>
-        <div class="gap-1">
-            <% const numberOfPages=products.length / 9 %>
-                <% for (let i=1; i < numberOfPages; i++ ) { %>
-                    <a class="bg-secondary/50 w-8 h-8 flex justify-center items-center rounded-2xl">
-                        <%= i %>
-                    </a>
-                    <% } %>
-        </div>
-        <div class="bg-secondary/80 px-4 py-2 justify-center items-center rounded-md">
-            <i class="fa-solid fa-play"></i>
-        </div>
+  <div class="items-center gap-1 justify-center">
+    <div class="bg-secondary/80 px-4 py-2 rounded-md">
+      <i class="fa-solid fa-play fa-rotate-180"></i>
     </div>
+    <div class="gap-1">
+      <% const numberOfPages=products.length / 9 %>
+      <% for (let i=1; i < numberOfPages; i++ ) { %>
+      <a class="bg-secondary/50 w-8 h-8 flex justify-center items-center rounded-2xl">
+        <%= i %>
+      </a>
+      <% } %>
+    </div>
+    <div class="bg-secondary/80 px-4 py-2 justify-center items-center rounded-md">
+      <i class="fa-solid fa-play"></i>
+    </div>
+  </div>
 </div>

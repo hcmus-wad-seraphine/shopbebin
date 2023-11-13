@@ -1,12 +1,12 @@
 <div class="grow-[3] flex-col gap-6 py-5">
-    <div class="items-center gap-2">
-        <i class="fa-solid fa-filter text-secondary text-2xl"></i>
-        <h2 class="text-3xl text-secondary font-semibold">FILTER BY</h2>
-    </div>
+  <div class="items-center gap-2">
+    <i class="fa-solid fa-filter text-secondary text-2xl"></i>
+    <h2 class="text-3xl text-secondary font-semibold">FILTER BY</h2>
+  </div>
 
-    <div class="flex-col bg-secondary/30 gap-4 py-5 px-6 rounded-md">
-        <% categories.map((item)=> { %>
-            <%- include ('./CategoryItem.ejs', {title: item.title, itemlist: item.items}) %>
-                <% }) %>
-    </div>
+  <div class="flex-col bg-secondary/30 gap-4 py-5 px-6 rounded-md">
+    <% categories.map((item)=> { %>
+    <%- include ('./CategoryItem.ejs', {title: item.title, itemlist: item.items}) %>
+    <% }) %>
+  </div>
 </div>

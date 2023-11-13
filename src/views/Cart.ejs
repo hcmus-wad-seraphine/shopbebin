@@ -2,35 +2,32 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your cart</title>
-    <link rel="stylesheet" href="/css/output.css" />
-    <script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your cart</title>
+  <link rel="stylesheet" href="/css/output.css" />
+  <script src="https://kit.fontawesome.com/379ff98abd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <%- include('layouts/Header.ejs', {loginHref: '/login' }) %>
-        <div class="flex-col py-10 items-center ">
-            <div class="flex-col gap-5">
-                <div class="flex-col gap-5 h-[560px] overflow-scroll py-5 px-10 border border-black rounded-2xl">
-                    <% products.slice(0,10).map((item)=> { %>
-                        <div class="gap-5">
-                            <input type="checkbox" id="product">
-                            <%- include('./components/ProductDisplay/ProductInCart.ejs', { name: item.name, price:
+  <%- include('layouts/Header.ejs', {loginHref: '/login' }) %>
+  <div class="flex-col py-10 items-center ">
+    <div class="flex-col gap-5">
+      <div class="flex-col gap-5 h-[560px] overflow-scroll py-5 px-10 border border-black rounded-2xl">
+        <% products.slice(0,10).map((item)=> { %>
+        <div class="gap-5">
+          <input type="checkbox" id="product">
+          <%- include('./components/ProductDisplay/ProductInCart.ejs', { name: item.name, price:
                                 item.price}) %>
-                        </div>
-                        <% }) %>
-                </div>
-
-                <div class="self-center">
-                    <%- include('./components/GradientButton.ejs', {component: 'Checkout' , href: '/checkout' }) %>
-                </div>
-            </div>
-
         </div>
+        <% }) %>
+      </div>
 
-
+      <div class="self-center">
+        <%- include('./components/GradientButton.ejs', {component: 'Checkout' , href: '/checkout' }) %>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
