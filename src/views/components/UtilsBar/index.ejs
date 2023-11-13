@@ -1,20 +1,20 @@
-<div>
+<div class="items-center justify-between py-3">
     <%- include('../GradientButton.ejs', { href: "/" ,
-        component: '<i class="fas fa-bell"></i> <span>Notifications (0)</span>' }) %>
+        component: '<i class="fa-regular fa-bell"></i> <span>Notifications (0)</span>' }) %>
 
         <div class="gap-6">
-            <p>Basket</p>
-            <p>Hat</p>
-            <p>Gaming mouse</p>
-            <p>Cosmetics</p>
-            <p>Toy</p>
-            <p>Books</p>
-            <p>Rack</p>
-            <p>Backpack</p>
-            <p>Tumblr</p>
-            <p>Umbrella</p>
+            <a>Basket</a>
+            <a>Hat</a>
+            <a>Gaming mouse</a>
+            <a>Cosmetics</a>
+            <a>Toy</a>
+            <a>Books</a>
+            <a>Rack</a>
+            <a>Backpack</a>
+            <a>Tumblr</a>
+            <a>Umbrella</a>
         </div>
 
-        <%- include('../GradientButton.ejs', { href: "/" ,
-            component: '<i class="fas fa-shopping-cart"></i> <span>My cart (0)</span>' }) %>
+        <%- include('../GradientButton.ejs', { href: "/cart" ,
+            component: '<i class="fas fa-cart-shopping"></i> <span>My cart (0)</span>' }) %>
 </div>
