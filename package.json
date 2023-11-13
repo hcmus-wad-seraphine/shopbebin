@@ -7,7 +7,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "watch-css": "npx tailwindcss -i ./public/css/index.css -o ./public/dist/output.css --watch",
+    "watch-css": "npx tailwindcss -i ./public/css/index.css -o ./public/css/output.css --watch",
     "nodemon-view:brave": "nodemon --exec \"osascript tools/refresh-brave.scpt\" -e ejs",
     "nodemon-view:chrome": "nodemon --exec \"osascript tools/refresh-chrome.scpt\" -e ejs",
     "nodemon-code:brave": "nodemon --exec \"node tools/build.js && node public/dist/bundle.js\" -e ts",
