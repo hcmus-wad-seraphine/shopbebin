@@ -21,15 +21,6 @@ app.set("view engine", "ejs");
 app.use(compression());
 app.use(express.static("public"));
 
-app.use(
-    "/dist",
-    (req, res, next) => {
-        res.header("Content-Type", "text/css");
-        next();
-    },
-    express.static("dist")
-);
-
 app.use("/", RootRouter);
 app.use("/login", CustomerLoginRouter);
 app.use("/register", CustomerRegisterRouter);
