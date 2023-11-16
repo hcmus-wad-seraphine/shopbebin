@@ -9,8 +9,6 @@ const app = express();
 
 const publicDir = resolve(__dirname, "..", "public");
 
-console.log("publicDir", publicDir);
-
 app.use(express.static(publicDir));
 
 app.get("*", (req, res) => {
