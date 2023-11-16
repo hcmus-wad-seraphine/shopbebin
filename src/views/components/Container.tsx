@@ -9,7 +9,7 @@ interface Props {
 
 const Container: FC<Props> = ({ children, className }) => {
     return (
-        <div className={`${className}`}>
+        <div className={`flex-col ${className}`}>
             <Header />
             {children}
             <Footer />
