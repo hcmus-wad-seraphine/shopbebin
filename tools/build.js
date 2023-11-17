@@ -10,7 +10,7 @@ esbuild.buildSync({
 
 esbuild.buildSync({
     entryPoints: ["src/index.ts"],
-    outfile: "api/index.js",
+    outfile: "public/dist/api.js",
     bundle: true,
     minify: false,
     sourcemap: false,
