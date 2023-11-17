@@ -1,14 +1,10 @@
 import express from "express";
-import { fileURLToPath } from "url";
-import { dirname, join, resolve } from "path";
-import router from "./routes/index.ts";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { join, resolve } from "path";
+import router from "./routes";
 
 const app = express();
 
-const publicDir = resolve(__dirname, "..", "public");
+const publicDir = resolve("public");
 
 app.use(express.static(publicDir));
 

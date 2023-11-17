@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
-  "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
     "build": "node tools/build.js && npx tailwindcss -i ./src/views/input.css -o ./public/dist/output.css",
-    "start": "ts-node-esm src/index.ts",
-    "dev": "nodemon --watch src --exec \"pnpm build && pnpm start\" -e js,ts,jsx,tsx",
+    "start": "node api/index.js",
+    "dev": "nodemon --watch src/views --exec \"pnpm build && pnpm start\" -e js,ts,jsx,tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,7 +23,6 @@
     "esbuild": "^0.19.5",
     "nodemon": "^3.0.1",
     "tailwindcss": "^3.3.5",
-    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
