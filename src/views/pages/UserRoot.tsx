@@ -14,7 +14,7 @@ const UserRoot = () => {
             setLoading(false);
         };
 
-        fetchProducts();
+        fetchProducts().catch(console.error);
     }, []);
 
     return (
