@@ -1,8 +1,7 @@
 import express from "express";
 import { fileURLToPath } from "url";
 import { dirname, join, resolve } from "path";
-
-// import router from "./routes/index.js";
+import router from "./routes/index.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,7 +12,7 @@ const publicDir = resolve(__dirname, "..", "public");
 
 app.use(express.static(publicDir));
 
-// app.use("/api", router);
+app.use("/api", router);
 
 app.get("*", (req, res) => {
     res.sendFile(join(publicDir, "index.html"));
