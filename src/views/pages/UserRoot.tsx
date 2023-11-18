@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import Container from "../components/Container";
-import { Product } from "../../models/type";
 
 const UserRoot = () => {
     const [loading, setLoading] = useState(true);
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<
+        {
+            id: number;
+            name: string;
+        }[]
+    >([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
