@@ -3,18 +3,19 @@ import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
 
 interface Props {
-    children?: ReactNode;
-    className?: string;
+  isAdmin?: boolean;
+  children?: ReactNode;
+  className?: string;
 }
 
-const Container: FC<Props> = ({ children, className }) => {
-    return (
-        <div className={`flex-col ${className}`}>
-            <Header />
-            {children}
-            <Footer />
-        </div>
-    );
+const Container: FC<Props> = ({ isAdmin, children, className }) => {
+  return (
+    <div className={`flex-col ${className} w-full`}>
+      <Header isAdmin={isAdmin} />
+      {children}
+      <Footer />
+    </div>
+  );
 };
 
 export default Container;
