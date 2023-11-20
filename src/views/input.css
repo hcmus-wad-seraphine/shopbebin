@@ -3,7 +3,17 @@
 @tailwind utilities;
 
 @layer base {
-    div {
-        @apply flex;
-    }
+  div {
+    @apply flex font-mono;
+  }
+}
+
+.triangle::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0em;
+  border: 1em solid transparent;
+  border-left-color: #ffffff;
 }
