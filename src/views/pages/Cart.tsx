@@ -1,24 +1,25 @@
 import Button from "../components/Button";
-import CartTable from "../components/CartTable";
+import CartTable from "../components/Cart/CartTable";
+import Container from "../components/Container";
 import { products } from "../components/internal";
 
 const CartPage = () => {
-  //   const pageTitle = `Cart | ${process.env.siteTitle}`;
   const cart = products;
 
   return (
-    <div className="container mx-auto mb-20 min-h-screen flex-col">
-      <CartTable cart={cart} />
-      {/* <div className="max-w-sm mx-auto space-y-4 px-2">
-        <CheckOutButton webUrl={checkoutUrl} />
-        <BackToProductButton />
-      </div> */}
+    <Container isAdmin={false}>
+      <div className="container mx-auto mb-20 min-h-screen flex-col py-10">
+        <h1 className="font-bold text-primary text-2xl self-center">
+          YOUR CART
+        </h1>
+        <CartTable cart={cart} />
 
-      <Button href="/checkout" style="max-w-[200px]">
-        <i className="fa-solid fa-money-check"></i>
-        <p>Check out</p>
-      </Button>
-    </div>
+        <Button href="/checkout" style="max-w-[200px] self-center">
+          <i className="fa-solid fa-money-check"></i>
+          <p>Check out</p>
+        </Button>
+      </div>
+    </Container>
   );
 };
 

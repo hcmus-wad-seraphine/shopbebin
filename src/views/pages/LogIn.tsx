@@ -7,7 +7,7 @@ interface Props {}
 const LogIn = () => {
   return (
     <Container isAdmin={false}>
-      <div className="flex-col px-[400px] py-[100px] gap-4">
+      <div className="flex-col gap-4 px-[50px] sm:px-[150px] lg:px-[200px] xl:px-[300px] py-[50px]">
         <h2 className="font-semibold text-xl">Log In</h2>
 
         <div className="flex-col">
@@ -20,9 +20,12 @@ const LogIn = () => {
           <input type="text" className="flex-1 border-black border-[1px]" />
         </div>
 
-        <div className="justify-between">
+        <div className="justify-between items-center flex-col sm:flex-row">
           <div className="justify-center items-center gap-2">
-            <div className="w-4 h-4 rounded-sm border-[1px] border-black"></div>
+            <input
+              type="checkbox"
+              className="w-4 h-4 rounded-sm border-[1px] border-black"
+            />
             Remember me
           </div>
           <a>Forget password</a>

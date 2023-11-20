@@ -3,7 +3,7 @@ import Container from "../components/Container";
 const Register = () => {
   return (
     <Container isAdmin={false}>
-      <div className="flex-col px-[400px] py-[100px] gap-4">
+      <div className="flex-col gap-4 px-[50px] sm:px-[150px] lg:px-[200px] xl:px-[300px] py-[50px]">
         <h2 className="font-semibold text-xl">Create your account</h2>
         <div className="flex-col">
           <p>Username</p>
