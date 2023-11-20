@@ -12,8 +12,9 @@ const Container: FC<Props> = ({ isAdmin, children, className }) => {
   return (
     <div className={`flex-col ${className} w-full`}>
       <Header isAdmin={isAdmin} />
-      {children}
-      <Footer />
+      <div className="w-full lg:max-w-4xl xl:max-w-6xl mx-auto flex-col">
+        {children}
+      </div>
     </div>
   );
 };

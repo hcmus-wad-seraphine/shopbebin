@@ -7,7 +7,7 @@ interface Props {
 const Price: FC<Props> = ({ num, numSize }) => {
   return (
     <>
-      <span className={numSize}>{num}</span>
+      <span className={numSize}>$ {num}</span>
     </>
   );
 };

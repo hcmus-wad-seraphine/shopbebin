@@ -20,7 +20,7 @@ const ProductCard: FC<Props> = ({ product }) => {
       className="flex flex-1 justify-center mx-[30px] my-[20px]"
     >
       <a className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
-        <div className="h-72 border-b-2 border-palette-lighter relative">
+        <div className="h-72 border-b-2 border-palette-lighter relative p-2">
           <img
             src={image}
             alt={image}
