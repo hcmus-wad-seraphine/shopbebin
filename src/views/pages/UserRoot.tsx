@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Container from "../components/Container";
+import UtilsBar from "../components/UtilsBar";
+import ProductsDisplay from "../components/ProductsDisplay";
 
 const UserRoot = () => {
   const [loading, setLoading] = useState(true);
@@ -23,21 +25,8 @@ const UserRoot = () => {
 
   return (
     <Container>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <p>Products:</p>
-          <i className="fa-solid fa-bell"></i>
-          <ul>
-            {products.map((product) => (
-              <li key={product.id}>{product.name}</li>
-            ))}
-          </ul>
-
-          <a href="/cart">Cart</a>
-        </div>
-      )}
+      <UtilsBar />
+      {loading ? <div>Loading...</div> : <ProductsDisplay pageNumber={1} />}
     </Container>
   );
 };
