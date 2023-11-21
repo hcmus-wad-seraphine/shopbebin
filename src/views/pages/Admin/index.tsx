@@ -1,4 +1,43 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
+
+interface NavItemProps {
+    to: string;
+    label: string;
+}
+
+const NavItem = ({ to, label }: NavItemProps) => {
+    const location = useLocation();
+
+    return (
+        <Link
+            className={`${
+                location.pathname === to ? "text-sky-200" : "text-white"
+            } text-lg font-semibold px-4 py-2 rounded-xl`}
+            to={to}
+        >
+            {label}
+        </Link>
+    );
+};
+
+const navItems: NavItemProps[] = [
+    {
+        to: "/admin/profile",
+        label: "Thiết lập hồ sơ",
+    },
+    {
+        to: "/admin/accounts",
+        label: "Quản lý tài khoản",
+    },
+    {
+        to: "/admin/products",
+        label: "Quản lý sản phẩm",
+    },
+    {
+        to: "/admin/orders",
+        label: "Quản lý đơn hàng",
+    },
+];
 
 const AdminRoot = () => {
     return (
@@ -7,34 +46,21 @@ const AdminRoot = () => {
                 Admin Dashboard
             </Link>
 
-            <div className="px-4 py-2 rounded-xl flex gap-3 justify-between items-center bg-primary">
-                <Link
-                    className="text-white text-lg font-semibold"
-                    to="/admin/profile"
-                >
-                    Thiết lập hồ sơ
-                </Link>
-                <Link
-                    className="text-white text-lg font-semibold"
-                    to="/admin/accounts"
-                >
-                    Quản lý tài khoản
-                </Link>
-                <Link
-                    className="text-white text-lg font-semibold"
-                    to="/admin/products"
-                >
-                    Quản lý sản phẩm
-                </Link>
-                <Link
-                    className="text-white text-lg font-semibold"
-                    to="/admin/orders"
-                >
-                    Quản lý đơn hàng
-                </Link>
-            </div>
+            <div className="flex-col gap-6">
+                <div className="bg-primary justify-center px-4 py-2 rounded-xl gap-8 items-center">
+                    {navItems.map((navItem) => (
+                        <NavItem
+                            key={navItem.to}
+                            to={navItem.to}
+                            label={navItem.label}
+                        />
+                    ))}
+                </div>
 
-            <Outlet />
+                <div>
+                    <Outlet />
+                </div>
+            </div>
         </div>
     );
 };
