@@ -16,7 +16,7 @@ describe("users query flow", () => {
         phone: "0123456789",
         addresses: [
             {
-                unit_number: "123A",
+                unitNumber: "123A",
                 street: "Ho Tung Mau",
                 district: "Quan 1",
                 city: "Ho Chi Minh",
