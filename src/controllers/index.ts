@@ -5,7 +5,7 @@ export const getProduct = async (id: string) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(mockProducts.find((product) => product.id === id));
-            }, 1000);
+            }, 500);
         });
     };
 
@@ -19,7 +19,7 @@ export const getProducts = async () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(mockProducts);
-            }, 1000);
+            }, 500);
         });
     };
 
