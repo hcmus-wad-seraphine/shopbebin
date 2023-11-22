@@ -1,18 +1,18 @@
 import Price from "../Price";
 import { FC } from "react";
-import { Product } from "../internal";
+import { ProductMetadata } from "@prisma/client";
 
 interface Props {
-  product: Product;
+  product: ProductMetadata;
 }
 
 const ProductCard: FC<Props> = ({ product }) => {
   const handle = product.id;
   const title = product.name;
-  const description = product.description;
-  const price = product.price;
+  const description = product.desc;
+  const price = 10;
 
-  const image = product.thumbnail;
+  const image = product.images[0];
 
   return (
     <a
