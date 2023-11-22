@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getProduct } from "@controllers/products";
 import { type ProductMetadata } from "@prisma/client";
 import ProductCard from "@components/ProductsDisplay/ProductCard";
 import Container from "@components/Container";
@@ -14,7 +13,8 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const product = await getProduct(productId);
+      const data = await fetch(`/api/products/${productId}`);
+      const product = await data.json();
       setProduct(product);
     };
 

@@ -3,7 +3,7 @@ import { getProduct, getProducts } from "../controllers/products";
 
 const router = express.Router();
 
-router.get("/product/:id", (req, res) => {
+router.get("/products/:id", (req, res) => {
   const fetchProduct = async () => {
     const product = await getProduct(req.params.id);
     res.json(product);
