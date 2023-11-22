@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getProduct } from "../../controllers";
+import { getProduct } from "@controllers/products";
 import { ProductMetadata } from "@prisma/client";
-import ProductCard from "../components/ProductsDisplay/ProductCard";
-import Container from "../components/Container";
-import Loading from "../components/Loading";
+import ProductCard from "@components/ProductsDisplay/ProductCard";
+import Container from "@components/Container";
+import Loading from "@components/Loading";
 
 const ProductDetail = () => {
     const location = useLocation();

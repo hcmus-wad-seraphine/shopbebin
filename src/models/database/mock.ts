@@ -64,6 +64,7 @@ export const mockUsers: User[] = [
                 city: "City 1",
             },
         ],
+        passwordHash: "123456",
     },
     {
         id: "2",
@@ -77,5 +78,6 @@ export const mockUsers: User[] = [
                 city: "City 2",
             },
         ],
+        passwordHash: "123456",
     },
 ];

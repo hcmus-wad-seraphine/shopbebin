@@ -1,4 +1,4 @@
-import { mockProducts } from "../models/database/mock";
+import { mockProducts } from "@models/database/mock";
 
 export const getProduct = async (id: string) => {
     const fetchProduct = () => {
