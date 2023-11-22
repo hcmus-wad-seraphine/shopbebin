@@ -2,16 +2,16 @@ import { useState, useEffect, FC } from "react";
 // import { useUpdateCartQuantityContext } from "@/context/Store";
 import Price from "../Price";
 // import { getCartSubTotal } from "@/utils/helpers";
-import { Product } from "../internal";
 import ProductInCart from "./ProductInCart";
+import { ProductMetadata } from "@prisma/client";
 
 interface Props {
-  cart: Product[];
+  cart: ProductMetadata[];
 }
 
 const CartTable: FC<Props> = ({ cart }) => {
   //   const updateCartQuantity = useUpdateCartQuantityContext();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductMetadata[]>([]);
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Product } from "../internal";
 import Price from "../Price";
+import { ProductMetadata } from "@prisma/client";
 
 interface Props {
   onUpdateItem: (id: string, quantity: number) => void;
-  item: Product;
+  item: ProductMetadata;
 }
 
 const ProductInCart: FC<Props> = ({ onUpdateItem, item }) => {
@@ -17,8 +17,8 @@ const ProductInCart: FC<Props> = ({ onUpdateItem, item }) => {
         <input type="checkbox" />
 
         <img
-          src={item.thumbnail}
-          alt={item.thumbnail}
+          src={item.images[0]}
+          alt={item.images[0]}
           height={52}
           width={52}
           className={`rounded-md hidden sm:inline-flex`}
@@ -39,14 +39,14 @@ const ProductInCart: FC<Props> = ({ onUpdateItem, item }) => {
           name="variant-quantity"
           min="1"
           step="1"
-          value={item.stock}
+          value={1}
           onChange={(e) => onUpdateItem(item.id, e.target.valueAsNumber)}
           className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-secondary focus:ring-secondary"
         />
       </td>
 
       <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
-        <Price num={item.price} numSize="text-lg" />
+        <Price num={10} numSize="text-lg" />
       </td>
       <td className="font-primary font-medium px-4 sm:px-6 py-4">
         <button
