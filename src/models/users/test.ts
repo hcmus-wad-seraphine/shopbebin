@@ -9,11 +9,15 @@ import {
 
 describe("users query flow", () => {
     const randomEmail = Math.random().toString(36).substring(7);
+    const randomPhone = Math.random().toString(36).substring(7);
+    const randomPassword = Math.random().toString(36).substring(7);
+    const randomPasswordHash = randomPassword;
 
     let user: User = {
         id: "",
         email: randomEmail + "@shopbebin.com",
-        phone: "0123456789",
+        phone: randomPhone,
+        passwordHash: randomPasswordHash,
         addresses: [
             {
                 unitNumber: "123A",
@@ -29,6 +33,7 @@ describe("users query flow", () => {
             email: user.email,
             phone: user.phone,
             addresses: user.addresses,
+            passwordHash: user.passwordHash,
         });
         const createdUser = await getUserByEmail(user.email);
         expect(createdUser).not.toBeNull();
