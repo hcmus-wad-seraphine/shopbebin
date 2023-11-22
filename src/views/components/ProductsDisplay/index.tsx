@@ -22,7 +22,6 @@ const ProductsDisplay: FC<Props> = ({ products, pageNumber }) => {
                     .map((product) => (
                         <ProductCard product={product} />
                     ))}
-                ;
             </div>
 
             <div className="items-center gap-1 justify-center">
