@@ -12,6 +12,7 @@ import ProfilePage from "./pages/Admin/Profile";
 import AccountsPage from "./pages/Admin/Accounts";
 import ProductsPage from "./pages/Admin/Products";
 import OrdersPage from "./pages/Admin/Orders";
+import ProductDetail from "./pages/ProductDetail";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
     {
         path: "/checkout",
         element: <Checkout />,
+    },
+    {
+        path: "/products/:id",
+        element: <ProductDetail />,
     },
 ]);
 

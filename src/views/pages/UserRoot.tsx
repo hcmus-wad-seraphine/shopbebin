@@ -3,6 +3,7 @@ import Container from "../components/Container";
 import UtilsBar from "../components/UtilsBar";
 import ProductsDisplay from "../components/ProductsDisplay";
 import { ProductMetadata } from "@prisma/client";
+import Loading from "../components/Loading";
 
 const UserRoot = () => {
     const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ const UserRoot = () => {
         <Container>
             <UtilsBar />
             {loading ? (
-                <div>Loading...</div>
+                <Loading />
             ) : (
                 <ProductsDisplay products={products} pageNumber={1} />
             )}
