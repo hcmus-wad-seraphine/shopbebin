@@ -1,20 +1,21 @@
 import { type FC, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   style?: string;
-  href: string;
+  to: string;
   children?: ReactNode;
 }
 
-const Button: FC<Props> = ({ href, children, style }) => {
+const NavigateButton: FC<Props> = ({ to: href, children, style }) => {
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className={`flex bg-gradient-to-b from-primary to-secondary px-3 py-2 justify-center items-center rounded-full gap-2 text-white ${style}`}
     >
       {children}
-    </a>
+    </Link>
   );
 };
 
-export default Button;
+export default NavigateButton;

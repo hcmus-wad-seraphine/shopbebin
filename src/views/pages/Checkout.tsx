@@ -1,4 +1,4 @@
-import Button from "@components/Button";
+import NavigateButton from "@views/components/NavigateButton";
 import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Container from "@components/Container";
 import Price from "@components/Price";
@@ -8,7 +8,7 @@ const Checkout = () => {
   const total = products.slice(0, 5).reduce((accumulator, currentValue) => accumulator + 10, 10);
 
   return (
-    <Container isAdmin={false}>
+    <Container>
       <div className="flex-col py-10 items-center">
         <div className="flex-col gap-2">
           <div className="flex-col gap-5 h-[500px] overflow-scroll py-5 px-10 border border-black rounded-2xl">
@@ -37,13 +37,14 @@ const Checkout = () => {
               />
             </div>
           </div>
+
           <div className="self-center">
-            <Button
-              href="/checkout"
+            <NavigateButton
               style="max-w-[200px] self-center"
+              to="/checkout"
             >
               Confirm
-            </Button>
+            </NavigateButton>
           </div>
         </div>
       </div>

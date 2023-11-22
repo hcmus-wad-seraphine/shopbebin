@@ -1,36 +1,31 @@
-import Button from "./Button";
+import NavigateButton from "./NavigateButton";
 
 const UtilsBar = () => {
   return (
     <div className="items-center justify-between py-3">
-      <Button
-        href="/notifications"
+      <NavigateButton
         style="max-w-[200px]"
+        to="/"
       >
         <i className="fas fa-solid fa-bell"></i>
         <p>Notifications</p>
-      </Button>
+      </NavigateButton>
 
       <div className="gap-6">
-        <a>Basket</a>
-        <a>Hat</a>
-        <a>Gaming mouse</a>
-        <a>Cosmetics</a>
-        <a>Toy</a>
-        <a>Books</a>
-        <a>Rack</a>
-        <a>Backpack</a>
-        <a>Tumblr</a>
-        <a>Umbrella</a>
+        <a>Milk tea</a>
+        <a>Fruit tea</a>
+        <a>Smoothie</a>
+        <a>Ice cream</a>
+        <a>Snack</a>
       </div>
 
-      <Button
-        href="/cart"
+      <NavigateButton
         style="max-w-[200px]"
+        to="/cart"
       >
         <i className="fas fa-solid fa-shopping-cart"></i>
         <p>My cart</p>
-      </Button>
+      </NavigateButton>
     </div>
   );
 };
