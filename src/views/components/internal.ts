@@ -1,4 +1,4 @@
-import { ProductMetadata } from "@prisma/client"
+import { ProductMetadata } from "@prisma/client";
 
 export interface Product {
     id: string;

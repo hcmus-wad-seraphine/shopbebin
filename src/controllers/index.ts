@@ -1,12 +1,10 @@
+import { mockProducts } from "../models/database/mock";
+
 export const getProducts = async () => {
     const fetchProducts = () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve([
-                    { id: 1, name: "Product 1" },
-                    { id: 2, name: "Product 2" },
-                    { id: 3, name: "Product 3" },
-                ]);
+                resolve(mockProducts);
             }, 1000);
         });
     };
