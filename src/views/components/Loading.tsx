@@ -1,10 +1,11 @@
 const Loading = () => {
     return (
-        <div className="flex items-center gap-2">
-            <p>Đang tải</p>
+        <div className="fixed top-0 left-0 w-full h-full justify-center items-center gap-1">
+            <p className={`text-xl text-primary font-semibold`}>Loading</p>
+
             <svg
                 aria-hidden="true"
-                className="w-4 h-4 text-primary animate-spin fill-white"
+                className={`w-6 h-6 animate-spin fill-primary text-secondary`}
                 viewBox="0 0 100 101"
                 xmlns="http://www.w3.org/2000/svg"
             >
