@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full justify-center items-center gap-1">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 justify-center items-center gap-2">
       <p className={`text-xl text-primary font-semibold`}>Loading</p>
 
       <svg
