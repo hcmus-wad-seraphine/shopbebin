@@ -1,45 +1,50 @@
 import Container from "@components/Container";
+import { FormContainer, FormInput } from "@views/components/Form";
+import { type FormEvent } from "react";
 
 const Register = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+  };
+
   return (
-    <Container isAdmin={false}>
-      <div className="flex-col gap-4 px-[50px] sm:px-[150px] lg:px-[200px] xl:px-[300px] py-[50px]">
+    <Container>
+      <FormContainer onSubmit={handleSubmit}>
         <h2 className="font-semibold text-xl">Create your account</h2>
-        <div className="flex-col">
-          <p>Username</p>
-          <input
-            type="text"
-            className="flex-1 border-black border-[1px]"
-          />
-        </div>
-        <div className="flex-col">
-          <p>Email adress</p>
-          <input
-            type="text"
-            className="flex-1 border-black border-[1px]"
-          />
-        </div>
-        <div className="flex-col">
-          <p>Password</p>
-          <input
-            type="text"
-            className="flex-1 border-black border-[1px]"
-          />
-        </div>
-        <div className="flex-col">
-          <p>Confirm your password</p>
-          <input
-            type="text"
-            className="flex-1 border-black border-[1px]"
-          />
-        </div>
-        <a
-          href="/"
+
+        <FormInput
+          label="Phone number"
+          name="register--phone"
+        />
+
+        <FormInput
+          label="Email"
+          name="register--email"
+          type="email"
+        />
+
+        <FormInput
+          label="Password"
+          name="register--password"
+          type="password"
+        />
+
+        <FormInput
+          label="Confirm password"
+          name="register--confirm-password"
+          type="password"
+        />
+
+        <button
           className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
+          type="submit"
         >
           Register
-        </a>
-      </div>
+        </button>
+      </FormContainer>
     </Container>
   );
 };
