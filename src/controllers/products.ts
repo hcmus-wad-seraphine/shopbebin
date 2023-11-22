@@ -1,29 +1,30 @@
 import { mockProducts } from "@models/database/mock";
+import type { ProductMetadata } from "@prisma/client";
 
 export const getProduct = async (id: string) => {
-    const fetchProduct = () => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(mockProducts.find((product) => product.id === id));
-            }, 500);
-        });
-    };
+  const fetchProduct = async () => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(mockProducts.find((product) => product.id === id));
+      }, 500);
+    });
+  };
 
-    const product = await fetchProduct();
+  const product = await fetchProduct();
 
-    return product;
+  return product as ProductMetadata;
 };
 
 export const getProducts = async () => {
-    const fetchProducts = () => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(mockProducts);
-            }, 500);
-        });
-    };
+  const fetchProducts = async () => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(mockProducts);
+      }, 500);
+    });
+  };
 
-    const products = await fetchProducts();
+  const products = await fetchProducts();
 
-    return products;
+  return products as ProductMetadata[];
 };

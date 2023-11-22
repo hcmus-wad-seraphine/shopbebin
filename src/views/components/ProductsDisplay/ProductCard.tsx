@@ -1,6 +1,6 @@
 import Price from "../Price";
-import { FC } from "react";
-import { ProductMetadata } from "@prisma/client";
+import { type FC } from "react";
+import { type ProductMetadata } from "@prisma/client";
 
 interface Props {
   product: ProductMetadata;
@@ -31,14 +31,15 @@ const ProductCard: FC<Props> = ({ product }) => {
           <div className="font-primary text-palette-primary text-2xl pt-4 px-4 font-semibold">
             {title}
           </div>
-          <div className="text-lg text-gray-600 p-4 font-primary font-light">
-            {description}
-          </div>
+          <div className="text-lg text-gray-600 p-4 font-primary font-light">{description}</div>
           <div
             className="text-black font-primary font-medium text-base absolute bottom-0 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-secondary/30 
             rounded-tl-sm triangle"
           >
-            <Price num={price} numSize="text-lg" />
+            <Price
+              num={price}
+              numSize="text-lg"
+            />
           </div>
         </div>
       </a>

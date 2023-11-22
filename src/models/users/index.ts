@@ -1,53 +1,53 @@
-import { User } from "@prisma/client";
+import { type User } from "@prisma/client";
 import { getPrismaClient } from "../prisma";
 
 export const createUser = async (user: Omit<User, "id">) => {
-    const client = getPrismaClient();
-    await client.user.create({
-        data: user,
-    });
+  const client = getPrismaClient();
+  await client.user.create({
+    data: user,
+  });
 };
 
 export const getUserByEmail = async (email: string) => {
-    const client = getPrismaClient();
-    return await client.user.findUnique({
-        where: {
-            email,
-        },
-    });
+  const client = getPrismaClient();
+  return await client.user.findUnique({
+    where: {
+      email,
+    },
+  });
 };
 
 export const getUserByPhone = async (phone: string) => {
-    const client = getPrismaClient();
-    return await client.user.findUnique({
-        where: {
-            phone,
-        },
-    });
+  const client = getPrismaClient();
+  return await client.user.findUnique({
+    where: {
+      phone,
+    },
+  });
 };
 
 export const getUsers = async () => {
-    const client = getPrismaClient();
-    return await client.user.findMany();
+  const client = getPrismaClient();
+  return await client.user.findMany();
 };
 
 export const updateUser = async (user: User) => {
-    const client = getPrismaClient();
-    const { id, ...data } = user;
+  const client = getPrismaClient();
+  const { id, ...data } = user;
 
-    await client.user.update({
-        where: {
-            id,
-        },
-        data,
-    });
+  await client.user.update({
+    where: {
+      id,
+    },
+    data,
+  });
 };
 
 export const deleteUser = async (id: string) => {
-    const client = getPrismaClient();
-    await client.user.delete({
-        where: {
-            id,
-        },
-    });
+  const client = getPrismaClient();
+  await client.user.delete({
+    where: {
+      id,
+    },
+  });
 };

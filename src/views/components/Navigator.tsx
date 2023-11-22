@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   href: string;
@@ -7,9 +8,12 @@ interface Props {
 
 const Navigator: FC<Props> = ({ href, title }) => {
   return (
-    <a href={href} className="px-2 py-1 text-white">
+    <Link
+      to={href}
+      className="px-2 py-1 text-white"
+    >
       {title}
-    </a>
+    </Link>
   );
 };
 

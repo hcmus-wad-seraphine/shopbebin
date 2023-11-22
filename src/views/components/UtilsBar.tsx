@@ -3,7 +3,10 @@ import Button from "./Button";
 const UtilsBar = () => {
   return (
     <div className="items-center justify-between py-3">
-      <Button href="/notifications" style="max-w-[200px]">
+      <Button
+        href="/notifications"
+        style="max-w-[200px]"
+      >
         <i className="fas fa-solid fa-bell"></i>
         <p>Notifications</p>
       </Button>
@@ -21,7 +24,10 @@ const UtilsBar = () => {
         <a>Umbrella</a>
       </div>
 
-      <Button href="/cart" style="max-w-[200px]">
+      <Button
+        href="/cart"
+        style="max-w-[200px]"
+      >
         <i className="fas fa-solid fa-shopping-cart"></i>
         <p>My cart</p>
       </Button>

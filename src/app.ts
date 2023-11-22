@@ -11,7 +11,7 @@ app.use(express.static(publicDir));
 app.use("/api", router);
 
 app.get("*", (req, res) => {
-    res.sendFile(join(publicDir, "index.html"));
+  res.sendFile(join(publicDir, "index.html"));
 });
 
 export default app;

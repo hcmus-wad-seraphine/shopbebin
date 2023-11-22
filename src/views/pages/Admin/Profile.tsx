@@ -1,5 +1,5 @@
 const ProfilePage = () => {
-    return <div>Thiết lập hồ sơ</div>;
+  return <div>Thiết lập hồ sơ</div>;
 };
 
 export default ProfilePage;

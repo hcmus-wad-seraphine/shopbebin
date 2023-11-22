@@ -1,9 +1,9 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, type FC } from "react";
 // import { useUpdateCartQuantityContext } from "@/context/Store";
 import Price from "../Price";
 // import { getCartSubTotal } from "@/utils/helpers";
 import ProductInCart from "./ProductInCart";
-import { ProductMetadata } from "@prisma/client";
+import { type ProductMetadata } from "@prisma/client";
 
 interface Props {
   cart: ProductMetadata[];
@@ -29,18 +29,12 @@ const CartTable: FC<Props> = ({ cart }) => {
       <table className="w-full">
         <thead>
           <tr className="uppercase text-xs sm:text-sm text-palette-primary border-b border-palette-light">
-            <th className="font-primary text-secondary text-xl font-bold px-6 py-4">
-              Product
-            </th>
-            <th className="font-primary text-secondary text-xl font-bold px-6 py-4">
-              Quantity
-            </th>
+            <th className="font-primary text-secondary text-xl font-bold px-6 py-4">Product</th>
+            <th className="font-primary text-secondary text-xl font-bold px-6 py-4">Quantity</th>
             <th className="font-primary text-secondary text-xl font-bold px-6 py-4 hidden sm:table-cell">
               Price
             </th>
-            <th className="font-primary text-secondary text-xl font-bold px-6 py-4">
-              Remove
-            </th>
+            <th className="font-primary text-secondary text-xl font-bold px-6 py-4">Remove</th>
           </tr>
         </thead>
 
@@ -61,7 +55,10 @@ const CartTable: FC<Props> = ({ cart }) => {
               <td></td>
 
               <td className="font-primary text-end text-lg text-palette-primary font-medium px-4 sm:px-6 py-4">
-                <Price num={subtotal} numSize="text-xl" />
+                <Price
+                  num={subtotal}
+                  numSize="text-xl"
+                />
               </td>
             </tr>
           )}
