@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node tools/build.js && npx tailwindcss -i ./src/views/input.css -o ./public/dist/output.css",
-    "vercel-build": "node tools/build.js && npx tailwindcss -i ./src/views/input.css -o ./public/dist/output.css",
+    "vercel-build": "pnpm schema && node tools/build.js && npx tailwindcss -i ./src/views/input.css -o ./public/dist/output.css",
     "start": "node ./public/dist/api.js",
     "schema": "npx prisma generate",
     "dev": "nodemon --watch src/views --exec \"pnpm build && pnpm start\" -e js,ts,jsx,tsx,css",
