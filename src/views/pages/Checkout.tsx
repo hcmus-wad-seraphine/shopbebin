@@ -7,10 +7,7 @@ import { products } from "../components/internal";
 const Checkout = () => {
   const total = products
     .slice(0, 5)
-    .reduce(
-      (accumulator, currentValue) => accumulator + currentValue.price,
-      10
-    );
+    .reduce((accumulator, currentValue) => accumulator + 10, 10);
 
   return (
     <Container isAdmin={false}>
