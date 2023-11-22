@@ -1,4 +1,4 @@
-import { mockProducts } from "@models/database/mock";
+import { mockProducts } from "../models/database/mock";
 import type { ProductMetadata } from "@prisma/client";
 
 export const getProduct = async (id: string) => {
