@@ -1,19 +1,20 @@
+import { Link } from "react-router-dom";
 import Navigator from "../components/Navigator";
 
 const Header = () => {
   return (
     <div className="bg-primary flex justify-between items-center px-10 py-4">
-      <a
-        href="/"
+      <Link
         className="flex gap-2 items-center"
+        to="/"
       >
         <img
-          className="w-10 rounded-full"
+          className="min-h-[40px] w-10 rounded-full"
           src="/favicon.ico"
           alt="logo"
         />
         <span className="text-white text-2xl font-semibold">Shopbebin</span>
-      </a>
+      </Link>
 
       <div className="bg-white rounded-full px-5 h-8 items-center justify-between w-[600px]">
         <input
