@@ -1,8 +1,13 @@
 import Container from "@components/Container";
 import { FormContainer, FormInput } from "@views/components/Form";
-import { type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { type ApiResponse } from "routes";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState<string>();
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -11,7 +16,7 @@ const Register = () => {
     const password = data["register--password"];
     const confirmPassword = data["register--confirm-password"];
     if (password !== confirmPassword) {
-      alert("Password and confirm password must match");
+      setError("Password and confirm password must match");
       return;
     }
 
@@ -26,12 +31,19 @@ const Register = () => {
           "Content-Type": "application/json",
         },
       });
-      const data = await response.json();
-      console.log(data);
+
+      const data: ApiResponse = await response.json();
+
+      if (data.ok) {
+        navigate("/login");
+      } else {
+        setError(data.errorMessage);
+      }
     };
 
     register().catch((err) => {
       console.error("[ERROR: register]", err);
+      setError("Something went wrong. Please try again later.");
     });
   };
 
@@ -62,6 +74,8 @@ const Register = () => {
           name="register--confirm-password"
           type="password"
         />
+
+        {error !== undefined && <p className="text-red-500">{error}</p>}
 
         <button
           className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"

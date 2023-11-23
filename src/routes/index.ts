@@ -1,13 +1,23 @@
 import express from "express";
+import bcrypt from "bcryptjs";
 import { getProduct, getProducts } from "../controllers/products";
 import { createUser } from "models/users";
+
+export interface ApiResponse {
+  ok: boolean;
+  data?: object;
+  message?: string;
+  errorMessage?: string;
+}
 
 const router = express.Router();
 
 router.post("/register", (req, res) => {
   const { email, phone, password } = req.body;
 
-  const passwordHash = password; // TODO: Hash this using bcrypt
+  const saltRounds = 10;
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const passwordHash = bcrypt.hashSync(password, salt);
 
   const user = {
     email: email as string,
@@ -18,11 +28,19 @@ router.post("/register", (req, res) => {
 
   const register = async () => {
     await createUser(user);
-    res.json({ message: "User created" });
+    const response: ApiResponse = {
+      ok: true,
+      data: user,
+    };
+    res.json(response);
   };
 
-  register().catch((err) => {
-    res.status(500).json({ error: err });
+  register().catch(() => {
+    const response: ApiResponse = {
+      ok: false,
+      errorMessage: "Email or phone number already exists",
+    };
+    res.status(500).json(response);
   });
 });
 
