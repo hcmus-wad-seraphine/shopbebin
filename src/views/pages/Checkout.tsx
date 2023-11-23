@@ -1,8 +1,8 @@
-import NavigateButton from "@views/components/NavigateButton";
 import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Container from "@components/Container";
-import Price from "@components/Price";
 import { products } from "@components/internal";
+import Price from "@components/Price";
+import NavigateButton from "@views/components/NavigateButton";
 
 const Checkout = () => {
   const total = products.slice(0, 5).reduce((accumulator, currentValue) => accumulator + 10, 10);

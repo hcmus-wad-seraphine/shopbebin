@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from "react";
+
 import Header from "../layouts/Header";
 
 interface Props {

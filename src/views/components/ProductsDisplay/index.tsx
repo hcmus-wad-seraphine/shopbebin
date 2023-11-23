@@ -1,7 +1,8 @@
-import { type FC } from "react";
-import ProductCard from "./ProductCard";
 import { type ProductMetadata } from "@prisma/client";
+import { type FC } from "react";
 import { Link } from "react-router-dom";
+
+import ProductCard from "./ProductCard";
 
 interface Props {
   products: ProductMetadata[];

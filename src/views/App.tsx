@@ -1,18 +1,19 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import UserRoot from "./pages/UserRoot";
+
 import AdminRoot from "./pages/Admin";
-import LogIn from "./pages/LogIn";
-import Register from "./pages/Register";
+import AccountsPage from "./pages/Admin/Accounts";
+import GreetingPage from "./pages/Admin/Greeting";
+import OrdersPage from "./pages/Admin/Orders";
+import ProductsPage from "./pages/Admin/Products";
+import ProfilePage from "./pages/Admin/Profile";
 import CartPage from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import GreetingPage from "./pages/Admin/Greeting";
-import ProfilePage from "./pages/Admin/Profile";
-import AccountsPage from "./pages/Admin/Accounts";
-import ProductsPage from "./pages/Admin/Products";
-import OrdersPage from "./pages/Admin/Orders";
+import LogIn from "./pages/LogIn";
 import ProductDetail from "./pages/ProductDetail";
+import Register from "./pages/Register";
+import UserRoot from "./pages/UserRoot";
 
 const router = createBrowserRouter([
   {

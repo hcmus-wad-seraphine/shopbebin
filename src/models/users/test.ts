@@ -1,5 +1,6 @@
 import { type User } from "@prisma/client";
-import { createUser, getUserByEmail, getUserByPhone, updateUser, deleteUser } from ".";
+
+import { createUser, deleteUser, getUserByEmail, getUserByPhone, updateUser } from ".";
 
 describe("users query flow", () => {
   const randomEmail = Math.random().toString(36).substring(7);

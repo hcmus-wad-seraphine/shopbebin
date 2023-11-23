@@ -1,5 +1,6 @@
 import express from "express";
 import { join, resolve } from "path";
+
 import router from "./routes";
 
 const app = express();

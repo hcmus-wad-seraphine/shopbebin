@@ -1,4 +1,5 @@
 import { type User } from "@prisma/client";
+
 import { getPrismaClient } from "../prisma";
 
 export const createUser = async (user: Omit<User, "id">) => {

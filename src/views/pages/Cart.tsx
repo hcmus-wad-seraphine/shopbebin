@@ -1,7 +1,7 @@
-import NavigateButton from "@components/NavigateButton";
 import CartTable from "@components/Cart/CartTable";
 import Container from "@components/Container";
 import { products } from "@components/internal";
+import NavigateButton from "@components/NavigateButton";
 
 const CartPage = () => {
   const cart = products;

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import Container from "@components/Container";
-import UtilsBar from "@components/UtilsBar";
-import ProductsDisplay from "@components/ProductsDisplay";
-import { type ProductMetadata } from "@prisma/client";
 import Loading from "@components/Loading";
+import ProductsDisplay from "@components/ProductsDisplay";
+import UtilsBar from "@components/UtilsBar";
+import { type ProductMetadata } from "@prisma/client";
+import { useEffect, useState } from "react";
 
 const UserRoot = () => {
   const [loading, setLoading] = useState(true);

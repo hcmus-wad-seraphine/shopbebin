@@ -1,6 +1,7 @@
-import { type FC } from "react";
-import Price from "../Price";
 import { type ProductMetadata } from "@prisma/client";
+import { type FC } from "react";
+
+import Price from "../Price";
 
 interface Props {
   onUpdateItem: (id: string, quantity: number) => void;

@@ -1,6 +1,7 @@
-import Price from "../Price";
-import { type FC } from "react";
 import { type ProductMetadata } from "@prisma/client";
+import { type FC } from "react";
+
+import Price from "../Price";
 
 interface Props {
   product: ProductMetadata;

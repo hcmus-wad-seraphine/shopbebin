@@ -1,9 +1,10 @@
-import { useState, useEffect, type FC } from "react";
+import { type ProductMetadata } from "@prisma/client";
+import { type FC, useEffect, useState } from "react";
+
 // import { useUpdateCartQuantityContext } from "@/context/Store";
 import Price from "../Price";
 // import { getCartSubTotal } from "@/utils/helpers";
 import ProductInCart from "./ProductInCart";
-import { type ProductMetadata } from "@prisma/client";
 
 interface Props {
   cart: ProductMetadata[];
