@@ -1,8 +1,8 @@
 import Container from "@components/Container";
+import { type ApiResponse } from "@routes/index";
 import { FormContainer, FormInput } from "@views/components/Form";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { type ApiResponse } from "routes";
 
 const Register = () => {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import NavigateButton from "@views/components/NavigateButton";
+import NavigateButton from "@components/NavigateButton";
 import CartTable from "@components/Cart/CartTable";
 import Container from "@components/Container";
 import { products } from "@components/internal";
