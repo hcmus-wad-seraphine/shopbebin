@@ -6,6 +6,7 @@ const app = express();
 
 const publicDir = resolve("public");
 
+app.use(express.json());
 app.use(express.static(publicDir));
 
 app.use("/api", router);
