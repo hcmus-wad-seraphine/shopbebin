@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { type RequestHandler } from "express";
+import { type ErrorResponse } from "react-router-dom";
 
 import { createUser } from "../models/users";
-import { type ApiResponse } from "./types";
 
 export const register: RequestHandler = (req, res) => {
   const { email, phone, password } = req.body;
@@ -18,20 +18,13 @@ export const register: RequestHandler = (req, res) => {
     addresses: [],
   };
 
-  const register = async () => {
-    await createUser(user);
-    const response: ApiResponse = {
-      ok: true,
-      data: user,
+  createUser(user).catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Email or phone already exists",
+      data: err,
     };
-    res.json(response);
-  };
 
-  register().catch(() => {
-    const response: ApiResponse = {
-      ok: false,
-      errorMessage: "Email or phone number already exists",
-    };
-    res.status(500).json(response);
+    res.status(500).json(errorResponse);
   });
 };

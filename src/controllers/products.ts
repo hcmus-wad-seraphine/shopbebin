@@ -1,8 +1,7 @@
-import type { ProductMetadata } from "@prisma/client";
 import { type RequestHandler } from "express";
+import { type ErrorResponse } from "react-router-dom";
 
 import { mockProducts } from "../models/database/mock";
-import { type ApiResponse } from "./types";
 
 export const getProduct: RequestHandler = (req, res) => {
   const fetchProduct = async () => {
@@ -12,20 +11,17 @@ export const getProduct: RequestHandler = (req, res) => {
       }, 200);
     });
 
-    const response: ApiResponse = {
-      ok: true,
-      data: product as ProductMetadata,
-    };
-
-    res.json(response);
+    res.json(product);
   };
 
-  fetchProduct().catch(() => {
-    const response: ApiResponse = {
-      ok: false,
-      errorMessage: "Product not found",
+  fetchProduct().catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 404,
+      statusText: "Product not found",
+      data: err,
     };
-    res.status(404).json(response);
+
+    res.status(404).json(errorResponse);
   });
 };
 
@@ -37,19 +33,16 @@ export const getProducts: RequestHandler = (req, res) => {
       }, 200);
     });
 
-    const response: ApiResponse = {
-      ok: true,
-      data: products,
-    };
-
-    res.json(response);
+    res.json(products);
   };
 
-  fetchProducts().catch(() => {
-    const response: ApiResponse = {
-      ok: false,
-      errorMessage: "Products not found",
+  fetchProducts().catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
     };
-    res.status(404).json(response);
+
+    res.status(500).json(errorResponse);
   });
 };

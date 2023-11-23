@@ -1,8 +1,7 @@
 import Container from "@components/Container";
-import { type ApiResponse } from "@controllers/types";
 import { FormContainer, FormInput } from "@views/components/Form";
 import { type FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { type ErrorResponse, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -32,18 +31,16 @@ const Register = () => {
         },
       });
 
-      const data: ApiResponse = await response.json();
-
-      if (data.ok) {
+      if (response.ok) {
         navigate("/login");
       } else {
-        setError(data.errorMessage);
+        const errorResponse: ErrorResponse = await response.json();
+        setError(errorResponse.statusText);
       }
     };
 
-    register().catch((err) => {
-      console.error("[ERROR: register]", err);
-      setError("Something went wrong. Please try again later.");
+    register().catch(() => {
+      setError("Server error");
     });
   };
 
