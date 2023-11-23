@@ -4,6 +4,7 @@ import { getPrismaClient } from "../prisma";
 
 export const createUser = async (user: Omit<User, "id">) => {
   const client = getPrismaClient();
+
   await client.user.create({
     data: user,
   });
@@ -11,6 +12,7 @@ export const createUser = async (user: Omit<User, "id">) => {
 
 export const getUserByEmail = async (email: string) => {
   const client = getPrismaClient();
+
   return await client.user.findUnique({
     where: {
       email,
@@ -29,6 +31,7 @@ export const getUserByPhone = async (phone: string) => {
 
 export const getUsers = async () => {
   const client = getPrismaClient();
+
   return await client.user.findMany();
 };
 
@@ -46,6 +49,7 @@ export const updateUser = async (user: User) => {
 
 export const deleteUser = async (id: string) => {
   const client = getPrismaClient();
+
   await client.user.delete({
     where: {
       id,

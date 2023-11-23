@@ -1,8 +1,8 @@
-import { type User } from "@prisma/client";
+import { Role, type User } from "@prisma/client";
 
 import { createUser, deleteUser, getUserByEmail, getUserByPhone, updateUser } from ".";
 
-describe("users query flow", () => {
+describe("User model", () => {
   const randomEmail = Math.random().toString(36).substring(7);
   const randomPhone = Math.random().toString(36).substring(7);
   const randomPassword = Math.random().toString(36).substring(7);
@@ -21,6 +21,7 @@ describe("users query flow", () => {
         city: "Ho Chi Minh",
       },
     ],
+    role: Role.USER,
   };
 
   test("create user", async () => {
@@ -29,6 +30,7 @@ describe("users query flow", () => {
       phone: user.phone,
       addresses: user.addresses,
       passwordHash: user.passwordHash,
+      role: user.role,
     });
     const createdUser = await getUserByEmail(user.email);
     expect(createdUser).not.toBeNull();

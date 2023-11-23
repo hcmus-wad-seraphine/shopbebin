@@ -10,11 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model User {
   id           String                 @id @default(auto()) @map("_id") @db.ObjectId
   email        String                 @unique
   phone        String                 @unique
   passwordHash String
+  role         Role                   @default(USER)
   addresses    Address[]
   cart         SingleProductInvoice[]
   Invoice      Invoice[]
@@ -59,6 +65,15 @@ model ProductSize {
   productMetadataId String?          @db.ObjectId
 }
 
+model Category {
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  name            String            @unique
+  desc            String
+  image           String
+  itemCount       Int
+  productMetadata ProductMetadata[]
+}
+
 model ProductMetadata {
   id                   String                 @id @default(auto()) @map("_id") @db.ObjectId
   name                 String
@@ -67,6 +82,8 @@ model ProductMetadata {
   availableSizes       ProductSize[]
   availableToppings    Topping[]
   SingleProductInvoice SingleProductInvoice[]
+  Category             Category?              @relation(fields: [categoryId], references: [id])
+  categoryId           String?                @db.ObjectId
 }
 
 model SingleProductInvoice {
