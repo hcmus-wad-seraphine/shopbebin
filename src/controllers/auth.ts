@@ -18,13 +18,17 @@ export const register: RequestHandler = (req, res) => {
     addresses: [],
   };
 
-  createUser(user).catch((err) => {
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Email or phone already exists",
-      data: err,
-    };
+  createUser(user)
+    .then(() => {
+      res.status(201).json({ status: 201, statusText: "Created" });
+    })
+    .catch((err) => {
+      const errorResponse: ErrorResponse = {
+        status: 500,
+        statusText: "Email or phone already exists",
+        data: err,
+      };
 
-    res.status(500).json(errorResponse);
-  });
+      res.status(500).json(errorResponse);
+    });
 };
