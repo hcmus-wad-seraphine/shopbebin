@@ -7,7 +7,32 @@ const Register = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    console.log(data);
+
+    const password = data["register--password"];
+    const confirmPassword = data["register--confirm-password"];
+    if (password !== confirmPassword) {
+      alert("Password and confirm password must match");
+      return;
+    }
+
+    const phone = data["register--phone"];
+    const email = data["register--email"];
+
+    const register = async () => {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({ phone, email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+    };
+
+    register().catch((err) => {
+      console.error("[ERROR: register]", err);
+    });
   };
 
   return (
