@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import { getProduct, getProducts } from "../controllers/products";
-import { createUser } from "models/users";
+import { createUser } from "../models/users";
 
 export interface ApiResponse {
   ok: boolean;
