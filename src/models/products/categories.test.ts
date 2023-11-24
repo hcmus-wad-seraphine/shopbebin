@@ -1,6 +1,6 @@
 import { type Category } from "@prisma/client";
 
-import { createCategory, deleteCategory, getCategoryByName, updateCategory } from ".";
+import { createCategory, deleteCategory, getCategory, getCategoryByName, updateCategory } from ".";
 
 describe("Category model", () => {
   const randomName = Math.random().toString(36).substring(7);
@@ -15,15 +15,19 @@ describe("Category model", () => {
   };
 
   test("create category", async () => {
-    await createCategory({
+    category = await createCategory({
       name: category.name,
       desc: category.desc,
       image: category.image,
       itemCount: category.itemCount,
     });
-    const createdCategory = await getCategoryByName(category.name);
-    expect(createdCategory).not.toBeNull();
-    category = createdCategory as Category;
+    expect(category).not.toBeNull();
+  });
+
+  test("get category by id", async () => {
+    const foundCategory = await getCategory(category.id);
+    expect(foundCategory).not.toBeNull();
+    expect(foundCategory).toEqual(category);
   });
 
   test("get category by name", async () => {

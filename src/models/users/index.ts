@@ -5,9 +5,11 @@ import { getPrismaClient } from "../prisma";
 export const createUser = async (user: Omit<User, "id">) => {
   const client = getPrismaClient();
 
-  await client.user.create({
+  const createdUser = await client.user.create({
     data: user,
   });
+
+  return createdUser;
 };
 
 export const getUserByEmail = async (email: string) => {
