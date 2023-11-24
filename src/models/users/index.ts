@@ -2,11 +2,13 @@ import { type User } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
-export const createUser = async (user: Omit<User, "id">) => {
+export const createUser = async (user: User) => {
   const client = getPrismaClient();
 
+  const { id, ...data } = user;
+
   const createdUser = await client.user.create({
-    data: user,
+    data,
   });
 
   return createdUser;

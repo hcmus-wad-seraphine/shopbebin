@@ -1,4 +1,4 @@
-import { type Topping } from "@prisma/client";
+import { type ToppingMetadata } from "@prisma/client";
 
 import { createTopping, deleteTopping, getTopping, updateTopping } from ".";
 
@@ -7,27 +7,17 @@ describe("Topping model", () => {
   const randomDescription = Math.random().toString(36).substring(7);
   const randomPrice = Math.random() * 100;
 
-  let topping: Topping = {
+  let topping: ToppingMetadata = {
     id: "",
     name: randomName,
     desc: randomDescription,
     price: randomPrice,
     image: "",
     stock: 10,
-    productMetadataId: null,
-    singleProductInvoiceId: null,
   };
 
   test("create topping", async () => {
-    topping = await createTopping({
-      name: topping.name,
-      desc: topping.desc,
-      price: topping.price,
-      image: topping.image,
-      stock: topping.stock,
-      productMetadataId: topping.productMetadataId,
-      singleProductInvoiceId: topping.singleProductInvoiceId,
-    });
+    topping = await createTopping(topping);
     expect(topping).not.toBeNull();
   });
 

@@ -25,13 +25,7 @@ describe("User model", () => {
   };
 
   test("create user", async () => {
-    user = await createUser({
-      email: user.email,
-      phone: user.phone,
-      addresses: user.addresses,
-      passwordHash: user.passwordHash,
-      role: user.role,
-    });
+    user = await createUser(user);
     expect(user).not.toBeNull();
   });
 

@@ -2,11 +2,13 @@ import { type ProductSize } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
-export const createProductSize = async (productSize: Omit<ProductSize, "id">) => {
+export const createProductSize = async (productSize: ProductSize) => {
   const client = getPrismaClient();
 
+  const { id, ...data } = productSize;
+
   const createdProductSize = await client.productSize.create({
-    data: productSize,
+    data,
   });
 
   return createdProductSize;

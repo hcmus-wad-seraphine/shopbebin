@@ -12,7 +12,8 @@ export const register: RequestHandler = (req, res) => {
   const salt = bcrypt.genSaltSync(saltRounds);
   const passwordHash = bcrypt.hashSync(password, salt);
 
-  const user: Omit<User, "id"> = {
+  const user: User = {
+    id: "",
     email: email as string,
     phone: phone as string,
     passwordHash,

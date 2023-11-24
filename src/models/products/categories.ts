@@ -2,11 +2,13 @@ import { type Category } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
-export const createCategory = async (category: Omit<Category, "id">) => {
+export const createCategory = async (category: Category) => {
   const client = getPrismaClient();
 
+  const { id, ...data } = category;
+
   const createdCategory = await client.category.create({
-    data: category,
+    data,
   });
 
   return createdCategory;

@@ -40,18 +40,22 @@ enum Size {
   XL
 }
 
-model Topping {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  desc  String
-  image String
-  price Float
-  stock Int
+model ToppingMetadata {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  name           String           @unique
+  desc           String
+  image          String
+  price          Float
+  stock          Int
+  ProductTopping ProductTopping[]
+}
 
-  ProductMetadata        ProductMetadata?      @relation(fields: [productMetadataId], references: [id])
-  productMetadataId      String?               @db.ObjectId
-  SingleProductInvoice   SingleProductInvoice? @relation(fields: [singleProductInvoiceId], references: [id])
-  singleProductInvoiceId String?               @db.ObjectId
+model ProductTopping {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  topping           ToppingMetadata  @relation(fields: [toppingMetadataId], references: [id])
+  toppingMetadataId String           @db.ObjectId
+  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
+  productMetadataId String?          @db.ObjectId
 }
 
 model ProductSize {
@@ -60,19 +64,17 @@ model ProductSize {
   price                Float
   stock                Int
   SingleProductInvoice SingleProductInvoice[]
-
-  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
-  productMetadataId String?          @db.ObjectId
+  ProductMetadata      ProductMetadata?       @relation(fields: [productMetadataId], references: [id])
+  productMetadataId    String?                @db.ObjectId
 }
 
 model Category {
-  id                String           @id @default(auto()) @map("_id") @db.ObjectId
-  name              String           @unique
-  desc              String
-  image             String
-  itemCount         Int
-  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
-  productMetadataId String?          @db.ObjectId
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  name            String            @unique
+  desc            String
+  image           String
+  itemCount       Int
+  ProductMetadata ProductMetadata[]
 }
 
 model ProductMetadata {
@@ -81,8 +83,9 @@ model ProductMetadata {
   desc                 String
   images               String[]
   availableSizes       ProductSize[]
-  availableToppings    Topping[]
-  categories           Category[]
+  availableToppings    ProductTopping[]
+  category             Category               @relation(fields: [categoryId], references: [id])
+  categoryId           String                 @db.ObjectId
   SingleProductInvoice SingleProductInvoice[]
 }
 
@@ -94,8 +97,6 @@ model SingleProductInvoice {
 
   size          ProductSize @relation(fields: [productSizeId], references: [id])
   productSizeId String      @db.ObjectId
-
-  toppings Topping[]
 
   quantity Int
 

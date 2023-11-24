@@ -1,38 +1,62 @@
-import { type Topping } from "@prisma/client";
+import { type ProductTopping, type ToppingMetadata } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
-export const createTopping = async (topping: Omit<Topping, "id">) => {
+export const createTopping = async (topping: ToppingMetadata) => {
   const client = getPrismaClient();
 
-  const createdTopping = await client.topping.create({
-    data: topping,
+  const { id, ...data } = topping;
+
+  const createdTopping = await client.toppingMetadata.create({
+    data,
   });
 
   return createdTopping;
 };
 
+export const createProductTopping = async (productTopping: ProductTopping) => {
+  const client = getPrismaClient();
+
+  const { id, ...data } = productTopping;
+
+  const createdProductTopping = await client.productTopping.create({
+    data,
+  });
+
+  return createdProductTopping;
+};
+
 export const getToppings = async () => {
   const client = getPrismaClient();
 
-  return await client.topping.findMany();
+  return await client.toppingMetadata.findMany();
 };
 
 export const getTopping = async (id: string) => {
   const client = getPrismaClient();
 
-  return await client.topping.findUnique({
+  return await client.toppingMetadata.findUnique({
     where: {
       id,
     },
   });
 };
 
-export const updateTopping = async (topping: Topping) => {
+export const getToppingByName = async (name: string) => {
+  const client = getPrismaClient();
+
+  return await client.toppingMetadata.findUnique({
+    where: {
+      name,
+    },
+  });
+};
+
+export const updateTopping = async (topping: ToppingMetadata) => {
   const client = getPrismaClient();
   const { id, ...data } = topping;
 
-  await client.topping.update({
+  await client.toppingMetadata.update({
     where: {
       id,
     },
@@ -43,7 +67,7 @@ export const updateTopping = async (topping: Topping) => {
 export const deleteTopping = async (id: string) => {
   const client = getPrismaClient();
 
-  await client.topping.delete({
+  await client.toppingMetadata.delete({
     where: {
       id,
     },

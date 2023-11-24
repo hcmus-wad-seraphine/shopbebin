@@ -2,7 +2,7 @@ import { type ProductSize, Size } from "@prisma/client";
 
 import { createProductSize, deleteProductSize, getProductSize, updateProductSize } from ".";
 
-describe("Product Sizes", () => {
+describe("Product Size Model", () => {
   let productSize: ProductSize = {
     id: "",
     size: Size.S,
@@ -12,12 +12,7 @@ describe("Product Sizes", () => {
   };
 
   it("create a product size", async () => {
-    productSize = await createProductSize({
-      price: productSize.price,
-      productMetadataId: productSize.productMetadataId,
-      size: productSize.size,
-      stock: productSize.stock,
-    });
+    productSize = await createProductSize(productSize);
     expect(productSize).toEqual(productSize);
   });
 

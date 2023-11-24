@@ -15,12 +15,7 @@ describe("Category model", () => {
   };
 
   test("create category", async () => {
-    category = await createCategory({
-      name: category.name,
-      desc: category.desc,
-      image: category.image,
-      itemCount: category.itemCount,
-    });
+    category = await createCategory(category);
     expect(category).not.toBeNull();
   });
 
