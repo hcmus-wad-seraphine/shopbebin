@@ -98,7 +98,7 @@ export const updateProduct = async (product: Product) => {
 export const deleteProduct = async (id: string) => {
   const client = getPrismaClient();
 
-  await client.productMetadata.delete({
+  const deletedProduct = await client.productMetadata.delete({
     where: {
       id,
     },
@@ -108,4 +108,28 @@ export const deleteProduct = async (id: string) => {
       category: true,
     },
   });
+
+  const promises = [];
+
+  for (const size of deletedProduct.availableSizes) {
+    promises.push(
+      client.productSize.delete({
+        where: {
+          id: size.id,
+        },
+      }),
+    );
+  }
+
+  for (const topping of deletedProduct.availableToppings) {
+    promises.push(
+      client.productTopping.delete({
+        where: {
+          id: topping.id,
+        },
+      }),
+    );
+  }
+
+  await Promise.all(promises);
 };

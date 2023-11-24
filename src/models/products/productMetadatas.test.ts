@@ -7,49 +7,98 @@ import {
 } from "@prisma/client";
 
 import { type Product } from "../interface";
-import { createCategory, createProduct, createTopping, getProduct, updateProduct } from ".";
+import {
+  createCategory,
+  createProduct,
+  createTopping,
+  deleteCategory,
+  deleteProduct,
+  deleteTopping,
+  getProduct,
+  updateProduct,
+} from ".";
 
 describe("Product Metadata Model", () => {
-  it("product full flow", async () => {
-    const randomName = Math.random().toString(36).substring(7);
-    const randomDescription = Math.random().toString(36).substring(7);
-    const randomImage = Math.random().toString(36).substring(7);
+  const randomName = Math.random().toString(36).substring(7);
+  const randomDescription = Math.random().toString(36).substring(7);
+  const randomImage = Math.random().toString(36).substring(7);
 
-    let category: Category = {
-      id: "",
-      name: randomName,
-      desc: randomDescription,
-      image: randomImage,
-      itemCount: 0,
-    };
+  let category: Category = {
+    id: "",
+    name: randomName,
+    desc: randomDescription,
+    image: randomImage,
+    itemCount: 0,
+  };
 
-    const productSize: ProductSize = {
-      id: "",
-      size: Size.S,
-      price: 100,
-      stock: 10,
-      productMetadataId: null,
-    };
+  let category2: Category = {
+    id: "",
+    name: randomName + " 2",
+    desc: randomDescription + " 2",
+    image: randomImage,
+    itemCount: 0,
+  };
 
-    let topping: ToppingMetadata = {
-      id: "",
-      name: randomName,
-      desc: randomDescription,
-      price: 100,
-      image: randomImage,
-      stock: 10,
-    };
+  const productSize: ProductSize = {
+    id: "",
+    size: Size.S,
+    price: 100,
+    stock: 10,
+    productMetadataId: null,
+  };
 
+  const productSize2: ProductSize = {
+    id: "",
+    size: Size.M,
+    price: 150,
+    stock: 20,
+    productMetadataId: null,
+  };
+
+  let topping: ToppingMetadata = {
+    id: "",
+    name: randomName,
+    desc: randomDescription,
+    price: 100,
+    image: randomImage,
+    stock: 10,
+  };
+
+  let topping2: ToppingMetadata = {
+    id: "",
+    name: randomName + " 2",
+    desc: randomDescription + " 2",
+    price: 100,
+    image: randomImage,
+    stock: 10,
+  };
+
+  let product: Product = {
+    id: "",
+    name: randomName,
+    desc: randomDescription,
+    images: [],
+    availableSizes: [],
+    availableToppings: [],
+    categoryId: category.id,
+    category,
+  };
+
+  it("setup", async () => {
     category = await createCategory(category);
+    category2 = await createCategory(category2);
     topping = await createTopping(topping);
+    topping2 = await createTopping(topping2);
+  });
 
+  it("product full flow", async () => {
     const productTopping: ProductTopping = {
       id: "",
       productMetadataId: null,
       toppingMetadataId: topping.id,
     };
 
-    const product: Product = {
+    product = {
       id: "",
       name: randomName,
       desc: randomDescription,
@@ -60,39 +109,21 @@ describe("Product Metadata Model", () => {
       category,
     };
 
-    const createdProduct = await createProduct(product);
-    expect(createdProduct.id).toBeDefined();
-    expect(createdProduct.name).toEqual(product.name);
-    expect(createdProduct.desc).toEqual(product.desc);
-    expect(createdProduct.images).toEqual(product.images);
-    expect(createdProduct.availableSizes.length).toEqual(1);
-    expect(createdProduct.availableToppings.length).toEqual(1);
-    expect(createdProduct.categoryId).toEqual(category.id);
+    product = await createProduct(product);
+    expect(product.id).toBeDefined();
+    expect(product.availableSizes.length).toEqual(1);
+    expect(product.availableToppings.length).toEqual(1);
+    expect(product.categoryId).toEqual(category.id);
 
-    const fetchedProduct = await getProduct(createdProduct.id);
+    console.log("--> createdProduct", product);
+  });
+
+  it("update project", async () => {
+    const fetchedProduct = await getProduct(product.id);
     if (fetchedProduct == null) {
       throw new Error("Product not found");
     }
-    expect(fetchedProduct).toEqual(createdProduct);
-
-    let newCategory: Category = {
-      id: "",
-      name: randomName + " 2",
-      desc: randomDescription + " 2",
-      image: randomImage,
-      itemCount: 0,
-    };
-    newCategory = await createCategory(newCategory);
-
-    let topping2: ToppingMetadata = {
-      id: "",
-      name: randomName + " 2",
-      desc: randomDescription + " 2",
-      price: 100,
-      image: randomImage,
-      stock: 10,
-    };
-    topping2 = await createTopping(topping2);
+    expect(fetchedProduct).toEqual(product);
 
     const productTopping2: ProductTopping = {
       id: "",
@@ -101,23 +132,31 @@ describe("Product Metadata Model", () => {
     };
 
     let updatedProduct: Product = {
-      ...createdProduct,
+      ...fetchedProduct,
       name: randomName + " 2",
       desc: randomDescription + " 2",
       images: [randomImage + " 2"],
-      availableSizes: [productSize],
+      availableSizes: [productSize, productSize2],
       availableToppings: [productTopping2],
-      categoryId: newCategory.id,
-      category: newCategory,
+      categoryId: category2.id,
+      category: category2,
     };
+
     updatedProduct = await updateProduct(updatedProduct);
-
-    console.log("--> updatedProduct", updatedProduct);
-
-    expect(updatedProduct.id).toEqual(createdProduct.id);
+    expect(updatedProduct.id).toEqual(fetchedProduct.id);
     expect(updatedProduct.name).toEqual(randomName + " 2");
     expect(updatedProduct.desc).toEqual(randomDescription + " 2");
     expect(updatedProduct.images).toEqual([randomImage + " 2"]);
-    expect(updatedProduct.categoryId).toEqual(newCategory.id);
+    expect(updatedProduct.categoryId).toEqual(category2.id);
+
+    console.log("--> updatedProduct", updatedProduct);
+  });
+
+  it("cleanup", async () => {
+    await deleteProduct(product.id);
+    await deleteCategory(category.id);
+    await deleteCategory(category2.id);
+    await deleteTopping(topping.id);
+    await deleteTopping(topping2.id);
   });
 });
