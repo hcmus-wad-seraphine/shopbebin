@@ -66,12 +66,13 @@ model ProductSize {
 }
 
 model Category {
-  id              String            @id @default(auto()) @map("_id") @db.ObjectId
-  name            String            @unique
-  desc            String
-  image           String
-  itemCount       Int
-  productMetadata ProductMetadata[]
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  name              String           @unique
+  desc              String
+  image             String
+  itemCount         Int
+  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
+  productMetadataId String?          @db.ObjectId
 }
 
 model ProductMetadata {
@@ -81,9 +82,8 @@ model ProductMetadata {
   images               String[]
   availableSizes       ProductSize[]
   availableToppings    Topping[]
+  categories           Category[]
   SingleProductInvoice SingleProductInvoice[]
-  Category             Category?              @relation(fields: [categoryId], references: [id])
-  categoryId           String?                @db.ObjectId
 }
 
 model SingleProductInvoice {
