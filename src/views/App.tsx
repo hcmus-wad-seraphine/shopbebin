@@ -11,7 +11,7 @@ import ProfilePage from "./pages/Admin/Profile";
 import CartPage from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import LogIn from "./pages/LogIn";
-import ProductDetail from "./pages/ProductDetail";
+import ProductDetails from "./pages/ProductDetails";
 import Register from "./pages/Register";
 import UserRoot from "./pages/UserRoot";
 
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/products/:id",
-    element: <ProductDetail />,
+    element: <ProductDetails />,
   },
 ]);
 
