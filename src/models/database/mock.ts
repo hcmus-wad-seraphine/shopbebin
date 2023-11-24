@@ -5,7 +5,12 @@ export const mockProducts: ProductMetadata[] = [
     id: "smoothie-strawberry-bubble",
     name: "Strawberry Bubble",
     desc: "",
-    images: ["/img/smoothie-strawberry-bubble.png"],
+    images: [
+      "/img/smoothie-strawberry-bubble.png",
+      "/img/tea-lemon-bubble.png",
+      "/img/smoothie-strawberry-bubble.png",
+      "/img/smoothie-strawberry-bubble.png",
+    ],
   },
   {
     id: "tea-lemon-bubble",
