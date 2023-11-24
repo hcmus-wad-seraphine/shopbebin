@@ -5,21 +5,32 @@
 @tailwind utilities;
 
 @layer base {
-    div {
-        @apply flex;
+  div {
+    @apply flex;
+  }
+  @variants respnsive {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
 }
 
 body {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .triangle::before {
-    content: "";
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0em;
-    border: 1em solid transparent;
-    border-left-color: #ffffff;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0em;
+  border: 1em solid transparent;
+  border-left-color: #ffffff;
 }
