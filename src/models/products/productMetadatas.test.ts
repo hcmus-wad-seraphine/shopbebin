@@ -10,6 +10,8 @@ import { type Product } from "../interface";
 import {
   createCategory,
   createProduct,
+  createProductSize,
+  createProductTopping,
   createTopping,
   deleteCategory,
   deleteProduct,
@@ -39,19 +41,11 @@ describe("Product Metadata Model", () => {
     itemCount: 0,
   };
 
-  const productSize: ProductSize = {
+  let productSize: ProductSize = {
     id: "",
     size: Size.S,
     price: 100,
     stock: 10,
-    productMetadataId: null,
-  };
-
-  const productSize2: ProductSize = {
-    id: "",
-    size: Size.M,
-    price: 150,
-    stock: 20,
     productMetadataId: null,
   };
 
@@ -125,11 +119,22 @@ describe("Product Metadata Model", () => {
     }
     expect(fetchedProduct).toEqual(product);
 
-    const productTopping2: ProductTopping = {
+    let productTopping2: ProductTopping = {
       id: "",
-      productMetadataId: null,
+      productMetadataId: product.id,
       toppingMetadataId: topping2.id,
     };
+    productTopping2 = await createProductTopping(productTopping2);
+
+    productSize = product.availableSizes[0];
+    let productSize2: ProductSize = {
+      id: "",
+      size: Size.M,
+      price: 125,
+      stock: 14,
+      productMetadataId: product.id,
+    };
+    productSize2 = await createProductSize(productSize2);
 
     let updatedProduct: Product = {
       ...fetchedProduct,
@@ -154,9 +159,9 @@ describe("Product Metadata Model", () => {
 
   it("cleanup", async () => {
     await deleteProduct(product.id);
-    await deleteCategory(category.id);
-    await deleteCategory(category2.id);
     await deleteTopping(topping.id);
     await deleteTopping(topping2.id);
+    await deleteCategory(category.id);
+    await deleteCategory(category2.id);
   });
 });

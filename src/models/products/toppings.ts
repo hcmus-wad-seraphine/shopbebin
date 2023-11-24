@@ -67,6 +67,12 @@ export const updateTopping = async (topping: ToppingMetadata) => {
 export const deleteTopping = async (id: string) => {
   const client = getPrismaClient();
 
+  await client.productTopping.deleteMany({
+    where: {
+      toppingMetadataId: id,
+    },
+  });
+
   await client.toppingMetadata.delete({
     where: {
       id,

@@ -74,10 +74,10 @@ export const updateProduct = async (product: Product) => {
     data: {
       ...data,
       availableSizes: {
-        create: availableSizes.map(({ id, productMetadataId, ...data }) => data),
+        set: availableSizes,
       },
       availableToppings: {
-        create: availableToppings.map(({ id, productMetadataId, ...data }) => data),
+        set: availableToppings,
       },
       category: {
         connect: {
@@ -113,7 +113,7 @@ export const deleteProduct = async (id: string) => {
 
   for (const size of deletedProduct.availableSizes) {
     promises.push(
-      client.productSize.delete({
+      client.productSize.deleteMany({
         where: {
           id: size.id,
         },
@@ -123,7 +123,7 @@ export const deleteProduct = async (id: string) => {
 
   for (const topping of deletedProduct.availableToppings) {
     promises.push(
-      client.productTopping.delete({
+      client.productTopping.deleteMany({
         where: {
           id: topping.id,
         },
