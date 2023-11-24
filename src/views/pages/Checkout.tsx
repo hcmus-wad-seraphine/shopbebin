@@ -2,6 +2,7 @@ import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Container from "@components/Container";
 import { products } from "@components/internal";
 import Price from "@components/Price";
+import ShippingInfo from "@views/components/Checkout/ShippingInfo";
 import NavigateButton from "@views/components/NavigateButton";
 
 const Checkout = () => {
@@ -10,8 +11,10 @@ const Checkout = () => {
   return (
     <Container>
       <div className="flex-col py-10 items-center">
+        <ShippingInfo />
+        <h1 className="font-bold text-primary text-2xl self-center">YOUR GOODS</h1>
         <div className="flex-col gap-2">
-          <div className="flex-col gap-5 h-[500px] overflow-scroll py-5 px-10 border border-black rounded-2xl">
+          <div className="flex-col gap-5 h-[500px] overflow-auto py-5 px-10 border border-black rounded-2xl">
             {products.slice(0, 5).map((product) => (
               <CheckoutItem
                 key={product.id}
