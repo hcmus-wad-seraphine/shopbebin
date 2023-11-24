@@ -1,3 +1,4 @@
+import { Role, type User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
@@ -11,10 +12,11 @@ export const register: RequestHandler = (req, res) => {
   const salt = bcrypt.genSaltSync(saltRounds);
   const passwordHash = bcrypt.hashSync(password, salt);
 
-  const user = {
+  const user: Omit<User, "id"> = {
     email: email as string,
     phone: phone as string,
     passwordHash,
+    role: Role.USER,
     addresses: [],
   };
 
