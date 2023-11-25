@@ -12,6 +12,8 @@
     "start": "node ./public/dist/api.js",
     "schema": "npx prisma generate",
     "dev": "concurrently \"nodemon --watch src --exec 'node tools/build.js' -e js,ts,jsx,tsx\" \"pnpm start\" \"npx tailwindcss --jit -i ./src/views/input.css -o ./public/dist/output.css --watch\"",
+    "dev:brave": "concurrently \"nodemon --watch src --exec 'node tools/build.js && osascript tools/brave.scpt' -e js,ts,jsx,tsx\" \"pnpm start\" \"npx tailwindcss --jit -i ./src/views/input.css -o ./public/dist/output.css --watch\"",
+    "dev:chrome": "concurrently \"nodemon --watch src --exec 'node tools/build.js && osascript tools/chrome.scpt' -e js,ts,jsx,tsx\" \"pnpm start\" \"npx tailwindcss --jit -i ./src/views/input.css -o ./public/dist/output.css --watch\"",
     "test": "jest",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx && echo \"\u001b[32mLinting passed!\u001b[0m\" || echo \"\u001b[31mLinting failed!\u001b[0m\"",
     "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix && echo \"\u001b[32mLinting passed!\u001b[0m\" || echo \"\u001b[31mLinting failed!\u001b[0m\""
