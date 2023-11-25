@@ -11,7 +11,7 @@
     "vercel-build": "pnpm schema && node tools/build.js && npx tailwindcss -i ./src/views/input.css -o ./public/dist/output.css",
     "start": "node ./public/dist/api.js",
     "schema": "npx prisma generate",
-    "dev": "nodemon --watch src --exec \"pnpm build && pnpm start\" -e js,ts,jsx,tsx,css",
+    "dev": "concurrently \"nodemon --watch src --exec 'node tools/build.js' -e js,ts,jsx,tsx\" \"pnpm start\" \"npx tailwindcss --jit -i ./src/views/input.css -o ./public/dist/output.css --watch\"",
     "test": "jest",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx && echo \"\u001b[32mLinting passed!\u001b[0m\" || echo \"\u001b[31mLinting failed!\u001b[0m\"",
     "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix && echo \"\u001b[32mLinting passed!\u001b[0m\" || echo \"\u001b[31mLinting failed!\u001b[0m\""
@@ -28,6 +28,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "concurrently": "^8.2.2",
     "esbuild": "^0.19.5",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^9.0.0",

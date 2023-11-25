@@ -8,7 +8,10 @@
   div {
     @apply flex;
   }
-  @variants respnsive {
+}
+
+@layer utilities {
+  .respnsive {
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
