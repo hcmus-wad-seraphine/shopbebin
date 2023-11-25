@@ -1,11 +1,14 @@
 import Container from "@components/Container";
+import CallOut from "@views/components/CallOut";
 import { FormContainer, FormInput } from "@views/components/Form";
 import { type FormEvent, useState } from "react";
-import { type ErrorResponse, useNavigate } from "react-router-dom";
+import { type ErrorResponse } from "react-router-dom";
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [error, setError] = useState<string>();
+  const [res, setRes] = useState<{
+    ok: boolean;
+    statusText: string;
+  }>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,7 +18,10 @@ const Register = () => {
     const password = data["register--password"];
     const confirmPassword = data["register--confirm-password"];
     if (password !== confirmPassword) {
-      setError("Password and confirm password must match");
+      setRes({
+        ok: false,
+        statusText: "Passwords do not match",
+      });
       return;
     }
 
@@ -23,7 +29,7 @@ const Register = () => {
     const email = data["register--email"];
 
     const register = async () => {
-      const response = await fetch("/api/register", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({ phone, email, password }),
         headers: {
@@ -32,15 +38,24 @@ const Register = () => {
       });
 
       if (response.ok) {
-        navigate("/login");
+        setRes({
+          ok: true,
+          statusText: "Account created successfully",
+        });
       } else {
         const errorResponse: ErrorResponse = await response.json();
-        setError(errorResponse.statusText);
+        setRes({
+          ok: false,
+          statusText: errorResponse.statusText,
+        });
       }
     };
 
     register().catch(() => {
-      setError("Server error");
+      setRes({
+        ok: false,
+        statusText: "Something went wrong",
+      });
     });
   };
 
@@ -72,7 +87,13 @@ const Register = () => {
           type="password"
         />
 
-        {error !== undefined && <p className="text-red-500">{error}</p>}
+        {res !== undefined && (
+          <CallOut
+            type={res.ok ? "success" : "error"}
+            title={res.statusText}
+            description={res.ok ? "You can now login" : "Please try again"}
+          />
+        )}
 
         <button
           className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"

@@ -5,7 +5,7 @@ import * as productsController from "../controllers/products";
 
 const router = express.Router();
 
-router.post("/register", authController.register);
+router.post("/auth/register", authController.register);
 
 router.get("/products/:id", productsController.getProduct);
 router.get("/products", productsController.getProducts);

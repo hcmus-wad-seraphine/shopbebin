@@ -23,7 +23,7 @@ export const register: RequestHandler = (req, res) => {
 
   createUser(user)
     .then(() => {
-      res.status(201).json({ status: 201, statusText: "Created" });
+      res.status(201).json({ status: 201, statusText: "User registered successfully" });
     })
     .catch((err) => {
       const errorResponse: ErrorResponse = {
