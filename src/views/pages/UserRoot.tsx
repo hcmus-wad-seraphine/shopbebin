@@ -1,8 +1,8 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import ProductsDisplay from "@components/ProductsDisplay";
-import UtilsBar from "@components/UtilsBar";
 import { type ProductMetadata } from "@prisma/client";
+import UtilsBar from "@views/layouts/UtilsBar";
 import { useEffect, useState } from "react";
 
 const UserRoot = () => {

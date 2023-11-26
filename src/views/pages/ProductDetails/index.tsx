@@ -1,5 +1,6 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
+import { type Product } from "@models/interface";
 import { type ProductMetadata } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -11,7 +12,7 @@ const ProductDetails = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
 
-  const [product, setProduct] = useState<ProductMetadata>();
+  const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
     const fetchProduct = async () => {

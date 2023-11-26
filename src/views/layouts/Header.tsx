@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 
 import Navigator from "../components/Navigator";
 
-const Header = () => {
+interface Props {
+  isLogIn: boolean;
+}
+
+const Header = ({ isLogIn }: Props) => {
   return (
     <div className="bg-primary flex justify-between items-center px-10 py-4">
       <Link
@@ -26,20 +30,39 @@ const Header = () => {
         <i className="fas fa-search text-black"></i>
       </div>
 
-      <div>
-        <div>
+      {isLogIn ? (
+        <div className="gap-5">
           <Navigator
+            icon={<i className="fas fa-shopping-cart"></i>}
+            href="/cart"
+            title="Your cart"
+          />
+          <Navigator
+            icon={<i className="fas fa-clipboard"></i>}
+            href="/orders"
+            title="Your orders"
+          />
+          <Navigator
+            icon={<i className="fas fa-user"></i>}
+            href="/profile"
+            title="Profile"
+          />
+        </div>
+      ) : (
+        <div className="gap-5">
+          <Navigator
+            icon={<i className="fa-regular fa-id-card"></i>}
             href="/register"
             title="Register"
           />
-        </div>
-        <div>
+
           <Navigator
+            icon={<i className="fa-solid fa-arrow-right-to-bracket"></i>}
             href="/login"
             title="Login"
           />
         </div>
-      </div>
+      )}
     </div>
   );
 };

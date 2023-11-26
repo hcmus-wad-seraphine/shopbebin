@@ -7,10 +7,10 @@ interface Props {
   children?: ReactNode;
 }
 
-const NavigateButton: FC<Props> = ({ to: href, children, style }) => {
+const NavigateButton: FC<Props> = ({ to, children, style }) => {
   return (
     <Link
-      to={href}
+      to={to}
       className={`flex bg-gradient-to-b from-primary to-secondary px-3 py-2 justify-center items-center rounded-full gap-2 text-white ${style}`}
     >
       {children}
