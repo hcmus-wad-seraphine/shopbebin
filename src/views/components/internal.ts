@@ -1,5 +1,7 @@
 import { type ProductMetadata } from "@prisma/client";
 
+import { type Order } from "./Orders/OrderCard";
+
 export interface Product {
   id: string;
   name: string;
@@ -47,5 +49,83 @@ export const products: ProductMetadata[] = [
     name: "Red Thai Bubble",
     desc: "",
     images: ["/img/tea-redthai-bubble.png"],
+  },
+];
+
+export const orders: Order[] = [
+  {
+    id: "1",
+    status: "pending",
+    createdAt: new Date(),
+    singleProductInvoices: [
+      {
+        id: "1",
+        invoiceId: "1",
+        productMetadataId: "smoothie-strawberry-bubble",
+        productSizeId: "S",
+        quantity: 1,
+        userId: "1",
+        status: "pending",
+      },
+      {
+        id: "2",
+        invoiceId: "1",
+        productMetadataId: "smoothie-strawberry-bubble",
+        productSizeId: "S",
+        quantity: 1,
+        userId: "1",
+        status: "pending",
+      },
+    ],
+  },
+  {
+    id: "1",
+    status: "pending",
+    createdAt: new Date(),
+    singleProductInvoices: [
+      {
+        id: "1",
+        invoiceId: "1",
+        productMetadataId: "smoothie-strawberry-bubble",
+        productSizeId: "S",
+        quantity: 1,
+        userId: "1",
+        status: "pending",
+      },
+      {
+        id: "2",
+        invoiceId: "1",
+        productMetadataId: "smoothie-strawberry-bubble",
+        productSizeId: "S",
+        quantity: 1,
+        userId: "1",
+        status: "pending",
+      },
+    ],
+  },
+  {
+    id: "1",
+    status: "pending",
+    createdAt: new Date(),
+    singleProductInvoices: [
+      {
+        id: "1",
+        invoiceId: "1",
+        productMetadataId: "smoothie-strawberry-bubble",
+        productSizeId: "S",
+        quantity: 1,
+        userId: "1",
+        status: "pending",
+      },
+      {
+        id: "2",
+        invoiceId: "1",
+        productMetadataId: "smoothie-strawberry-bubble",
+        productSizeId: "S",
+        quantity: 1,
+        userId: "1",
+        status: "pending",
+      },
+    ],
   },
 ];

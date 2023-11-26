@@ -11,7 +11,7 @@
 }
 
 @layer utilities {
-  .respnsive {
+  .responsive {
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }

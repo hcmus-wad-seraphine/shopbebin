@@ -10,7 +10,7 @@ interface Props {
 const Container: FC<Props> = ({ children, className }) => {
   return (
     <div className={`flex-col ${className} w-full`}>
-      <Header />
+      <Header isLogIn={true} />
       <div className="w-full lg:max-w-4xl xl:max-w-6xl mx-auto flex-col">{children}</div>
     </div>
   );
