@@ -18,8 +18,9 @@ const Profile = () => {
           Authorization: `Bearer ${appState.profile?.jwt}`,
         },
       });
-      const data = await response.json();
-      console.log("--> profile", data);
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile");
+      }
     };
 
     fetchProfile().catch(() => {
