@@ -13,8 +13,6 @@ const ProductsDisplay = () => {
   const pageNumber = parseInt(pageParam);
   const itemsPerPage = 9;
 
-  console.log(pageNumber);
-
   useEffect(() => {
     const fetchData = async () => {
       const productsResponse = await fetch(
@@ -26,6 +24,8 @@ const ProductsDisplay = () => {
       const totalProductsResponse = await fetch("/api/products/total");
       const totalProductsData = await totalProductsResponse.json();
       setTotalProducts(totalProductsData);
+
+      window.scrollTo(0, 0);
     };
 
     fetchData().catch(console.error);
