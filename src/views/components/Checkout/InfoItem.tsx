@@ -1,13 +1,19 @@
 interface Props {
   title: string;
   value: string;
+  isDisabled?: boolean;
 }
 
-const InfoItem = ({ title, value }: Props) => {
+const InfoItem = ({ title, value, isDisabled }: Props) => {
   return (
     <div className="justify-between">
       <label className="text-gray-500 text-base">{title}</label>
-      <p className="font-medium text-lg">{value}</p>
+      <input
+        disabled={isDisabled}
+        type="text"
+        className="font-medium text-lg"
+        value={value}
+      />
     </div>
   );
 };
