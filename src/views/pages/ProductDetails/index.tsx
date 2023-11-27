@@ -1,7 +1,6 @@
 import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
-import { type ProductMetadata } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 

@@ -1,25 +1,50 @@
-import { type ProductMetadata } from "@prisma/client";
-import { type FC } from "react";
-import { Link } from "react-router-dom";
+import Loading from "@components/Loading";
+import { type Product } from "@models/interface";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import ProductCard from "./ProductCard";
 
-interface Props {
-  products: ProductMetadata[];
-  pageNumber: number;
-}
+const ProductsDisplay = () => {
+  const [products, setProducts] = useState<Product[]>();
+  const [totalProducts, setTotalProducts] = useState<number>(0);
+  const [searchParams] = useSearchParams();
+  const pageParam = searchParams.get("page") ?? "1";
+  const pageNumber = parseInt(pageParam);
+  const itemsPerPage = 9;
 
-const ProductsDisplay: FC<Props> = ({ products, pageNumber }) => {
-  const numberOfPages = Math.ceil(products.length / 9);
+  console.log(pageNumber);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const productsResponse = await fetch(
+        `/api/products?offset=${(pageNumber - 1) * itemsPerPage}&limit=${itemsPerPage}`,
+      );
+      const productsData = await productsResponse.json();
+      setProducts(productsData);
+
+      const totalProductsResponse = await fetch("/api/products/total");
+      const totalProductsData = await totalProductsResponse.json();
+      setTotalProducts(totalProductsData);
+    };
+
+    fetchData().catch(console.error);
+  }, [pageNumber]);
+
+  const numberOfPages = Math.ceil(totalProducts / itemsPerPage);
   const pages = [];
   for (let i = 1; i <= numberOfPages; i++) {
     pages.push(i);
   }
 
+  if (products === undefined) {
+    return <Loading />;
+  }
+
   return (
     <div className="flex-col items-center">
       <div className="w-full  items-center flex-wrap px-10 py-10">
-        {products.slice((pageNumber - 1) * 9, pageNumber * 9).map((product) => (
+        {products.map((product) => (
           <ProductCard
             key={product.id}
             product={product}

@@ -1,4 +1,4 @@
-import { appState } from "@views/valtio/auth";
+import { appState } from "@views/valtio";
 import type { FC, ReactNode } from "react";
 import { useSnapshot } from "valtio";
 

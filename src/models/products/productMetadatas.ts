@@ -62,7 +62,7 @@ export const getProduct = async (id: string) => {
   return product;
 };
 
-export const getProducts = async () => {
+export const getProducts = async (offset: number = 0, limit: number = 10) => {
   const client = getPrismaClient();
 
   const products: Product[] = await client.productMetadata.findMany({
@@ -75,9 +75,17 @@ export const getProducts = async () => {
       },
       category: true,
     },
+    skip: offset,
+    take: limit,
   });
 
   return products;
+};
+
+export const getTotalProducts = async () => {
+  const client = getPrismaClient();
+  const totalProducts = await client.productMetadata.count();
+  return totalProducts;
 };
 
 export const updateProduct = async (product: Product) => {

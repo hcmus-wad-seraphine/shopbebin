@@ -1,7 +1,7 @@
 import Container from "@components/Container";
 import CallOut from "@views/components/CallOut";
 import { FormContainer, FormInput } from "@views/components/Form";
-import { appActions, Role, type UserProfile } from "@views/valtio/auth";
+import { appActions, Role, type UserProfile } from "@views/valtio";
 import { type FormEvent, useState } from "react";
 import { type ErrorResponse, useNavigate } from "react-router-dom";
 

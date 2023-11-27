@@ -1,20 +1,15 @@
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
-import { mockProducts } from "../models/database/mock";
+import { getProduct, getProducts, getTotalProducts } from "../models/products/productMetadatas";
 
-export const getProduct: RequestHandler = (req, res) => {
-  const fetchProduct = async () => {
-    const product = await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(mockProducts.find((product) => product.id === req.params.id));
-      }, 200);
-    });
-
+export const fetchProduct: RequestHandler = (req, res) => {
+  const handleFetchProduct = async () => {
+    const product = await getProduct(req.params.id);
     res.json(product);
   };
 
-  fetchProduct().catch((err) => {
+  handleFetchProduct().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 404,
       statusText: "Product not found",
@@ -25,18 +20,32 @@ export const getProduct: RequestHandler = (req, res) => {
   });
 };
 
-export const getProducts: RequestHandler = (req, res) => {
-  const fetchProducts = async () => {
-    const products = await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(mockProducts);
-      }, 200);
-    });
-
+export const fetchProducts: RequestHandler = (req, res) => {
+  const handleFetchProducts = async () => {
+    const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
+    const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
+    const products = await getProducts(offset, limit);
     res.json(products);
   };
 
-  fetchProducts().catch((err) => {
+  handleFetchProducts().catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
+export const fetchTotalProducts: RequestHandler = (req, res) => {
+  const handleFetchTotalProducts = async () => {
+    const totalProducts = await getTotalProducts();
+    res.json(totalProducts);
+  };
+
+  handleFetchTotalProducts().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",
