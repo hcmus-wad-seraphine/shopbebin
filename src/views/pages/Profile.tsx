@@ -2,7 +2,7 @@ import InfoItem from "@views/components/Checkout/InfoItem";
 import Dropdown from "@views/components/Dropdown";
 import InformationTitle from "@views/features/Profile/Information";
 import SettingTitle, { SettingItem } from "@views/features/Profile/Setting";
-import { appState } from "@views/valtio";
+import { appActions, appState } from "@views/valtio";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +26,11 @@ const Profile = () => {
       navigate("/login");
     });
   }, []);
+
+  const handleLogout = () => {
+    appActions.logout();
+    navigate("/login");
+  };
 
   const InformationItems = [
     <InfoItem
@@ -89,7 +94,10 @@ const Profile = () => {
         items={SettingItems}
       />
 
-      <button className="w-full max-w-[600px] flex items-center justify-between px-5 py-3 bg-primary rounded-full">
+      <button
+        className="w-full max-w-[600px] flex items-center justify-between px-5 py-3 bg-primary rounded-full"
+        onClick={handleLogout}
+      >
         <div className="items-center text-white text-lg font-semibold gap-2">
           <i className="fa-solid fa-arrow-right-from-bracket"></i>
           Log out
