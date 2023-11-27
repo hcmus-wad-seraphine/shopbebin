@@ -14,6 +14,16 @@ export const createUser = async (user: User) => {
   return createdUser;
 };
 
+export const getUser = async (id: string) => {
+  const client = getPrismaClient();
+
+  return await client.user.findUnique({
+    where: {
+      id,
+    },
+  });
+};
+
 export const getUserByEmail = async (email: string) => {
   const client = getPrismaClient();
 

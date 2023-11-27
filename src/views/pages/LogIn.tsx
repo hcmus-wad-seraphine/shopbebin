@@ -1,6 +1,6 @@
 import CallOut from "@views/components/CallOut";
 import { FormContainer, FormInput } from "@views/components/Form";
-import { appActions, Role, type UserProfile } from "@views/valtio";
+import { appActions, type Profile } from "@views/valtio";
 import { type FormEvent, useState } from "react";
 import { type ErrorResponse, useNavigate } from "react-router-dom";
 
@@ -26,8 +26,10 @@ const LogIn = () => {
       });
 
       if (response.ok) {
-        const profile: UserProfile = {
-          role: Role.Basic,
+        const { jwt, user } = await response.json();
+        const profile: Profile = {
+          jwt,
+          user,
         };
         appActions.login(profile);
         navigate("/");

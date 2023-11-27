@@ -1,16 +1,13 @@
+import { type User } from "@prisma/client";
 import { proxy } from "valtio";
 
-export enum Role {
-  Admin = "admin",
-  Basic = "basic",
-}
-
-export interface UserProfile {
-  role: Role;
+export interface Profile {
+  jwt: string;
+  user: User;
 }
 
 export interface AppState {
-  profile: UserProfile | null;
+  profile: Profile | null;
 }
 
 export const appState = proxy<AppState>({
@@ -18,7 +15,7 @@ export const appState = proxy<AppState>({
 });
 
 export const appActions = {
-  login: (profile: UserProfile) => {
+  login: (profile: Profile) => {
     appState.profile = profile;
   },
   logout: () => {
