@@ -19,13 +19,13 @@ const ProductsDisplay = () => {
         `/api/products?offset=${(pageNumber - 1) * itemsPerPage}&limit=${itemsPerPage}`,
       );
       const productsData = await productsResponse.json();
-      setProducts(productsData);
 
       const totalProductsResponse = await fetch("/api/products/total");
       const totalProductsData = await totalProductsResponse.json();
-      setTotalProducts(totalProductsData);
 
       window.scrollTo(0, 0);
+      setProducts(productsData);
+      setTotalProducts(totalProductsData);
     };
 
     fetchData().catch(console.error);

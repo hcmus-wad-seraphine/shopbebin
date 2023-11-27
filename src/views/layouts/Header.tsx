@@ -8,7 +8,7 @@ interface Props {
 
 const Header = ({ isLogIn }: Props) => {
   return (
-    <div className="bg-primary flex justify-between items-center px-10 py-4">
+    <div className="sticky top-0 z-10 bg-primary justify-between items-center px-10 py-4">
       <Link
         className="flex gap-2 items-center"
         to="/"
