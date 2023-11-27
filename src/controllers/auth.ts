@@ -40,8 +40,6 @@ export const login: RequestHandler = (req, res) => {
   const { identifier, password } = req.body;
   const isEmail = identifier.includes("@");
 
-  console.log("--> login", identifier, password);
-
   const getUser = async () => {
     if (isEmail === true) {
       return await getUserByEmail(identifier);

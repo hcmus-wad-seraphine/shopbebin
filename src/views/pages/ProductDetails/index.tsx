@@ -1,4 +1,3 @@
-import Container from "@components/Container";
 import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
 import { useEffect, useState } from "react";
@@ -28,7 +27,7 @@ const ProductDetails = () => {
   const images = product?.images ?? [];
 
   return (
-    <Container>
+    <div>
       {product === undefined && <Loading />}
       {product !== undefined && (
         <div className="w-full flex-col justify-start items-center md:flex-row md:items-start space-y-8 md:space-y-0 md:space-x-4 lg:space-x-8 gap-10 py-10">
@@ -36,7 +35,7 @@ const ProductDetails = () => {
           <DetailsFeature {...product} />
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 

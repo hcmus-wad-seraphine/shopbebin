@@ -1,4 +1,3 @@
-import Container from "@components/Container";
 import CallOut from "@views/components/CallOut";
 import { FormContainer, FormInput } from "@views/components/Form";
 import { appActions, Role, type UserProfile } from "@views/valtio";
@@ -44,36 +43,34 @@ const LogIn = () => {
   };
 
   return (
-    <Container>
-      <FormContainer onSubmit={handleSubmit}>
-        <h2 className="font-semibold text-xl">Login</h2>
+    <FormContainer onSubmit={handleSubmit}>
+      <h2 className="font-semibold text-xl">Login</h2>
 
-        <FormInput
-          label="Email or Phone number"
-          name="login--email-phone"
+      <FormInput
+        label="Email or Phone number"
+        name="login--email-phone"
+      />
+
+      <FormInput
+        label="Password"
+        name="login--password"
+        type="password"
+      />
+
+      {err != null && (
+        <CallOut
+          type="error"
+          title={err}
         />
+      )}
 
-        <FormInput
-          label="Password"
-          name="login--password"
-          type="password"
-        />
-
-        {err != null && (
-          <CallOut
-            type="error"
-            title={err}
-          />
-        )}
-
-        <button
-          className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
-          type="submit"
-        >
-          Login
-        </button>
-      </FormContainer>
-    </Container>
+      <button
+        className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
+        type="submit"
+      >
+        Login
+      </button>
+    </FormContainer>
   );
 };
 

@@ -7,19 +7,55 @@ import AccountsPage from "./pages/Admin/Accounts";
 import GreetingPage from "./pages/Admin/Greeting";
 import OrdersPage from "./pages/Admin/Orders";
 import ProductsPage from "./pages/Admin/Products";
-import ProfilePage from "./pages/Admin/Profile";
+import AdminProfile from "./pages/Admin/Profile";
 import CartPage from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import HomePage from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import Orders from "./pages/Orders";
 import ProductDetails from "./pages/ProductDetails";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import UserRoot from "./pages/UserRoot";
+import RootPage from "./pages/Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <UserRoot />,
+    element: <RootPage />,
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "/login",
+        element: <LogIn />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
+      },
+    ],
   },
   {
     path: "/admin",
@@ -31,7 +67,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <ProfilePage />,
+        element: <AdminProfile />,
       },
       {
         path: "accounts",
@@ -46,30 +82,6 @@ const router = createBrowserRouter([
         element: <OrdersPage />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <LogIn />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/cart",
-    element: <CartPage />,
-  },
-  {
-    path: "/checkout",
-    element: <Checkout />,
-  },
-  {
-    path: "/products/:id",
-    element: <ProductDetails />,
-  },
-  {
-    path: "/orders",
-    element: <Orders />,
   },
 ]);
 

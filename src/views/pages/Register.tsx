@@ -1,4 +1,3 @@
-import Container from "@components/Container";
 import CallOut from "@views/components/CallOut";
 import { FormContainer, FormInput } from "@views/components/Form";
 import { type FormEvent, useState } from "react";
@@ -60,49 +59,47 @@ const Register = () => {
   };
 
   return (
-    <Container>
-      <FormContainer onSubmit={handleSubmit}>
-        <h2 className="font-semibold text-xl">Create your account</h2>
+    <FormContainer onSubmit={handleSubmit}>
+      <h2 className="font-semibold text-xl">Create your account</h2>
 
-        <FormInput
-          label="Phone number"
-          name="register--phone"
+      <FormInput
+        label="Phone number"
+        name="register--phone"
+      />
+
+      <FormInput
+        label="Email"
+        name="register--email"
+        type="email"
+      />
+
+      <FormInput
+        label="Password"
+        name="register--password"
+        type="password"
+      />
+
+      <FormInput
+        label="Confirm password"
+        name="register--confirm-password"
+        type="password"
+      />
+
+      {res !== undefined && (
+        <CallOut
+          type={res.ok ? "success" : "error"}
+          title={res.statusText}
+          description={res.ok ? "You can now login" : "Please try again"}
         />
+      )}
 
-        <FormInput
-          label="Email"
-          name="register--email"
-          type="email"
-        />
-
-        <FormInput
-          label="Password"
-          name="register--password"
-          type="password"
-        />
-
-        <FormInput
-          label="Confirm password"
-          name="register--confirm-password"
-          type="password"
-        />
-
-        {res !== undefined && (
-          <CallOut
-            type={res.ok ? "success" : "error"}
-            title={res.statusText}
-            description={res.ok ? "You can now login" : "Please try again"}
-          />
-        )}
-
-        <button
-          className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
-          type="submit"
-        >
-          Register
-        </button>
-      </FormContainer>
-    </Container>
+      <button
+        className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
+        type="submit"
+      >
+        Register
+      </button>
+    </FormContainer>
   );
 };
 
