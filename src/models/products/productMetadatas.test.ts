@@ -1,12 +1,6 @@
-import {
-  type Category,
-  type ProductSize,
-  type ProductTopping,
-  Size,
-  type ToppingMetadata,
-} from "@prisma/client";
+import { type Category, type ProductSize, Size, type ToppingMetadata } from "@prisma/client";
 
-import { type Product } from "../interface";
+import { type Product, type Topping } from "../interface";
 import {
   createCategory,
   createProduct,
@@ -86,10 +80,11 @@ describe("Product Metadata Model", () => {
   });
 
   it("product full flow", async () => {
-    const productTopping: ProductTopping = {
+    const productTopping: Topping = {
       id: "",
       productMetadataId: null,
       toppingMetadataId: topping.id,
+      topping,
     };
 
     product = {
@@ -119,10 +114,11 @@ describe("Product Metadata Model", () => {
     }
     expect(fetchedProduct).toEqual(product);
 
-    let productTopping2: ProductTopping = {
+    let productTopping2: Topping = {
       id: "",
       productMetadataId: product.id,
       toppingMetadataId: topping2.id,
+      topping: topping2,
     };
     productTopping2 = await createProductTopping(productTopping2);
 
@@ -142,7 +138,7 @@ describe("Product Metadata Model", () => {
       desc: randomDescription + " 2",
       images: [randomImage + " 2"],
       availableSizes: [productSize, productSize2],
-      availableToppings: [productTopping2],
+      availableToppings: [fetchedProduct.availableToppings[0], productTopping2],
       categoryId: category2.id,
       category: category2,
     };
@@ -155,6 +151,7 @@ describe("Product Metadata Model", () => {
     expect(updatedProduct.categoryId).toEqual(category2.id);
 
     console.log("--> updatedProduct", updatedProduct);
+    console.log("--> updatedProductToppings", updatedProduct.availableToppings);
   });
 
   it("cleanup", async () => {

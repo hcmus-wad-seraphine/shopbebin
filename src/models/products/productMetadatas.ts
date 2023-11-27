@@ -13,7 +13,13 @@ export const createProduct = async (product: Product) => {
         create: product.availableSizes.map(({ id, productMetadataId, ...data }) => data),
       },
       availableToppings: {
-        create: product.availableToppings.map(({ id, productMetadataId, ...data }) => data),
+        create: product.availableToppings.map(({ toppingMetadataId }) => ({
+          topping: {
+            connect: {
+              id: toppingMetadataId,
+            },
+          },
+        })),
       },
       category: {
         connect: {
@@ -23,7 +29,11 @@ export const createProduct = async (product: Product) => {
     },
     include: {
       availableSizes: true,
-      availableToppings: true,
+      availableToppings: {
+        include: {
+          topping: true,
+        },
+      },
       category: true,
     },
   });
@@ -40,7 +50,11 @@ export const getProduct = async (id: string) => {
     },
     include: {
       availableSizes: true,
-      availableToppings: true,
+      availableToppings: {
+        include: {
+          topping: true,
+        },
+      },
       category: true,
     },
   });
@@ -54,7 +68,11 @@ export const getProducts = async () => {
   const products: Product[] = await client.productMetadata.findMany({
     include: {
       availableSizes: true,
-      availableToppings: true,
+      availableToppings: {
+        include: {
+          topping: true,
+        },
+      },
       category: true,
     },
   });
@@ -87,7 +105,11 @@ export const updateProduct = async (product: Product) => {
     },
     include: {
       availableSizes: true,
-      availableToppings: true,
+      availableToppings: {
+        include: {
+          topping: true,
+        },
+      },
       category: true,
     },
   });

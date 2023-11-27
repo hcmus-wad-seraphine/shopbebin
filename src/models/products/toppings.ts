@@ -17,13 +17,30 @@ export const createTopping = async (topping: ToppingMetadata) => {
 export const createProductTopping = async (productTopping: ProductTopping) => {
   const client = getPrismaClient();
 
-  const { id, ...data } = productTopping;
-
   const createdProductTopping = await client.productTopping.create({
-    data,
+    data: {
+      productMetadataId: productTopping.productMetadataId,
+      toppingMetadataId: productTopping.toppingMetadataId,
+    },
+    include: {
+      topping: true,
+    },
   });
 
   return createdProductTopping;
+};
+
+export const getProductTopping = async (id: string) => {
+  const client = getPrismaClient();
+
+  return await client.productTopping.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      topping: true,
+    },
+  });
 };
 
 export const getToppings = async () => {

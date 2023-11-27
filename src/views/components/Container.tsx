@@ -1,4 +1,6 @@
+import { appState } from "@views/valtio/auth";
 import type { FC, ReactNode } from "react";
+import { useSnapshot } from "valtio";
 
 import Header from "../layouts/Header";
 
@@ -8,9 +10,11 @@ interface Props {
 }
 
 const Container: FC<Props> = ({ children, className }) => {
+  const snap = useSnapshot(appState);
+
   return (
     <div className={`flex-col ${className} w-full`}>
-      <Header isLogIn={true} />
+      <Header isLogIn={snap.profile !== null} />
       <div className="w-full lg:max-w-4xl xl:max-w-6xl mx-auto flex-col">{children}</div>
     </div>
   );

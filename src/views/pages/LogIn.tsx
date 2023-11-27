@@ -1,45 +1,78 @@
 import Container from "@components/Container";
+import CallOut from "@views/components/CallOut";
+import { FormContainer, FormInput } from "@views/components/Form";
+import { appActions, Role, type UserProfile } from "@views/valtio/auth";
+import { type FormEvent, useState } from "react";
+import { type ErrorResponse, useNavigate } from "react-router-dom";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const [err, setErr] = useState<string>();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    const identifier = data["login--email-phone"];
+    const password = data["login--password"];
+
+    const login = async () => {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ identifier, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const profile: UserProfile = {
+          role: Role.Basic,
+        };
+        appActions.login(profile);
+        navigate("/");
+      } else {
+        const errorResponse: ErrorResponse = await response.json();
+        setErr(errorResponse.statusText);
+      }
+    };
+
+    login().catch(() => {
+      console.log("Something went wrong");
+    });
+  };
+
   return (
     <Container>
-      <div className="flex-col gap-4 px-[50px] sm:px-[150px] lg:px-[200px] xl:px-[300px] py-[50px]">
-        <h2 className="font-semibold text-xl">Log In</h2>
+      <FormContainer onSubmit={handleSubmit}>
+        <h2 className="font-semibold text-xl">Login</h2>
 
-        <div className="flex-col">
-          <p>Username or email adress</p>
-          <input
-            type="text"
-            className="flex-1 border-black border-[1px]"
+        <FormInput
+          label="Email or Phone number"
+          name="login--email-phone"
+        />
+
+        <FormInput
+          label="Password"
+          name="login--password"
+          type="password"
+        />
+
+        {err != null && (
+          <CallOut
+            type="error"
+            title={err}
           />
-        </div>
+        )}
 
-        <div className="flex-col">
-          <p>Password</p>
-          <input
-            type="text"
-            className="flex-1 border-black border-[1px]"
-          />
-        </div>
-
-        <div className="justify-between items-center flex-col sm:flex-row">
-          <div className="justify-center items-center gap-2">
-            <input
-              type="checkbox"
-              className="w-4 h-4 rounded-sm border-[1px] border-black"
-            />
-            Remember me
-          </div>
-          <a>Forget password</a>
-        </div>
-
-        <a
-          href="/"
+        <button
           className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
+          type="submit"
         >
-          Log In
-        </a>
-      </div>
+          Login
+        </button>
+      </FormContainer>
     </Container>
   );
 };
