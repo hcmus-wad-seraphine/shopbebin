@@ -1,148 +1,21 @@
-import { type ProductMetadata, ProductSize, Topping } from "@prisma/client";
+import { type Topping } from "@models/interface";
+import { type ProductSize } from "@prisma/client";
+import Price from "@views/components/Price";
 import { useState } from "react";
 
-import { useAddToCartContext, useCartContext } from "@/context/Store";
-import Price from "@views/components/Price";
-
 interface ProductFormProps {
-  product: ProductMetadata;
+  sizes: ProductSize[];
+  toppings: Topping[];
+  onChangeSize: (size: ProductSize) => void;
 }
 
-const ProductForm = ({ product }: ProductFormProps) => {
-  const sizes = [
-    {
-      id: "1",
-      size: "S",
-      price: 10,
-    },
-    {
-      id: "2",
-      size: "M",
-      price: 20,
-    },
-    {
-      id: "3",
-      size: "L",
-      price: 30,
-    },
-    {
-      id: "4",
-      size: "XL",
-      price: 40,
-    },
-  ];
-
-  const toppings: Topping[] = [
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-    {
-      id: "black-bubble",
-      name: "Black Bubble",
-      price: 1,
-      image: "",
-      desc: "Chewy, sweet, and delicious",
-      productMetadataId: "1",
-      singleProductInvoiceId: "1",
-      stock: 100,
-    },
-  ];
-
+const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(sizes[0]);
-  const [price, setPrice] = useState(sizes[0].price);
 
   function handleSizeChange(event) {
     setSize(event);
-    const selectedVariant = sizes.filter((size) => size.size === event).pop();
-    setPrice(selectedVariant.price);
+    onChangeSize(size);
   }
 
   const handleAddToCart = async () => {

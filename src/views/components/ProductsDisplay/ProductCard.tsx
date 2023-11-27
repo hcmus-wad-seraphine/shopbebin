@@ -1,10 +1,10 @@
-import { type ProductMetadata } from "@prisma/client";
+import { type Product } from "@models/interface";
 import { type FC } from "react";
 
 import Price from "../Price";
 
 interface Props {
-  product: ProductMetadata;
+  product: Product;
 }
 
 const ProductCard: FC<Props> = ({ product }) => {
