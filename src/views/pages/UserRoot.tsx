@@ -1,11 +1,11 @@
 import Container from "@components/Container";
 import ProductsDisplay from "@components/ProductsDisplay";
-// import UtilsBar from "@views/layouts/UtilsBar";
+import UtilsBar from "@views/layouts/UtilsBar";
 
 const UserRoot = () => {
   return (
     <Container>
-      {/* <UtilsBar /> */}
+      <UtilsBar />
       <ProductsDisplay />
     </Container>
   );
