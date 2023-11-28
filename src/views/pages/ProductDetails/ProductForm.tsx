@@ -13,8 +13,10 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(sizes[0]);
 
-  function handleSizeChange(event) {
-    setSize(event);
+  function handleSizeChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const sizeId = event.target.value;
+    const selectedSize = sizes.find((item) => item.id === sizeId);
+    setSize(selectedSize as ProductSize);
     onChangeSize(size);
   }
 
@@ -22,11 +24,11 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
     console.log("added");
   };
 
-  const updateQuantity = (event) => {
-    if (event === "") {
+  const updateQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value === "") {
       setQuantity(1);
     } else {
-      setQuantity(Math.floor(event));
+      setQuantity(Math.floor(event.target.valueAsNumber));
     }
   };
 
@@ -44,9 +46,7 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
               min="1"
               step="1"
               value={quantity}
-              onChange={(e) => {
-                updateQuantity(e.target.value);
-              }}
+              onChange={updateQuantity}
               className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-secondary focus:ring-secondary"
             />
           </div>
@@ -55,10 +55,7 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
             <select
               id="size-selector"
               name="size-selector"
-              onChange={(event) => {
-                handleSizeChange(event.target.value);
-              }}
-              value={size.size}
+              onChange={handleSizeChange}
               className="form-select border border-gray-300 rounded-sm w-full text-gray-900 focus:border-secondary focus:ring-secondary"
             >
               {sizes.map((item) => (
@@ -85,16 +82,16 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
               >
                 <div className="gap-2">
                   <img
-                    src={item.image}
+                    src={item.topping.image}
                     alt=""
                     className="w-8 h-8 rounded-lg"
                   />
                   <div />
 
                   <div className="flex-col">
-                    <p>{item.name}</p>
+                    <p>{item.topping.name}</p>
                     <Price
-                      num={item.price}
+                      num={item.topping.price}
                       numSize="12"
                     />
                   </div>
