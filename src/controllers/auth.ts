@@ -81,7 +81,7 @@ export const login: RequestHandler = (req, res) => {
 
       const token = sign(payload, process.env.JWT_SECRET ?? "bidumdum");
 
-      res.json({ jwt: token, user });
+      res.json({ token, user });
     })
     .catch((err) => {
       const errorResponse: ErrorResponse = {

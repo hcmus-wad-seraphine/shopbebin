@@ -26,11 +26,12 @@ const LogIn = () => {
       });
 
       if (response.ok) {
-        const { jwt, user } = await response.json();
+        const { token, user } = await response.json();
         const profile: Profile = {
-          jwt,
+          token,
           user,
         };
+        localStorage.setItem("token", token);
         appActions.login(profile);
         navigate("/");
       } else {

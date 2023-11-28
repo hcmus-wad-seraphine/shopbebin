@@ -2,31 +2,13 @@ import InfoItem from "@views/components/Checkout/InfoItem";
 import Dropdown from "@views/components/Dropdown";
 import InformationTitle from "@views/features/Profile/Information";
 import SettingTitle, { SettingItem } from "@views/features/Profile/Setting";
-import { appActions, appState } from "@views/valtio";
-import { useEffect, useState } from "react";
+import { appActions } from "@views/valtio";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const response = await fetch("/api/profile", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${appState.profile?.jwt}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch profile");
-      }
-    };
-
-    fetchProfile().catch(() => {
-      navigate("/login");
-    });
-  }, []);
 
   const handleLogout = () => {
     appActions.logout();
