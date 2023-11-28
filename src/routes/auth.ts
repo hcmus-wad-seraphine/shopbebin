@@ -11,6 +11,12 @@ const options: StrategyOptions = {
 
 passport.use(
   new Strategy(options, (payload: JwtPayload, done) => {
+    const isExpired = Date.now() > (payload.exp as number);
+    if (isExpired) {
+      done(null, false);
+      return;
+    }
+
     const uid = payload.sub;
     if (uid === undefined) {
       done("Undefined uid", false);

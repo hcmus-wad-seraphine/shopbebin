@@ -37,19 +37,20 @@ export const appActions = {
   },
 
   loginWithToken: async (token: string) => {
-    console.log("--> token", token);
-
-    const res = await fetch("/api/profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const user: User = await res.json();
-
-    appState.profile = {
-      token,
-      user,
-    };
+    try {
+      const res = await fetch("/api/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const user: User = await res.json();
+      appState.profile = {
+        token,
+        user,
+      };
+    } catch (err) {
+      appState.profile = null;
+    }
   },
 
   logout: () => {
