@@ -4,6 +4,7 @@ interface FormInputProps {
   name: string;
   defaultValue?: string;
   type?: string;
+  pattern?: string;
   required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -14,6 +15,7 @@ export const FormInput = ({
   name,
   defaultValue,
   type = "text",
+  pattern,
   required = true,
   onChange,
 }: FormInputProps) => {
@@ -27,6 +29,7 @@ export const FormInput = ({
         name={name}
         defaultValue={defaultValue}
         required={required}
+        pattern={pattern}
         onChange={onChange}
       />
     </div>
