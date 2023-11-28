@@ -76,6 +76,10 @@ export const router = createBrowserRouter([
         element: <Orders />,
         loader: authLoader,
       },
+      {
+        path: "*",
+        loader: async () => redirect("/"),
+      },
     ],
   },
   {
@@ -106,6 +110,10 @@ export const router = createBrowserRouter([
       {
         path: "orders",
         element: <OrdersPage />,
+      },
+      {
+        path: "*",
+        loader: async () => redirect("/admin"),
       },
     ],
   },
