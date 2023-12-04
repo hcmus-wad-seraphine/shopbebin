@@ -125,6 +125,35 @@ export const updateProduct = async (product: Product) => {
   return updatedProduct;
 };
 
+export const getProductsByCategory = async (
+  name: string,
+  offset: number = 0,
+  limit: number = 10,
+) => {
+  const client = getPrismaClient();
+
+  const products: Product[] = await client.productMetadata.findMany({
+    where: {
+      name: {
+        contains: name,
+      },
+    },
+    include: {
+      availableSizes: true,
+      availableToppings: {
+        include: {
+          topping: true,
+        },
+      },
+      category: true,
+    },
+    skip: offset,
+    take: limit,
+  });
+
+  return products;
+};
+
 export const deleteProduct = async (id: string) => {
   const client = getPrismaClient();
 
