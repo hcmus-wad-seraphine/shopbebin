@@ -56,7 +56,7 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
               id="size-selector"
               name="size-selector"
               onChange={handleSizeChange}
-              className="form-select border border-gray-300 rounded-sm w-full text-gray-900 focus:border-secondary focus:ring-secondary"
+              className="form-select border border-gray-300 rounded-sm w-full text-gray-900 focus:border-secondary focus:ring-secondary max-w-xs"
             >
               {sizes.map((item) => (
                 <option
@@ -74,19 +74,18 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
         <div className="flex-col gap-2">
           <label className="text-gray-500 text-base">Toppings</label>
 
-          <div className="flex-col max-h-[240px] overflow-auto border border-gray-300 p-2 rounded-lg">
+          <div className="flex-col max-h-[240px] overflow-auto border border-gray-300 p-2 rounded-lg max-w-md">
             {toppings.map((item) => (
               <div
                 key={item.id}
                 className="justify-between w-full"
               >
-                <div className="gap-2">
+                <div className="gap-2 items-center">
                   <img
                     src={item.topping.image}
                     alt=""
-                    className="w-8 h-8 rounded-lg"
+                    className="w-10 h-10 rounded-lg"
                   />
-                  <div />
 
                   <div className="flex-col">
                     <p>{item.topping.name}</p>
@@ -109,7 +108,7 @@ const ProductForm = ({ sizes, toppings, onChangeSize }: ProductFormProps) => {
       </div>
 
       <button
-        className="flex bg-gradient-to-b from-primary to-secondary px-3 py-2 justify-center items-center rounded-full gap-2 text-white "
+        className="flex bg-gradient-to-b from-primary to-secondary px-3 py-2 justify-center items-center rounded-full gap-2 text-white max-w-[280px]"
         aria-label="cart-button"
         onClick={() => handleAddToCart}
       >
