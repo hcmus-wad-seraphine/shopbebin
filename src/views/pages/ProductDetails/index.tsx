@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 
 import DetailsFeature from "./DetailsFeature";
 import ProductImage from "./ProductImages";
+import RelatedItems from "./RelatedItems";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -30,9 +31,12 @@ const ProductDetails = () => {
     <div>
       {product === undefined && <Loading />}
       {product !== undefined && (
-        <div className="w-full flex-col justify-start items-center md:flex-row md:items-start space-y-8 md:space-y-0 md:space-x-4 lg:space-x-8 gap-10 py-10">
-          <ProductImage images={images} />
-          <DetailsFeature {...product} />
+        <div className="flex-col w-full py-10 gap-10 min-h-[200vh]">
+          <div className="w-full justify-start items-center md:flex-row md:items-start space-y-8 md:space-y-0 md:space-x-4 lg:space-x-8 gap-10">
+            <ProductImage images={images} />
+            <DetailsFeature {...product} />
+          </div>
+          <RelatedItems products={[]} />
         </div>
       )}
     </div>
