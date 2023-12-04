@@ -9,7 +9,7 @@ const DetailsFeature = (product: Product) => {
   const [size, setSize] = useState<ProductSize>(product.availableSizes[0]);
 
   return (
-    <div className="flex-1 flex-col justify-start h-full w-full md:w-1/2 max-w-xs mx-auto space-y-4 min-h-128">
+    <div className="flex-1 flex-col justify-start h-full w-full mx-auto space-y-4 min-h-128">
       <ProductInfo
         name={product.name}
         desc={product.desc}
