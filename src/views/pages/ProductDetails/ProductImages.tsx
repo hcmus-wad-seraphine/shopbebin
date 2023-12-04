@@ -24,7 +24,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
       <div className="relative flex border-t border-secondary">
         <button
           aria-label="left-scroll"
-          className="h-32 bg-secondary/70 hover:bg-palette-light  absolute left-0 z-10 opacity-75 px-1"
+          className="h-32 bg-secondary/70 hover:bg-palette-light  absolute left-0 z-1 opacity-75 px-1"
           onClick={() => {
             scroll(-300);
           }}
@@ -56,7 +56,7 @@ const ProductImage = ({ images }: ProductImageProps) => {
 
         <button
           aria-label="right-scroll"
-          className="h-32 bg-secondary/70 hover:bg-palette-light  absolute right-0 z-10 opacity-75 px-1"
+          className="h-32 bg-secondary/70 hover:bg-palette-light  absolute right-0 z-1 opacity-75 px-1"
           onClick={() => {
             scroll(300);
           }}
