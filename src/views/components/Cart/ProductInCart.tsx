@@ -26,7 +26,7 @@ const ProductInCart: FC<Props> = ({ onUpdateItem, item }) => {
         />
 
         <a href={`/products/${item.id}`}>
-          <a className="pt-1 hover:text-primary font-medium text-xl">{item.name}</a>
+          <p className="pt-1 hover:text-primary font-medium text-xl">{item.name}</p>
         </a>
       </td>
 
