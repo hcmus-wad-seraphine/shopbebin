@@ -1,7 +1,7 @@
 import { Role, type User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { type RequestHandler } from "express";
-import { type JwtPayload, sign } from "jsonwebtoken";
+import jsonwebtoken from "jsonwebtoken";
 import { type ErrorResponse } from "react-router-dom";
 
 import { createUser, getUserByEmail, getUserByPhone } from "../models/users";
@@ -73,13 +73,13 @@ export const login: RequestHandler = (req, res) => {
 
       const oneHour = 1000 * 60 * 60;
 
-      const payload: JwtPayload = {
+      const payload: jsonwebtoken.JwtPayload = {
         sub: user.id,
         iat: Date.now(),
         exp: Date.now() + oneHour,
       };
 
-      const token = sign(payload, process.env.JWT_SECRET ?? "bidumdum");
+      const token = jsonwebtoken.sign(payload, process.env.JWT_SECRET ?? "bidumdum");
 
       res.json({ token, user });
     })

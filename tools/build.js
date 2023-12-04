@@ -1,19 +1,18 @@
 const esbuild = require("esbuild");
 
 esbuild.buildSync({
-    entryPoints: ["src/views/App.tsx"],
-    outfile: "public/dist/app.js",
-    bundle: true,
-    minify: true,
-    sourcemap: true,
+  entryPoints: ["src/index.ts"],
+  bundle: true,
+  platform: "node",
+  outfile: "public/dist/api.js",
+  packages: "external",
+  minify: true,
 });
 
 esbuild.buildSync({
-    entryPoints: ["src/index.ts"],
-    outfile: "public/dist/api.js",
-    bundle: true,
-    minify: false,
-    sourcemap: false,
-    format: "cjs",
-    platform: "node",
+  entryPoints: ["src/views/App.tsx"],
+  bundle: true,
+  platform: "browser",
+  outfile: "public/dist/app.js",
+  minify: true,
 });
