@@ -24,6 +24,7 @@ model User {
   addresses    Address[]
   cart         SingleProductInvoice[]
   Invoice      Invoice[]
+  Review       ReviewMetadata[]
 }
 
 type Address {
@@ -87,6 +88,7 @@ model ProductMetadata {
   category             Category               @relation(fields: [categoryId], references: [id])
   categoryId           String                 @db.ObjectId
   SingleProductInvoice SingleProductInvoice[]
+  ProductReview        ProductReview[]
 }
 
 model SingleProductInvoice {
@@ -138,4 +140,28 @@ model Order {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ReviewMetadata {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+
+  user      User @relation(fields: [userId], references: [id])
+  userId    String @db.ObjectId
+
+  rating Int
+  comment String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ProductReview ProductReview[]
+}
+
+model ProductReview {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+
+  review ReviewMetadata  @relation(fields: [reviewMetadataId], references: [id])
+  reviewMetadataId String @db.ObjectId
+
+  productMetadata ProductMetadata? @relation(fields: [productMetadataId], references: [id])
+  productMetadataId String? @db.ObjectId
 }
