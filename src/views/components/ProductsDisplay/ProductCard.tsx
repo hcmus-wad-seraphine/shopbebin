@@ -11,7 +11,7 @@ const ProductCard: FC<Props> = ({ product }) => {
   const handle = product.id;
   const title = product.name;
   const description = product.desc;
-  const price = 10;
+  const price = product.availableSizes[0].price;
 
   const image = product.images[0];
 
