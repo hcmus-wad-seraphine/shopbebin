@@ -61,7 +61,7 @@ const UtilsBar = ({ categories, activeCategory }: Props) => {
               <Link
                 key={index}
                 className={`${activeStyle}`}
-                to={`/category/${category.name}`}
+                to={`/categories/${category.name}`}
               >
                 {category.name}
               </Link>

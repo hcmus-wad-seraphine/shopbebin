@@ -135,6 +135,15 @@ export const getProductsByCategory = async (
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
     skip: offset,
     take: limit,
@@ -215,6 +224,9 @@ export const updateProduct = async (product: Product) => {
           id: category.id,
         },
       },
+      reviews: {
+        set: product.reviews,
+      },
     },
     include: {
       availableSizes: true,
@@ -224,6 +236,15 @@ export const updateProduct = async (product: Product) => {
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
   });
 
