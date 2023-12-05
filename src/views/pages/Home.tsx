@@ -3,18 +3,19 @@ import { type Product } from "@models/interface";
 import { type Category } from "@prisma/client";
 import UtilsBar from "@views/layouts/UtilsBar";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>();
   const [categories, setCategories] = useState<Category[]>();
   const [totalProducts, setTotalProducts] = useState<number>(0);
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
 
   const [searchParams] = useSearchParams();
   const pageParam = searchParams.get("page") ?? "1";
   const pageNumber = parseInt(pageParam);
   const itemsPerPage = 9;
+
+  const { category } = useParams<{ category: string }>();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -30,41 +31,47 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (activeCategory === null) {
-        const productsResponse = await fetch(
-          `/api/products?offset=${(pageNumber - 1) * itemsPerPage}&limit=${itemsPerPage}`,
-        );
-        const productsData = await productsResponse.json();
+      const endpoints =
+        category === undefined
+          ? {
+              products: `/api/products?offset=${
+                (pageNumber - 1) * itemsPerPage
+              }&limit=${itemsPerPage}`,
+              totalProducts: `/api/products/total`,
+            }
+          : {
+              products: `/api/products/categories/${category}?offset=${
+                (pageNumber - 1) * itemsPerPage
+              }&limit=${itemsPerPage}`,
+              totalProducts: `/api/products/total/${category}`,
+            };
 
-        const totalProductsResponse = await fetch("/api/products/total");
-        const totalProductsData = await totalProductsResponse.json();
+      const productsResponse = await fetch(endpoints.products);
+      const productsData = await productsResponse.json();
 
-        window.scrollTo(0, 0);
-        setProducts(productsData);
-        setTotalProducts(totalProductsData);
-      } else {
-        const productsResponse = await fetch(`/api/categories/${activeCategory.name}`);
+      const totalProductsResponse = await fetch(endpoints.totalProducts);
+      const totalProductsData = await totalProductsResponse.json();
 
-        const productsData = await productsResponse.json();
-        setProducts(productsData);
-        setTotalProducts(activeCategory.itemCount);
-      }
+      window.scrollTo(0, 0);
+      setProducts(productsData);
+      setTotalProducts(totalProductsData);
     };
 
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, [pageNumber, activeCategory]);
+  }, [pageNumber, category]);
 
   return (
     <>
       <UtilsBar
-        categories={categories}
-        onSelectCategory={setActiveCategory}
+        categories={categories ?? []}
+        activeCategory={category ?? ""}
       />
       <ProductsDisplay
         products={products}
         totalProducts={totalProducts}
+        itemsPerPage={itemsPerPage}
       />
     </>
   );

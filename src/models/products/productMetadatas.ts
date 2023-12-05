@@ -88,41 +88,16 @@ export const getTotalProducts = async () => {
   return totalProducts;
 };
 
-export const updateProduct = async (product: Product) => {
+export const getTotalProductsByCategory = async (category: string) => {
   const client = getPrismaClient();
-
-  const { id, availableSizes, availableToppings, category, categoryId, ...data } = product;
-
-  const updatedProduct: Product | null = await client.productMetadata.update({
+  const totalProducts = await client.productMetadata.count({
     where: {
-      id,
-    },
-    data: {
-      ...data,
-      availableSizes: {
-        set: availableSizes,
+      name: {
+        contains: category,
       },
-      availableToppings: {
-        set: availableToppings,
-      },
-      category: {
-        connect: {
-          id: category.id,
-        },
-      },
-    },
-    include: {
-      availableSizes: true,
-      availableToppings: {
-        include: {
-          topping: true,
-        },
-      },
-      category: true,
     },
   });
-
-  return updatedProduct;
+  return totalProducts;
 };
 
 export const getProductsByCategory = async (
@@ -191,4 +166,41 @@ export const deleteProduct = async (id: string) => {
   }
 
   await Promise.all(promises);
+};
+
+export const updateProduct = async (product: Product) => {
+  const client = getPrismaClient();
+
+  const { id, availableSizes, availableToppings, category, categoryId, ...data } = product;
+
+  const updatedProduct: Product | null = await client.productMetadata.update({
+    where: {
+      id,
+    },
+    data: {
+      ...data,
+      availableSizes: {
+        set: availableSizes,
+      },
+      availableToppings: {
+        set: availableToppings,
+      },
+      category: {
+        connect: {
+          id: category.id,
+        },
+      },
+    },
+    include: {
+      availableSizes: true,
+      availableToppings: {
+        include: {
+          topping: true,
+        },
+      },
+      category: true,
+    },
+  });
+
+  return updatedProduct;
 };

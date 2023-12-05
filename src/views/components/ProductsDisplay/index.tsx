@@ -7,11 +7,10 @@ import ProductCard from "./ProductCard";
 interface ProductsDisplayProps {
   products?: Product[];
   totalProducts: number;
+  itemsPerPage: number;
 }
 
-const ProductsDisplay = ({ products, totalProducts }: ProductsDisplayProps) => {
-  const itemsPerPage = 9;
-
+const ProductsDisplay = ({ products, totalProducts, itemsPerPage }: ProductsDisplayProps) => {
   const numberOfPages = Math.ceil(totalProducts / itemsPerPage);
   const pages = [];
   for (let i = 1; i <= numberOfPages; i++) {

@@ -1,17 +1,15 @@
 import { type Category } from "@prisma/client";
 import Loading from "@views/components/Loading";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
-  categories?: Category[];
-  onSelectCategory: (category: Category) => void;
+  categories: Category[];
+  activeCategory: string;
   onSelectPriceRange?: (price: number) => void;
   onSelectNews?: (news: string) => void;
 }
 
-const UtilsBar = ({ categories, onSelectCategory }: Props) => {
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
-
+const UtilsBar = ({ categories, activeCategory }: Props) => {
   const activeCategoryStyle =
     "text-secondary border-b-2 border-secondary transition	duration-200 ease-in-out";
 
@@ -49,30 +47,25 @@ const UtilsBar = ({ categories, onSelectCategory }: Props) => {
         <Loading />
       ) : (
         <div className="gap-6">
-          <button
-            onClick={() => {
-              setActiveCategory(null);
-            }}
-            className={`${activeCategory === null && activeCategoryStyle}`}
+          <Link
+            className={`${activeCategory === "" && activeCategoryStyle}`}
+            to="/"
           >
             All
-          </button>
+          </Link>
           {categories.map((category, index) => {
             let activeStyle = "";
-            if (category.id === activeCategory?.id) {
+            if (category.name === activeCategory) {
               activeStyle = activeCategoryStyle;
             }
             return (
-              <button
+              <Link
                 key={index}
                 className={`${activeStyle}`}
-                onClick={() => {
-                  setActiveCategory(category);
-                  onSelectCategory(category);
-                }}
+                to={`/category/${category.name}`}
               >
                 {category.name}
-              </button>
+              </Link>
             );
           })}
         </div>
