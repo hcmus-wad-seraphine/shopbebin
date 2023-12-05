@@ -44,17 +44,24 @@ interface Props {
   categories: Category[];
   activeCategory: string;
   onPriceFilter: (props: { lowerBound: number; upperBound: number }) => void;
+  onSelectSortMode?: (sortMode: string, isAscending: boolean) => void;
 }
 
-const UtilsBar = ({ categories, activeCategory, onPriceFilter }: Props) => {
+const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSelectSortMode }: Props) => {
   const activeCategoryStyle =
     "text-secondary border-b-2 border-secondary transition duration-200 ease-in-out";
 
-  const mockNews = [
-    { id: "1", name: "New" },
-    { id: "2", name: "Sale" },
-    { id: "3", name: "Hot" },
-    { id: "4", name: "Best" },
+  const sortList = [
+    {
+      id: "1",
+      name: "Price",
+      isAscending: true,
+    },
+    {
+      id: "2",
+      name: "Price",
+      isAscending: false,
+    },
   ];
 
   const handleFilterPrice = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -68,15 +75,21 @@ const UtilsBar = ({ categories, activeCategory, onPriceFilter }: Props) => {
 
   return (
     <div className="items-center justify-between py-3 px-10">
-      <select className="form-select border w-20 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary">
+      <select className="form-select border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary">
         <option value="1">All</option>
-        {mockNews.map((news, index) => {
+        {sortList.map((sort, index) => {
+          const mode = sort.isAscending ? "ascending" : "descending";
           return (
             <option
               key={index}
-              value={news.id}
+              value={sort.id}
+              onChange={() => {
+                onSelectSortMode?.(sort.name, sort.isAscending);
+              }}
             >
-              {news.name}
+              <div>
+                {sort.name} {mode}
+              </div>
             </option>
           );
         })}
