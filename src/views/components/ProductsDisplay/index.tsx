@@ -1,35 +1,16 @@
 import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
-import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import ProductCard from "./ProductCard";
 
-const ProductsDisplay = () => {
-  const [products, setProducts] = useState<Product[]>();
-  const [totalProducts, setTotalProducts] = useState<number>(0);
-  const [searchParams] = useSearchParams();
-  const pageParam = searchParams.get("page") ?? "1";
-  const pageNumber = parseInt(pageParam);
+interface ProductsDisplayProps {
+  products?: Product[];
+  totalProducts: number;
+}
+
+const ProductsDisplay = ({ products, totalProducts }: ProductsDisplayProps) => {
   const itemsPerPage = 9;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const productsResponse = await fetch(
-        `/api/products?offset=${(pageNumber - 1) * itemsPerPage}&limit=${itemsPerPage}`,
-      );
-      const productsData = await productsResponse.json();
-
-      const totalProductsResponse = await fetch("/api/products/total");
-      const totalProductsData = await totalProductsResponse.json();
-
-      window.scrollTo(0, 0);
-      setProducts(productsData);
-      setTotalProducts(totalProductsData);
-    };
-
-    fetchData().catch(console.error);
-  }, [pageNumber]);
 
   const numberOfPages = Math.ceil(totalProducts / itemsPerPage);
   const pages = [];

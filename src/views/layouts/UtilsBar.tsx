@@ -1,11 +1,12 @@
 import { type Category } from "@prisma/client";
+import Loading from "@views/components/Loading";
 import { useState } from "react";
 
 interface Props {
-  categories: Category[];
+  categories?: Category[];
   onSelectCategory: (category: Category) => void;
-  onSelectPriceRange: (price: number) => void;
-  onSelectNews: (news: string) => void;
+  onSelectPriceRange?: (price: number) => void;
+  onSelectNews?: (news: string) => void;
 }
 
 const UtilsBar = ({ categories, onSelectCategory }: Props) => {
@@ -13,12 +14,6 @@ const UtilsBar = ({ categories, onSelectCategory }: Props) => {
 
   const activeCategoryStyle =
     "text-secondary border-b-2 border-secondary transition	duration-200 ease-in-out";
-  const mockCategories = [
-    { id: "1", name: "Milktea" },
-    { id: "2", name: "Pizza" },
-    { id: "3", name: "Burger" },
-    { id: "4", name: "Drink" },
-  ];
 
   const mockNews = [
     { id: "1", name: "New" },
@@ -50,34 +45,38 @@ const UtilsBar = ({ categories, onSelectCategory }: Props) => {
         })}
       </select>
 
-      <div className="gap-6">
-        <button
-          onClick={() => {
-            setActiveCategory(null);
-          }}
-          className={`${activeCategory === null && activeCategoryStyle}`}
-        >
-          All
-        </button>
-        {mockCategories.map((category, index) => {
-          let activeStyle = "";
-          if (category.id === activeCategory?.id) {
-            activeStyle = activeCategoryStyle;
-          }
-          return (
-            <button
-              key={index}
-              className={`${activeStyle}`}
-              onClick={() => {
-                setActiveCategory(category);
-                onSelectCategory(category);
-              }}
-            >
-              {category.name}
-            </button>
-          );
-        })}
-      </div>
+      {categories === undefined || categories === null ? (
+        <Loading />
+      ) : (
+        <div className="gap-6">
+          <button
+            onClick={() => {
+              setActiveCategory(null);
+            }}
+            className={`${activeCategory === null && activeCategoryStyle}`}
+          >
+            All
+          </button>
+          {categories.map((category, index) => {
+            let activeStyle = "";
+            if (category.id === activeCategory?.id) {
+              activeStyle = activeCategoryStyle;
+            }
+            return (
+              <button
+                key={index}
+                className={`${activeStyle}`}
+                onClick={() => {
+                  setActiveCategory(category);
+                  onSelectCategory(category);
+                }}
+              >
+                {category.name}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <select className="form-select border w-20 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary">
         <option value="1">All</option>
