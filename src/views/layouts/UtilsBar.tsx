@@ -40,28 +40,54 @@ const priceFilter: FilterPrice[] = [
   },
 ];
 
+export enum SortCriteria {
+  Price = "Price",
+  Name = "Name",
+}
+
+export enum SortOrder {
+  Ascending = "ascending",
+  Descending = "descending",
+}
+
+export interface SortOption {
+  id: string;
+  name: SortCriteria;
+  order: SortOrder;
+}
+
 interface Props {
   categories: Category[];
   activeCategory: string;
   onPriceFilter: (props: { lowerBound: number; upperBound: number }) => void;
-  onSelectSortMode?: (sortMode: string, isAscending: boolean) => void;
+  onSort: (option: SortOption) => void;
 }
 
-const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSelectSortMode }: Props) => {
+const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSort }: Props) => {
   const activeCategoryStyle =
     "text-secondary border-b-2 border-secondary transition duration-200 ease-in-out";
 
-  const sortList = [
+  const sortList: SortOption[] = [
     {
-      id: "1",
-      name: "Price",
-      isAscending: true,
+      id: "price-ascending",
+      name: SortCriteria.Price,
+      order: SortOrder.Ascending,
     },
     {
-      id: "2",
-      name: "Price",
-      isAscending: false,
+      id: "price-descending",
+      name: SortCriteria.Price,
+      order: SortOrder.Descending,
     },
+    // {
+    //   id: "name-ascending",
+    //   name: SortCriteria.Name,
+    //   order: SortOrder.Ascending,
+    // },
+    // {
+    //   id: "name-descending",
+    //   name: SortCriteria.Name,
+    //   order: SortOrder.Descending,
+    // },
   ];
 
   const handleFilterPrice = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -73,23 +99,30 @@ const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSelectSortMode 
     onPriceFilter({ lowerBound: lowerBound ?? 0, upperBound: upperBound ?? 0 });
   };
 
+  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    const sort = sortList.find((sort) => sort.id === e.target.value);
+    if (sort === undefined) {
+      return;
+    }
+    onSort(sort);
+  };
+
   return (
     <div className="items-center justify-between py-3 px-10">
-      <select className="form-select border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary">
-        <option value="1">All</option>
+      <select
+        className="form-select border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary"
+        onChange={handleSort}
+      >
         {sortList.map((sort, index) => {
-          const mode = sort.isAscending ? "ascending" : "descending";
+          const mode = sort.order;
           return (
             <option
               key={index}
               value={sort.id}
-              onChange={() => {
-                onSelectSortMode?.(sort.name, sort.isAscending);
-              }}
             >
-              <div>
+              <p>
                 {sort.name} {mode}
-              </div>
+              </p>
             </option>
           );
         })}
