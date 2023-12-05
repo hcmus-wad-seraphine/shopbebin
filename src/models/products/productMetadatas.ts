@@ -80,7 +80,13 @@ export const getProduct = async (id: string) => {
   return product;
 };
 
-export const getProducts = async (offset: number = 0, limit: number = 10, search: string = "") => {
+export const getProducts = async (
+  offset: number = 0,
+  limit: number = 10,
+  search: string = "",
+  lowerBound: number = -1,
+  upperBound: number = 100000,
+) => {
   const client = getPrismaClient();
 
   const products: Product[] = await client.productMetadata.findMany({
@@ -88,6 +94,14 @@ export const getProducts = async (offset: number = 0, limit: number = 10, search
       name: {
         contains: search,
         mode: "insensitive",
+      },
+      availableSizes: {
+        some: {
+          price: {
+            gte: lowerBound,
+            lte: upperBound,
+          },
+        },
       },
     },
     include: {

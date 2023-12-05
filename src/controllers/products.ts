@@ -30,7 +30,11 @@ export const fetchProducts: RequestHandler = (req, res) => {
     const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
     const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
     const search = req.query.search !== undefined ? (req.query.search as string) : "";
-    const data = await getProducts(offset, limit, search);
+    const lowerBound =
+      req.query.lowerBound !== undefined ? parseInt(req.query.lowerBound as string) : -1;
+    const upperBound =
+      req.query.upperBound !== undefined ? parseInt(req.query.upperBound as string) : 100000;
+    const data = await getProducts(offset, limit, search, lowerBound, upperBound);
     res.json(data);
   };
 
