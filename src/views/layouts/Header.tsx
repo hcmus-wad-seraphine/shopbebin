@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import Navigator from "../components/Navigator";
 
@@ -7,6 +8,23 @@ interface Props {
 }
 
 const Header = ({ isLogIn }: Props) => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const search = searchParams.get("search") ?? "";
+
+  const handleSearch = () => {
+    if (inputRef.current != null) {
+      const search = inputRef.current.value;
+      if (search !== "") {
+        navigate(`/?search=${search}`);
+      } else {
+        navigate("/");
+      }
+    }
+  };
+
   return (
     <div className="sticky top-0 z-10 bg-primary justify-between items-center px-10 py-4">
       <Link
@@ -25,9 +43,18 @@ const Header = ({ isLogIn }: Props) => {
         <input
           type="text"
           placeholder="Search"
-          className="flex-1"
+          className="flex-1 border-none outline-none"
+          defaultValue={search}
+          ref={inputRef}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
-        <i className="fas fa-search text-black"></i>
+        <button onClick={handleSearch}>
+          <i className="fas fa-search text-black"></i>
+        </button>
       </div>
 
       {isLogIn ? (

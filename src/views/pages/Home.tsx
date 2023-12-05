@@ -12,6 +12,7 @@ const HomePage = () => {
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") ?? "1");
+  const search = searchParams.get("search") ?? "";
   const itemsPerPage = 9;
 
   const { category } = useParams<{ category: string }>();
@@ -30,12 +31,20 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      let queryString = "";
+
+      if (page !== 1) {
+        queryString += `?offset=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}`;
+      }
+
+      if (category === undefined && search !== "") {
+        queryString += queryString === "" ? "?" : "&";
+        queryString += `search=${search}`;
+      }
+
       const endpoint =
-        category === undefined
-          ? `/api/products?offset=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}`
-          : `/api/products/categories/${category}?offset=${
-              (page - 1) * itemsPerPage
-            }&limit=${itemsPerPage}`;
+        (category === undefined ? `/api/products` : `/api/products/categories/${category}`) +
+        queryString;
 
       const productsResponse = await fetch(endpoint);
       const data = await productsResponse.json();
@@ -48,7 +57,7 @@ const HomePage = () => {
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, [page, category]);
+  }, [page, search, category]);
 
   return (
     <>

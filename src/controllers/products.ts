@@ -29,7 +29,8 @@ export const fetchProducts: RequestHandler = (req, res) => {
   const handleFetchProducts = async () => {
     const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
     const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
-    const data = await getProducts(offset, limit);
+    const search = req.query.search !== undefined ? (req.query.search as string) : "";
+    const data = await getProducts(offset, limit, search);
     res.json(data);
   };
 
