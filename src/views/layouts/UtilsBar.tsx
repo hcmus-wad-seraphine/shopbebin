@@ -6,7 +6,6 @@ interface Props {
   categories: Category[];
   activeCategory: string;
   onSelectPriceRange?: (price: number) => void;
-  onSelectNews?: (news: string) => void;
 }
 
 const UtilsBar = ({ categories, activeCategory }: Props) => {
