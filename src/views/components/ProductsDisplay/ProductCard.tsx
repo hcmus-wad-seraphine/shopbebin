@@ -11,7 +11,6 @@ const ProductCard: FC<Props> = ({ product }) => {
   const handle = product.id;
   const title = product.name;
   const description = product.desc;
-  const price = product.availableSizes[0].price;
 
   const image = product.images[0];
 
@@ -47,7 +46,7 @@ const ProductCard: FC<Props> = ({ product }) => {
             rounded-tl-sm triangle"
           >
             <Price
-              num={price}
+              num={product.basePrice}
               numSize="text-lg"
             />
           </div>

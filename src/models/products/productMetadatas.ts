@@ -9,6 +9,7 @@ export const createProduct = async (product: Product) => {
       name: product.name,
       desc: product.desc,
       images: product.images,
+      basePrice: product.basePrice,
       availableSizes: {
         create: product.availableSizes.map(({ id, productMetadataId, ...data }) => data),
       },
@@ -80,28 +81,26 @@ export const getProduct = async (id: string) => {
   return product;
 };
 
-export const getProducts = async (
-  offset: number = 0,
-  limit: number = 10,
-  search: string = "",
-  lowerBound: number = -1,
-  upperBound: number = 100000,
-) => {
+export const getProducts = async (props: {
+  category?: string;
+  offset?: number;
+  limit?: number;
+  search?: string;
+  lowerBound?: number;
+  upperBound?: number;
+  sortAscending?: boolean;
+}) => {
   const client = getPrismaClient();
 
   const products: Product[] = await client.productMetadata.findMany({
     where: {
       name: {
-        contains: search,
+        contains: (props.search !== "" ? props.search : props.category) ?? "",
         mode: "insensitive",
       },
-      availableSizes: {
-        some: {
-          price: {
-            gte: lowerBound,
-            lte: upperBound,
-          },
-        },
+      basePrice: {
+        gte: props.lowerBound ?? 0,
+        lte: props.upperBound ?? 100000,
       },
     },
     include: {
@@ -122,64 +121,22 @@ export const getProducts = async (
         },
       },
     },
-    skip: offset,
-    take: limit,
+    orderBy: {
+      basePrice: props.sortAscending ?? true ? "asc" : "desc",
+    },
+    skip: props.offset ?? 0,
+    take: props.limit ?? 9,
   });
 
   const total = await client.productMetadata.count({
     where: {
       name: {
-        contains: search,
+        contains: props.search ?? "",
         mode: "insensitive",
       },
-    },
-  });
-
-  return {
-    products,
-    total,
-  };
-};
-
-export const getProductsByCategory = async (
-  name: string,
-  offset: number = 0,
-  limit: number = 10,
-) => {
-  const client = getPrismaClient();
-
-  const products: Product[] = await client.productMetadata.findMany({
-    where: {
-      name: {
-        contains: name,
-      },
-    },
-    include: {
-      availableSizes: true,
-      availableToppings: {
-        include: {
-          topping: true,
-        },
-      },
-      category: true,
-      reviews: {
-        include: {
-          reviewMetadata: {
-            include: {
-              user: true,
-            },
-          },
-        },
-      },
-    },
-    skip: offset,
-    take: limit,
-  });
-
-  const total = await client.productMetadata.count({
-    where: {
-      name: {
-        contains: name,
+      basePrice: {
+        gte: props.lowerBound ?? 0,
+        lte: props.upperBound ?? 100000,
       },
     },
   });

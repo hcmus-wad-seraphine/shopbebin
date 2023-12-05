@@ -2,11 +2,7 @@ import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
 import { getCategories } from "../models/products";
-import {
-  getProduct,
-  getProducts,
-  getProductsByCategory,
-} from "../models/products/productMetadatas";
+import { getProduct, getProducts } from "../models/products/productMetadatas";
 
 export const fetchProduct: RequestHandler = (req, res) => {
   const handleFetchProduct = async () => {
@@ -34,30 +30,23 @@ export const fetchProducts: RequestHandler = (req, res) => {
       req.query.lowerBound !== undefined ? parseInt(req.query.lowerBound as string) : -1;
     const upperBound =
       req.query.upperBound !== undefined ? parseInt(req.query.upperBound as string) : 100000;
-    const data = await getProducts(offset, limit, search, lowerBound, upperBound);
+    const sortAscending = !(req.query.sortOrder === "descending");
+
+    const category = req.params.category ?? "";
+
+    const data = await getProducts({
+      category,
+      offset,
+      limit,
+      search,
+      lowerBound,
+      upperBound,
+      sortAscending,
+    });
     res.json(data);
   };
 
   handleFetchProducts().catch((err) => {
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Internal server error",
-      data: err,
-    };
-
-    res.status(500).json(errorResponse);
-  });
-};
-
-export const fetchProductsByCategory: RequestHandler = (req, res) => {
-  const handleFetchProductsByCategory = async () => {
-    const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
-    const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
-    const products = await getProductsByCategory(req.params.name, offset, limit);
-    res.json(products);
-  };
-
-  handleFetchProductsByCategory().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",

@@ -1,6 +1,6 @@
 import { type Category } from "@prisma/client";
 import Loading from "@views/components/Loading";
-import { SortCriteria, SortOrder } from "@views/valtio";
+import { appActions, SortCriteria, SortOrder } from "@views/valtio";
 import { type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 
@@ -123,6 +123,7 @@ const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSort }: Props) 
         <div className="gap-6">
           <Link
             className={`${activeCategory === "" && activeCategoryStyle}`}
+            onClick={appActions.resetPagination}
             to="/"
           >
             All
@@ -136,6 +137,7 @@ const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSort }: Props) 
               <Link
                 key={index}
                 className={`${activeStyle}`}
+                onClick={appActions.resetPagination}
                 to={`/categories/${category.name}`}
               >
                 {category.name}

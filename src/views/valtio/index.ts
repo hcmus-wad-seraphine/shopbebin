@@ -37,7 +37,7 @@ export const appState = proxy<AppState>({
   injecting: true,
   queryString: {
     offset: 0,
-    limit: 10,
+    limit: 9,
     search: "",
     lowerBound: 0,
     upperBound: 1000,
@@ -60,6 +60,10 @@ export const appActions = {
 
   updateInjecting: (flag: boolean) => {
     appState.injecting = flag;
+  },
+
+  resetPagination: () => {
+    appState.queryString.offset = 0;
   },
 
   updateQueryString: (queryString: QueryString) => {

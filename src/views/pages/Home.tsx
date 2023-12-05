@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const { queryString } = useSnapshot(appState);
 
-  const itemsPerPage = 9;
+  const itemsPerPage = queryString.limit;
   const page = queryString.offset / itemsPerPage + 1;
 
   const { category } = useParams<{ category: string }>();

@@ -83,6 +83,7 @@ model ProductMetadata {
   name                 String
   desc                 String
   images               String[]
+  basePrice            Float
   availableSizes       ProductSize[]
   availableToppings    ProductTopping[]
   category             Category               @relation(fields: [categoryId], references: [id])

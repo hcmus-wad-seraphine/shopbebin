@@ -1,6 +1,7 @@
 import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
-import { Link } from "react-router-dom";
+import { appActions, appState } from "@views/valtio";
+import { useSnapshot } from "valtio";
 
 import ProductCard from "./ProductCard";
 
@@ -22,6 +23,8 @@ const ProductsDisplay = ({
   for (let i = 1; i <= numberOfPages; i++) {
     pages.push(i);
   }
+
+  const { queryString } = useSnapshot(appState);
 
   if (products === undefined) {
     return <Loading />;
@@ -50,13 +53,18 @@ const ProductsDisplay = ({
             }
 
             return (
-              <Link
+              <button
                 key={page.toString()}
                 className={`bg-secondary/50 w-8 h-8 flex justify-center items-center rounded-2xl ${activeStyle}`}
-                to={`/?page=${page}`}
+                onClick={() => {
+                  appActions.updateQueryString({
+                    ...queryString,
+                    offset: (page - 1) * itemsPerPage,
+                  });
+                }}
               >
                 {page}
-              </Link>
+              </button>
             );
           })}
         </div>
