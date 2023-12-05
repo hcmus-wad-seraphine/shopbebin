@@ -2,31 +2,20 @@ import ProductsDisplay from "@components/ProductsDisplay";
 import { type Product } from "@models/interface";
 import { type Category } from "@prisma/client";
 import UtilsBar from "@views/layouts/UtilsBar";
+import { appActions, appState } from "@views/valtio";
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-
-interface QueryStrings {
-  page: number;
-  search: string;
-  lowerBound: number;
-  upperBound: number;
-}
+import { useParams } from "react-router-dom";
+import { useSnapshot } from "valtio";
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>();
   const [categories, setCategories] = useState<Category[]>();
   const [totalProducts, setTotalProducts] = useState<number>(0);
 
-  const [searchParams] = useSearchParams();
-
-  const [queryStrings, setQueryStrings] = useState<QueryStrings>({
-    page: parseInt(searchParams.get("page") ?? "1"),
-    search: searchParams.get("search") ?? "",
-    lowerBound: parseInt(searchParams.get("lowerBound") ?? "0"),
-    upperBound: parseInt(searchParams.get("upperBound") ?? "0"),
-  });
+  const { queryString } = useSnapshot(appState);
 
   const itemsPerPage = 9;
+  const page = queryString.offset / itemsPerPage + 1;
 
   const { category } = useParams<{ category: string }>();
 
@@ -43,36 +32,8 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    setQueryStrings({
-      page: parseInt(searchParams.get("page") ?? "1"),
-      search: searchParams.get("search") ?? "",
-      lowerBound: parseInt(searchParams.get("lowerBound") ?? "0"),
-      upperBound: parseInt(searchParams.get("upperBound") ?? "0"),
-    });
-  }, [searchParams, category]);
-
-  useEffect(() => {
     const fetchData = async () => {
-      let queryString = "";
-
-      if (queryStrings.page !== 1) {
-        queryString += `?offset=${(queryStrings.page - 1) * itemsPerPage}&limit=${itemsPerPage}`;
-      }
-
-      if (category === undefined && queryStrings.search !== "") {
-        queryString += queryString === "" ? "?" : "&";
-        queryString += `search=${queryStrings.search}`;
-      }
-
-      if (queryStrings.lowerBound !== 0) {
-        queryString += queryString === "" ? "?" : "&";
-        queryString += `lowerBound=${queryStrings.lowerBound}`;
-      }
-
-      if (queryStrings.upperBound !== 0) {
-        queryString += queryString === "" ? "?" : "&";
-        queryString += `upperBound=${queryStrings.upperBound}`;
-      }
+      const queryString = appActions.getQueryStrings();
 
       const endpoint =
         (category === undefined ? `/api/products` : `/api/products/categories/${category}`) +
@@ -89,33 +50,37 @@ const HomePage = () => {
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, [queryStrings]);
+  }, [category, queryString, queryString.search]);
 
   return (
     <>
       <UtilsBar
         categories={categories ?? []}
         activeCategory={category ?? ""}
-        onPriceFilter={(props) => {
-          const { lowerBound, upperBound } = props;
-
+        onPriceFilter={({ lowerBound, upperBound }) => {
           const newQueryStrings = {
-            ...queryStrings,
-            lowerBound: lowerBound ?? 0,
-            upperBound: upperBound ?? 0,
+            ...queryString,
+            lowerBound,
+            upperBound,
           };
 
-          setQueryStrings(newQueryStrings);
+          appActions.updateQueryString(newQueryStrings);
         }}
         onSort={(option) => {
-          console.log("--> sort option", option);
+          const newQueryStrings = {
+            ...queryString,
+            sortBy: option.name,
+            sortOrder: option.order,
+          };
+
+          appActions.updateQueryString(newQueryStrings);
         }}
       />
       <ProductsDisplay
         products={products}
         totalProducts={totalProducts}
         itemsPerPage={itemsPerPage}
-        currentPage={queryStrings.page}
+        currentPage={page}
       />
     </>
   );

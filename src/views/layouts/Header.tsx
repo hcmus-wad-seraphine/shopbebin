@@ -1,5 +1,7 @@
+import { appActions, appState } from "@views/valtio";
 import { useRef } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSnapshot } from "valtio";
 
 import Navigator from "../components/Navigator";
 
@@ -8,20 +10,17 @@ interface Props {
 }
 
 const Header = ({ isLogIn }: Props) => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const search = searchParams.get("search") ?? "";
+  const { queryString } = useSnapshot(appState);
 
   const handleSearch = () => {
     if (inputRef.current != null) {
       const search = inputRef.current.value;
-      if (search !== "") {
-        navigate(`/?search=${search}`);
-      } else {
-        navigate("/");
-      }
+      appActions.updateQueryString({
+        ...appState.queryString,
+        search,
+      });
     }
   };
 
@@ -44,7 +43,7 @@ const Header = ({ isLogIn }: Props) => {
           type="text"
           placeholder="Search"
           className="flex-1 border-none outline-none"
-          defaultValue={search}
+          defaultValue={queryString.search}
           ref={inputRef}
           onKeyDown={(e) => {
             if (e.key === "Enter") {

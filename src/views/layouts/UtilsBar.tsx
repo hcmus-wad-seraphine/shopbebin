@@ -1,5 +1,6 @@
 import { type Category } from "@prisma/client";
 import Loading from "@views/components/Loading";
+import { SortCriteria, SortOrder } from "@views/valtio";
 import { type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 
@@ -39,16 +40,6 @@ const priceFilter: FilterPrice[] = [
     text: "≥ $16",
   },
 ];
-
-export enum SortCriteria {
-  Price = "Price",
-  Name = "Name",
-}
-
-export enum SortOrder {
-  Ascending = "ascending",
-  Descending = "descending",
-}
 
 export interface SortOption {
   id: string;
@@ -120,9 +111,7 @@ const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSort }: Props) 
               key={index}
               value={sort.id}
             >
-              <p>
-                {sort.name} {mode}
-              </p>
+              {sort.name} {mode}
             </option>
           );
         })}
