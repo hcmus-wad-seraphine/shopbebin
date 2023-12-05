@@ -132,6 +132,7 @@ export const getProducts = async (props: {
         gte: props.lowerBound ?? 0,
         lte: props.upperBound ?? 100000,
       },
+      category: props.category,
     },
   });
 
