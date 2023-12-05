@@ -80,10 +80,16 @@ export const getProduct = async (id: string) => {
   return product;
 };
 
-export const getProducts = async (offset: number = 0, limit: number = 10) => {
+export const getProducts = async (offset: number = 0, limit: number = 10, search: string = "") => {
   const client = getPrismaClient();
 
   const products: Product[] = await client.productMetadata.findMany({
+    where: {
+      name: {
+        contains: search,
+        mode: "insensitive",
+      },
+    },
     include: {
       availableSizes: true,
       availableToppings: {
@@ -106,7 +112,14 @@ export const getProducts = async (offset: number = 0, limit: number = 10) => {
     take: limit,
   });
 
-  const total = await client.productMetadata.count();
+  const total = await client.productMetadata.count({
+    where: {
+      name: {
+        contains: search,
+        mode: "insensitive",
+      },
+    },
+  });
 
   return {
     products,
