@@ -10,7 +10,7 @@ const Reviews = ({ reviews }: ReviewsProps) => {
   return (
     <div className="flex-col">
       <h1 className="text-3xl font-semibold text-center">Reviews</h1>
-      <div className="flex-col">
+      <div className="flex-col gap-10">
         {reviews.map((review) => (
           <ReviewItem
             key={review.id}
