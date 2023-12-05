@@ -6,8 +6,6 @@ import {
   getProduct,
   getProducts,
   getProductsByCategory,
-  getTotalProducts,
-  getTotalProductsByCategory,
 } from "../models/products/productMetadatas";
 
 export const fetchProduct: RequestHandler = (req, res) => {
@@ -31,8 +29,8 @@ export const fetchProducts: RequestHandler = (req, res) => {
   const handleFetchProducts = async () => {
     const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
     const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
-    const products = await getProducts(offset, limit);
-    res.json(products);
+    const data = await getProducts(offset, limit);
+    res.json(data);
   };
 
   handleFetchProducts().catch((err) => {
@@ -55,40 +53,6 @@ export const fetchProductsByCategory: RequestHandler = (req, res) => {
   };
 
   handleFetchProductsByCategory().catch((err) => {
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Internal server error",
-      data: err,
-    };
-
-    res.status(500).json(errorResponse);
-  });
-};
-
-export const fetchTotalProducts: RequestHandler = (req, res) => {
-  const handleFetchTotalProducts = async () => {
-    const totalProducts = await getTotalProducts();
-    res.json(totalProducts);
-  };
-
-  handleFetchTotalProducts().catch((err) => {
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Internal server error",
-      data: err,
-    };
-
-    res.status(500).json(errorResponse);
-  });
-};
-
-export const fetchTotalProductsByCategory: RequestHandler = (req, res) => {
-  const handleFetchTotalProductsByCategory = async () => {
-    const totalProducts = await getTotalProductsByCategory(req.params.category);
-    res.json(totalProducts);
-  };
-
-  handleFetchTotalProductsByCategory().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",

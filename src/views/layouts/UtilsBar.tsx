@@ -6,7 +6,6 @@ interface Props {
   categories: Category[];
   activeCategory: string;
   onSelectPriceRange?: (price: number) => void;
-  onSelectNews?: (news: string) => void;
 }
 
 const UtilsBar = ({ categories, activeCategory }: Props) => {
@@ -62,7 +61,7 @@ const UtilsBar = ({ categories, activeCategory }: Props) => {
               <Link
                 key={index}
                 className={`${activeStyle}`}
-                to={`/category/${category.name}`}
+                to={`/categories/${category.name}`}
               >
                 {category.name}
               </Link>

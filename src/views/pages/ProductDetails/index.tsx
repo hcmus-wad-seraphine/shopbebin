@@ -2,43 +2,37 @@ import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
 import Reviews from "@views/components/ProductDetails/Reviews";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import DetailsFeature from "./DetailsFeature";
 import ProductImage from "./ProductImages";
 import RelatedItems from "./RelatedItems";
 
 const ProductDetails = () => {
-  const location = useLocation();
-  const productId = location.pathname.split("/")[2];
+  const { id } = useParams<{ id: string }>();
 
   const [product, setProduct] = useState<Product>();
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const data = await fetch(`/api/products/${productId}`);
-      const product = await data.json();
+      const productData = await fetch(`/api/products/${id}`);
+      const product = await productData.json();
+
+      const relatedProductsData = await fetch(`/api/products/categories/${product.category.name}`);
+      const relatedProducts = await relatedProductsData.json();
+      const filteredProducts = relatedProducts.products.filter(
+        (item: Product) => item.id !== product.id,
+      );
+
       setProduct(product);
+      setRelatedProducts(filteredProducts);
     };
 
     fetchProduct().catch((err) => {
       console.log(err);
     });
-  }, [productId]);
-
-  useEffect(() => {
-    const fetchRelatedProducts = async () => {
-      const data = await fetch(`/api/categories/${product?.category.name}`);
-      const products = await data.json();
-      const filteredProducts = products.filter((item: Product) => item.id !== product?.id);
-      setRelatedProducts(filteredProducts);
-    };
-
-    fetchRelatedProducts().catch((err) => {
-      console.log(err);
-    });
-  }, [product]);
+  }, []);
 
   const images = product?.images ?? [];
 

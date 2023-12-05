@@ -11,8 +11,7 @@ const HomePage = () => {
   const [totalProducts, setTotalProducts] = useState<number>(0);
 
   const [searchParams] = useSearchParams();
-  const pageParam = searchParams.get("page") ?? "1";
-  const pageNumber = parseInt(pageParam);
+  const page = parseInt(searchParams.get("page") ?? "1");
   const itemsPerPage = 9;
 
   const { category } = useParams<{ category: string }>();
@@ -31,36 +30,25 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoints =
+      const endpoint =
         category === undefined
-          ? {
-              products: `/api/products?offset=${
-                (pageNumber - 1) * itemsPerPage
-              }&limit=${itemsPerPage}`,
-              totalProducts: `/api/products/total`,
-            }
-          : {
-              products: `/api/products/categories/${category}?offset=${
-                (pageNumber - 1) * itemsPerPage
-              }&limit=${itemsPerPage}`,
-              totalProducts: `/api/products/total/${category}`,
-            };
+          ? `/api/products?offset=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}`
+          : `/api/products/categories/${category}?offset=${
+              (page - 1) * itemsPerPage
+            }&limit=${itemsPerPage}`;
 
-      const productsResponse = await fetch(endpoints.products);
-      const productsData = await productsResponse.json();
-
-      const totalProductsResponse = await fetch(endpoints.totalProducts);
-      const totalProductsData = await totalProductsResponse.json();
+      const productsResponse = await fetch(endpoint);
+      const data = await productsResponse.json();
 
       window.scrollTo(0, 0);
-      setProducts(productsData);
-      setTotalProducts(totalProductsData);
+      setProducts(data.products);
+      setTotalProducts(data.total);
     };
 
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, [pageNumber, category]);
+  }, [page, category]);
 
   return (
     <>

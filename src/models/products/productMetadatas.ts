@@ -106,25 +106,12 @@ export const getProducts = async (offset: number = 0, limit: number = 10) => {
     take: limit,
   });
 
-  return products;
-};
+  const total = await client.productMetadata.count();
 
-export const getTotalProducts = async () => {
-  const client = getPrismaClient();
-  const totalProducts = await client.productMetadata.count();
-  return totalProducts;
-};
-
-export const getTotalProductsByCategory = async (category: string) => {
-  const client = getPrismaClient();
-  const totalProducts = await client.productMetadata.count({
-    where: {
-      name: {
-        contains: category,
-      },
-    },
-  });
-  return totalProducts;
+  return {
+    products,
+    total,
+  };
 };
 
 export const getProductsByCategory = async (
@@ -148,12 +135,32 @@ export const getProductsByCategory = async (
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
     skip: offset,
     take: limit,
   });
 
-  return products;
+  const total = await client.productMetadata.count({
+    where: {
+      name: {
+        contains: name,
+      },
+    },
+  });
+
+  return {
+    products,
+    total,
+  };
 };
 
 export const deleteProduct = async (id: string) => {
@@ -217,6 +224,9 @@ export const updateProduct = async (product: Product) => {
           id: category.id,
         },
       },
+      reviews: {
+        set: product.reviews,
+      },
     },
     include: {
       availableSizes: true,
@@ -226,6 +236,15 @@ export const updateProduct = async (product: Product) => {
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
   });
 
