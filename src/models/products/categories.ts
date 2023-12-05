@@ -17,11 +17,7 @@ export const createCategory = async (category: Category) => {
 export const getCategories = async () => {
   const client = getPrismaClient();
 
-  return await client.category.findMany({
-    include: {
-      ProductMetadata: true,
-    },
-  });
+  return await client.category.findMany();
 };
 
 export const getCategory = async (id: string) => {
@@ -30,9 +26,6 @@ export const getCategory = async (id: string) => {
   return await client.category.findUnique({
     where: {
       id,
-    },
-    include: {
-      ProductMetadata: true,
     },
   });
 };
@@ -43,9 +36,6 @@ export const getCategoryByName = async (name: string) => {
   return await client.category.findUnique({
     where: {
       name,
-    },
-    include: {
-      ProductMetadata: true,
     },
   });
 };

@@ -25,14 +25,14 @@ export const fetchProducts: RequestHandler = (req, res) => {
   const handleFetchProducts = async () => {
     const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
     const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
-    const search = req.query.search !== undefined ? (req.query.search as string) : "";
+    const search = req.query.search as string | undefined;
     const lowerBound =
       req.query.lowerBound !== undefined ? parseInt(req.query.lowerBound as string) : -1;
     const upperBound =
       req.query.upperBound !== undefined ? parseInt(req.query.upperBound as string) : 100000;
     const sortAscending = !(req.query.sortOrder === "descending");
 
-    const category = req.params.category ?? "";
+    const category = req.params.category;
 
     const data = await getProducts({
       category,

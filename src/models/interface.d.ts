@@ -1,5 +1,4 @@
 import {
-  type Category,
   type ProductMetadata,
   type ProductReview,
   type ProductSize,
@@ -25,5 +24,4 @@ export type Product = ProductMetadata & {
   availableSizes: ProductSize[];
   availableToppings: Topping[];
   reviews: Review[];
-  category: Category;
 };

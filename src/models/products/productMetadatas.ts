@@ -10,6 +10,7 @@ export const createProduct = async (product: Product) => {
       desc: product.desc,
       images: product.images,
       basePrice: product.basePrice,
+      category: product.category,
       availableSizes: {
         create: product.availableSizes.map(({ id, productMetadataId, ...data }) => data),
       },
@@ -22,11 +23,6 @@ export const createProduct = async (product: Product) => {
           },
         })),
       },
-      category: {
-        connect: {
-          id: product.categoryId,
-        },
-      },
     },
     include: {
       availableSizes: true,
@@ -35,7 +31,6 @@ export const createProduct = async (product: Product) => {
           topping: true,
         },
       },
-      category: true,
       reviews: {
         include: {
           reviewMetadata: {
@@ -65,7 +60,6 @@ export const getProduct = async (id: string) => {
           topping: true,
         },
       },
-      category: true,
       reviews: {
         include: {
           reviewMetadata: {
@@ -95,13 +89,14 @@ export const getProducts = async (props: {
   const products: Product[] = await client.productMetadata.findMany({
     where: {
       name: {
-        contains: (props.search !== "" ? props.search : props.category) ?? "",
+        contains: props.search,
         mode: "insensitive",
       },
       basePrice: {
         gte: props.lowerBound ?? 0,
         lte: props.upperBound ?? 100000,
       },
+      category: props.category,
     },
     include: {
       availableSizes: true,
@@ -110,7 +105,6 @@ export const getProducts = async (props: {
           topping: true,
         },
       },
-      category: true,
       reviews: {
         include: {
           reviewMetadata: {
@@ -131,7 +125,7 @@ export const getProducts = async (props: {
   const total = await client.productMetadata.count({
     where: {
       name: {
-        contains: props.search ?? "",
+        contains: (props.search !== "" ? props.search : props.category) ?? "",
         mode: "insensitive",
       },
       basePrice: {
@@ -157,7 +151,6 @@ export const deleteProduct = async (id: string) => {
     include: {
       availableSizes: true,
       availableToppings: true,
-      category: true,
     },
   });
 
@@ -189,7 +182,7 @@ export const deleteProduct = async (id: string) => {
 export const updateProduct = async (product: Product) => {
   const client = getPrismaClient();
 
-  const { id, availableSizes, availableToppings, category, categoryId, ...data } = product;
+  const { id, availableSizes, availableToppings, ...data } = product;
 
   const updatedProduct: Product | null = await client.productMetadata.update({
     where: {
@@ -203,11 +196,6 @@ export const updateProduct = async (product: Product) => {
       availableToppings: {
         set: availableToppings,
       },
-      category: {
-        connect: {
-          id: category.id,
-        },
-      },
       reviews: {
         set: product.reviews,
       },
@@ -219,7 +207,6 @@ export const updateProduct = async (product: Product) => {
           topping: true,
         },
       },
-      category: true,
       reviews: {
         include: {
           reviewMetadata: {

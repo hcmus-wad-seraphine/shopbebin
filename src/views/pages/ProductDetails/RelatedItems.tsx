@@ -7,9 +7,11 @@ interface RelatedItemsProps {
 }
 
 const RelatedItems = ({ products }: RelatedItemsProps) => {
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>();
   const scroll = (scrollOffset: number) => {
-    ref.current.scrollLeft += scrollOffset;
+    if (ref.current !== undefined) {
+      ref.current.scrollLeft += scrollOffset;
+    }
   };
 
   return (
