@@ -9,6 +9,8 @@ const HomePage = () => {
   const [products, setProducts] = useState<Product[]>();
   const [categories, setCategories] = useState<Category[]>();
   const [totalProducts, setTotalProducts] = useState<number>(0);
+  const [sortMode, setSortMode] = useState<string>("");
+  const [isAscending, setIsAscending] = useState<boolean>(true);
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") ?? "1");
@@ -26,7 +28,7 @@ const HomePage = () => {
     fetchCategories().catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [sortMode, isAscending]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +57,10 @@ const HomePage = () => {
       <UtilsBar
         categories={categories ?? []}
         activeCategory={category ?? ""}
+        onSelectSortMode={(sortMode, isAscending) => {
+          setSortMode(sortMode);
+          setIsAscending(isAscending);
+        }}
       />
       <ProductsDisplay
         products={products}
