@@ -75,6 +75,7 @@ const HomePage = () => {
         products={products}
         totalProducts={totalProducts}
         itemsPerPage={itemsPerPage}
+        currentPage={page}
       />
     </>
   );
