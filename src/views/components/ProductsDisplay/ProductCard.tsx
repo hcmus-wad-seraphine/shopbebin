@@ -15,6 +15,13 @@ const ProductCard: FC<Props> = ({ product }) => {
 
   const image = product.images[0];
 
+  const shortenDescription = (desc: string) => {
+    if (desc.length > 40) {
+      return desc.slice(0, 40) + "...";
+    }
+    return desc;
+  };
+
   return (
     <a
       href={`/products/${handle}`}
@@ -32,7 +39,9 @@ const ProductCard: FC<Props> = ({ product }) => {
           <div className="font-primary text-palette-primary text-2xl pt-4 px-4 font-semibold">
             {title}
           </div>
-          <div className="text-lg text-gray-600 p-4 font-primary font-light">{description}</div>
+          <div className="text-lg text-gray-600 p-4 font-primary font-light">
+            {shortenDescription(description)}
+          </div>
           <div
             className="text-black font-primary font-medium text-base absolute bottom-0 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-secondary/30 
             rounded-tl-sm triangle"
