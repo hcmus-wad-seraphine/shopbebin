@@ -1,5 +1,6 @@
 import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
+import Reviews from "@views/components/ProductDetails/Reviews";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -12,6 +13,7 @@ const ProductDetails = () => {
   const productId = location.pathname.split("/")[2];
 
   const [product, setProduct] = useState<Product>();
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,6 +27,19 @@ const ProductDetails = () => {
     });
   }, [productId]);
 
+  useEffect(() => {
+    const fetchRelatedProducts = async () => {
+      const data = await fetch(`/api/categories/${product?.category.name}`);
+      const products = await data.json();
+      const filteredProducts = products.filter((item: Product) => item.id !== product?.id);
+      setRelatedProducts(filteredProducts);
+    };
+
+    fetchRelatedProducts().catch((err) => {
+      console.log(err);
+    });
+  }, [product]);
+
   const images = product?.images ?? [];
 
   return (
@@ -36,7 +51,8 @@ const ProductDetails = () => {
             <ProductImage images={images} />
             <DetailsFeature {...product} />
           </div>
-          <RelatedItems products={[]} />
+          <RelatedItems products={relatedProducts} />
+          <Reviews reviews={product.reviews ?? []} />
         </div>
       )}
     </div>

@@ -35,6 +35,15 @@ export const createProduct = async (product: Product) => {
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -56,6 +65,15 @@ export const getProduct = async (id: string) => {
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -74,6 +92,15 @@ export const getProducts = async (offset: number = 0, limit: number = 10) => {
         },
       },
       category: true,
+      reviews: {
+        include: {
+          reviewMetadata: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
     skip: offset,
     take: limit,

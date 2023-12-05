@@ -55,6 +55,9 @@ export const getReview = async (id: string) => {
     where: {
       id,
     },
+    include: {
+      user: true,
+    },
   });
 };
 
