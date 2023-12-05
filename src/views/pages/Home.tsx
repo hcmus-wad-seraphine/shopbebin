@@ -49,7 +49,7 @@ const HomePage = () => {
       lowerBound: parseInt(searchParams.get("lowerBound") ?? "0"),
       upperBound: parseInt(searchParams.get("upperBound") ?? "0"),
     });
-  }, [searchParams]);
+  }, [searchParams, category]);
 
   useEffect(() => {
     const fetchData = async () => {
