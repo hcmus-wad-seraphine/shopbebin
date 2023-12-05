@@ -7,6 +7,7 @@ import {
   getProducts,
   getProductsByCategory,
   getTotalProducts,
+  getTotalProductsByCategory,
 } from "../models/products/productMetadatas";
 
 export const fetchProduct: RequestHandler = (req, res) => {
@@ -45,6 +46,25 @@ export const fetchProducts: RequestHandler = (req, res) => {
   });
 };
 
+export const fetchProductsByCategory: RequestHandler = (req, res) => {
+  const handleFetchProductsByCategory = async () => {
+    const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
+    const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
+    const products = await getProductsByCategory(req.params.name, offset, limit);
+    res.json(products);
+  };
+
+  handleFetchProductsByCategory().catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
 export const fetchTotalProducts: RequestHandler = (req, res) => {
   const handleFetchTotalProducts = async () => {
     const totalProducts = await getTotalProducts();
@@ -62,13 +82,13 @@ export const fetchTotalProducts: RequestHandler = (req, res) => {
   });
 };
 
-export const fetchTotalCategories: RequestHandler = (req, res) => {
-  const handleFetchTotalCategories = async () => {
-    const totalCategories = await getCategories();
-    res.json(totalCategories);
+export const fetchTotalProductsByCategory: RequestHandler = (req, res) => {
+  const handleFetchTotalProductsByCategory = async () => {
+    const totalProducts = await getTotalProductsByCategory(req.params.category);
+    res.json(totalProducts);
   };
 
-  handleFetchTotalCategories().catch((err) => {
+  handleFetchTotalProductsByCategory().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",
@@ -79,15 +99,13 @@ export const fetchTotalCategories: RequestHandler = (req, res) => {
   });
 };
 
-export const fetchProductsByCategory: RequestHandler = (req, res) => {
-  const handleFetchProductsByCategory = async () => {
-    const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
-    const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
-    const products = await getProductsByCategory(req.params.name, offset, limit);
-    res.json(products);
+export const fetchTotalCategories: RequestHandler = (req, res) => {
+  const handleFetchTotalCategories = async () => {
+    const totalCategories = await getCategories();
+    res.json(totalCategories);
   };
 
-  handleFetchProductsByCategory().catch((err) => {
+  handleFetchTotalCategories().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",

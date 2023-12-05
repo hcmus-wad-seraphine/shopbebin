@@ -13,10 +13,11 @@ router.get("/profile", requireAuth, (req, res) => {
   res.send(req.user);
 });
 
-router.get("/products/total", productsController.fetchTotalProducts);
-router.get("/products/:id", productsController.fetchProduct);
 router.get("/products", productsController.fetchProducts);
+router.get("/products/total", productsController.fetchTotalProducts);
+router.get("/products/total/:category", productsController.fetchTotalProductsByCategory);
+router.get("/products/categories/:name", productsController.fetchProductsByCategory);
+router.get("/products/:id", productsController.fetchProduct);
 router.get("/categories/total", productsController.fetchTotalCategories);
-router.get("/categories/:name", productsController.fetchProductsByCategory);
 
 export default router;
