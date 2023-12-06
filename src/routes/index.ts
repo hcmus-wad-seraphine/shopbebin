@@ -14,7 +14,7 @@ router.get("/profile", requireAuth, (req, res) => {
 });
 
 router.get("/products", productsController.fetchProducts);
-router.get("/products/categories/:name", productsController.fetchProductsByCategory);
+router.get("/products/categories/:category", productsController.fetchProducts);
 router.get("/products/:id", productsController.fetchProduct);
 router.get("/categories/total", productsController.fetchTotalCategories);
 

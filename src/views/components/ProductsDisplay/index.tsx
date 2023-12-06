@@ -1,6 +1,7 @@
 import Loading from "@components/Loading";
 import { type Product } from "@models/interface";
-import { Link } from "react-router-dom";
+import { appActions, appState } from "@views/valtio";
+import { useSnapshot } from "valtio";
 
 import ProductCard from "./ProductCard";
 
@@ -8,14 +9,22 @@ interface ProductsDisplayProps {
   products?: Product[];
   totalProducts: number;
   itemsPerPage: number;
+  currentPage: number;
 }
 
-const ProductsDisplay = ({ products, totalProducts, itemsPerPage }: ProductsDisplayProps) => {
+const ProductsDisplay = ({
+  products,
+  totalProducts,
+  itemsPerPage,
+  currentPage,
+}: ProductsDisplayProps) => {
   const numberOfPages = Math.ceil(totalProducts / itemsPerPage);
   const pages = [];
   for (let i = 1; i <= numberOfPages; i++) {
     pages.push(i);
   }
+
+  const { queryString } = useSnapshot(appState);
 
   if (products === undefined) {
     return <Loading />;
@@ -37,15 +46,27 @@ const ProductsDisplay = ({ products, totalProducts, itemsPerPage }: ProductsDisp
           <i className="fa-solid fa-play fa-rotate-180"></i>
         </div>
         <div className="gap-1">
-          {pages.map((page) => (
-            <Link
-              key={page.toString()}
-              className="bg-secondary/50 w-8 h-8 flex justify-center items-center rounded-2xl"
-              to={`/?page=${page}`}
-            >
-              {page}
-            </Link>
-          ))}
+          {pages.map((page) => {
+            let activeStyle = "";
+            if (currentPage === page) {
+              activeStyle = "bg-primary/50 text-white";
+            }
+
+            return (
+              <button
+                key={page.toString()}
+                className={`bg-secondary/50 w-8 h-8 flex justify-center items-center rounded-2xl ${activeStyle}`}
+                onClick={() => {
+                  appActions.updateQueryString({
+                    ...queryString,
+                    offset: (page - 1) * itemsPerPage,
+                  });
+                }}
+              >
+                {page}
+              </button>
+            );
+          })}
         </div>
         <div className="bg-secondary/80 px-4 py-2 justify-center items-center rounded-md">
           <i className="fa-solid fa-play"></i>

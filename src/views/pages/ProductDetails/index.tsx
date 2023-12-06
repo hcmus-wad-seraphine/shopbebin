@@ -17,9 +17,9 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       const productData = await fetch(`/api/products/${id}`);
-      const product = await productData.json();
+      const product: Product = await productData.json();
 
-      const relatedProductsData = await fetch(`/api/products/categories/${product.category.name}`);
+      const relatedProductsData = await fetch(`/api/products/categories/${product.category}`);
       const relatedProducts = await relatedProductsData.json();
       const filteredProducts = relatedProducts.products.filter(
         (item: Product) => item.id !== product.id,

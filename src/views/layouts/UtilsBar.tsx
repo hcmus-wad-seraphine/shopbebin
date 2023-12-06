@@ -1,42 +1,117 @@
 import { type Category } from "@prisma/client";
 import Loading from "@views/components/Loading";
+import { appActions, SortCriteria, SortOrder } from "@views/valtio";
+import { type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
+
+export interface FilterPrice {
+  id: string;
+  lowerBound?: number;
+  upperBound?: number;
+  text: string;
+}
+
+const priceFilter: FilterPrice[] = [
+  {
+    id: "all",
+    text: "All",
+  },
+  {
+    id: "under-5",
+    lowerBound: 0,
+    upperBound: 5,
+    text: "≤ $5",
+  },
+  {
+    id: "6-10",
+    lowerBound: 6,
+    upperBound: 10,
+    text: "$6 - $10",
+  },
+  {
+    id: "11-15",
+    lowerBound: 11,
+    upperBound: 15,
+    text: "$11 - $15",
+  },
+  {
+    id: "over-16",
+    lowerBound: 16,
+    text: "≥ $16",
+  },
+];
+
+export interface SortOption {
+  id: string;
+  name: SortCriteria;
+  order: SortOrder;
+}
 
 interface Props {
   categories: Category[];
   activeCategory: string;
-  onSelectPriceRange?: (price: number) => void;
+  onPriceFilter: (props: { lowerBound: number; upperBound: number }) => void;
+  onSort: (option: SortOption) => void;
 }
 
-const UtilsBar = ({ categories, activeCategory }: Props) => {
+const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSort }: Props) => {
   const activeCategoryStyle =
-    "text-secondary border-b-2 border-secondary transition	duration-200 ease-in-out";
+    "text-secondary border-b-2 border-secondary transition duration-200 ease-in-out";
 
-  const mockNews = [
-    { id: "1", name: "New" },
-    { id: "2", name: "Sale" },
-    { id: "3", name: "Hot" },
-    { id: "4", name: "Best" },
+  const sortList: SortOption[] = [
+    {
+      id: "price-ascending",
+      name: SortCriteria.Price,
+      order: SortOrder.Ascending,
+    },
+    {
+      id: "price-descending",
+      name: SortCriteria.Price,
+      order: SortOrder.Descending,
+    },
+    // {
+    //   id: "name-ascending",
+    //   name: SortCriteria.Name,
+    //   order: SortOrder.Ascending,
+    // },
+    // {
+    //   id: "name-descending",
+    //   name: SortCriteria.Name,
+    //   order: SortOrder.Descending,
+    // },
   ];
 
-  const mockPrice = [
-    { id: "1", name: "$ 4-10" },
-    { id: "2", name: "$ 10-15" },
-    { id: "3", name: "$ 15-20" },
-    { id: "4", name: "$ 20-25" },
-  ];
+  const handleFilterPrice = (e: ChangeEvent<HTMLSelectElement>) => {
+    const price = priceFilter.find((price) => price.id === e.target.value);
+    if (price === undefined) {
+      return;
+    }
+    const { lowerBound, upperBound } = price;
+    onPriceFilter({ lowerBound: lowerBound ?? 0, upperBound: upperBound ?? 0 });
+  };
+
+  const handleSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    const sort = sortList.find((sort) => sort.id === e.target.value);
+    if (sort === undefined) {
+      return;
+    }
+    onSort(sort);
+  };
 
   return (
     <div className="items-center justify-between py-3 px-10">
-      <select className="form-select border w-20 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary">
-        <option value="1">All</option>
-        {mockNews.map((news, index) => {
+      <select
+        className="form-select border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary"
+        onChange={handleSort}
+      >
+        {sortList.map((sort, index) => {
+          const mode = sort.order;
           return (
             <option
               key={index}
-              value={news.id}
+              value={sort.id}
             >
-              {news.name}
+              {sort.name} {mode}
             </option>
           );
         })}
@@ -48,6 +123,7 @@ const UtilsBar = ({ categories, activeCategory }: Props) => {
         <div className="gap-6">
           <Link
             className={`${activeCategory === "" && activeCategoryStyle}`}
+            onClick={appActions.resetPagination}
             to="/"
           >
             All
@@ -61,6 +137,7 @@ const UtilsBar = ({ categories, activeCategory }: Props) => {
               <Link
                 key={index}
                 className={`${activeStyle}`}
+                onClick={appActions.resetPagination}
                 to={`/categories/${category.name}`}
               >
                 {category.name}
@@ -70,15 +147,17 @@ const UtilsBar = ({ categories, activeCategory }: Props) => {
         </div>
       )}
 
-      <select className="form-select border w-20 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary">
-        <option value="1">All</option>
-        {mockPrice.map((price, index) => {
+      <select
+        className="form-select border w-20 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary"
+        onChange={handleFilterPrice}
+      >
+        {priceFilter.map((price) => {
           return (
             <option
-              key={index}
+              key={price.id}
               value={price.id}
             >
-              {price.name}
+              {price.text}
             </option>
           );
         })}

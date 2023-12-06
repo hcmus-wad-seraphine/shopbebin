@@ -2,18 +2,20 @@ import ProductsDisplay from "@components/ProductsDisplay";
 import { type Product } from "@models/interface";
 import { type Category } from "@prisma/client";
 import UtilsBar from "@views/layouts/UtilsBar";
+import { appActions, appState } from "@views/valtio";
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useSnapshot } from "valtio";
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>();
   const [categories, setCategories] = useState<Category[]>();
   const [totalProducts, setTotalProducts] = useState<number>(0);
 
-  const [searchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") ?? "1");
-  const search = searchParams.get("search") ?? "";
-  const itemsPerPage = 9;
+  const { queryString } = useSnapshot(appState);
+
+  const itemsPerPage = queryString.limit;
+  const page = queryString.offset / itemsPerPage + 1;
 
   const { category } = useParams<{ category: string }>();
 
@@ -31,16 +33,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let queryString = "";
-
-      if (page !== 1) {
-        queryString += `?offset=${(page - 1) * itemsPerPage}&limit=${itemsPerPage}`;
-      }
-
-      if (category === undefined && search !== "") {
-        queryString += queryString === "" ? "?" : "&";
-        queryString += `search=${search}`;
-      }
+      const queryString = appActions.getQueryStrings();
 
       const endpoint =
         (category === undefined ? `/api/products` : `/api/products/categories/${category}`) +
@@ -57,18 +50,37 @@ const HomePage = () => {
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, [page, search, category]);
+  }, [category, queryString, queryString.search]);
 
   return (
     <>
       <UtilsBar
         categories={categories ?? []}
         activeCategory={category ?? ""}
+        onPriceFilter={({ lowerBound, upperBound }) => {
+          const newQueryStrings = {
+            ...queryString,
+            lowerBound,
+            upperBound,
+          };
+
+          appActions.updateQueryString(newQueryStrings);
+        }}
+        onSort={(option) => {
+          const newQueryStrings = {
+            ...queryString,
+            sortBy: option.name,
+            sortOrder: option.order,
+          };
+
+          appActions.updateQueryString(newQueryStrings);
+        }}
       />
       <ProductsDisplay
         products={products}
         totalProducts={totalProducts}
         itemsPerPage={itemsPerPage}
+        currentPage={page}
       />
     </>
   );
