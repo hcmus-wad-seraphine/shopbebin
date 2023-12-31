@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import Modal from "react-modal";
 import { RouterProvider } from "react-router-dom";
 
 import { inject } from "./setup/inject";
@@ -10,6 +11,8 @@ const rootElement = document.getElementById("root");
 if (rootElement == null) {
   throw new Error("Couldn't find the root element");
 }
+
+Modal.setAppElement("#root");
 
 const root = createRoot(rootElement);
 

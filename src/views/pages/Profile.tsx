@@ -50,7 +50,7 @@ const Profile = () => {
       component={<ChangePassword />}
     />,
     <SettingItem
-      key="1"
+      key="2"
       title="Change password"
       icon="key"
     />,

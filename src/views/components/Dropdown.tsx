@@ -27,7 +27,7 @@ const Dropdown = ({ title, items, currentId, onSelected }: DropdownProps) => {
       {isDropdownOpen && (
         <div className="flex-col gap-2 px-3">
           {items.map((item, index) => (
-            <button
+            <div
               className="w-full px-5 py-3 rounded-full"
               key={index}
               onClick={() => {
@@ -37,7 +37,7 @@ const Dropdown = ({ title, items, currentId, onSelected }: DropdownProps) => {
               }}
             >
               {item}
-            </button>
+            </div>
           ))}
         </div>
       )}

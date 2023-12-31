@@ -10,7 +10,7 @@ interface SettingItemProps {
 export const SettingItem = ({ title, icon, component }: SettingItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const customStyles = {
+  const customStyles: Modal.Styles = {
     content: {
       display: "flex",
       flexDirection: "column",
@@ -44,6 +44,7 @@ export const SettingItem = ({ title, icon, component }: SettingItemProps) => {
         <div className="bg-gray-500 w-[full] h-[1px] mb-4 mt-4"></div>
         {component}
       </Modal>
+
       <button
         className="flex w-full justify-between"
         onClick={() => {
