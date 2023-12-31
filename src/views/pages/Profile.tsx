@@ -19,7 +19,7 @@ const Profile = () => {
   };
 
   const { profile } = useSnapshot(appState);
-  const { email, phone } = profile?.user as User;
+  const { email, phone, name, avatar } = profile?.user as User;
 
   const InformationItems = [
     <InfoItem
@@ -60,11 +60,11 @@ const Profile = () => {
     <div className="flex-col justify-center items-center w-full">
       <div className="flex-col">
         <img
-          src=""
-          alt=""
+          src={avatar}
+          alt="avatar"
           className="w-[100px] h-[100px] rounded-full object-cover"
         />
-        <p>Username</p>
+        <p>{name}</p>
       </div>
 
       <Dropdown

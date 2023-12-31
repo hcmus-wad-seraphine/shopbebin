@@ -47,6 +47,8 @@ export const fetchProducts: RequestHandler = (req, res) => {
   };
 
   handleFetchProducts().catch((err) => {
+    console.log("[ERROR] handleFetchProducts()", err);
+
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",

@@ -21,6 +21,8 @@ model User {
   phone          String                 @unique
   passwordHash   String
   role           Role                   @default(USER)
+  name           String
+  avatar         String
   addresses      Address[]
   cart           SingleProductInvoice[]
   Invoice        Invoice[]

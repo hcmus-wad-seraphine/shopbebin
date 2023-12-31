@@ -14,9 +14,11 @@ export const register: RequestHandler = (req, res) => {
 
   const user: User = {
     id: "",
-    email: email as string,
-    phone: phone as string,
+    email,
+    phone,
     passwordHash,
+    name: email,
+    avatar: "https://picsum.photos/200",
     role: Role.USER,
     addresses: [],
   };
