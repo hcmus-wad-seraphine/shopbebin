@@ -12,7 +12,7 @@ const Dropdown = ({ title, items, currentId, onSelected }: DropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="flex-col w-full max-w-[600px]">
+    <div className="flex-col w-full max-w-[800px]">
       <div className="flex justify-between px-5 py-3 bg-primary rounded-full">
         <div>{title}</div>
         <button
