@@ -1,9 +1,9 @@
-import { getUser, updateUser } from "@models/users";
 import { type CartItem, type User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
+import { getUser, updateUser } from "../models/users";
 import { hashPassword } from "./utils";
 
 export const changePassword: RequestHandler = (req, res) => {
