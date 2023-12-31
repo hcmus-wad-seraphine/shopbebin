@@ -5,13 +5,12 @@ import jsonwebtoken from "jsonwebtoken";
 import { type ErrorResponse } from "react-router-dom";
 
 import { createUser, getUserByEmail, getUserByPhone } from "../models/users";
+import { hashPassword } from "./utils";
 
 export const register: RequestHandler = (req, res) => {
   const { email, phone, password } = req.body;
 
-  const saltRounds = 10;
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const passwordHash = bcrypt.hashSync(password, salt);
+  const passwordHash = hashPassword(password);
 
   const user: User = {
     id: "",

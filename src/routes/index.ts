@@ -2,6 +2,7 @@ import express from "express";
 
 import * as authController from "../controllers/auth";
 import * as productsController from "../controllers/products";
+import * as profileController from "../controllers/profile";
 import { requireAuth } from "./auth";
 
 const router = express.Router();
@@ -12,6 +13,8 @@ router.post("/auth/login", authController.login);
 router.get("/profile", requireAuth, (req, res) => {
   res.send(req.user);
 });
+
+router.post("/profile/change-password", profileController.changePassword);
 
 router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
