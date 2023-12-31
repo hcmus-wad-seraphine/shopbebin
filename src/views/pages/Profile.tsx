@@ -3,6 +3,7 @@ import InfoItem from "@views/components/Checkout/InfoItem";
 import Dropdown from "@views/components/Dropdown";
 import ChangePassword from "@views/features/Profile/ChangePassword";
 import InformationTitle from "@views/features/Profile/Information";
+import ManageAddress from "@views/features/Profile/ManageAddress";
 import SettingTitle, { SettingItem } from "@views/features/Profile/Setting";
 import { appActions, appState } from "@views/valtio";
 import { useState } from "react";
@@ -26,7 +27,7 @@ const Profile = () => {
       key="1"
       isDisabled={!isEditMode}
       title="Name"
-      value={email}
+      value={name}
     />,
     <InfoItem
       key="2"
@@ -51,20 +52,22 @@ const Profile = () => {
     />,
     <SettingItem
       key="2"
-      title="Change password"
-      icon="key"
+      title="Manage address"
+      icon="home"
+      component={<ManageAddress />}
     />,
   ];
 
   return (
-    <div className="flex-col justify-center items-center w-full">
-      <div className="flex-col">
+    <div className="flex-col justify-center items-center w-full gap-4">
+      <div className="flex-col justify-center items-center gap-4">
         <img
           src={avatar}
           alt="avatar"
-          className="w-[100px] h-[100px] rounded-full object-cover"
+          className="w-[200px] h-[200px] rounded-full object-cover"
         />
-        <p>{name}</p>
+
+        <p className="text-xl font-semibold">{name}</p>
       </div>
 
       <Dropdown
@@ -85,7 +88,7 @@ const Profile = () => {
       />
 
       <button
-        className="w-full max-w-[600px] flex items-center justify-between px-5 py-3 bg-primary rounded-full"
+        className="w-full max-w-[800px] flex items-center justify-between px-5 py-3 bg-primary rounded-full"
         onClick={handleLogout}
       >
         <div className="items-center text-white text-lg font-semibold gap-2">
