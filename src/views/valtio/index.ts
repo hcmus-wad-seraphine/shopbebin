@@ -1,4 +1,4 @@
-import { type User } from "@prisma/client";
+import { type CartItem, type User } from "@prisma/client";
 import { proxy } from "valtio";
 
 export interface Profile {
@@ -135,5 +135,12 @@ export const appActions = {
   logout: () => {
     localStorage.removeItem("token");
     appState.profile = null;
+  },
+
+  updateUserCart: (cart: CartItem[]) => {
+    if (!appState.profile) {
+      return;
+    }
+    appState.profile.user.cart = cart;
   },
 };

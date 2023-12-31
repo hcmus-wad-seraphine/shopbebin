@@ -1,11 +1,11 @@
-import { type Topping } from "@models/interface";
+import { type ShopbebinTopping } from "@models/interface";
 import Price from "@views/components/Price";
 import { type FunctionComponent } from "react";
 
 interface ToppingDetailProps {
-  toppings: Topping[];
-  selectedToppings: Topping[];
-  setSelectedToppings: (toppings: Topping[]) => void;
+  toppings: ShopbebinTopping[];
+  selectedToppings: ShopbebinTopping[];
+  setSelectedToppings: (toppings: ShopbebinTopping[]) => void;
 }
 
 const ToppingDetail: FunctionComponent<ToppingDetailProps> = ({

@@ -21,6 +21,7 @@ export const register: RequestHandler = (req, res) => {
     avatar: "https://picsum.photos/200",
     role: Role.USER,
     addresses: [],
+    cart: [],
   };
 
   createUser(user)

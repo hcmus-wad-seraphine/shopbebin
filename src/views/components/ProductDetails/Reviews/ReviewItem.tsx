@@ -1,7 +1,7 @@
-import { type Review } from "@models/interface";
+import { type ShopbebinReview } from "@models/interface";
 
 interface ReviewItemProps {
-  review: Review;
+  review: ShopbebinReview;
 }
 
 const ReviewItem = ({ review }: ReviewItemProps) => {

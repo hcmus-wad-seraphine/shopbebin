@@ -1,5 +1,5 @@
 import Loading from "@components/Loading";
-import { type Product } from "@models/interface";
+import { type ShopbebinProduct } from "@models/interface";
 import Reviews from "@views/components/ProductDetails/Reviews";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -11,18 +11,18 @@ import RelatedItems from "./RelatedItems";
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
 
-  const [product, setProduct] = useState<Product>();
-  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<ShopbebinProduct>();
+  const [relatedProducts, setRelatedProducts] = useState<ShopbebinProduct[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
       const productData = await fetch(`/api/products/${id}`);
-      const product: Product = await productData.json();
+      const product: ShopbebinProduct = await productData.json();
 
       const relatedProductsData = await fetch(`/api/products/categories/${product.category}`);
       const relatedProducts = await relatedProductsData.json();
       const filteredProducts = relatedProducts.products.filter(
-        (item: Product) => item.id !== product.id,
+        (item: ShopbebinProduct) => item.id !== product.id,
       );
 
       setProduct(product);

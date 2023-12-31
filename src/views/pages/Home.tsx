@@ -1,5 +1,5 @@
 import ProductsDisplay from "@components/ProductsDisplay";
-import { type Product } from "@models/interface";
+import { type ShopbebinProduct } from "@models/interface";
 import { type Category } from "@prisma/client";
 import UtilsBar from "@views/layouts/UtilsBar";
 import { appActions, appState } from "@views/valtio";
@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
 
 const HomePage = () => {
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<ShopbebinProduct[]>();
   const [categories, setCategories] = useState<Category[]>();
   const [totalProducts, setTotalProducts] = useState<number>(0);
 

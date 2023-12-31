@@ -1,22 +1,64 @@
-import { type Product, type Topping } from "@models/interface";
-import { type ProductSize } from "@prisma/client";
+import { type ShopbebinProduct, type ShopbebinTopping } from "@models/interface";
+import { type CartItem, type ProductSize } from "@prisma/client";
+import { appActions, appState } from "@views/valtio";
 import { useState } from "react";
+import { useSnapshot } from "valtio";
 
 import ProductInfo from "./ProductInfo";
 import QuantityDetail from "./QuantityDetail";
 import SizeDetail from "./SizeDetail";
 import ToppingDetail from "./ToppingDetail";
 
-const DetailsFeature = (product: Product) => {
+const DetailsFeature = (product: ShopbebinProduct) => {
+  const profileSnap = useSnapshot(appState).profile;
   const [size, setSize] = useState<ProductSize>(product.availableSizes[0]);
   const [quantity, setQuantity] = useState(1);
-  const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
+  const [selectedToppings, setSelectedToppings] = useState<ShopbebinTopping[]>([]);
 
   const totalPrice =
     size.price + selectedToppings.reduce((sum, curr) => sum + curr.topping.price, 0);
 
+  const updateCart = async (cart: CartItem[]) => {
+    if (!profileSnap) return;
+
+    const res = await fetch("/api/profile/update-cart", {
+      headers: {
+        Authorization: `Bearer ${profileSnap.token}`,
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        cart,
+      }),
+    });
+
+    if (res.ok) {
+      appActions.updateUserCart(cart);
+    }
+  };
+
   const handleAddToCart = () => {
-    console.log("added", size, quantity, selectedToppings);
+    if (!profileSnap) return;
+
+    const cartItem: CartItem = {
+      name: product.name,
+      image: product.images[0],
+      price: totalPrice,
+      metadataId: product.id,
+      sizeId: size.id,
+      toppingIds: selectedToppings.map((topping) => topping.id),
+      quantity,
+    };
+
+    const currentCart = profileSnap.user.cart.map((item) => ({
+      ...item,
+      toppingIds: item.toppingIds.map((id) => id),
+    }));
+
+    const newCart = [...currentCart, cartItem];
+    updateCart(newCart).catch((err) => {
+      console.error(err);
+    });
   };
 
   return (

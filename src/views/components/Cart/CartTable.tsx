@@ -1,29 +1,24 @@
-import { type ProductMetadata } from "@prisma/client";
-import { type FC, useEffect, useState } from "react";
+import { appState } from "@views/valtio";
+import { useSnapshot } from "valtio";
 
-// import { useUpdateCartQuantityContext } from "@/context/Store";
 import Price from "../Price";
-// import { getCartSubTotal } from "@/utils/helpers";
-import ProductInCart from "./ProductInCart";
+import ProductInCart, { type ProductInCartProps } from "./ProductInCart";
 
-interface Props {
-  cart: ProductMetadata[];
-}
+const CartTable = () => {
+  const profileSnap = useSnapshot(appState).profile;
 
-const CartTable: FC<Props> = ({ cart }) => {
-  //   const updateCartQuantity = useUpdateCartQuantityContext();
-  const [products, setProducts] = useState<ProductMetadata[]>([]);
-  const [subtotal, setSubtotal] = useState(0);
+  if (!profileSnap) return null;
 
-  useEffect(() => {
-    setProducts(cart);
-    setSubtotal(100);
-  }, [cart]);
+  const items: ProductInCartProps[] = profileSnap.user.cart.map((item) => ({
+    ...item,
+    toppingIds: item.toppingIds.map((id) => id),
+    id: crypto.randomUUID(),
+    onUpdateItem(id, quantity) {
+      console.log("-->", id, quantity);
+    },
+  }));
 
-  const updateItem = (id: string, stock: number) => {
-    // updateCartQuantity(id, stock);
-    console.log(id, stock);
-  };
+  const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
 
   return (
     <div className="min-h-80 max-w-3xl my-4 sm:my-8 mx-auto w-full">
@@ -40,24 +35,24 @@ const CartTable: FC<Props> = ({ cart }) => {
         </thead>
 
         <tbody className="divide-y divide-palette-lighter">
-          {products.map((item) => (
+          {items.map((item) => (
             <ProductInCart
               key={item.id}
-              item={item}
-              onUpdateItem={updateItem}
+              {...item}
             />
           ))}
-          {subtotal === 0 ? null : (
+
+          {total === 0 ? null : (
             <tr>
-              <td className="text-xl font-primary text-base font-semibold text-primary uppercase px-4 sm:px-6 py-4">
-                Subtotal
+              <td className="text-xl font-primary font-semibold text-primary uppercase px-4 sm:px-6 py-4">
+                Total
               </td>
               <td></td>
               <td></td>
 
               <td className="font-primary text-end text-lg text-palette-primary font-medium px-4 sm:px-6 py-4">
                 <Price
-                  num={subtotal}
+                  num={total}
                   numSize="text-xl"
                 />
               </td>

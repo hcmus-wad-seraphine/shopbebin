@@ -1,12 +1,12 @@
 import Loading from "@components/Loading";
-import { type Product } from "@models/interface";
+import { type ShopbebinProduct } from "@models/interface";
 import { appActions, appState } from "@views/valtio";
 import { useSnapshot } from "valtio";
 
 import ProductCard from "./ProductCard";
 
 interface ProductsDisplayProps {
-  products?: Product[];
+  products?: ShopbebinProduct[];
   totalProducts: number;
   itemsPerPage: number;
   currentPage: number;

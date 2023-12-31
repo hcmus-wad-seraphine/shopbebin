@@ -1,10 +1,10 @@
-import { type Product } from "@models/interface";
+import { type ShopbebinProduct } from "@models/interface";
 import { type FC } from "react";
 
 import Price from "../Price";
 
 interface Props {
-  product: Product;
+  product: ShopbebinProduct;
 }
 
 const ProductCard: FC<Props> = ({ product }) => {

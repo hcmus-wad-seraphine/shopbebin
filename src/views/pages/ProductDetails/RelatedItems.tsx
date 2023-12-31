@@ -1,9 +1,9 @@
-import { type Product } from "@models/interface";
+import { type ShopbebinProduct } from "@models/interface";
 import ProductCard from "@views/components/ProductsDisplay/ProductCard";
 import { useRef } from "react";
 
 interface RelatedItemsProps {
-  products: Product[];
+  products: ShopbebinProduct[];
 }
 
 const RelatedItems = ({ products }: RelatedItemsProps) => {

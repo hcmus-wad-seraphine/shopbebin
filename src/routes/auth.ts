@@ -1,3 +1,4 @@
+import { type RequestHandler } from "express";
 import { type JwtPayload } from "jsonwebtoken";
 import passport from "passport";
 import { ExtractJwt, Strategy, type StrategyOptions } from "passport-jwt";
@@ -37,4 +38,6 @@ passport.use(
   }),
 );
 
-export const requireAuth = passport.authenticate("jwt", { session: false });
+export const requireAuth: RequestHandler = (req, res, next) => {
+  passport.authenticate("jwt", { session: false })(req, res, next);
+};

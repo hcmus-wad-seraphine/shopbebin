@@ -1,7 +1,7 @@
-import { type Product } from "../interface";
+import { type ShopbebinProduct } from "../interface";
 import { getPrismaClient } from "../prisma";
 
-export const createProduct = async (product: Product) => {
+export const createProduct = async (product: ShopbebinProduct) => {
   const client = getPrismaClient();
 
   const createdProduct = await client.productMetadata.create({
@@ -49,7 +49,7 @@ export const createProduct = async (product: Product) => {
 export const getProduct = async (id: string) => {
   const client = getPrismaClient();
 
-  const product: Product | null = await client.productMetadata.findUnique({
+  const product: ShopbebinProduct | null = await client.productMetadata.findUnique({
     where: {
       id,
     },
@@ -86,7 +86,7 @@ export const getProducts = async (props: {
 }) => {
   const client = getPrismaClient();
 
-  const products: Product[] = await client.productMetadata.findMany({
+  const products: ShopbebinProduct[] = await client.productMetadata.findMany({
     where: {
       name: {
         contains: props.search,
@@ -180,12 +180,12 @@ export const deleteProduct = async (id: string) => {
   await Promise.all(promises);
 };
 
-export const updateProduct = async (product: Product) => {
+export const updateProduct = async (product: ShopbebinProduct) => {
   const client = getPrismaClient();
 
   const { id, availableSizes, availableToppings, ...data } = product;
 
-  const updatedProduct: Product | null = await client.productMetadata.update({
+  const updatedProduct: ShopbebinProduct | null = await client.productMetadata.update({
     where: {
       id,
     },

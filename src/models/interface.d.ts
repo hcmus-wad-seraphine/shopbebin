@@ -8,20 +8,20 @@ import {
   type User,
 } from "@prisma/client";
 
-export type Topping = ProductTopping & {
+export type ShopbebinTopping = ProductTopping & {
   topping: ToppingMetadata;
 };
 
-export type ReviewUser = ReviewMetadata & {
+export type ShopbebinReviewUser = ReviewMetadata & {
   user: User;
 };
 
-export type Review = ProductReview & {
-  reviewMetadata: ReviewUser;
+export type ShopbebinReview = ProductReview & {
+  reviewMetadata: ShopbebinReviewUser;
 };
 
-export type Product = ProductMetadata & {
+export type ShopbebinProduct = ProductMetadata & {
   availableSizes: ProductSize[];
-  availableToppings: Topping[];
-  reviews: Review[];
+  availableToppings: ShopbebinTopping[];
+  reviews: ShopbebinReview[];
 };
