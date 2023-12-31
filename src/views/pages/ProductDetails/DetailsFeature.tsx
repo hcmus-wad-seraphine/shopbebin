@@ -1,6 +1,7 @@
 import { type ShopbebinProduct, type ShopbebinTopping } from "@models/interface";
 import { type CartItem, type ProductSize } from "@prisma/client";
-import { appActions, appState } from "@views/valtio";
+import { compareItem as compareCardItems, updateCart } from "@utils/cart";
+import { appState } from "@views/valtio";
 import { useState } from "react";
 import { useSnapshot } from "valtio";
 
@@ -18,25 +19,6 @@ const DetailsFeature = (product: ShopbebinProduct) => {
   const totalPrice =
     size.price + selectedToppings.reduce((sum, curr) => sum + curr.topping.price, 0);
 
-  const updateCart = async (cart: CartItem[]) => {
-    if (!profileSnap) return;
-
-    const res = await fetch("/api/profile/update-cart", {
-      headers: {
-        Authorization: `Bearer ${profileSnap.token}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        cart,
-      }),
-    });
-
-    if (res.ok) {
-      appActions.updateUserCart(cart);
-    }
-  };
-
   const handleAddToCart = () => {
     if (!profileSnap) return;
 
@@ -46,6 +28,7 @@ const DetailsFeature = (product: ShopbebinProduct) => {
       price: totalPrice,
       metadataId: product.id,
       sizeId: size.id,
+      sizeName: size.size,
       toppingIds: selectedToppings.map((topping) => topping.id),
       quantity,
     };
@@ -55,8 +38,26 @@ const DetailsFeature = (product: ShopbebinProduct) => {
       toppingIds: item.toppingIds.map((id) => id),
     }));
 
-    const newCart = [...currentCart, cartItem];
-    updateCart(newCart).catch((err) => {
+    const existedItem = currentCart.find((item) => compareCardItems(item, cartItem));
+
+    let newCart: CartItem[] = [];
+
+    if (existedItem) {
+      newCart = currentCart.map((item) => {
+        if (compareCardItems(item, cartItem)) {
+          return {
+            ...item,
+            quantity: item.quantity + cartItem.quantity,
+          };
+        }
+
+        return item;
+      });
+    } else {
+      newCart = [...currentCart, cartItem];
+    }
+
+    updateCart(newCart, profileSnap.token).catch((err) => {
       console.error(err);
     });
   };

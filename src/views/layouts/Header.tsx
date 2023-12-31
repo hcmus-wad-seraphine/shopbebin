@@ -12,7 +12,7 @@ interface Props {
 const Header = ({ isLogIn }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { queryString } = useSnapshot(appState);
+  const { queryString, profile } = useSnapshot(appState);
 
   const handleSearch = () => {
     if (inputRef.current != null) {
@@ -61,7 +61,7 @@ const Header = ({ isLogIn }: Props) => {
           <Navigator
             icon={<i className="fas fa-shopping-cart"></i>}
             href="/cart"
-            title="Your cart"
+            title={`Cart (${profile?.user.cart.length ?? 0})`}
           />
           <Navigator
             icon={<i className="fas fa-clipboard"></i>}

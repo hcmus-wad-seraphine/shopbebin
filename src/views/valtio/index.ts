@@ -137,7 +137,7 @@ export const appActions = {
     appState.profile = null;
   },
 
-  updateUserCart: (cart: CartItem[]) => {
+  updateCart: (cart: CartItem[]) => {
     if (!appState.profile) {
       return;
     }

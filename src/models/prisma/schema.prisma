@@ -49,6 +49,7 @@ type CartItem {
   price      Float
   metadataId String
   sizeId     String
+  sizeName   Size
   toppingIds String[]
   quantity   Int
 }

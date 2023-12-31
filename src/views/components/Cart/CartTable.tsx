@@ -1,21 +1,18 @@
+import { type CartItem } from "@prisma/client";
 import { appState } from "@views/valtio";
 import { useSnapshot } from "valtio";
 
 import Price from "../Price";
-import ProductInCart, { type ProductInCartProps } from "./ProductInCart";
+import ProductInCart from "./ProductInCart";
 
 const CartTable = () => {
   const profileSnap = useSnapshot(appState).profile;
 
   if (!profileSnap) return null;
 
-  const items: ProductInCartProps[] = profileSnap.user.cart.map((item) => ({
+  const items: CartItem[] = profileSnap.user.cart.map((item) => ({
     ...item,
     toppingIds: item.toppingIds.map((id) => id),
-    id: crypto.randomUUID(),
-    onUpdateItem(id, quantity) {
-      console.log("-->", id, quantity);
-    },
   }));
 
   const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
@@ -35,9 +32,9 @@ const CartTable = () => {
         </thead>
 
         <tbody className="divide-y divide-palette-lighter">
-          {items.map((item) => (
+          {items.map((item, idx) => (
             <ProductInCart
-              key={item.id}
+              key={idx}
               {...item}
             />
           ))}
