@@ -6,8 +6,9 @@ interface Props {
 
 const InfoItem = ({ title, value, isDisabled }: Props) => {
   return (
-    <div className="justify-between">
+    <div className="justify-between w-full">
       <label className="text-gray-500 text-base">{title}</label>
+
       <input
         disabled={isDisabled}
         type="text"

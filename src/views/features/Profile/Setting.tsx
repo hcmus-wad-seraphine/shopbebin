@@ -26,7 +26,7 @@ export const SettingItem = ({ title, icon, component }: SettingItemProps) => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <Modal
         isOpen={isModalOpen}
         style={customStyles}
