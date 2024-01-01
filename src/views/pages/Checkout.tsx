@@ -1,8 +1,7 @@
 import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Price from "@components/Price";
-import { type CartItem } from "@prisma/client";
+import { type CartItem, type Order, OrderStatus } from "@prisma/client";
 import ShippingInfo, { type ShippingInfoProps } from "@views/components/Checkout/ShippingInfo";
-import NavigateButton from "@views/components/NavigateButton";
 import { appState } from "@views/valtio";
 import { useState } from "react";
 import { useSnapshot } from "valtio";
@@ -24,6 +23,20 @@ const Checkout = () => {
   }));
 
   const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
+
+  const handleMakeOrder = () => {
+    const order: Order = {
+      id: "",
+      cart: items,
+      userId: profileSnap.user.id,
+      shippingAddress: shippingInfo.address,
+      status: OrderStatus.PREPARING,
+      reviewId: "",
+      createdAt: new Date(),
+    };
+
+    console.log("--> order", order);
+  };
 
   return (
     <div className="flex-col py-5 items-center">
@@ -59,14 +72,12 @@ const Checkout = () => {
           </div>
         </div>
 
-        <div className="self-center">
-          <NavigateButton
-            style="max-w-[200px] self-center"
-            to="/checkout"
-          >
-            Confirm
-          </NavigateButton>
-        </div>
+        <button
+          className="w-fit mx-auto bg-gradient-to-b from-primary to-secondary px-3 py-2 rounded-full text-white"
+          onClick={handleMakeOrder}
+        >
+          Confirm
+        </button>
       </div>
     </div>
   );
