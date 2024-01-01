@@ -1,6 +1,6 @@
 import { type ShopbebinProduct, type ShopbebinTopping } from "@models/interface";
 import { type CartItem, type ProductSize } from "@prisma/client";
-import { compareItem as compareCardItems, updateCart } from "@utils/cart";
+import { compareCartItems, updateCart } from "@utils/cart";
 import { appState } from "@views/valtio";
 import { useState } from "react";
 import { useSnapshot } from "valtio";
@@ -27,24 +27,23 @@ const DetailsFeature = (product: ShopbebinProduct) => {
       image: product.images[0],
       price: totalPrice,
       metadataId: product.id,
-      sizeId: size.id,
       sizeName: size.size,
-      toppingIds: selectedToppings.map((topping) => topping.id),
+      toppingNames: selectedToppings.map((toppingItem) => toppingItem.topping.name),
       quantity,
     };
 
     const currentCart = profileSnap.user.cart.map((item) => ({
       ...item,
-      toppingIds: item.toppingIds.map((id) => id),
+      toppingNames: item.toppingNames.map((id) => id),
     }));
 
-    const existedItem = currentCart.find((item) => compareCardItems(item, cartItem));
+    const existedItem = currentCart.find((item) => compareCartItems(item, cartItem));
 
     let newCart: CartItem[] = [];
 
     if (existedItem) {
       newCart = currentCart.map((item) => {
-        if (compareCardItems(item, cartItem)) {
+        if (compareCartItems(item, cartItem)) {
           return {
             ...item,
             quantity: item.quantity + cartItem.quantity,

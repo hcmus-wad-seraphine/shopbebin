@@ -1,12 +1,12 @@
 import { type CartItem } from "@prisma/client";
-import { compareItem, updateCart } from "@utils/cart";
+import { compareCartItems, updateCart } from "@utils/cart";
 import { appState } from "@views/valtio";
 import { type FC } from "react";
 import { useSnapshot } from "valtio";
 
 import Price from "../Price";
 
-const ProductInCart: FC<CartItem> = (cardItem) => {
+const ProductInCart: FC<CartItem> = (cartItem) => {
   const profileSnap = useSnapshot(appState).profile;
 
   if (!profileSnap) return null;
@@ -14,14 +14,14 @@ const ProductInCart: FC<CartItem> = (cardItem) => {
   const handleChangeQuantity = (quantity: number) => {
     let currentCart: CartItem[] = profileSnap.user.cart.map((item) => ({
       ...item,
-      toppingIds: item.toppingIds.map((id) => id),
+      toppingNames: item.toppingNames.map((name) => name),
     }));
 
     if (quantity === 0) {
-      currentCart = currentCart.filter((item) => !compareItem(item, cardItem));
+      currentCart = currentCart.filter((item) => !compareCartItems(item, cartItem));
     } else {
       currentCart = currentCart.map((item) => {
-        if (compareItem(item, cardItem)) {
+        if (compareCartItems(item, cartItem)) {
           return {
             ...item,
             quantity,
@@ -40,21 +40,19 @@ const ProductInCart: FC<CartItem> = (cardItem) => {
   return (
     <tr className="text-sm sm:text-base text-gray-600 text-center">
       <td className="font-primary font-medium px-4 sm:px-6 py-4 flex items-center gap-4">
-        <input type="checkbox" />
-
         <img
-          src={cardItem.image}
-          alt={cardItem.name}
+          src={cartItem.image}
+          alt={cartItem.name}
           height={52}
           width={52}
           className={`rounded-md hidden sm:inline-flex`}
         />
 
-        <a href={`/products/${cardItem.metadataId}`}>
-          <p className="pt-1 hover:text-primary font-medium text-xl text-left">{cardItem.name}</p>
+        <a href={`/products/${cartItem.metadataId}`}>
+          <p className="pt-1 hover:text-primary font-medium text-xl text-left">{cartItem.name}</p>
+          <p className="pt-1 text-slate-500 text-sm text-left">Size: {cartItem.sizeName}</p>
           <p className="pt-1 text-slate-500 text-sm text-left">
-            Size {cardItem.sizeName}, {cardItem.toppingIds.length}{" "}
-            {cardItem.toppingIds.length === 1 ? "topping" : "toppings"}
+            Topping: {cartItem.toppingNames.length > 0 ? cartItem.toppingNames.join(", ") : "None"}
           </p>
         </a>
       </td>
@@ -67,7 +65,7 @@ const ProductInCart: FC<CartItem> = (cardItem) => {
           name="variant-quantity"
           min="1"
           step="1"
-          value={cardItem.quantity}
+          value={cartItem.quantity}
           onChange={(e) => {
             handleChangeQuantity(parseInt(e.target.value) || 1);
           }}
@@ -77,7 +75,7 @@ const ProductInCart: FC<CartItem> = (cardItem) => {
 
       <td className="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
         <Price
-          num={cardItem.price * cardItem.quantity}
+          num={cartItem.price * cartItem.quantity}
           numSize="text-lg"
         />
       </td>

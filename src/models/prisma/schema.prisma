@@ -44,14 +44,13 @@ enum Size {
 }
 
 type CartItem {
-  name       String
-  image      String
-  price      Float
-  metadataId String
-  sizeId     String
-  sizeName   Size
-  toppingIds String[]
-  quantity   Int
+  metadataId   String
+  name         String
+  image        String
+  price        Float
+  sizeName     Size
+  toppingNames String[]
+  quantity     Int
 }
 
 model ToppingMetadata {

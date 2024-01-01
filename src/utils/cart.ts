@@ -18,13 +18,12 @@ export const updateCart = async (cart: CartItem[], jwt: string) => {
   }
 };
 
-export const compareItem = (item1: CartItem, item2: CartItem) => {
-  if (item1.metadataId !== item2.metadataId) return false;
-  if (item1.sizeId !== item2.sizeId) return false;
-  if (item1.toppingIds.length !== item2.toppingIds.length) return false;
+export const compareCartItems = (item1: CartItem, item2: CartItem) => {
+  if (item1.sizeName !== item2.sizeName) return false;
+  if (item1.toppingNames.length !== item2.toppingNames.length) return false;
 
-  for (let i = 0; i < item1.toppingIds.length; i++) {
-    if (item1.toppingIds[i] !== item2.toppingIds[i]) return false;
+  for (let i = 0; i < item1.toppingNames.length; i++) {
+    if (item1.toppingNames[i] !== item2.toppingNames[i]) return false;
   }
 
   return true;

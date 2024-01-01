@@ -12,7 +12,7 @@ const CartTable = () => {
 
   const items: CartItem[] = profileSnap.user.cart.map((item) => ({
     ...item,
-    toppingIds: item.toppingIds.map((id) => id),
+    toppingNames: item.toppingNames.map((name) => name),
   }));
 
   const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
