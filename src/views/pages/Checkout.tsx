@@ -1,27 +1,36 @@
 import CheckoutItem from "@components/Checkout/CheckoutItem";
-import { products } from "@components/internal";
 import Price from "@components/Price";
 import { type CartItem } from "@prisma/client";
-import ShippingInfo from "@views/components/Checkout/ShippingInfo";
+import ShippingInfo, { type ShippingInfoProps } from "@views/components/Checkout/ShippingInfo";
 import NavigateButton from "@views/components/NavigateButton";
 import { appState } from "@views/valtio";
+import { useState } from "react";
 import { useSnapshot } from "valtio";
 
 const Checkout = () => {
-  const total = products.slice(0, 5).reduce((accumulator, currentValue) => accumulator + 10, 10);
   const profileSnap = useSnapshot(appState).profile;
 
   if (!profileSnap) return null;
+
+  const [shippingInfo, setShippingInfo] = useState<ShippingInfoProps>({
+    name: profileSnap.user.name,
+    phone: profileSnap.user.phone,
+    address: profileSnap.user.addresses[0],
+  });
 
   const items: CartItem[] = profileSnap.user.cart.map((item) => ({
     ...item,
     toppingNames: item.toppingNames.map((name) => name),
   }));
 
+  const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
+
   return (
     <div className="flex-col py-5 items-center">
-      <ShippingInfo />
+      <ShippingInfo {...shippingInfo} />
+
       <h1 className="font-bold text-primary text-xl self-center">YOUR ORDER</h1>
+
       <div className="flex-col gap-2">
         <div className="flex-col gap-5 h-[500px] overflow-auto py-5 px-10 border border-black rounded-2xl">
           {items.map((item, idx) => (

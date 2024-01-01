@@ -1,6 +1,19 @@
+import { type Address } from "@prisma/client";
+import { type FC } from "react";
+
 import InfoItem from "./InfoItem";
 
-const ShippingInfo = () => {
+const addressToString = (address: Address) => {
+  return address.unitNumber + address.street + address.district + address.city;
+};
+
+export interface ShippingInfoProps {
+  address: Address;
+  name: string;
+  phone: string;
+}
+
+const ShippingInfo: FC<ShippingInfoProps> = ({ name, phone, address }) => {
   return (
     <div className="flex-col w-full max-w-3xl px-8">
       <div className="justify-between text-primary">
@@ -15,17 +28,17 @@ const ShippingInfo = () => {
       <div className="flex-col">
         <InfoItem
           title="Name"
-          value="John Doe"
+          value={name}
         />
 
         <InfoItem
           title="Phone number"
-          value="0779944549"
+          value={phone}
         />
 
         <InfoItem
           title="Address"
-          value="1234 Main St"
+          value={addressToString(address)}
         />
       </div>
     </div>

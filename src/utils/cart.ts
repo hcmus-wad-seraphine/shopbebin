@@ -19,7 +19,10 @@ export const updateCart = async (cart: CartItem[], jwt: string) => {
 };
 
 export const compareCartItems = (item1: CartItem, item2: CartItem) => {
+  if (item1.name !== item2.name) return false;
+
   if (item1.sizeName !== item2.sizeName) return false;
+
   if (item1.toppingNames.length !== item2.toppingNames.length) return false;
 
   for (let i = 0; i < item1.toppingNames.length; i++) {
