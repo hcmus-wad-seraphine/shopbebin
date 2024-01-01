@@ -16,7 +16,7 @@ const RelatedItems = ({ products }: RelatedItemsProps) => {
 
   return (
     <div className="flex-col">
-      <h1 className="text-3xl font-semibold text-center">Related Items</h1>
+      <h1 className="text-3xl font-semibold text-center mb-8">Related Items</h1>
       <div className="relative flex border-t border-secondary">
         <button
           aria-label="left-scroll"

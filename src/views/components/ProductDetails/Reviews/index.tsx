@@ -7,8 +7,6 @@ interface ReviewsProps {
 }
 
 const Reviews = ({ reviews }: ReviewsProps) => {
-  console.log("--> reviews", reviews);
-
   return (
     <div className="flex-col">
       <h1 className="text-3xl font-semibold text-center mb-8">Reviews</h1>
