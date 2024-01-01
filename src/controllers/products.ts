@@ -11,6 +11,8 @@ export const fetchProduct: RequestHandler = (req, res) => {
   };
 
   handleFetchProduct().catch((err) => {
+    console.log("[ERROR] handleFetchProduct()", err);
+
     const errorResponse: ErrorResponse = {
       status: 404,
       statusText: "Product not found",

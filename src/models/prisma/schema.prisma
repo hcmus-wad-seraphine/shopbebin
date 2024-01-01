@@ -16,17 +16,16 @@ enum Role {
 }
 
 model User {
-  id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  email          String           @unique
-  phone          String           @unique
-  passwordHash   String
-  role           Role             @default(USER)
-  name           String
-  avatar         String
-  addresses      Address[]
-  cart           CartItem[]
-  Invoice        Invoice[]
-  ReviewMetadata ReviewMetadata[]
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  email        String     @unique
+  phone        String     @unique
+  passwordHash String
+  role         Role       @default(USER)
+  name         String
+  avatar       String
+  addresses    Address[]
+  cart         CartItem[]
+  Review       Review[]
 }
 
 type Address {
@@ -97,59 +96,33 @@ model ProductMetadata {
   category          String
   availableSizes    ProductSize[]
   availableToppings ProductTopping[]
-  reviews           ProductReview[]
-}
-
-model Invoice {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  user        User       @relation(fields: [userId], references: [id])
-  cart        CartItem[]
-  totalPrice  Float
-  shippingFee Float
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  userId      String     @db.ObjectId
-  Order       Order[]
+  reviews           Review[]
 }
 
 enum OrderStatus {
-  PENDING
-  CONFIRMED
+  PREPARING
   DELIVERING
   DELIVERED
   CANCELLED
 }
 
 model Order {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-
-  invoice   Invoice @relation(fields: [invoiceId], references: [id])
-  invoiceId String  @db.ObjectId
-
-  status OrderStatus
-
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  status          OrderStatus
   shippingAddress Address
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  cart            CartItem[]
+  userId          String      @db.ObjectId
+  reviewId        String?     @db.ObjectId
+  createdAt       DateTime    @default(now())
 }
 
-model ReviewMetadata {
-  id                String          @id @default(auto()) @map("_id") @db.ObjectId
-  user              User            @relation(fields: [userId], references: [id])
+model Review {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String           @db.ObjectId
+  productMetadataId String           @db.ObjectId
   rating            Int
   comment           String
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
-  productMetadataId String?         @db.ObjectId
-  userId            String          @db.ObjectId
-  ProductReview     ProductReview[]
-}
-
-model ProductReview {
-  id                String           @id @default(auto()) @map("_id") @db.ObjectId
-  reviewMetadata    ReviewMetadata   @relation(fields: [reviewMetadataId], references: [id])
-  reviewMetadataId  String           @db.ObjectId
+  createdAt         DateTime         @default(now())
   ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
-  productMetadataId String?          @db.ObjectId
+  User              User             @relation(fields: [userId], references: [id])
 }

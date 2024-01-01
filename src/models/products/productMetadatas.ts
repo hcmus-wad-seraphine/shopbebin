@@ -33,11 +33,7 @@ export const createProduct = async (product: ShopbebinProduct) => {
       },
       reviews: {
         include: {
-          reviewMetadata: {
-            include: {
-              user: true,
-            },
-          },
+          User: true,
         },
       },
     },
@@ -62,11 +58,7 @@ export const getProduct = async (id: string) => {
       },
       reviews: {
         include: {
-          reviewMetadata: {
-            include: {
-              user: true,
-            },
-          },
+          User: true,
         },
       },
     },
@@ -107,11 +99,7 @@ export const getProducts = async (props: {
       },
       reviews: {
         include: {
-          reviewMetadata: {
-            include: {
-              user: true,
-            },
-          },
+          User: true,
         },
       },
     },
@@ -210,11 +198,7 @@ export const updateProduct = async (product: ShopbebinProduct) => {
       },
       reviews: {
         include: {
-          reviewMetadata: {
-            include: {
-              user: true,
-            },
-          },
+          User: true,
         },
       },
     },
