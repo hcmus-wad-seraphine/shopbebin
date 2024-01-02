@@ -107,11 +107,12 @@ enum OrderStatus {
 }
 
 model Order {
-  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  id              String      @id @map("_id") @db.ObjectId
   status          OrderStatus
   shippingAddress Address
   cart            CartItem[]
   userId          String      @db.ObjectId
+  price           Float
   reviewId        String?     @db.ObjectId
   createdAt       DateTime    @default(now())
 }

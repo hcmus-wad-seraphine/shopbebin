@@ -3,6 +3,7 @@ import express from "express";
 import * as authController from "../controllers/auth";
 import * as productsController from "../controllers/products";
 import * as profileController from "../controllers/profile";
+import * as vnpayController from "../controllers/vnpay";
 import { requireAuth } from "./auth";
 
 const router = express.Router();
@@ -19,6 +20,8 @@ router.post("/profile/update-cart", requireAuth, profileController.updateCart);
 router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
 router.get("/products/:id", productsController.fetchProduct);
+
+router.post("/checkout", requireAuth, vnpayController.handleCheckout);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 

@@ -2,14 +2,18 @@ import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Price from "@components/Price";
 import { type CartItem, type Order, OrderStatus } from "@prisma/client";
 import ShippingInfo, { type ShippingInfoProps } from "@views/components/Checkout/ShippingInfo";
+import InlineLoading from "@views/components/InlineLoading";
+import NavigateButton from "@views/components/NavigateButton";
 import { appState } from "@views/valtio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSnapshot } from "valtio";
 
 const Checkout = () => {
   const profileSnap = useSnapshot(appState).profile;
 
   if (!profileSnap) return null;
+
+  const [checkoutUrl, setCheckoutUrl] = useState("");
 
   const [shippingInfo, setShippingInfo] = useState<ShippingInfoProps>({
     name: profileSnap.user.name,
@@ -24,19 +28,37 @@ const Checkout = () => {
 
   const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
 
-  const handleMakeOrder = () => {
-    const order: Order = {
-      id: "",
-      cart: items,
-      userId: profileSnap.user.id,
-      shippingAddress: shippingInfo.address,
-      status: OrderStatus.PREPARING,
-      reviewId: "",
-      createdAt: new Date(),
+  useEffect(() => {
+    const checkout = async () => {
+      const order: Order = {
+        id: crypto.randomUUID(),
+        cart: items,
+        userId: profileSnap.user.id,
+        shippingAddress: shippingInfo.address,
+        status: OrderStatus.PREPARING,
+        price: total,
+        reviewId: "",
+        createdAt: new Date(),
+      };
+
+      const data = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${profileSnap.token}`,
+        },
+        body: JSON.stringify(order),
+      });
+
+      const { url } = await data.json();
+
+      setCheckoutUrl(url);
     };
 
-    console.log("--> order", order);
-  };
+    checkout().catch((err) => {
+      console.error("[ERROR] Checkout", err);
+    });
+  }, []);
 
   return (
     <div className="flex-col py-5 items-center">
@@ -72,12 +94,16 @@ const Checkout = () => {
           </div>
         </div>
 
-        <button
-          className="w-fit mx-auto bg-gradient-to-b from-primary to-secondary px-3 py-2 rounded-full text-white"
-          onClick={handleMakeOrder}
-        >
-          Confirm
-        </button>
+        {checkoutUrl === "" ? (
+          <InlineLoading />
+        ) : (
+          <NavigateButton
+            style="w-fit mx-auto"
+            to={checkoutUrl}
+          >
+            Confirm
+          </NavigateButton>
+        )}
       </div>
     </div>
   );
