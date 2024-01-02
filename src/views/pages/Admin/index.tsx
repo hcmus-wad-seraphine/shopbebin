@@ -23,46 +23,41 @@ const NavItem = ({ to, label }: NavItemProps) => {
 const navItems: NavItemProps[] = [
   {
     to: "/admin/profile",
-    label: "Thiết lập hồ sơ",
+    label: "Profile",
+  },
+  {
+    to: "/admin/dashboard",
+    label: "Dashboard",
   },
   {
     to: "/admin/accounts",
-    label: "Quản lý tài khoản",
+    label: "Accounts management",
   },
   {
     to: "/admin/products",
-    label: "Quản lý sản phẩm",
+    label: "Products management",
   },
   {
     to: "/admin/orders",
-    label: "Quản lý đơn hàng",
+    label: "Orders management",
   },
 ];
 
 const AdminRoot = () => {
   return (
-    <div className="w-full lg:max-w-4xl xl:max-w-6xl mx-auto flex-col">
-      <Link
-        className="mx-auto my-4 text-4xl font-bold"
-        to="/admin"
-      >
-        Admin Dashboard
-      </Link>
+    <div className="w-full lg:max-w-4xl xl:max-w-6xl mx-auto">
+      <div className="flex-col bg-primary  px-4 py-2 gap-8  absolute left-0 h-full">
+        {navItems.map((navItem) => (
+          <NavItem
+            key={navItem.to}
+            to={navItem.to}
+            label={navItem.label}
+          />
+        ))}
+      </div>
 
-      <div className="flex-col gap-6">
-        <div className="bg-primary justify-center px-4 py-2 rounded-xl gap-8 items-center">
-          {navItems.map((navItem) => (
-            <NavItem
-              key={navItem.to}
-              to={navItem.to}
-              label={navItem.label}
-            />
-          ))}
-        </div>
-
-        <div>
-          <Outlet />
-        </div>
+      <div className="ml-[180px] w-full">
+        <Outlet />
       </div>
     </div>
   );

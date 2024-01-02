@@ -104,6 +104,11 @@ export const router = createBrowserRouter([
         loader: adminAuthLoader,
       },
       {
+        path: "dashboard",
+        element: <AdminDashboard />,
+        // loader: adminAuthLoader,
+      },
+      {
         path: "accounts",
         element: <AccountsPage />,
       },
