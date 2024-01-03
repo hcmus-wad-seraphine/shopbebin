@@ -49,12 +49,26 @@ const OrderCard = ({ order }: OrderCardProps) => {
 
       <div className="justify-between items-center py-1">
         <p className="text-secondary font-medium">{capitalize(order.status)}</p>
-        <Link
-          to={`/orders/${order.id}/rate`}
-          className="bg-primary text-white font-medium px-4 py-1 rounded-md hover:bg-secondary transition"
-        >
-          Review
-        </Link>
+
+        <div className="gap-4">
+          <Link
+            to={`/orders/${order.id}/rate`}
+            className={`bg-${
+              order.status === "DELIVERED" ? "primary" : "gray-500"
+            } text-white font-medium px-4 py-1 rounded-md hover:bg-secondary transition`}
+          >
+            Review
+          </Link>
+
+          <button
+            to={`/orders/${order.id}/rate`}
+            className={`bg-${
+              order.status === "ORDERED" ? "error" : "gray-500"
+            } text-white font-medium px-4 py-1 rounded-md hover:bg-secondary transition`}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
