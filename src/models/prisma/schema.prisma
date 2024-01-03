@@ -105,6 +105,7 @@ enum OrderStatus {
   DELIVERING
   DELIVERED
   CANCELLED
+  REVIEWED
 }
 
 enum PaymentMethod {
