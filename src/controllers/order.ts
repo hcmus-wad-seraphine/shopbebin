@@ -30,9 +30,7 @@ export const fetchOrders: RequestHandler = (req, res) => {
 };
 
 export const fetchOrderById: RequestHandler = (req, res) => {
-  const id = req.body;
-
-  getOrderById(id)
+  getOrderById(req.params.id)
     .then((order) => {
       res.json(order);
     })
