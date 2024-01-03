@@ -1,11 +1,8 @@
 import { type Address } from "@prisma/client";
+import { addressToString } from "@utils/address";
 import { type FC } from "react";
 
 import InfoItem from "./InfoItem";
-
-const addressToString = (address: Address) => {
-  return address.unitNumber + address.street + address.district + address.city;
-};
 
 export interface ShippingInfoProps {
   address: Address;

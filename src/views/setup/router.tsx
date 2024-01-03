@@ -1,4 +1,5 @@
 import { Role } from "@prisma/client";
+import AdminDashboard from "@views/pages/Admin/Dashboard";
 import { appActions, appState } from "@views/valtio";
 import { createBrowserRouter, redirect } from "react-router-dom";
 

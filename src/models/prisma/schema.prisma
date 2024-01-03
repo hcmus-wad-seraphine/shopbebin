@@ -106,14 +106,21 @@ enum OrderStatus {
   CANCELLED
 }
 
+enum PaymentMethod {
+  COD
+  INTERNET_BANKING
+}
+
 model Order {
-  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  id              String        @id @map("_id") @db.ObjectId
+  userId          String        @db.ObjectId
   status          OrderStatus
   shippingAddress Address
   cart            CartItem[]
-  userId          String      @db.ObjectId
-  reviewId        String?     @db.ObjectId
-  createdAt       DateTime    @default(now())
+  price           Float
+  paymentMethod   PaymentMethod
+  reviewId        String?       @db.ObjectId
+  createdAt       DateTime      @default(now())
 }
 
 model Review {

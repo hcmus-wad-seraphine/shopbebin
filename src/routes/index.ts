@@ -3,6 +3,7 @@ import express from "express";
 import * as authController from "../controllers/auth";
 import * as productsController from "../controllers/products";
 import * as profileController from "../controllers/profile";
+import * as vnpayController from "../controllers/vnpay";
 import { requireAuth } from "./auth";
 
 const router = express.Router();
@@ -14,11 +15,17 @@ router.get("/profile", requireAuth, (req, res) => {
   res.send(req.user);
 });
 router.post("/profile/change-password", profileController.changePassword);
-router.post("/profile/update-cart", requireAuth, profileController.updateCart);
+
+router.post("/update-cart", requireAuth, productsController.updateCart);
 
 router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
 router.get("/products/:id", productsController.fetchProduct);
+
+router.post("/checkout", requireAuth, vnpayController.handleCheckout);
+
+router.get("/orders", requireAuth, productsController.fetchOrders);
+router.post("/orders", requireAuth, productsController.makeOrder);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 

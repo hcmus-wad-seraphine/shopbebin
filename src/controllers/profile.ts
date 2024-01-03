@@ -1,4 +1,3 @@
-import { type CartItem, type User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
@@ -59,35 +58,4 @@ export const changePassword: RequestHandler = (req, res) => {
 
       res.status(500).json(errorResponse);
     });
-};
-
-export const updateCart: RequestHandler = (req, res) => {
-  const handleUpdateCart = async () => {
-    const cart = req.body.cart as CartItem[] | undefined;
-    if (cart === undefined) {
-      throw new Error("Cart is undefined");
-    }
-
-    const user = req.user as User | undefined;
-    if (user === undefined) {
-      throw new Error("User is undefined");
-    }
-
-    user.cart = cart;
-    await updateUser(user);
-
-    res.json({ status: 200, statusText: "Cart updated successfully" });
-  };
-
-  handleUpdateCart().catch((err) => {
-    console.log("[ERROR] updateCart", err);
-
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Internal server error",
-      data: err,
-    };
-
-    res.status(500).json(errorResponse);
-  });
 };
