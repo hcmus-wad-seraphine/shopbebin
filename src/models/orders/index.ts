@@ -76,14 +76,15 @@ export const getOrdersByStatus = async (status: OrderStatus) => {
   return orders;
 };
 
-export const updateOrder = async (id: string, order: Order) => {
+export const updateOrder = async (order: Order) => {
   const client = getPrismaClient();
+  const { id, ...data } = order;
 
   const updatedOrder = await client.order.update({
     where: {
       id,
     },
-    data: order,
+    data,
   });
 
   return updatedOrder;
