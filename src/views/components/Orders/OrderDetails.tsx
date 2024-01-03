@@ -108,13 +108,13 @@ const OrderDetails = () => {
         >
           Review
         </Link>
-        <Link
+        <button
           className={`bg-${
             order?.status === "ORDERED" ? "error" : "gray-500"
           } text-white font-medium px-4 py-1 rounded-md flex flex-1 items-center justify-center`}
         >
           Cancel
-        </Link>
+        </button>
       </div>
     </div>
   );
