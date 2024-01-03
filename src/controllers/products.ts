@@ -1,8 +1,9 @@
+import { type CartItem, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
-import { getCategories } from "../models/products";
-import { getProduct, getProducts } from "../models/products/productMetadatas";
+import { getCategories, getOrdersByUserId, getProduct, getProducts } from "../models/products";
+import { updateUser } from "../models/users";
 
 export const fetchProduct: RequestHandler = (req, res) => {
   const handleFetchProduct = async () => {
@@ -68,6 +69,62 @@ export const fetchTotalCategories: RequestHandler = (req, res) => {
   };
 
   handleFetchTotalCategories().catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
+export const updateCart: RequestHandler = (req, res) => {
+  const handleUpdateCart = async () => {
+    const cart = req.body.cart as CartItem[] | undefined;
+    if (cart === undefined) {
+      throw new Error("Cart is undefined");
+    }
+
+    const user = req.user as User | undefined;
+    if (user === undefined) {
+      throw new Error("User is undefined");
+    }
+
+    user.cart = cart;
+    await updateUser(user);
+
+    res.json({ status: 200, statusText: "Cart updated successfully" });
+  };
+
+  handleUpdateCart().catch((err) => {
+    console.log("[ERROR] updateCart", err);
+
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
+export const fetchOrders: RequestHandler = (req, res) => {
+  const handleFetchOrders = async () => {
+    const user = req.user as User | undefined;
+    if (user === undefined) {
+      throw new Error("User is undefined");
+    }
+
+    const orders = await getOrdersByUserId(user.id);
+
+    res.json(orders);
+  };
+
+  handleFetchOrders().catch((err) => {
+    console.log("[ERROR] fetchOrders", err);
+
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",

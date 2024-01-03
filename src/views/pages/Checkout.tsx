@@ -1,9 +1,8 @@
 import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Price from "@components/Price";
-import { type CartItem, type Order, OrderStatus } from "@prisma/client";
+import { type CartItem, type Order, OrderStatus, PaymentMethod } from "@prisma/client";
 import ShippingInfo, { type ShippingInfoProps } from "@views/components/Checkout/ShippingInfo";
 import InlineLoading from "@views/components/InlineLoading";
-import NavigateButton from "@views/components/NavigateButton";
 import { appState } from "@views/valtio";
 import { useEffect, useState } from "react";
 import { useSnapshot } from "valtio";
@@ -13,7 +12,7 @@ const Checkout = () => {
 
   if (!profileSnap) return null;
 
-  const [checkoutUrl, setCheckoutUrl] = useState("");
+  const [vnpayCheckoutUrl, setVnpayCheckoutUrl] = useState("");
 
   const [shippingInfo, setShippingInfo] = useState<ShippingInfoProps>({
     name: profileSnap.user.name,
@@ -21,26 +20,31 @@ const Checkout = () => {
     address: profileSnap.user.addresses[0],
   });
 
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.COD);
+
+  const shippingFee = 10;
+
   const items: CartItem[] = profileSnap.user.cart.map((item) => ({
     ...item,
     toppingNames: item.toppingNames.map((name) => name),
   }));
 
-  const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0);
+  const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0) + shippingFee;
+
+  const order: Order = {
+    id: crypto.randomUUID(),
+    cart: items,
+    userId: profileSnap.user.id,
+    shippingAddress: shippingInfo.address,
+    status: OrderStatus.PREPARING,
+    price: total,
+    paymentMethod,
+    reviewId: "",
+    createdAt: new Date(),
+  };
 
   useEffect(() => {
     const checkout = async () => {
-      const order: Order = {
-        id: crypto.randomUUID(),
-        cart: items,
-        userId: profileSnap.user.id,
-        shippingAddress: shippingInfo.address,
-        status: OrderStatus.PREPARING,
-        price: total,
-        reviewId: "",
-        createdAt: new Date(),
-      };
-
       const data = await fetch("/api/checkout", {
         method: "POST",
         headers: {
@@ -52,7 +56,7 @@ const Checkout = () => {
 
       const { url } = await data.json();
 
-      setCheckoutUrl(url);
+      setVnpayCheckoutUrl(url);
     };
 
     checkout().catch((err) => {
@@ -60,13 +64,30 @@ const Checkout = () => {
     });
   }, []);
 
+  const handleCheckout = () => {};
+
   return (
-    <div className="flex-col py-5 items-center">
+    <div className="flex-col py-5 items-center gap-8">
       <ShippingInfo {...shippingInfo} />
 
-      <h1 className="font-bold text-primary text-xl self-center">YOUR ORDER</h1>
+      <div className="justify-between w-full max-w-3xl px-8">
+        <p className="text-primary uppercase font-semibold text-xl">Payment method</p>
+
+        <select
+          className="form-select border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary"
+          value={paymentMethod}
+          onChange={(e) => {
+            setPaymentMethod(e.target.value as PaymentMethod);
+          }}
+        >
+          <option value={PaymentMethod.COD}>COD</option>
+          <option value={PaymentMethod.INTERNET_BANKING}>Internal Banking</option>
+        </select>
+      </div>
 
       <div className="flex-col gap-2">
+        <h1 className="font-bold text-primary text-xl self-center">YOUR ORDER</h1>
+
         <div className="flex-col gap-5 h-[500px] overflow-auto py-5 px-10 border border-black rounded-2xl">
           {items.map((item, idx) => (
             <CheckoutItem
@@ -80,7 +101,7 @@ const Checkout = () => {
           <div className="text-xl justify-between">
             <p className="font-semibold uppercase text-primary">Shipping fee</p>
             <Price
-              num={10}
+              num={shippingFee}
               numSize="20"
             />
           </div>
@@ -94,15 +115,15 @@ const Checkout = () => {
           </div>
         </div>
 
-        {checkoutUrl === "" ? (
+        {vnpayCheckoutUrl === "" ? (
           <InlineLoading />
         ) : (
-          <NavigateButton
-            style="w-fit mx-auto"
-            to={checkoutUrl}
+          <button
+            className="w-fit mx-auto bg-gradient-to-b from-primary to-secondary px-3 py-2 rounded-full gap-2 text-white"
+            onClick={handleCheckout}
           >
             Confirm
-          </NavigateButton>
+          </button>
         )}
       </div>
     </div>

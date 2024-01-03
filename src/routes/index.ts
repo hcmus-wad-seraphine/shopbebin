@@ -15,13 +15,16 @@ router.get("/profile", requireAuth, (req, res) => {
   res.send(req.user);
 });
 router.post("/profile/change-password", profileController.changePassword);
-router.post("/profile/update-cart", requireAuth, profileController.updateCart);
+
+router.post("/update-cart", requireAuth, productsController.updateCart);
 
 router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
 router.get("/products/:id", productsController.fetchProduct);
 
 router.post("/checkout", requireAuth, vnpayController.handleCheckout);
+
+router.get("/orders", requireAuth, productsController.fetchOrders);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 

@@ -2,7 +2,7 @@ import { type CartItem } from "@prisma/client";
 import { appActions } from "@views/valtio";
 
 export const updateCart = async (cart: CartItem[], jwt: string) => {
-  const res = await fetch("/api/profile/update-cart", {
+  const res = await fetch("/api/update-cart", {
     headers: {
       Authorization: `Bearer ${jwt}`,
       "Content-Type": "application/json",

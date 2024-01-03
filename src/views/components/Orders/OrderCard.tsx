@@ -1,14 +1,6 @@
-import { type SingleProductInvoice } from "@prisma/client";
+import { type Order } from "@prisma/client";
+import { addressToString } from "@utils/address";
 import { Link } from "react-router-dom";
-
-export interface Order {
-  id: string;
-  createdAt: Date;
-  userId: string;
-  status: string;
-  totalPrice: number;
-  singleProductInvoices: SingleProductInvoice[];
-}
 
 interface OrderCardProps {
   order: Order;
@@ -16,13 +8,11 @@ interface OrderCardProps {
 
 const OrderCard = ({ order }: OrderCardProps) => {
   const convertDateToReadable = (date: Date) => {
-    const option = {
+    return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
-    };
-
-    return date.toLocaleDateString("en-US", option);
+    });
   };
 
   const shortenProductName = (name: string) => {
@@ -37,8 +27,8 @@ const OrderCard = ({ order }: OrderCardProps) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const mainItem = shortenProductName(order.singleProductInvoices[0].productMetadataId);
-  const totalItems = order.singleProductInvoices.length;
+  const mainItem = shortenProductName(order.cart[0].name);
+  const totalItems = order.cart.reduce((sum, curr) => sum + curr.quantity, 0);
 
   return (
     <div className="flex-col w-full max-w-xl border border-gray-400 px-5 py-4 rounded-lg hover:shadow-lg transition">
@@ -63,8 +53,8 @@ const OrderCard = ({ order }: OrderCardProps) => {
             <p className="font-medium">({totalItems} items)</p>
           </div>
 
-          <p className="text-gray-500">Address here</p>
-          <p className="font-medium">{order.totalPrice}</p>
+          <p className="text-gray-500">{addressToString(order.shippingAddress)}</p>
+          <p className="font-medium">{order.price}</p>
         </div>
       </Link>
 
