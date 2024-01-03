@@ -61,7 +61,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
           </Link>
 
           <button
-            to={`/orders/${order.id}/rate`}
+            disabled={order?.status !== "ORDERED"}
             className={`bg-${
               order.status === "ORDERED" ? "error" : "gray-500"
             } text-white font-medium px-4 py-1 rounded-md hover:bg-secondary transition`}
