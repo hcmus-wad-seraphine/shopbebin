@@ -27,6 +27,7 @@ router.post("/checkout", requireAuth, vnpayController.handleCheckout);
 
 router.get("/orders", requireAuth, orderController.fetchOrders);
 router.post("/orders", requireAuth, orderController.makeOrder);
+router.get("/orders/:id", requireAuth, orderController.fetchOrderById);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 
