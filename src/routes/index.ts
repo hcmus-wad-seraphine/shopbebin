@@ -1,6 +1,7 @@
 import express from "express";
 
 import * as authController from "../controllers/auth";
+import * as orderController from "../controllers/order";
 import * as productsController from "../controllers/products";
 import * as profileController from "../controllers/profile";
 import * as vnpayController from "../controllers/vnpay";
@@ -24,8 +25,8 @@ router.get("/products/:id", productsController.fetchProduct);
 
 router.post("/checkout", requireAuth, vnpayController.handleCheckout);
 
-router.get("/orders", requireAuth, productsController.fetchOrders);
-router.post("/orders", requireAuth, productsController.makeOrder);
+router.get("/orders", requireAuth, orderController.fetchOrders);
+router.post("/orders", requireAuth, orderController.makeOrder);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 
