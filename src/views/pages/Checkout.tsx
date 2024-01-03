@@ -40,7 +40,7 @@ const Checkout = () => {
     cart: items,
     userId: profileSnap.user.id,
     shippingAddress: shippingInfo.address,
-    status: OrderStatus.PREPARING,
+    status: OrderStatus.ORDERED,
     price: total,
     paymentMethod,
     reviewId: null,

@@ -1,4 +1,4 @@
-import { type Order } from "@prisma/client";
+import { type Order, type OrderStatus } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
@@ -52,6 +52,21 @@ export const getOrdersByUserId = async (userId: string) => {
   const orders: Order[] = await client.order.findMany({
     where: {
       userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return orders;
+};
+
+export const getOrdersByStatus = async (status: OrderStatus) => {
+  const client = getPrismaClient();
+
+  const orders: Order[] = await client.order.findMany({
+    where: {
+      status,
     },
     orderBy: {
       createdAt: "desc",
