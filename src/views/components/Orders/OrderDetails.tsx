@@ -21,8 +21,6 @@ const OrderDetails = () => {
 
   const handleCancel = () => {
     const cancel = async () => {
-      console.log("------>", id);
-
       const response = await fetch(`/api/orders/status/${id}?status=${OrderStatus.CANCELLED}`, {
         method: "POST",
         headers: {
@@ -47,8 +45,6 @@ const OrderDetails = () => {
         },
       });
       const order: Order = await orderData.json();
-
-      console.log(order);
 
       setOrder(order);
     };

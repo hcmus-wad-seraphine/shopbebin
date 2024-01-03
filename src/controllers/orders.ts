@@ -1,8 +1,14 @@
-import { type OrderStatus, type User } from "@prisma/client";
+import { OrderStatus, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
-import { createOrder, getOrderById, getOrdersByStatus, getOrdersByUserId } from "../models/orders";
+import {
+  createOrder,
+  getOrderById,
+  getOrdersByStatus,
+  getOrdersByUserId,
+  updateOrder,
+} from "../models/orders";
 
 export const fetchOrders: RequestHandler = (req, res) => {
   const handleFetchOrders = async () => {
@@ -89,5 +95,32 @@ export const makeOrder: RequestHandler = (req, res) => {
     };
 
     res.status(500).json(errorResponse);
+  });
+};
+
+export const updateOrderStatus: RequestHandler = (req, res) => {
+  const id = req.params.id;
+  const status = req.query.status;
+
+  console.log("--> server body", id, status);
+
+  const handleUpdateOrderStatus = async () => {
+    const order = await getOrderById(id);
+    if (order === null) {
+      throw new Error("Order not found");
+    }
+
+    console.log("--> server order", order);
+
+    order.status = status ?? OrderStatus.ORDERED;
+
+    await updateOrder(order);
+
+    res.json(order);
+  };
+
+  handleUpdateOrderStatus().catch((err) => {
+    console.log("[ERROR] updateOrderStatus", err);
+    res.status(500).json(err);
   });
 };
