@@ -21,6 +21,9 @@ const Status = ({ status }: StatusProps) => {
       case OrderStatus.DELIVERED:
         setState(3);
         break;
+      case OrderStatus.REVIEWED:
+        setState(4);
+        break;
       case OrderStatus.CANCELLED:
         setState(5);
         break;
