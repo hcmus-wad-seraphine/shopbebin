@@ -1,4 +1,4 @@
-import { type Order } from "@prisma/client";
+import { type Order, OrderStatus } from "@prisma/client";
 import { addressToString } from "@utils/address";
 import { capitalize, convertDateToReadable } from "@utils/converter";
 import { appState } from "@views/valtio";
@@ -19,11 +19,31 @@ const OrderDetails = () => {
 
   if (!profileSnap) return null;
 
+  const handleCancel = () => {
+    const cancel = async () => {
+      console.log("------>", id);
+
+      const response = await fetch(`/api/orders/status/${id}?status=${OrderStatus.CANCELLED}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${profileSnap.token}`,
+        },
+      });
+
+      setOrder(await response.json());
+    };
+
+    cancel().catch((err) => {
+      console.log(err);
+    });
+  };
+
   useEffect(() => {
     const fetchOrder = async () => {
       const orderData = await fetch(`/api/orders/${id}`, {
         headers: {
           Authorization: `Bearer ${profileSnap.token}`,
+          "Content-Type": "application/json",
         },
       });
       const order: Order = await orderData.json();
@@ -108,7 +128,10 @@ const OrderDetails = () => {
         >
           Review
         </Link>
+
         <button
+          onClick={handleCancel}
+          disabled={order?.status !== "ORDERED"}
           className={`bg-${
             order?.status === "ORDERED" ? "error" : "gray-500"
           } text-white font-medium px-4 py-1 rounded-md flex flex-1 items-center justify-center`}
