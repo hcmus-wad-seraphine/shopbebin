@@ -7,5 +7,7 @@ export const convertDateToReadable = (date: Date) => {
 };
 
 export const capitalize = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  const trimmed = str.replace(/_/g, " ").toLowerCase();
+  console.log(trimmed);
+  return trimmed.charAt(0).toUpperCase() + str.slice(1);
 };
