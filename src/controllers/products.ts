@@ -1,14 +1,8 @@
-import { type CartItem, type Order, type User } from "@prisma/client";
+import { type CartItem, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
-import {
-  createOrder,
-  getCategories,
-  getOrdersByUserId,
-  getProduct,
-  getProducts,
-} from "../models/products";
+import { getCategories, getProduct, getProducts } from "../models/products";
 import { updateUser } from "../models/users";
 
 export const fetchProduct: RequestHandler = (req, res) => {
@@ -105,61 +99,6 @@ export const updateCart: RequestHandler = (req, res) => {
 
   handleUpdateCart().catch((err) => {
     console.log("[ERROR] updateCart", err);
-
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Internal server error",
-      data: err,
-    };
-
-    res.status(500).json(errorResponse);
-  });
-};
-
-export const fetchOrders: RequestHandler = (req, res) => {
-  const handleFetchOrders = async () => {
-    const user = req.user as User | undefined;
-    if (user === undefined) {
-      throw new Error("User is undefined");
-    }
-
-    const orders = await getOrdersByUserId(user.id);
-
-    res.json(orders);
-  };
-
-  handleFetchOrders().catch((err) => {
-    console.log("[ERROR] fetchOrders", err);
-
-    const errorResponse: ErrorResponse = {
-      status: 500,
-      statusText: "Internal server error",
-      data: err,
-    };
-
-    res.status(500).json(errorResponse);
-  });
-};
-
-export const makeOrder: RequestHandler = (req, res) => {
-  const handleMakeOrder = async () => {
-    const user = req.user as User | undefined;
-    if (user === undefined) {
-      throw new Error("User is undefined");
-    }
-
-    const order = req.body.order as Order | undefined;
-    if (order === undefined) {
-      throw new Error("Order is undefined");
-    }
-
-    await createOrder(order);
-
-    res.json(order);
-  };
-
-  handleMakeOrder().catch((err) => {
-    console.log("[ERROR] createOrder", err);
 
     const errorResponse: ErrorResponse = {
       status: 500,

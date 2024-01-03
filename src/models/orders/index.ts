@@ -2,6 +2,16 @@ import { type Order } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
+export const getOrderById = async (id: string) => {
+  const client = getPrismaClient();
+
+  return await client.order.findUnique({
+    where: {
+      id,
+    },
+  });
+};
+
 export const createOrder = async (order: Order) => {
   const client = getPrismaClient();
 
