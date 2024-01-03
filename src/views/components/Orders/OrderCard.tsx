@@ -1,5 +1,6 @@
 import { type Order } from "@prisma/client";
 import { addressToString } from "@utils/address";
+import { capitalize, convertDateToReadable } from "@utils/converter";
 import { Link } from "react-router-dom";
 
 interface OrderCardProps {
@@ -7,24 +8,12 @@ interface OrderCardProps {
 }
 
 const OrderCard = ({ order }: OrderCardProps) => {
-  const convertDateToReadable = (date: Date) => {
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   const shortenProductName = (name: string) => {
     if (name.length > 20) {
       return name.slice(0, 20) + "...";
     }
 
     return name;
-  };
-
-  const capitalize = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   const mainItem = shortenProductName(order.cart[0].name);
