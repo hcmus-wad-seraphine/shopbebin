@@ -18,6 +18,23 @@ export const updateCart = async (cart: CartItem[], jwt: string) => {
   }
 };
 
+export const cleanCart = async (jwt: string) => {
+  const res = await fetch("/api/update-cart", {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      cart: [],
+    }),
+  });
+
+  if (res.ok) {
+    appActions.updateCart([]);
+  }
+};
+
 export const compareCartItems = (item1: CartItem, item2: CartItem) => {
   if (item1.name !== item2.name) return false;
 

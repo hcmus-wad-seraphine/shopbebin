@@ -34,16 +34,16 @@ const OrderCard = ({ order }: OrderCardProps) => {
     <div className="flex-col w-full max-w-xl border border-gray-400 px-5 py-4 rounded-lg hover:shadow-lg transition">
       <div className="justify-between py-1">
         <p>Order #{order.id}</p>
-        <p>{convertDateToReadable(order.createdAt)}</p>
+        <p>{convertDateToReadable(new Date(order.createdAt))}</p>
       </div>
 
       <Link
-        to="/"
+        to={`/orders/${order.id}`}
         className="flex gap-5 items-center py-1"
       >
         <img
-          src=""
-          alt=""
+          src={order.cart[0].image}
+          alt={order.cart[0].name}
           className="w-[60px] h-[60px] object-cover rounded-md"
         />
 
@@ -54,7 +54,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
           </div>
 
           <p className="text-gray-500">{addressToString(order.shippingAddress)}</p>
-          <p className="font-medium">{order.price}</p>
+          <p className="font-medium">$ {order.price}</p>
         </div>
       </Link>
 

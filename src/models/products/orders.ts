@@ -24,12 +24,27 @@ export const getOrder = async (id: string) => {
   return order;
 };
 
+export const getOrders = async () => {
+  const client = getPrismaClient();
+
+  const orders: Order[] = await client.order.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return orders;
+};
+
 export const getOrdersByUserId = async (userId: string) => {
   const client = getPrismaClient();
 
   const orders: Order[] = await client.order.findMany({
     where: {
       userId,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 

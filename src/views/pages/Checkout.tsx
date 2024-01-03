@@ -1,6 +1,8 @@
 import CheckoutItem from "@components/Checkout/CheckoutItem";
 import Price from "@components/Price";
 import { type CartItem, type Order, OrderStatus, PaymentMethod } from "@prisma/client";
+import { cleanCart } from "@utils/cart";
+import { generateMongoObjectId } from "@utils/objectId";
 import ShippingInfo, { type ShippingInfoProps } from "@views/components/Checkout/ShippingInfo";
 import InlineLoading from "@views/components/InlineLoading";
 import { appState } from "@views/valtio";
@@ -31,15 +33,17 @@ const Checkout = () => {
 
   const total = items.reduce((sum, curr) => sum + curr.price * curr.quantity, 0) + shippingFee;
 
+  const orderId = generateMongoObjectId();
+
   const order: Order = {
-    id: crypto.randomUUID(),
+    id: orderId,
     cart: items,
     userId: profileSnap.user.id,
     shippingAddress: shippingInfo.address,
     status: OrderStatus.PREPARING,
     price: total,
     paymentMethod,
-    reviewId: "",
+    reviewId: null,
     createdAt: new Date(),
   };
 
@@ -64,7 +68,30 @@ const Checkout = () => {
     });
   }, []);
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    const makeOrder = async (order: Order) => {
+      await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${profileSnap.token}`,
+        },
+        body: JSON.stringify({ order }),
+      });
+
+      // No need to wait for this
+      cleanCart(profileSnap.token).catch((err) => {
+        console.error("[ERROR] Clean cart", err);
+      });
+
+      // Not use navigate because we may need to redirect to VNPAY checkout page
+      window.location.href = paymentMethod === PaymentMethod.COD ? "/orders" : vnpayCheckoutUrl;
+    };
+
+    makeOrder(order).catch((err) => {
+      console.error("[ERROR] Make order", err);
+    });
+  };
 
   return (
     <div className="flex-col py-5 items-center gap-8">
