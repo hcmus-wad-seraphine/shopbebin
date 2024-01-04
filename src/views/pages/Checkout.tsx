@@ -43,7 +43,6 @@ const Checkout = () => {
     status: OrderStatus.ORDERED,
     price: total,
     paymentMethod,
-    reviewId: null,
     createdAt: new Date(),
   };
 
