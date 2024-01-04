@@ -12,7 +12,7 @@ const NavItem = ({ to, label }: NavItemProps) => {
     <Link
       className={`${
         location.pathname === to ? "text-sky-200" : "text-white"
-      } text-lg font-semibold px-4 py-2 rounded-xl`}
+      } text-base font-semibold px-4 py-2 rounded-xl`}
       to={to}
     >
       {label}
@@ -45,8 +45,8 @@ const navItems: NavItemProps[] = [
 
 const AdminRoot = () => {
   return (
-    <div className="w-full lg:max-w-4xl xl:max-w-6xl mx-auto">
-      <div className="flex-col bg-primary  px-4 py-2 gap-8  absolute left-0 h-full">
+    <div className="w-screen">
+      <div className="flex-col bg-primary px-4 py-2 w-[280px] gap-8 fixed top-0 left-0 h-full">
         {navItems.map((navItem) => (
           <NavItem
             key={navItem.to}
@@ -56,7 +56,7 @@ const AdminRoot = () => {
         ))}
       </div>
 
-      <div className="ml-[180px] w-full">
+      <div className="ml-[280px] w-full">
         <Outlet />
       </div>
     </div>
