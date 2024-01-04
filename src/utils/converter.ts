@@ -10,3 +10,11 @@ export const capitalize = (str: string) => {
   const trimmed = str.replace(/_/g, " ").toLowerCase();
   return trimmed.charAt(0).toUpperCase() + str.slice(1);
 };
+
+export const shortenProductName = (name: string) => {
+  if (name.length > 20) {
+    return name.slice(0, 20) + "...";
+  }
+
+  return name;
+};
