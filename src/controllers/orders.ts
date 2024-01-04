@@ -119,25 +119,3 @@ export const updateOrderStatus: RequestHandler = (req, res) => {
     res.status(500).json(err);
   });
 };
-
-export const updateOrderReview: RequestHandler = (req, res) => {
-  const id = req.params.id;
-  const isReviewed = req.query.isReviewed as boolean | undefined;
-
-  const handleUpdateOrderReview = async () => {
-    const order = await getOrderById(id);
-    if (order === null) {
-      throw new Error("Order not found");
-    }
-
-    order.isReviewed = isReviewed ?? true;
-    const updatedOrder = await updateOrder(order);
-
-    res.json(updatedOrder);
-  };
-
-  handleUpdateOrderReview().catch((err) => {
-    console.log("[ERROR] updateOrderReview", err);
-    res.status(500).json(err);
-  });
-};

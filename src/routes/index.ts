@@ -31,7 +31,6 @@ router.get("/orders/status/:status", requireAuth, ordersController.fetchOrdersBy
 router.get("/orders/:id", requireAuth, ordersController.fetchOrderById);
 router.post("/orders", requireAuth, ordersController.makeOrder);
 router.post("/orders/status/:id", requireAuth, ordersController.updateOrderStatus);
-router.post("/orders/review/:id", requireAuth, ordersController.updateOrderReview);
 
 router.post("/reviews", requireAuth, reviewsController.makeReview);
 
