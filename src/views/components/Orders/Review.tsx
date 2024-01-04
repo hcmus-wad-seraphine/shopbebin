@@ -52,7 +52,7 @@ const ReviewProduct = ({ orderId, cart, isOpen, onSetOrder }: ReviewProps) => {
     });
 
     const updatedOrder = await response.json();
-    onSetOrder && onSetOrder(await updatedOrder.json());
+    onSetOrder && onSetOrder(updatedOrder);
   };
 
   const handleSubmit = () => {
