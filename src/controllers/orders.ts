@@ -100,9 +100,7 @@ export const makeOrder: RequestHandler = (req, res) => {
 
 export const updateOrderStatus: RequestHandler = (req, res) => {
   const id = req.params.id;
-  const status = req.query.status;
-
-  console.log("--> server body", id, status);
+  const status = req.query.status as OrderStatus | undefined;
 
   const handleUpdateOrderStatus = async () => {
     const order = await getOrderById(id);
@@ -110,17 +108,36 @@ export const updateOrderStatus: RequestHandler = (req, res) => {
       throw new Error("Order not found");
     }
 
-    console.log("--> server order", order);
-
     order.status = status ?? OrderStatus.ORDERED;
+    const updatedOrder = await updateOrder(order);
 
-    await updateOrder(order);
-
-    res.json(order);
+    res.json(updatedOrder);
   };
 
   handleUpdateOrderStatus().catch((err) => {
     console.log("[ERROR] updateOrderStatus", err);
+    res.status(500).json(err);
+  });
+};
+
+export const updateOrderReview: RequestHandler = (req, res) => {
+  const id = req.params.id;
+  const isReviewed = req.query.isReviewed as boolean | undefined;
+
+  const handleUpdateOrderReview = async () => {
+    const order = await getOrderById(id);
+    if (order === null) {
+      throw new Error("Order not found");
+    }
+
+    order.isReviewed = isReviewed ?? true;
+    const updatedOrder = await updateOrder(order);
+
+    res.json(updatedOrder);
+  };
+
+  handleUpdateOrderReview().catch((err) => {
+    console.log("[ERROR] updateOrderReview", err);
     res.status(500).json(err);
   });
 };
