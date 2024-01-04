@@ -59,3 +59,20 @@ export const changePassword: RequestHandler = (req, res) => {
       res.status(500).json(errorResponse);
     });
 };
+
+export const updateProfile: RequestHandler = (req, res) => {
+  const user = req.body;
+  updateUser(user)
+    .then(() => {
+      res.json({ user });
+    })
+    .catch((err) => {
+      const errorResponse: ErrorResponse = {
+        status: 500,
+        statusText: "Update profile failed, please try again later",
+        data: err,
+      };
+
+      res.status(500).json(errorResponse);
+    });
+};

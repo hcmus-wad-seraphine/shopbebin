@@ -58,6 +58,13 @@ export const appActions = {
     });
   },
 
+  updateProfile: (user: User) => {
+    if (!appState.profile) {
+      return;
+    }
+    appState.profile.user = user;
+  },
+
   updateInjecting: (flag: boolean) => {
     appState.injecting = flag;
   },

@@ -17,6 +17,7 @@ router.get("/profile", requireAuth, (req, res) => {
   res.send(req.user);
 });
 router.post("/profile/change-password", profilesController.changePassword);
+router.post("/profile/update", requireAuth, profilesController.updateProfile);
 
 router.post("/update-cart", requireAuth, productsController.updateCart);
 
