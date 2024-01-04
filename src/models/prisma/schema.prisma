@@ -121,7 +121,6 @@ model Order {
   cart            CartItem[]
   price           Float
   paymentMethod   PaymentMethod
-  reviewId        String?       @db.ObjectId
   createdAt       DateTime      @default(now())
 }
 
