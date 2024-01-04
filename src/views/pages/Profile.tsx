@@ -7,39 +7,100 @@ import ManageAddress from "@views/features/Profile/ManageAddress";
 import SettingTitle, { SettingItem } from "@views/features/Profile/Setting";
 import { appActions, appState } from "@views/valtio";
 import { useState } from "react";
+import { FileUploader } from "react-drag-drop-files";
+import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { useSnapshot } from "valtio";
 
 const Profile = () => {
+  const { profile } = useSnapshot(appState);
+  const { email, phone, name, avatar } = profile?.user as User;
+
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isChangingPhoto, setIsChangingPhoto] = useState(false);
+  const [photo, setPhoto] = useState<string | null>(null);
+  const [newAvatar, setNewAvatar] = useState<string>(avatar);
+  const [newName, setNewName] = useState<string>(name);
+  const [newPhone, setNewPhone] = useState<string>(phone);
+  const [newEmail, setNewEmail] = useState<string>(email);
+
   const navigate = useNavigate();
+
+  const fileTypes = ["JPG", "PNG", "GIF"];
 
   const handleLogout = () => {
     appActions.logout();
     navigate("/login");
   };
 
-  const { profile } = useSnapshot(appState);
-  const { email, phone, name, avatar } = profile?.user as User;
+  const handleFileChange = (file: File) => {
+    const url = URL.createObjectURL(file);
+    setPhoto(url);
+  };
+
+  const updateProfile = async () => {
+    if (!profile) return;
+
+    const newUserData: User = {
+      ...profile.user,
+      addresses: profile.user.addresses.map((address) => address),
+      cart: profile.user.cart.map((item) => ({
+        ...item,
+        toppingNames: item.toppingNames.map((name) => name),
+      })),
+      name: newName,
+      phone: newPhone,
+      email: newEmail,
+      avatar: newAvatar,
+    };
+
+    appActions.updateProfile(newUserData);
+
+    const res = await fetch("/api/profile/update", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${profile.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserData),
+    });
+
+    const user = await res.json();
+    console.log(user);
+  };
+
+  const handleUpdateProfile = () => {
+    updateProfile().catch((err) => {
+      console.log(err);
+    });
+  };
+
+  const handleChangeAvatar = () => {
+    setNewAvatar(photo as string);
+    setIsChangingPhoto(false);
+  };
 
   const InformationItems = [
     <InfoItem
       key="1"
       isDisabled={!isEditMode}
       title="Name"
-      value={name}
+      value={newName}
+      onChange={setNewName}
     />,
     <InfoItem
       key="2"
       isDisabled={!isEditMode}
       title="Phone number"
       value={phone}
+      onChange={setNewPhone}
     />,
     <InfoItem
       key="3"
       isDisabled={!isEditMode}
       title="Email"
       value={email}
+      onChange={setNewEmail}
     />,
   ];
 
@@ -58,14 +119,80 @@ const Profile = () => {
     />,
   ];
 
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      width: "80%",
+      maxWidth: "400px",
+      maxHeight: "400px",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
   return (
     <div className="flex-col justify-center items-center w-full gap-4">
+      <button onClick={handleUpdateProfile}>Save your changes</button>
+      <Modal
+        isOpen={isChangingPhoto}
+        style={customStyles}
+      >
+        <div className="flex-col justify-center items-center gap-5 w-full">
+          <div className="items-center justify-between w-full">
+            <h1 className="text-primary text-xl font-semibold">Change avatar</h1>
+            <button
+              onClick={() => {
+                setIsChangingPhoto(false);
+              }}
+            >
+              <i className="fa-solid fa-xmark text-xl text-primary"></i>
+            </button>
+          </div>
+
+          <FileUploader
+            multiple={false}
+            handleChange={handleFileChange}
+            name="file"
+            types={fileTypes}
+          />
+
+          {photo && (
+            <img
+              className="w-[200px] h-[200px] rounded-full object-cover"
+              src={photo}
+              alt=""
+            />
+          )}
+
+          <button
+            onClick={handleChangeAvatar}
+            className="rounded-full bg-primary px-5 py-2 text-white"
+          >
+            Submit
+          </button>
+        </div>
+      </Modal>
+
       <div className="flex-col justify-center items-center gap-4">
-        <img
-          src={avatar}
-          alt="avatar"
-          className="w-[200px] h-[200px] rounded-full object-cover"
-        />
+        <div className="flex-col justify-center items-center gap-4">
+          <img
+            src={newAvatar}
+            alt="avatar"
+            className="w-[200px] h-[200px] rounded-full object-cover"
+          />
+
+          <button
+            onClick={() => {
+              setIsChangingPhoto(true);
+            }}
+            className="text-primary font-semibold"
+          >
+            Change profile photo
+          </button>
+        </div>
 
         <p className="text-xl font-semibold">{name}</p>
       </div>
