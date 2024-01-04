@@ -1,3 +1,4 @@
+import { Role, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type JwtPayload } from "jsonwebtoken";
 import passport from "passport";
@@ -40,4 +41,16 @@ passport.use(
 
 export const requireAuth: RequestHandler = (req, res, next) => {
   passport.authenticate("jwt", { session: false })(req, res, next);
+};
+
+export const requireAdminAuth: RequestHandler = (req, res, next) => {
+  const verifyAdmin = (_err: Error, user: User) => {
+    if (user.role === Role.ADMIN) {
+      next();
+    } else {
+      res.status(401).send("Unauthorized");
+    }
+  };
+
+  passport.authenticate("jwt", { session: false }, verifyAdmin)(req, res, next);
 };
