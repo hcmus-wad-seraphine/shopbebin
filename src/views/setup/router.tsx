@@ -94,16 +94,17 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/admin/login",
+    element: <LoginPage />,
+  },
+  {
     path: "/admin",
     element: <AdminRoot />,
     children: [
       {
         path: "",
         element: <GreetingPage />,
-      },
-      {
-        path: "login",
-        element: <LoginPage />,
+        loader: adminAuthLoader,
       },
       {
         path: "profile",
@@ -113,19 +114,22 @@ export const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminDashboard />,
-        // loader: adminAuthLoader,
+        loader: adminAuthLoader,
       },
       {
         path: "accounts",
         element: <AccountsPage />,
+        loader: adminAuthLoader,
       },
       {
         path: "products",
         element: <ProductsPage />,
+        loader: adminAuthLoader,
       },
       {
         path: "orders",
         element: <OrdersPage />,
+        loader: adminAuthLoader,
       },
       {
         path: "*",
