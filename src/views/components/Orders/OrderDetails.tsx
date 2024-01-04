@@ -1,40 +1,26 @@
-import { type Order, OrderStatus } from "@prisma/client";
+import { type Order } from "@prisma/client";
 import { addressToString } from "@utils/address";
 import { capitalize, convertDateToReadable } from "@utils/converter";
 import { appState } from "@views/valtio";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
 
 import CheckoutItem from "../Checkout/CheckoutItem";
 import InfoItem from "../Checkout/InfoItem";
 import InlineLoading from "../InlineLoading";
 import Loading from "../Loading";
+import { handleCancel } from "./internal";
+import ReviewProduct from "./Review";
 import Status from "./Status";
 
 const OrderDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [order, setOrder] = useState<Order | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const profileSnap = useSnapshot(appState).profile;
 
   if (!profileSnap) return null;
-
-  const handleCancel = () => {
-    const cancel = async () => {
-      const response = await fetch(`/api/orders/status/${id}?status=${OrderStatus.CANCELLED}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${profileSnap.token}`,
-        },
-      });
-
-      setOrder(await response.json());
-    };
-
-    cancel().catch((err) => {
-      console.log(err);
-    });
-  };
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -56,6 +42,13 @@ const OrderDetails = () => {
 
   return (
     <div className="flex-col max-w-3xl self-center">
+      {order && (
+        <ReviewProduct
+          orderId={order.id}
+          cart={order?.cart}
+          isOpen={isModalOpen}
+        />
+      )}
       <div className="w-full justify-between mt-5">
         <h1 className="font-medium">Order #{id}</h1>
         <p className="text-primary font-medium">
@@ -117,16 +110,21 @@ const OrderDetails = () => {
       <div className="bg-primary w-full h-[1px] my-5"></div>
 
       <div className="gap-4">
-        <Link
+        <button
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
           className={`bg-${
             order?.status === "DELIVERED" ? "primary" : "gray-500"
           } text-white font-medium px-4 py-1 rounded-md flex flex-1 items-center justify-center`}
         >
           Review
-        </Link>
+        </button>
 
         <button
-          onClick={handleCancel}
+          onClick={() => {
+            handleCancel(id ?? "", setOrder);
+          }}
           disabled={order?.status !== "ORDERED"}
           className={`bg-${
             order?.status === "ORDERED" ? "error" : "gray-500"

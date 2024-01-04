@@ -7,6 +7,7 @@ interface StatusProps {
 
 const Status = ({ status }: StatusProps) => {
   const [state, setState] = useState<number>(0);
+
   useEffect(() => {
     switch (status) {
       case OrderStatus.ORDERED:
@@ -31,7 +32,7 @@ const Status = ({ status }: StatusProps) => {
         setState(5);
         break;
     }
-  }, []);
+  }, [status]);
 
   if (state === 5)
     return (
