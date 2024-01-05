@@ -68,6 +68,7 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-drag-drop-files": "^2.3.10",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.19.0",
     "valtio": "^1.12.0"
