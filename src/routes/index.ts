@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 
 import * as authController from "../controllers/auth";
 import * as ordersController from "../controllers/orders";
@@ -11,13 +12,15 @@ import { requireAuth } from "./auth";
 
 const router = express.Router();
 
+const upload = multer();
+
 router.post("/auth/register", authController.register);
 router.post("/auth/login", authController.login);
 
 router.get("/profile", requireAuth, (req, res) => {
   res.send(req.user);
 });
-router.post("/profile/change-password", profilesController.changePassword);
+router.post("/profile/change-password", requireAuth, profilesController.changePassword);
 router.post("/profile/update", requireAuth, profilesController.updateProfile);
 
 router.post("/update-cart", requireAuth, productsController.updateCart);
@@ -38,6 +41,11 @@ router.post("/reviews", requireAuth, reviewsController.makeReview);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 
-router.post("/storage/upload-image", requireAuth, storageController.uploadImage);
+router.post(
+  "/storage/upload-image",
+  requireAuth,
+  upload.single("avatar"),
+  storageController.uploadImage,
+);
 
 export default router;

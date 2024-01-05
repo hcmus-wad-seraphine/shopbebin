@@ -6,11 +6,10 @@ import InformationTitle from "@views/features/Profile/Information";
 import ManageAddress from "@views/features/Profile/ManageAddress";
 import SettingTitle, { SettingItem } from "@views/features/Profile/Setting";
 import { appActions, appState } from "@views/valtio";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import { serialize } from "serialize-javascript";
 import { useSnapshot } from "valtio";
 
 const Profile = () => {
@@ -19,7 +18,7 @@ const Profile = () => {
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [isChangingPhoto, setIsChangingPhoto] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [newAvatar, setNewAvatar] = useState<string>(avatar);
   const [newName, setNewName] = useState<string>(name);
   const [newPhone, setNewPhone] = useState<string>(phone);
@@ -35,12 +34,12 @@ const Profile = () => {
   };
 
   const updateProfile = async () => {
-    if (!profile) return;
+    if (!appState.profile) return;
 
     const newUserData: User = {
-      ...profile.user,
-      addresses: profile.user.addresses.map((address) => address),
-      cart: profile.user.cart.map((item) => ({
+      ...appState.profile.user,
+      addresses: appState.profile.user.addresses.map((address) => address),
+      cart: appState.profile.user.cart.map((item) => ({
         ...item,
         toppingNames: item.toppingNames.map((name) => name),
       })),
@@ -55,7 +54,7 @@ const Profile = () => {
     const res = await fetch("/api/profile/update", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${profile.token}`,
+        Authorization: `Bearer ${appState.profile.token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newUserData),
@@ -71,31 +70,34 @@ const Profile = () => {
     });
   };
 
-  const handleChangeAvatar = () => {
-    if (!profile) return;
+  const handleChangeAvatar = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    const uploadAvatarAndGetUrl = async () => {
-      const res = await serialize(file);
-      const fileString = await res.json();
+    const formData = new FormData();
 
-      const response = await fetch(`/api/storage/upload-image?path=users/${profile.user.id}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${profile.token}`,
-          "Content-Type": file?.type ?? "image/*",
-          "Content-Disposition": `attachment; filename="${file?.name}"`,
-        },
-        body: file,
+    if (avatarFile) {
+      formData.append("avatar", avatarFile);
+    }
+
+    fetch("/api/storage/upload-image", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${appState.profile?.token}`,
+      },
+      body: formData,
+    })
+      .then(async (res) => {
+        const { url } = await res.json();
+        // https://stackoverflow.com/questions/53925736/download-firebase-storage-url-not-working
+        console.log("--> url", url);
+        setNewAvatar(url);
+      })
+      .catch((err) => {
+        console.log("--> err", err);
+      })
+      .finally(() => {
+        setIsChangingPhoto(false);
       });
-
-      setNewAvatar((await response.json()).url);
-    };
-
-    uploadAvatarAndGetUrl().catch((err) => {
-      console.log(err);
-    });
-
-    setIsChangingPhoto(false);
   };
 
   const InformationItems = [
@@ -170,27 +172,33 @@ const Profile = () => {
             </button>
           </div>
 
-          <FileUploader
-            multiple={false}
-            handleChange={setFile}
-            name="file"
-            types={fileTypes}
-          />
-
-          {file && (
-            <img
-              className="w-[200px] h-[200px] rounded-full object-cover"
-              src={URL.createObjectURL(file)}
-              alt=""
-            />
-          )}
-
-          <button
-            onClick={handleChangeAvatar}
-            className="rounded-full bg-primary px-5 py-2 text-white"
+          <form
+            encType="multipart/form-data"
+            className="flex flex-col justify-center items-center gap-5 w-full"
+            onSubmit={handleChangeAvatar}
           >
-            Submit
-          </button>
+            <FileUploader
+              multiple={false}
+              handleChange={setAvatarFile}
+              name="avatar"
+              types={fileTypes}
+            />
+
+            {avatarFile && (
+              <img
+                className="w-[200px] h-[200px] rounded-full object-cover"
+                src={URL.createObjectURL(avatarFile)}
+                alt=""
+              />
+            )}
+
+            <button
+              className="rounded-full bg-primary px-5 py-2 text-white"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </Modal>
 
