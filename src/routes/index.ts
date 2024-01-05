@@ -5,6 +5,7 @@ import * as ordersController from "../controllers/orders";
 import * as productsController from "../controllers/products";
 import * as profilesController from "../controllers/profiles";
 import * as reviewsController from "../controllers/reviews";
+import * as storageController from "../controllers/storage";
 import * as vnpayController from "../controllers/vnpay";
 import { requireAuth } from "./auth";
 
@@ -36,5 +37,7 @@ router.post("/orders/status/:id", requireAuth, ordersController.updateOrderStatu
 router.post("/reviews", requireAuth, reviewsController.makeReview);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
+
+router.post("/storage/upload-image", requireAuth, storageController.uploadImage);
 
 export default router;
