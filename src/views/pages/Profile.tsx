@@ -10,6 +10,7 @@ import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import { serialize } from "serialize-javascript";
 import { useSnapshot } from "valtio";
 
 const Profile = () => {
@@ -18,7 +19,7 @@ const Profile = () => {
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [isChangingPhoto, setIsChangingPhoto] = useState(false);
-  const [photo, setPhoto] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [newAvatar, setNewAvatar] = useState<string>(avatar);
   const [newName, setNewName] = useState<string>(name);
   const [newPhone, setNewPhone] = useState<string>(phone);
@@ -31,11 +32,6 @@ const Profile = () => {
   const handleLogout = () => {
     appActions.logout();
     navigate("/login");
-  };
-
-  const handleFileChange = (file: File) => {
-    const url = URL.createObjectURL(file);
-    setPhoto(url);
   };
 
   const updateProfile = async () => {
@@ -76,7 +72,29 @@ const Profile = () => {
   };
 
   const handleChangeAvatar = () => {
-    setNewAvatar(photo as string);
+    if (!profile) return;
+
+    const uploadAvatarAndGetUrl = async () => {
+      const res = await serialize(file);
+      const fileString = await res.json();
+
+      const response = await fetch(`/api/storage/upload-image?path=users/${profile.user.id}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${profile.token}`,
+          "Content-Type": file?.type ?? "image/*",
+          "Content-Disposition": `attachment; filename="${file?.name}"`,
+        },
+        body: file,
+      });
+
+      setNewAvatar((await response.json()).url);
+    };
+
+    uploadAvatarAndGetUrl().catch((err) => {
+      console.log(err);
+    });
+
     setIsChangingPhoto(false);
   };
 
@@ -154,15 +172,15 @@ const Profile = () => {
 
           <FileUploader
             multiple={false}
-            handleChange={handleFileChange}
+            handleChange={setFile}
             name="file"
             types={fileTypes}
           />
 
-          {photo && (
+          {file && (
             <img
               className="w-[200px] h-[200px] rounded-full object-cover"
-              src={photo}
+              src={URL.createObjectURL(file)}
               alt=""
             />
           )}
