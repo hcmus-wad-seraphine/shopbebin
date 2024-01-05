@@ -27,7 +27,7 @@ const ProductsPage = () => {
   }, [queryString]);
 
   return (
-    <div className="flex-col gap-2 px-4">
+    <div className="flex-col gap-2 px-12 py-8">
       <ProductTitleRow />
 
       {products.map((product) => (
