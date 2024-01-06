@@ -1,4 +1,5 @@
 import { type User } from "@prisma/client";
+import Account from "@views/components/Admin/Account";
 import { appState } from "@views/valtio";
 import { useEffect, useState } from "react";
 
@@ -87,30 +88,12 @@ const AccountsPage = () => {
         </div>
         <div>
           {accounts.map((account, index) => (
-            <div
+            <Account
               key={index}
-              className="justify-between items-center w-full"
-            >
-              <div className="gap-2 items-center">
-                <input
-                  type="checkbox"
-                  onChange={(isSelected) => {
-                    if (isSelected.target.checked) {
-                      setSelectedAccounts([...selectedAccounts, account]);
-                    }
-                  }}
-                />
-                <div className="justify-center items-center gap-2">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={account.avatar}
-                    alt=""
-                  />
-                  <p className="text-lg font-medium">{account.name}</p>
-                </div>
-              </div>
-              <i className="fa-solid fa-arrow-right"></i>
-            </div>
+              account={account}
+              setSelectedAccounts={setSelectedAccounts}
+              selectedAccounts={selectedAccounts}
+            />
           ))}
         </div>
       </div>
@@ -129,30 +112,12 @@ const AccountsPage = () => {
         </div>
         <div>
           {bannedAccounts.map((account, index) => (
-            <div
+            <Account
               key={index}
-              className="justify-between items-center w-full"
-            >
-              <div className="gap-2 items-center">
-                <input
-                  type="checkbox"
-                  onChange={(isSelected) => {
-                    if (isSelected.target.checked) {
-                      setSelectedBannedAccounts([...selectedBannedAccounts, account]);
-                    }
-                  }}
-                />
-                <div className="justify-center items-center gap-2">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={account.avatar}
-                    alt=""
-                  />
-                  <p className="text-lg font-medium">{account.name}</p>
-                </div>
-              </div>
-              <i className="fa-solid fa-arrow-right"></i>
-            </div>
+              account={account}
+              setSelectedAccounts={setSelectedBannedAccounts}
+              selectedAccounts={selectedBannedAccounts}
+            />
           ))}
         </div>
       </div>
