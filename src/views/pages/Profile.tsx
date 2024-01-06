@@ -6,7 +6,7 @@ import InformationTitle from "@views/features/Profile/Information";
 import ManageAddress from "@views/features/Profile/ManageAddress";
 import SettingTitle, { SettingItem } from "@views/features/Profile/Setting";
 import { appActions, appState } from "@views/valtio";
-import { FormEventHandler, useState } from "react";
+import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -88,8 +88,6 @@ const Profile = () => {
     })
       .then(async (res) => {
         const { url } = await res.json();
-        // https://stackoverflow.com/questions/53925736/download-firebase-storage-url-not-working
-        console.log("--> url", url);
         setNewAvatar(url);
       })
       .catch((err) => {
