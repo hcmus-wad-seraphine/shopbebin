@@ -1,5 +1,6 @@
 import { type ShopbebinProduct, type ShopbebinTopping } from "@models/interface";
 import { type ProductSize } from "@prisma/client";
+import { shortenId } from "@utils/converter";
 import { ModalActions, ModalHeader, modalStyles } from "@views/components/Modal";
 import { type FC, useState } from "react";
 import Modal from "react-modal";
@@ -7,10 +8,6 @@ import Modal from "react-modal";
 interface ProductRowProps {
   product: ShopbebinProduct;
 }
-
-const shortenId = (id: string) => {
-  return id.slice(0, 4) + "..." + id.slice(-4);
-};
 
 const sizesToString = (sizes: ProductSize[]) => {
   if (sizes.length === 0) {

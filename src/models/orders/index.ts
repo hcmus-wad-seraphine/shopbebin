@@ -34,16 +34,42 @@ export const getOrder = async (id: string) => {
   return order;
 };
 
-export const getOrders = async () => {
+export const getOrders = async (props: {
+  offset?: number;
+  limit?: number;
+  date?: Date;
+  status?: OrderStatus;
+  sortAsc?: boolean;
+}) => {
   const client = getPrismaClient();
 
   const orders: Order[] = await client.order.findMany({
+    where: {
+      status: props.status,
+      createdAt: {
+        equals: props.date,
+      },
+    },
     orderBy: {
-      createdAt: "desc",
+      createdAt: props.sortAsc ? "asc" : "desc",
+    },
+    skip: props.offset,
+    take: props.limit,
+  });
+
+  const total = await client.order.count({
+    where: {
+      status: props.status,
+      createdAt: {
+        equals: props.date,
+      },
     },
   });
 
-  return orders;
+  return {
+    orders,
+    total,
+  };
 };
 
 export const getOrdersByUserId = async (userId: string) => {

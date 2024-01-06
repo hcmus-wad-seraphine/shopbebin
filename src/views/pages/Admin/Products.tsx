@@ -27,7 +27,7 @@ const ProductsPage = () => {
   }, [queryString]);
 
   return (
-    <div className="flex-col gap-2">
+    <div className="flex-col gap-2 w-full">
       <ProductTitleRow />
 
       {products.map((product) => (

@@ -101,7 +101,7 @@ const UtilsBar = ({ categories, activeCategory, onPriceFilter, onSort }: Props) 
   return (
     <div className="items-center justify-between py-3 px-10">
       <select
-        className="form-select border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary"
+        className="border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary"
         onChange={handleSort}
       >
         {sortList.map((sort, index) => {

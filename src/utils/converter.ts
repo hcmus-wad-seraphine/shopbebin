@@ -18,3 +18,7 @@ export const shortenProductName = (name: string) => {
 
   return name;
 };
+
+export const shortenId = (id: string) => {
+  return id.slice(0, 4) + "..." + id.slice(-4);
+};

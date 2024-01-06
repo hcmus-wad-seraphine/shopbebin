@@ -1,25 +1,48 @@
-import { OrderStatus, type User } from "@prisma/client";
+import { OrderStatus, Role, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
 import {
   createOrder,
   getOrderById,
+  getOrders,
   getOrdersByStatus,
   getOrdersByUserId,
   updateOrder,
 } from "../models/orders";
 
-export const fetchOrdersByUserId: RequestHandler = (req, res) => {
+export const fetchOrders: RequestHandler = (req, res) => {
   const handleFetchOrders = async () => {
     const user = req.user as User | undefined;
     if (user === undefined) {
       throw new Error("User is undefined");
     }
 
-    const orders = await getOrdersByUserId(user.id);
+    if (user.role === Role.USER) {
+      const orders = await getOrdersByUserId(user.id);
+      return res.json(orders);
+    }
 
-    res.json(orders);
+    if (user.role === Role.ADMIN) {
+      const { date, status } = req.query;
+      const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
+      const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
+
+      const data = await getOrders({
+        date: date ? new Date(date as string) : undefined,
+        status: status as OrderStatus | undefined,
+        offset,
+        limit,
+      });
+
+      return res.json(data);
+    }
+
+    res.status(403).json({
+      status: 403,
+      statusText: "Forbidden",
+      data: "You don't have permission to access this resource",
+    });
   };
 
   handleFetchOrders().catch((err) => {

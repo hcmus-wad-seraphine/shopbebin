@@ -8,6 +8,9 @@
   div {
     @apply flex;
   }
+  select {
+    @apply border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary;
+  }
 }
 
 @layer utilities {
