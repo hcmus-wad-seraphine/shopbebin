@@ -5,8 +5,11 @@ import { ModalActions, ModalHeader, modalStyles } from "@views/components/Modal"
 import { type FC, useState } from "react";
 import Modal from "react-modal";
 
+import ProductBuilder from "./ProductBuilder";
+
 interface ProductRowProps {
   product: ShopbebinProduct;
+  categories: string[];
 }
 
 const sizesToString = (sizes: ProductSize[]) => {
@@ -23,7 +26,7 @@ const toppingsToString = (toppings: ShopbebinTopping[]) => {
   return toppings.map((topping) => `${topping.topping.name}`).join(", ");
 };
 
-const ProductRow: FC<ProductRowProps> = ({ product }) => {
+const ProductRow: FC<ProductRowProps> = ({ product, categories }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -104,14 +107,14 @@ const ProductRow: FC<ProductRowProps> = ({ product }) => {
           closeModal={closeEditModal}
         />
 
-        <div className="py-8">Content</div>
-
-        <ModalActions
-          actionName="Edit"
-          onAction={() => {
-            console.log("--> edit", product.name);
+        <ProductBuilder
+          defaultProduct={product}
+          buildButtonText="Update"
+          categories={categories}
+          toppings={[]}
+          onBuild={(product) => {
+            console.log("--> update", product.name);
           }}
-          closeModal={closeEditModal}
         />
       </Modal>
     </>

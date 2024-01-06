@@ -9,7 +9,19 @@
     @apply flex;
   }
   select {
-    @apply border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary;
+    @apply border w-40 border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary p-2;
+  }
+  label {
+    @apply text-gray-700 font-semibold py-2;
+  }
+  input {
+    @apply border border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary p-2;
+  }
+  input:disabled {
+    @apply bg-gray-100 border-gray-300 text-gray-500;
+  }
+  textarea {
+    @apply border border-gray-300 rounded-sm text-gray-900 focus:border-secondary focus:ring-secondary p-2;
   }
 }
 

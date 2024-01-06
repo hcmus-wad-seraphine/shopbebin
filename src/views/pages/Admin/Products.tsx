@@ -110,6 +110,7 @@ const ProductsPage = () => {
         <ProductRow
           key={product.id}
           product={product}
+          categories={categories?.map((c) => c.name) ?? []}
         />
       ))}
 
