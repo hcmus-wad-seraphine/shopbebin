@@ -12,6 +12,7 @@ const OrdersPage = () => {
   const [offset, setOffset] = useState(0);
   const [statusFilter, setStatusFilter] = useState<OrderStatus | "ALL">("ALL");
   const [dateFilter, setDateFilter] = useState<Date | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const limit = 10;
 
   const totalPages = Math.ceil(total / limit);
@@ -20,12 +21,16 @@ const OrdersPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       let endpoint = `/api/orders?offset=${offset}&limit=${limit}`;
+
       if (statusFilter !== "ALL") {
         endpoint += `&status=${statusFilter}`;
       }
+
       if (dateFilter) {
         endpoint += `&date=${dateFilter.toISOString()}`;
       }
+
+      endpoint += `&sort=${sortOrder}`;
 
       const res = await fetch(endpoint, {
         headers: {
@@ -39,7 +44,7 @@ const OrdersPage = () => {
     };
 
     fetchOrders().catch(console.error);
-  }, [limit, offset, statusFilter, dateFilter]);
+  }, [limit, offset, statusFilter, dateFilter, sortOrder]);
 
   const updateOrder = (order: Order) => {
     setOrders((prevOrders) =>
@@ -87,6 +92,16 @@ const OrdersPage = () => {
             setDateFilter(new Date(e.target.value));
           }}
         />
+
+        <select
+          value={sortOrder}
+          onChange={(e) => {
+            setSortOrder(e.target.value as "asc" | "desc");
+          }}
+        >
+          <option value="desc">Newest</option>
+          <option value="asc">Oldest</option>
+        </select>
       </div>
 
       <OrderTitleRow />

@@ -24,7 +24,7 @@ export const fetchOrders: RequestHandler = (req, res) => {
     }
 
     if (user.role === Role.ADMIN) {
-      const { date, status } = req.query;
+      const { date, status, sort } = req.query;
       const offset = req.query.offset !== undefined ? parseInt(req.query.offset as string) : 0;
       const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
 
@@ -33,6 +33,7 @@ export const fetchOrders: RequestHandler = (req, res) => {
         status: status as OrderStatus | undefined,
         offset,
         limit,
+        sortAsc: sort === "asc",
       });
 
       return res.json(data);
