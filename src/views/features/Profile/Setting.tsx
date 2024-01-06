@@ -21,7 +21,8 @@ export const SettingItem = ({ title, icon, component }: SettingItemProps) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       borderRadius: "20px",
-      width: 400,
+      width: 600,
+      maxHeight: 600,
     },
   };
 
