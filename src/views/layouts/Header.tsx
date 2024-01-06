@@ -1,5 +1,4 @@
-import { appActions, appState } from "@views/valtio";
-import { useRef } from "react";
+import { appState } from "@views/valtio";
 import { Link } from "react-router-dom";
 import { useSnapshot } from "valtio";
 
@@ -10,19 +9,9 @@ interface Props {
 }
 
 const Header = ({ isLogIn }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { profile } = useSnapshot(appState);
 
-  const { queryString, profile } = useSnapshot(appState);
-
-  const handleSearch = () => {
-    if (inputRef.current != null) {
-      const search = inputRef.current.value;
-      appActions.updateQueryString({
-        ...appState.queryString,
-        search,
-      });
-    }
-  };
+  if (!profile) return null;
 
   return (
     <div className="sticky top-0 z-10 bg-primary justify-between items-center px-10 py-4">
@@ -37,24 +26,6 @@ const Header = ({ isLogIn }: Props) => {
         />
         <span className="text-white text-2xl font-semibold">Shopbebin</span>
       </Link>
-
-      <div className="bg-white rounded-full px-5 h-8 items-center justify-between w-[600px]">
-        <input
-          type="text"
-          placeholder="Search"
-          className="flex-1 border-none outline-none"
-          defaultValue={queryString.search}
-          ref={inputRef}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-        />
-        <button onClick={handleSearch}>
-          <i className="fas fa-search text-black"></i>
-        </button>
-      </div>
 
       {isLogIn ? (
         <div className="gap-5">

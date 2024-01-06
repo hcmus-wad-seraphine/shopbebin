@@ -33,9 +33,9 @@ export const fetchProducts: RequestHandler = (req, res) => {
       req.query.lowerBound !== undefined ? parseInt(req.query.lowerBound as string) : -1;
     const upperBound =
       req.query.upperBound !== undefined ? parseInt(req.query.upperBound as string) : 100000;
-    const sortAscending = !(req.query.sortOrder === "descending");
+    const sortAscending = !(req.query.sortOrder === "desc");
 
-    const category = req.params.category;
+    const category = req.query.category as string | undefined;
 
     const data = await getProducts({
       category,

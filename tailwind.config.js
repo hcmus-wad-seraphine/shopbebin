@@ -13,6 +13,7 @@ export default {
       },
       fontFamily: {
         mono: ['"Poppins"'],
+        fontawesome: ["FontAwesome", "Poppins", "sans-serif"],
       },
     },
   },

@@ -1,77 +1,29 @@
 import Loading from "@components/Loading";
 import { type ShopbebinProduct } from "@models/interface";
-import { appActions, appState } from "@views/valtio";
-import { useSnapshot } from "valtio";
 
 import ProductCard from "./ProductCard";
 
 interface ProductsDisplayProps {
   products?: ShopbebinProduct[];
-  totalProducts: number;
-  itemsPerPage: number;
-  currentPage: number;
 }
 
-const ProductsDisplay = ({
-  products,
-  totalProducts,
-  itemsPerPage,
-  currentPage,
-}: ProductsDisplayProps) => {
-  const numberOfPages = Math.ceil(totalProducts / itemsPerPage);
-  const pages = [];
-  for (let i = 1; i <= numberOfPages; i++) {
-    pages.push(i);
-  }
-
-  const { queryString } = useSnapshot(appState);
-
+const ProductsDisplay = ({ products }: ProductsDisplayProps) => {
   if (products === undefined) {
     return <Loading />;
   }
 
+  if (products.length === 0) {
+    return <p className="text-center">No products found.</p>;
+  }
+
   return (
-    <div className="flex-col items-center">
-      <div className="w-full  items-center flex-wrap px-10 py-10">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-          />
-        ))}
-      </div>
-
-      <div className="items-center gap-1 justify-center">
-        <div className="bg-secondary/80 px-4 py-2 rounded-md">
-          <i className="fa-solid fa-play fa-rotate-180"></i>
-        </div>
-        <div className="gap-1">
-          {pages.map((page) => {
-            let activeStyle = "";
-            if (currentPage === page) {
-              activeStyle = "bg-primary/50 text-white";
-            }
-
-            return (
-              <button
-                key={page.toString()}
-                className={`bg-secondary/50 w-8 h-8 flex justify-center items-center rounded-2xl ${activeStyle}`}
-                onClick={() => {
-                  appActions.updateQueryString({
-                    ...queryString,
-                    offset: (page - 1) * itemsPerPage,
-                  });
-                }}
-              >
-                {page}
-              </button>
-            );
-          })}
-        </div>
-        <div className="bg-secondary/80 px-4 py-2 justify-center items-center rounded-md">
-          <i className="fa-solid fa-play"></i>
-        </div>
-      </div>
+    <div className="items-center flex-wrap">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+        />
+      ))}
     </div>
   );
 };
