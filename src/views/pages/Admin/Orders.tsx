@@ -1,4 +1,5 @@
 import { type Order } from "@prisma/client";
+import Pagination from "@views/components/Pagination";
 import OrderRow from "@views/features/Orders/OrderRow";
 import OrderTitleRow from "@views/features/Orders/OrderTitleRow";
 import { appState } from "@views/valtio";
@@ -7,10 +8,15 @@ import { useEffect, useState } from "react";
 const OrdersPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
+
+  const totalPages = Math.ceil(total / limit);
+  const currentPage = Math.floor(offset / limit) + 1;
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const res = await fetch("/api/orders", {
+      const res = await fetch(`/api/orders?offset=${offset}&limit=${limit}`, {
         headers: {
           Authorization: `Bearer ${appState.profile?.token}`,
         },
@@ -21,7 +27,7 @@ const OrdersPage = () => {
     };
 
     fetchOrders().catch(console.error);
-  }, []);
+  }, [limit, offset]);
 
   const updateOrder = (order: Order) => {
     setOrders((prevOrders) =>
@@ -45,6 +51,15 @@ const OrdersPage = () => {
           updateOrder={updateOrder}
         />
       ))}
+
+      <Pagination
+        currentPage={currentPage}
+        limit={limit}
+        total={totalPages}
+        onGoToPage={(page) => {
+          setOffset((page - 1) * limit);
+        }}
+      />
     </div>
   );
 };
