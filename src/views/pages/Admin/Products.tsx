@@ -1,4 +1,5 @@
 import { type ShopbebinProduct } from "@models/interface";
+import { useDebounce } from "@uidotdev/usehooks";
 import Pagination from "@views/components/Pagination";
 import Title from "@views/components/Title";
 import ProductRow from "@views/features/Products/ProductRow";
@@ -10,6 +11,8 @@ const ProductsPage = () => {
   const [products, setProducts] = useState<ShopbebinProduct[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [offset, setOffset] = useState(0);
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 300);
 
   const limit = 10;
   const totalPages = Math.ceil(total / limit);
@@ -17,12 +20,18 @@ const ProductsPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `/api/products?offset=${offset}&limit=${limit}`;
+      let endpoint = `/api/products?offset=${offset}&limit=${limit}`;
+
+      if (search !== "") {
+        endpoint += `&search=${search}`;
+      }
+
       const productsResponse = await fetch(endpoint, {
         headers: {
           Authorization: `Bearer ${appState.profile?.token}`,
         },
       });
+
       const data = await productsResponse.json();
 
       setProducts(data.products);
@@ -32,11 +41,22 @@ const ProductsPage = () => {
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, [limit, offset]);
+  }, [limit, offset, debouncedSearch]);
 
   return (
-    <div className="flex-col gap-2 w-full">
+    <div className="flex-col gap-8 w-full">
       <Title text="Products" />
+
+      <div>
+        <input
+          className="border border-gray-400 rounded-md p-2 w-full"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </div>
 
       <ProductTitleRow />
 
