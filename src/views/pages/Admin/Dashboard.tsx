@@ -134,54 +134,47 @@ const AdminDashboard = () => {
   }, [profileSnap?.token]);
 
   return (
-    <div className="w-full gap-10">
-      <div className="flex-col w-[60%] gap-4">
-        <h1 className="text-2xl font-semibold">Report revenue</h1>
+    <div className="flex-col w-[60%] gap-4">
+      <h1 className="text-2xl font-semibold">Report revenue</h1>
 
-        <select
-          className="self-start border-2 border-primary rounded-full px-2"
-          value={period}
-          onChange={(e) => {
-            setPeriod(e.target.value as Period);
-          }}
-        >
-          <option>{Period.Daily}</option>
-          <option>{Period.Weekly}</option>
-          <option>{Period.Monthly}</option>
-        </select>
+      <select
+        className="self-start border-2 border-primary rounded-full px-2"
+        value={period}
+        onChange={(e) => {
+          setPeriod(e.target.value as Period);
+        }}
+      >
+        <option>{Period.Daily}</option>
+        <option>{Period.Weekly}</option>
+        <option>{Period.Monthly}</option>
+      </select>
 
-        <Bar
-          data={{
-            labels: getLabels(period),
-            datasets: [
-              {
-                label: "Revenue",
-                data: getData(period, orders),
-                backgroundColor: "#3B82F6",
-                borderColor: "#3B82F6",
-                borderWidth: 1,
-              },
-            ],
-          }}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "top" as const,
-              },
-              title: {
-                display: true,
-                text: `Revenue ${period}`,
-              },
+      <Bar
+        data={{
+          labels: getLabels(period),
+          datasets: [
+            {
+              label: "Revenue",
+              data: getData(period, orders),
+              backgroundColor: "#3B82F6",
+              borderColor: "#3B82F6",
+              borderWidth: 1,
             },
-          }}
-        />
-      </div>
-
-      <div className="flex-col w-[40%]">
-        <h1 className="text-2xl font-semibold">Today orders</h1>
-        <div className="flex-col overflow-scroll"></div>
-      </div>
+          ],
+        }}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top" as const,
+            },
+            title: {
+              display: true,
+              text: `Revenue ${period}`,
+            },
+          },
+        }}
+      />
     </div>
   );
 };

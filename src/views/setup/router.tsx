@@ -1,5 +1,6 @@
 import { Role } from "@prisma/client";
 import OrderDetails from "@views/components/Orders/OrderDetails";
+import CategoriesPage from "@views/pages/Admin/Categories";
 import AdminDashboard from "@views/pages/Admin/Dashboard";
 import { appActions, appState } from "@views/valtio";
 import { createBrowserRouter, redirect } from "react-router-dom";
@@ -124,6 +125,11 @@ export const router = createBrowserRouter([
       {
         path: "products",
         element: <ProductsPage />,
+        loader: adminAuthLoader,
+      },
+      {
+        path: "categories",
+        element: <CategoriesPage />,
         loader: adminAuthLoader,
       },
       {

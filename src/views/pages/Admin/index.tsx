@@ -38,6 +38,10 @@ const navItems: NavItemProps[] = [
     label: "Products management",
   },
   {
+    to: "/admin/categories",
+    label: "Categories management",
+  },
+  {
     to: "/admin/orders",
     label: "Orders management",
   },
