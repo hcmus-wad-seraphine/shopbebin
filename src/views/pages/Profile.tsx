@@ -26,7 +26,7 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  const fileTypes = ["JPG", "PNG", "GIF"];
+  const fileTypes = ["JPG", "JPEG", "PNG", "GIF"];
 
   const handleLogout = () => {
     appActions.logout();
