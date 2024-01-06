@@ -1,7 +1,15 @@
 import { type Address } from "@prisma/client";
 import { useState } from "react";
 
-const AddressRow = ({ unitNumber, street, district, city }: Address) => {
+interface Props {
+  address: Address;
+  index: number;
+  setDeletedAddressesIndex: (indices: number[]) => void;
+  indices: number[];
+}
+
+const AddressRow = ({ address, index, setDeletedAddressesIndex, indices }: Props) => {
+  const { unitNumber, street, district, city } = address;
   const [unitNumberState, setUnitNumberState] = useState<string>(unitNumber);
   const [streetState, setStreetState] = useState<string>(street);
   const [districtState, setDistrictState] = useState<string>(district);
@@ -37,7 +45,12 @@ const AddressRow = ({ unitNumber, street, district, city }: Address) => {
         value={cityState}
         className="col-span-2"
       />
-      <button className="col-span-1">
+      <button
+        className="col-span-1"
+        onClick={() => {
+          setDeletedAddressesIndex([...indices, index]);
+        }}
+      >
         <i className="fa-solid fa-trash"></i>
       </button>
     </div>
