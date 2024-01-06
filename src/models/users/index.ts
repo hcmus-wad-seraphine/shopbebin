@@ -1,4 +1,4 @@
-import { type User } from "@prisma/client";
+import { Role, type User } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
 
@@ -46,7 +46,11 @@ export const getUserByPhone = async (phone: string) => {
 export const getUsers = async () => {
   const client = getPrismaClient();
 
-  return await client.user.findMany();
+  return await client.user.findMany({
+    where: {
+      role: Role.USER,
+    },
+  });
 };
 
 export const updateUser = async (user: User) => {
