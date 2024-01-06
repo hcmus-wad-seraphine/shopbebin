@@ -1,6 +1,11 @@
-import { Role, type User } from "@prisma/client";
+import { type Role, type User } from "@prisma/client";
 
 import { getPrismaClient } from "../prisma";
+
+export interface UserProps {
+  role?: Role;
+  isBanned?: string;
+}
 
 export const createUser = async (user: User) => {
   const client = getPrismaClient();
@@ -43,12 +48,15 @@ export const getUserByPhone = async (phone: string) => {
   });
 };
 
-export const getUsers = async () => {
+export const getUsers = async (userProps: UserProps) => {
+  const { role, isBanned } = userProps;
   const client = getPrismaClient();
+  console.log(role, isBanned);
 
   return await client.user.findMany({
     where: {
-      role: Role.USER,
+      role,
+      isBanned: isBanned === "true",
     },
   });
 };
