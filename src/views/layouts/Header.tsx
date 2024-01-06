@@ -11,8 +11,6 @@ interface Props {
 const Header = ({ isLogIn }: Props) => {
   const { profile } = useSnapshot(appState);
 
-  if (!profile) return null;
-
   return (
     <div className="sticky top-0 z-10 bg-primary justify-between items-center px-10 py-4">
       <Link
