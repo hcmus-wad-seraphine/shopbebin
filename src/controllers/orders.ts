@@ -1,4 +1,4 @@
-import { OrderStatus, Role, type User } from "@prisma/client";
+import { type Order, type OrderStatus, Role, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
@@ -91,8 +91,8 @@ export const fetchOrdersByStatus: RequestHandler = (req, res) => {
   });
 };
 
-export const makeOrder: RequestHandler = (req, res) => {
-  const handleMakeOrder = async () => {
+export const putOrder: RequestHandler = (req, res) => {
+  const handleInsertOrder = async () => {
     const user = req.user as User | undefined;
     if (user === undefined) {
       throw new Error("User is undefined");
@@ -108,7 +108,7 @@ export const makeOrder: RequestHandler = (req, res) => {
     res.json(order);
   };
 
-  handleMakeOrder().catch((err) => {
+  handleInsertOrder().catch((err) => {
     console.log("[ERROR] createOrder", err);
 
     const errorResponse: ErrorResponse = {
@@ -121,23 +121,25 @@ export const makeOrder: RequestHandler = (req, res) => {
   });
 };
 
-export const updateOrderStatus: RequestHandler = (req, res) => {
-  const id = req.params.id;
-  const status = req.query.status as OrderStatus | undefined;
-
-  const handleUpdateOrderStatus = async () => {
+export const patchOrder: RequestHandler = (req, res) => {
+  const handleUpdateOrder = async () => {
+    const id = req.params.id;
     const order = await getOrderById(id);
-    if (order === null) {
+    if (!order) {
       throw new Error("Order not found");
     }
 
-    order.status = status ?? OrderStatus.ORDERED;
-    const updatedOrder = await updateOrder(order);
+    const newOrder: Order = {
+      ...order,
+      ...req.body,
+    };
+
+    const updatedOrder = await updateOrder(newOrder);
 
     res.json(updatedOrder);
   };
 
-  handleUpdateOrderStatus().catch((err) => {
+  handleUpdateOrder().catch((err) => {
     console.log("[ERROR] updateOrderStatus", err);
     res.status(500).json(err);
   });

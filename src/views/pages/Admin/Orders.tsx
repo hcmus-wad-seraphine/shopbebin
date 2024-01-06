@@ -23,6 +23,17 @@ const OrdersPage = () => {
     fetchOrders().catch(console.error);
   }, []);
 
+  const updateOrder = (order: Order) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((prevOrder) => {
+        if (prevOrder.id === order.id) {
+          return order;
+        }
+        return prevOrder;
+      }),
+    );
+  };
+
   return (
     <div className="flex-col gap-2 w-full">
       <OrderTitleRow />
@@ -31,6 +42,7 @@ const OrdersPage = () => {
         <OrderRow
           key={order.id}
           order={order}
+          updateOrder={updateOrder}
         />
       ))}
     </div>
