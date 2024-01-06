@@ -44,12 +44,14 @@ export const updateCategory = async (category: Category) => {
   const client = getPrismaClient();
   const { id, ...data } = category;
 
-  await client.category.update({
+  const result = await client.category.update({
     where: {
       id,
     },
     data,
   });
+
+  return result;
 };
 
 export const deleteCategory = async (id: string) => {
