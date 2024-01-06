@@ -79,7 +79,7 @@ const Profile = () => {
       formData.append("avatar", avatarFile);
     }
 
-    fetch("/api/storage/upload-image", {
+    fetch("/api/upload/avatar", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${appState.profile?.token}`,
