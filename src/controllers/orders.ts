@@ -10,7 +10,7 @@ import {
   updateOrder,
 } from "../models/orders";
 
-export const fetchOrders: RequestHandler = (req, res) => {
+export const fetchOrdersByUserId: RequestHandler = (req, res) => {
   const handleFetchOrders = async () => {
     const user = req.user as User | undefined;
     if (user === undefined) {
