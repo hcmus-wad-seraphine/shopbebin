@@ -42,6 +42,7 @@ const ChangePassword = () => {
       method: "POST",
       body: JSON.stringify({ id, password: currentPassword, newPassword }),
       headers: {
+        Authorization: `Bearer ${profile?.token}`,
         "Content-Type": "application/json",
       },
     });
@@ -61,10 +62,12 @@ const ChangePassword = () => {
     }
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     if (!handleCheckError()) return;
 
-    await handleChangePassword();
+    handleChangePassword().catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
