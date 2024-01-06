@@ -31,7 +31,7 @@ router.get("/products/:id", productsController.fetchProduct);
 
 router.post("/checkout", requireAuth, vnpayController.handleCheckout);
 
-router.get("/orders", requireAuth, ordersController.fetchOrders);
+router.get("/orders", requireAuth, ordersController.fetchOrdersByUserId);
 router.get("/orders/status/:status", requireAuth, ordersController.fetchOrdersByStatus);
 router.get("/orders/:id", requireAuth, ordersController.fetchOrderById);
 router.post("/orders", requireAuth, ordersController.makeOrder);
@@ -41,11 +41,6 @@ router.post("/reviews", requireAuth, reviewsController.makeReview);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 
-router.post(
-  "/storage/upload-image",
-  requireAuth,
-  upload.single("avatar"),
-  storageController.uploadImage,
-);
+router.post("/upload/avatar", requireAuth, upload.single("avatar"), storageController.uploadImage);
 
 export default router;
