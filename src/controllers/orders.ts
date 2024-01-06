@@ -29,7 +29,7 @@ export const fetchOrders: RequestHandler = (req, res) => {
       const limit = req.query.limit !== undefined ? parseInt(req.query.limit as string) : 10;
 
       const data = await getOrders({
-        date: date ? new Date(date as string) : undefined,
+        date: date ? (date as string) : undefined,
         status: status as OrderStatus | undefined,
         offset,
         limit,

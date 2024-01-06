@@ -37,17 +37,28 @@ export const getOrder = async (id: string) => {
 export const getOrders = async (props: {
   offset?: number;
   limit?: number;
-  date?: Date;
+  date?: string;
   status?: OrderStatus;
   sortAsc?: boolean;
 }) => {
   const client = getPrismaClient();
 
+  const startDate = props.date ? new Date(props.date).toISOString() : undefined;
+
+  let endDate;
+  if (props.date) {
+    const tempDate = new Date(props.date);
+    tempDate.setDate(tempDate.getDate() + 1);
+    tempDate.setHours(0, 0, 0, 0);
+    endDate = tempDate.toISOString();
+  }
+
   const orders: Order[] = await client.order.findMany({
     where: {
       status: props.status,
       createdAt: {
-        equals: props.date,
+        gte: startDate,
+        lte: endDate,
       },
     },
     orderBy: {
@@ -61,7 +72,8 @@ export const getOrders = async (props: {
     where: {
       status: props.status,
       createdAt: {
-        equals: props.date,
+        gte: startDate,
+        lte: endDate,
       },
     },
   });
