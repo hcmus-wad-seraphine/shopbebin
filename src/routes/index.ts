@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 
 import * as authController from "../controllers/auth";
+import * as categoriesController from "../controllers/categories";
 import * as ordersController from "../controllers/orders";
 import * as productsController from "../controllers/products";
 import * as profilesController from "../controllers/profiles";
@@ -46,5 +47,8 @@ router.post("/upload/avatar", requireAuth, upload.single("avatar"), storageContr
 
 router.get("/users", requireAdminAuth, usersController.fetchUsers);
 router.post("/users/update", requireAdminAuth, profilesController.updateProfile);
+
+router.get("/categories", categoriesController.fetchCategories);
+router.post("/categories", requireAdminAuth, categoriesController.changeCategory);
 
 export default router;
