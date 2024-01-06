@@ -1,6 +1,6 @@
 const AccountsPage = () => {
   return (
-    <div className="w-full gap-10 py-10">
+    <div className="w-full gap-10">
       <div className="flex-col flex-1 gap-4">
         <div className="w-full items-center justify-between">
           <h1 className="text-2xl font-semibold">Accounts</h1>

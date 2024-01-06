@@ -18,7 +18,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 enum Period {
   Daily = "Daily",
   Weekly = "Weekly",
-  Monthly = "Yearly",
+  Monthly = "Monthly",
 }
 
 const getLabels = (period: Period) => {
@@ -100,27 +100,41 @@ const AdminDashboard = () => {
   const profileSnap = useSnapshot(appState).profile;
 
   const [period, setPeriod] = useState(Period.Daily);
-  const [deliveredOrders, setDeliveredOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     const fetchDeliveredOrders = async () => {
-      const res = await fetch(`/api/orders/status/${OrderStatus.PREPARING}`, {
+      const deliveredRes = fetch(`/api/orders/status/${OrderStatus.DELIVERED}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${profileSnap?.token}`,
           "Content-Type": "application/json",
         },
       });
-      const data = await res.json();
 
-      setDeliveredOrders(data);
+      const reviewedRes = fetch(`/api/orders/status/${OrderStatus.REVIEWED}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${profileSnap?.token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const [delivered, reviewed] = await Promise.all([deliveredRes, reviewedRes]);
+
+      const [deliveredOrders, reviewedOrders] = await Promise.all([
+        delivered.json(),
+        reviewed.json(),
+      ]);
+
+      setOrders([...deliveredOrders, ...reviewedOrders]);
     };
 
     fetchDeliveredOrders().catch(console.error);
   }, [profileSnap?.token]);
 
   return (
-    <div className="w-full gap-10 py-10">
+    <div className="w-full gap-10">
       <div className="flex-col w-[60%] gap-4">
         <h1 className="text-2xl font-semibold">Report revenue</h1>
 
@@ -142,7 +156,7 @@ const AdminDashboard = () => {
             datasets: [
               {
                 label: "Revenue",
-                data: getData(period, deliveredOrders),
+                data: getData(period, orders),
                 backgroundColor: "#3B82F6",
                 borderColor: "#3B82F6",
                 borderWidth: 1,

@@ -56,7 +56,7 @@ const AdminRoot = () => {
         ))}
       </div>
 
-      <div className="ml-[280px] w-full">
+      <div className="ml-[280px] w-full px-12 py-10">
         <Outlet />
       </div>
     </div>
