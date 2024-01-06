@@ -22,6 +22,7 @@ export const register: RequestHandler = (req, res) => {
     role: Role.USER,
     addresses: [],
     cart: [],
+    isBanned: false,
   };
 
   createUser(user)

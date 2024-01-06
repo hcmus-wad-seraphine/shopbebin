@@ -7,8 +7,9 @@ import * as productsController from "../controllers/products";
 import * as profilesController from "../controllers/profiles";
 import * as reviewsController from "../controllers/reviews";
 import * as storageController from "../controllers/storage";
+import * as usersController from "../controllers/users";
 import * as vnpayController from "../controllers/vnpay";
-import { requireAuth } from "./auth";
+import { requireAdminAuth, requireAuth } from "./auth";
 
 const router = express.Router();
 
@@ -42,5 +43,8 @@ router.post("/reviews", requireAuth, reviewsController.makeReview);
 router.get("/categories/total", productsController.fetchTotalCategories);
 
 router.post("/upload/avatar", requireAuth, upload.single("avatar"), storageController.uploadImage);
+
+router.get("/users", requireAdminAuth, usersController.fetchUsers);
+router.post("/users/update", requireAdminAuth, profilesController.updateProfile);
 
 export default router;

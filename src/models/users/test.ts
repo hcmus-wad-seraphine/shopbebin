@@ -22,6 +22,7 @@ describe("User model", () => {
       },
     ],
     role: Role.USER,
+    isBanned: false,
   };
 
   test("create user", async () => {

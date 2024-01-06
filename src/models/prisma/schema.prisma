@@ -26,6 +26,7 @@ model User {
   addresses    Address[]
   cart         CartItem[]
   Review       Review[]
+  isBanned     Boolean    @default(false)
 }
 
 type Address {
