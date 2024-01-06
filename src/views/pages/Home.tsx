@@ -127,7 +127,7 @@ const HomePage = () => {
 
   return (
     <div className="flex-col justify-center gap-8 py-3 px-10">
-      <div className="p-2 border border-gray-400 bg-white rounded-full items-center justify-between">
+      <div className="px-4 py-2 border border-gray-400 bg-white rounded-full items-center justify-between">
         <input
           className="flex-1 border-none outline-none rounded-md"
           placeholder="Search"
