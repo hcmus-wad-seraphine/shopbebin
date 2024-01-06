@@ -1,3 +1,5 @@
+import { type CartItem } from "@prisma/client";
+
 export const convertDateToReadable = (date: Date) => {
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -21,4 +23,12 @@ export const shortenProductName = (name: string) => {
 
 export const shortenId = (id: string) => {
   return id.slice(0, 4) + "..." + id.slice(-4);
+};
+
+export const cartToReadableContent = (cart: CartItem[]) => {
+  return cart.map((item) => {
+    const { name, sizeName, toppingNames, quantity } = item;
+    const toppings = toppingNames.join(", ");
+    return `${quantity} ${name} (${sizeName}): ${toppings.length > 0 ? toppings : "No toppings"}`;
+  });
 };
