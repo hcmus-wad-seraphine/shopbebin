@@ -31,6 +31,7 @@ router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
 router.get("/products/toppings", productsController.fetchToppings);
 router.get("/products/:id", productsController.fetchProduct);
+router.post("/products", requireAdminAuth, productsController.postProduct);
 router.put("/products/:id", requireAdminAuth, productsController.putProduct);
 router.delete("/products/:id", requireAdminAuth, productsController.removeProduct);
 

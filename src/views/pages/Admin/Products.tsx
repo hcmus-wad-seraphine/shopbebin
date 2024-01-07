@@ -1,6 +1,7 @@
 import { type ShopbebinProduct } from "@models/interface";
 import { type Category, type ToppingMetadata } from "@prisma/client";
 import { useDebounce } from "@uidotdev/usehooks";
+import { generateMongoObjectId } from "@utils/objectId";
 import Pagination from "@views/components/Pagination";
 import Title from "@views/components/Title";
 import ProductRow from "@views/features/Products/ProductRow";
@@ -10,6 +11,17 @@ import { useEffect, useState } from "react";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<ShopbebinProduct[]>([]);
+  const [defaultProduct, setDefaultProduct] = useState<ShopbebinProduct>({
+    id: generateMongoObjectId(),
+    name: "New Product",
+    basePrice: 1,
+    availableSizes: [],
+    availableToppings: [],
+    category: "Tea",
+    desc: "Product description",
+    images: ["/img/default_product.png"],
+    reviews: [],
+  });
   const [categories, setCategories] = useState<Category[]>();
   const [category, setCategory] = useState<Category | null>(null);
   const [toppings, setToppings] = useState<ToppingMetadata[]>([]);
@@ -17,6 +29,8 @@ const ProductsPage = () => {
   const [offset, setOffset] = useState(0);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
+
+  console.log("--> default product", defaultProduct.id);
 
   const limit = 10;
   const totalPages = Math.ceil(total / limit);
@@ -72,6 +86,42 @@ const ProductsPage = () => {
       console.log(err);
     });
   }, [limit, offset, category, debouncedSearch]);
+
+  const handleCreateProduct = (product: ShopbebinProduct) => {
+    const postProduct = async () => {
+      if (!appState.profile) {
+        return;
+      }
+
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${appState.profile.token}`,
+        },
+        body: JSON.stringify(product),
+      });
+
+      const newProduct = await response.json();
+
+      setProducts((products) => [newProduct, ...products]);
+      setDefaultProduct({
+        id: generateMongoObjectId(),
+        name: "New Product",
+        basePrice: 1,
+        availableSizes: [],
+        availableToppings: [],
+        category: "Tea",
+        desc: "Product description",
+        images: ["/img/default_product.png"],
+        reviews: [],
+      });
+    };
+
+    postProduct().catch((err) => {
+      console.log(err);
+    });
+  };
 
   const handleUpdateProduct = (product: ShopbebinProduct) => {
     const putProduct = async () => {
@@ -173,6 +223,13 @@ const ProductsPage = () => {
       </div>
 
       <ProductTitleRow />
+
+      <ProductRow
+        product={defaultProduct}
+        categories={categories?.map((c) => c.name) ?? []}
+        toppings={toppings ?? []}
+        onCreateProduct={handleCreateProduct}
+      />
 
       {products.map((product) => (
         <ProductRow

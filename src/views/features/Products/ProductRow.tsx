@@ -11,8 +11,9 @@ interface ProductRowProps {
   product: ShopbebinProduct;
   categories: string[];
   toppings: ToppingMetadata[];
-  onUpdateProduct: (product: ShopbebinProduct) => void;
-  onDeleteProduct: (product: ShopbebinProduct) => void;
+  onCreateProduct?: (product: ShopbebinProduct) => void;
+  onUpdateProduct?: (product: ShopbebinProduct) => void;
+  onDeleteProduct?: (product: ShopbebinProduct) => void;
 }
 
 const sizesToString = (sizes: ProductSize[]) => {
@@ -33,6 +34,7 @@ const ProductRow: FC<ProductRowProps> = ({
   product,
   categories,
   toppings,
+  onCreateProduct,
   onUpdateProduct,
   onDeleteProduct,
 }) => {
@@ -57,31 +59,40 @@ const ProductRow: FC<ProductRowProps> = ({
 
   return (
     <>
-      <div className="grid grid-cols-10 gap-4 whitespace-pre-wrap">
-        <div className="col-span-1">{shortenId(product.id)}</div>
-        <div className="col-span-1">
-          <img
-            className="w-12 h-12 object-cover"
-            src={product.images[0]}
-            alt={product.name}
-          />
+      {onCreateProduct ? (
+        <button
+          className="mx-auto w-fit px-4 py-2 text-center border border-primary rounded-md hover:bg-primary hover:text-white transition"
+          onClick={openEditModal}
+        >
+          Add new product
+        </button>
+      ) : (
+        <div className="grid grid-cols-10 gap-4 whitespace-pre-wrap">
+          <div className="col-span-1">{shortenId(product.id)}</div>
+          <div className="col-span-1">
+            <img
+              className="w-12 h-12 object-cover"
+              src={product.images[0]}
+              alt={product.name}
+            />
+          </div>
+          <div className="col-span-2">{product.name}</div>
+          <div className="col-span-1">{product.basePrice}</div>
+          <div className="col-span-1">{product.category}</div>
+          <div className="col-span-1">{sizesToString(product.availableSizes)}</div>
+          <div className="col-span-2">{toppingsToString(product.availableToppings)}</div>
+          <div className="col-span-1 flex items-center justify-around gap-2">
+            <i
+              className="fa-solid fa-pen-to-square hover:text-primary hover:cursor-pointer transition"
+              onClick={openEditModal}
+            />
+            <i
+              className="fa-solid fa-trash hover:text-error hover:cursor-pointer transition"
+              onClick={openDeleteModal}
+            />
+          </div>
         </div>
-        <div className="col-span-2">{product.name}</div>
-        <div className="col-span-1">{product.basePrice}</div>
-        <div className="col-span-1">{product.category}</div>
-        <div className="col-span-1">{sizesToString(product.availableSizes)}</div>
-        <div className="col-span-2">{toppingsToString(product.availableToppings)}</div>
-        <div className="col-span-1 flex items-center justify-around gap-2">
-          <i
-            className="fa-solid fa-pen-to-square hover:text-primary hover:cursor-pointer transition"
-            onClick={openEditModal}
-          />
-          <i
-            className="fa-solid fa-trash hover:text-error hover:cursor-pointer transition"
-            onClick={openDeleteModal}
-          />
-        </div>
-      </div>
+      )}
 
       <Modal
         isOpen={isDeleteModalOpen}
@@ -99,7 +110,7 @@ const ProductRow: FC<ProductRowProps> = ({
         <button
           className="mx-auto px-2 py-1 w-[120px] border border-primary rounded-md hover:bg-primary hover:text-white transition"
           onClick={() => {
-            onDeleteProduct(product);
+            onDeleteProduct && onDeleteProduct(product);
             closeDeleteModal();
           }}
         >
@@ -124,7 +135,8 @@ const ProductRow: FC<ProductRowProps> = ({
           categories={categories}
           toppings={toppings}
           onBuild={(product) => {
-            onUpdateProduct(product);
+            onCreateProduct && onCreateProduct(product);
+            onUpdateProduct && onUpdateProduct(product);
             closeEditModal();
           }}
         />

@@ -79,7 +79,7 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
     build().catch(console.error);
   };
 
-  const id = product?.id ?? generateMongoObjectId();
+  const id = product.id;
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({

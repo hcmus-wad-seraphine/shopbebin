@@ -3,6 +3,7 @@ import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
 import {
+  createProduct,
   deleteProduct,
   getCategories,
   getProduct,
@@ -123,6 +124,26 @@ export const updateCart: RequestHandler = (req, res) => {
 
   handleUpdateCart().catch((err) => {
     console.log("[ERROR] updateCart", err);
+
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
+export const postProduct: RequestHandler = (req, res) => {
+  const handlePatchProduct = async () => {
+    const product = req.body;
+    const updatedProduct = await createProduct(product);
+    res.json(updatedProduct);
+  };
+
+  handlePatchProduct().catch((err) => {
+    console.log("[ERROR] createProduct", err);
 
     const errorResponse: ErrorResponse = {
       status: 500,
