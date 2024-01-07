@@ -1,0 +1,131 @@
+[{
+  "_id": {
+    "$oid": "6592ee0578d3aa5d2210d01b"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "65644aa928fce034985e34ca"
+  },
+  "rating": 4,
+  "comment": "It's good!",
+  "createdAt": {
+    "$timestamp": {
+      "t": 0,
+      "i": 0
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "6596696bbf586043ea242716"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "6564576a28fce034985e34d9"
+  },
+  "rating": 4,
+  "comment": "123",
+  "createdAt": {
+    "$date": "2024-01-04T08:16:41.752Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6596870cb814a23adecf1aa0"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "6564577d28fce034985e34da"
+  },
+  "rating": 5,
+  "comment": "it''s super good and delicious",
+  "createdAt": {
+    "$date": "2024-01-04T10:23:07.170Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "659687f6b814a23adecf1aa1"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "6564561028fce034985e34d1"
+  },
+  "rating": 2,
+  "comment": "",
+  "createdAt": {
+    "$date": "2024-01-04T10:27:00.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6596924f723ce38c16889089"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "6564562928fce034985e34d2"
+  },
+  "rating": 5,
+  "comment": "I LOVE IT",
+  "createdAt": {
+    "$date": "2024-01-04T11:11:10.265Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "659694c7b04551d55873a973"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "6564562928fce034985e34d2"
+  },
+  "rating": 4,
+  "comment": "",
+  "createdAt": {
+    "$date": "2024-01-04T11:21:42.626Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "659695f553961b9ccd64624e"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "6564561028fce034985e34d1"
+  },
+  "rating": 1,
+  "comment": "too sweet",
+  "createdAt": {
+    "$date": "2024-01-04T11:26:42.928Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "659696a034433075f89396cf"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "productMetadataId": {
+    "$oid": "656444e328fce034985e34c2"
+  },
+  "rating": 5,
+  "comment": "super yummyyy, will re-order next time",
+  "createdAt": {
+    "$date": "2024-01-04T11:29:27.805Z"
+  }
+}]

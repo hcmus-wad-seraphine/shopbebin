@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  email        String     @unique
+  phone        String     @unique
+  passwordHash String
+  role         Role       @default(USER)
+  name         String
+  avatar       String
+  addresses    Address[]
+  cart         CartItem[]
+  Review       Review[]
+  isBanned     Boolean    @default(false)
+}
+
+type Address {
+  unitNumber String
+  street     String
+  district   String
+  city       String
+}
+
+enum Size {
+  S
+  M
+  L
+  XL
+}
+
+type CartItem {
+  metadataId   String
+  name         String
+  image        String
+  price        Float
+  sizeName     Size
+  toppingNames String[]
+  quantity     Int
+}
+
+model ToppingMetadata {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  name           String           @unique
+  desc           String
+  image          String
+  price          Float
+  stock          Int
+  ProductTopping ProductTopping[]
+}
+
+model ProductTopping {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  topping           ToppingMetadata  @relation(fields: [toppingMetadataId], references: [id])
+  toppingMetadataId String           @db.ObjectId
+  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
+  productMetadataId String?          @db.ObjectId
+}
+
+model ProductSize {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  size              Size
+  price             Float
+  stock             Int
+  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
+  productMetadataId String?          @db.ObjectId
+}
+
+model Category {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String @unique
+  desc      String
+  image     String
+  itemCount Int
+}
+
+model ProductMetadata {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  desc              String
+  images            String[]
+  basePrice         Float
+  category          String
+  availableSizes    ProductSize[]
+  availableToppings ProductTopping[]
+  reviews           Review[]
+}
+
+enum OrderStatus {
+  ORDERED
+  PREPARING
+  DELIVERING
+  DELIVERED
+  CANCELLED
+  REVIEWED
+}
+
+enum PaymentMethod {
+  COD
+  INTERNET_BANKING
+}
+
+model Order {
+  id              String        @id @map("_id") @db.ObjectId
+  userId          String        @db.ObjectId
+  status          OrderStatus
+  shippingAddress Address
+  cart            CartItem[]
+  price           Float
+  paymentMethod   PaymentMethod
+  createdAt       DateTime      @default(now())
+}
+
+model Review {
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String           @db.ObjectId
+  productMetadataId String           @db.ObjectId
+  rating            Int
+  comment           String
+  createdAt         DateTime         @default(now())
+  ProductMetadata   ProductMetadata? @relation(fields: [productMetadataId], references: [id])
+  User              User             @relation(fields: [userId], references: [id])
+}

@@ -1,0 +1,286 @@
+[{
+  "_id": {
+    "$oid": "65644a6d28fce034985e34c9"
+  },
+  "name": "Bubble Apple Tea",
+  "desc": "Crisp and bubbly, our Apple Bubble Tea is pure refreshment.",
+  "images": [
+    "/img/tea/apple.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 6,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "65644aa928fce034985e34ca"
+  },
+  "name": "Bubble Taro Tea",
+  "desc": "Indulge in the creamy allure of our Bubble Taro Tea, a luscious blend of rich taro flavor and delightful bubbles for a uniquely satisfying experience.",
+  "images": [
+    "/img/tea/taro.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 4,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "6564568a28fce034985e34d3"
+  },
+  "name": "Strawberry Milktea",
+  "desc": "Indulge in bliss: Strawberry Milk Tea, a sweet fusion of strawberries and creamy delight.",
+  "images": [
+    "/img/milktea/strawberry.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 6,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "656456ee28fce034985e34d4"
+  },
+  "name": "Original Milktea",
+  "desc": "Classic comfort: Original Milk Tea, a timeless blend of rich tea and creamy goodness.",
+  "images": [
+    "/img/milktea/milktea.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 8,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "6564571128fce034985e34d6"
+  },
+  "name": "Almond Milktea",
+  "desc": "Nourish your senses with Almond Milk Tea, a delightful blend of nutty sweetness for a comforting sip.",
+  "images": [
+    "/img/milktea/almond.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 8,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "6564576a28fce034985e34d9"
+  },
+  "name": "Black Milktea",
+  "desc": "Bold and classic, a rich fusion of tea perfection.",
+  "images": [
+    "/img/milktea/black-tea.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 4,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "6564553928fce034985e34cd"
+  },
+  "name": "Bubble Dragon Fruit Tea",
+  "desc": "Exotic bliss: Bubble Dragon Fruit Tea fuses dragon fruit with bubbles for a refreshing sip.",
+  "images": [
+    "/img/tea/dragon-fruit.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 4,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "656446c328fce034985e34c5"
+  },
+  "name": "Bubble Lemon Tea",
+  "desc": "Savor the invigorating blend of premium tea, sun-kissed lemons, and chewy bubbles in our Bubble Lemon Tea for a uniquely refreshing experience.",
+  "images": [
+    "/img/tea/lemon.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 4,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "65644b1d28fce034985e34cc"
+  },
+  "name": "Bubble Mango Tea",
+  "desc": "Tropical delight: Bubble Mango Tea blends sweet mango with bubbles for a refreshing, exotic sip.",
+  "images": [
+    "/img/tea/mango.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 7,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "6564556528fce034985e34ce"
+  },
+  "name": "Bubble Matcha Tea",
+  "desc": "Sip serenity with our Bubble Matcha Tea, harmonizing premium matcha with delightful bubbles for a calming blend.",
+  "images": [
+    "/img/tea/matcha.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 7,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "6564562928fce034985e34d2"
+  },
+  "name": "Mango Juice",
+  "desc": "Tropical delight: Mango Juice, a luscious burst of sunshine in every sip for fruity bliss.",
+  "images": [
+    "/img/juice/mango.png"
+  ],
+  "categoryId": "656455a128fce034985e34cf",
+  "basePrice": 3,
+  "category": "Juice"
+},
+{
+  "_id": {
+    "$oid": "6564570128fce034985e34d5"
+  },
+  "name": "Taro Milktea",
+  "desc": "Sip into bliss with Taro Milk Tea, a creamy fusion of taro's richness for a delightful experience.",
+  "images": [
+    "/img/milktea/taro.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 6,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "6564572028fce034985e34d7"
+  },
+  "name": "Apple Milktea",
+  "desc": "Crisp indulgence: Apple Milk Tea, a refreshing fusion of apple's sweetness with creamy satisfaction.",
+  "images": [
+    "/img/milktea/apple.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 15,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "6564575228fce034985e34d8"
+  },
+  "name": "Lychee Milktea",
+  "desc": "Exotic sweetness meets creamy delight in every sip.",
+  "images": [
+    "/img/milktea/lychee.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 16,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "6564577d28fce034985e34da"
+  },
+  "name": "Red Thai Milktea",
+  "desc": "Savor the aromatic spices in this Thai-inspired, milky delight.",
+  "images": [
+    "/img/milktea/red-thailand.png"
+  ],
+  "categoryId": "6564435728fce034985e34ba",
+  "basePrice": 6,
+  "category": "Milktea"
+},
+{
+  "_id": {
+    "$oid": "656444e328fce034985e34c2"
+  },
+  "name": "Bubble Strawberry Smoothie",
+  "desc": "Strawberries and milk mixed are grinded, bubble added",
+  "images": [
+    "/img/smoothie/strawberry.png"
+  ],
+  "categoryId": "6564445928fce034985e34be",
+  "basePrice": 4,
+  "category": "Smoothie"
+},
+{
+  "_id": {
+    "$oid": "656449ee28fce034985e34c8"
+  },
+  "name": "Bubble Strawberry Tea",
+  "desc": "Delight in the enticing fusion of ripe strawberries and chewy bubbles with our Bubble Strawberry Tea, offering a refreshingly sweet and textured twist to your tea experience.",
+  "images": [
+    "/img/tea/strawberry.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 8,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "65644ad128fce034985e34cb"
+  },
+  "name": "Bubble Lychee Tea",
+  "desc": "Sweet lychee meets bubbles in our refreshing Bubble Lychee Tea.",
+  "images": [
+    "/img/tea/lychee.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 6,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "656455c828fce034985e34d0"
+  },
+  "name": "Strawberry Juice",
+  "desc": "Pure joy: Strawberry Juice, a burst of luscious sweetness in every sip for fruity delight.",
+  "images": [
+    "/img/juice/strawberry.png"
+  ],
+  "categoryId": "656455a128fce034985e34cf",
+  "basePrice": 4,
+  "category": "Juice"
+},
+{
+  "_id": {
+    "$oid": "6564561028fce034985e34d1"
+  },
+  "name": "Peach Juice",
+  "desc": "Sip sunshine: Peach Juice, a burst of ripe peach sweetness for a refreshing, fruity indulgence.",
+  "images": [
+    "/img/juice/peach.png"
+  ],
+  "categoryId": "656455a128fce034985e34cf",
+  "basePrice": 4,
+  "category": "Juice"
+},
+{
+  "_id": {
+    "$oid": "659a50d0271f68699e191526"
+  },
+  "name": "Test Product 2",
+  "desc": "Crisp and bubbly, our Apple Bubble Tea is pure refreshment.",
+  "images": [
+    "/img/tea/apple.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 1,
+  "category": "Tea"
+},
+{
+  "_id": {
+    "$oid": "659a50f3271f68699e191528"
+  },
+  "name": "Test Product 3",
+  "desc": "Exotic bliss: Bubble Dragon Fruit Tea fuses dragon fruit with bubbles for a refreshing sip.",
+  "images": [
+    "/img/tea/dragon-fruit.png"
+  ],
+  "categoryId": "6564439428fce034985e34bb",
+  "basePrice": 1,
+  "category": "Tea"
+}]

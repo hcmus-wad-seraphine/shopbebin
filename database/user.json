@@ -1,0 +1,90 @@
+[
+  {
+    "_id": {
+      "$oid": "656e9fc8a8511be6f0c96ff2"
+    },
+    "email": "123@123",
+    "phone": "123",
+    "passwordHash": "$2a$10$iND.TtU4i6ahTY.irHbu6.CAI5mLADkB97SUmzmwynQyN9ZcS6uqS",
+    "role": "USER",
+    "addresses": [
+      {
+        "unitNumber": "18bis/33",
+        "street": "Nguyen Thi Minh Khai",
+        "district": "Quan 1",
+        "city": "Ho Chi Minh"
+      },
+      {
+        "unitNumber": "260/1c",
+        "street": "Nguyen Thai Binh",
+        "district": "Tan Binh",
+        "city": "Ho Chi Minh"
+      }
+    ],
+    "name": "Hieu",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/shopbebin-e4fe7.appspot.com/o/users%2F656e9fc8a8511be6f0c96ff2?alt=media&token=ee3e42e9-ceaa-43b5-b5b2-eb079c5d7d72",
+    "cart": [
+      {
+        "metadataId": "65644aa928fce034985e34ca",
+        "name": "Bubble Taro Tea",
+        "image": "/img/tea/taro.png",
+        "price": 4,
+        "sizeName": "S",
+        "toppingNames": [],
+        "quantity": 1
+      },
+      {
+        "metadataId": "6564562928fce034985e34d2",
+        "name": "Mango Juice",
+        "image": "/img/juice/mango.png",
+        "price": 1,
+        "sizeName": "S",
+        "toppingNames": [],
+        "quantity": 1
+      }
+    ],
+    "isBanned": false
+  },
+  {
+    "_id": {
+      "$oid": "6596d16dfc1462a8fc7cade9"
+    },
+    "email": "admin@shopbebin.com",
+    "phone": "321",
+    "passwordHash": "$2a$10$ywdtnaU6DNr5djvSr.lyteoswjiM71PnYTveMbJuMsR8zMg06bqMy",
+    "role": "ADMIN",
+    "addresses": [
+      {
+        "unitNumber": "260/1C",
+        "street": "Nguyen Thai Binh",
+        "district": "Tan Binh",
+        "city": "Ho Chi Minh"
+      }
+    ],
+    "name": "Mthu",
+    "avatar": "https://picsum.photos/200",
+    "cart": [],
+    "isBanned": false
+  },
+  {
+    "_id": {
+      "$oid": "659a8579c420e5c2f0743a7c"
+    },
+    "email": "hieudeptrai@gmail.com",
+    "phone": "0123123123",
+    "passwordHash": "$2a$10$fJAw5QrpU1w.fmuRhpbIw.lcBf957lOvLu8BcB4jEdg/yEyIeK8Sm",
+    "role": "USER",
+    "name": "Hieu Dep Trai",
+    "avatar": "/img/default_avatar.jpg",
+    "isBanned": false,
+    "addresses": [
+      {
+        "unitNumber": "100",
+        "street": "Hai Ba Trung",
+        "district": "District 1",
+        "city": "Ho Chi Minh City"
+      }
+    ],
+    "cart": []
+  }
+]

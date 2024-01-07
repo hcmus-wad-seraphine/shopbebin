@@ -1,0 +1,334 @@
+[{
+  "_id": {
+    "$oid": "6594f37382fae1c8b722a8c1"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "REVIEWED",
+  "price": 20,
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2024-01-03T05:41:07.047Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "656444e328fce034985e34c2",
+      "name": "Bubble Strawberry Smoothie",
+      "image": "/img/smoothie/strawberry.png",
+      "price": 10,
+      "sizeName": "L",
+      "toppingNames": [
+        "White bubble",
+        "Strawberry",
+        "Cheese cream"
+      ],
+      "quantity": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6594f43d566b61ad2f31b7df"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "REVIEWED",
+  "price": 14,
+  "paymentMethod": "INTERNET_BANKING",
+  "createdAt": {
+    "$date": "2024-01-03T05:44:29.900Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564561028fce034985e34d1",
+      "name": "Peach Juice",
+      "image": "/img/juice/peach.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6595176272b27361b849d137"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "DELIVERED",
+  "price": 42,
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2024-01-03T08:14:26.558Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564576a28fce034985e34d9",
+      "name": "Black Milktea",
+      "image": "/img/milktea/black-tea.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 2
+    },
+    {
+      "metadataId": "656455c828fce034985e34d0",
+      "name": "Strawberry Juice",
+      "image": "/img/juice/strawberry.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    },
+    {
+      "metadataId": "6564562928fce034985e34d2",
+      "name": "Mango Juice",
+      "image": "/img/juice/mango.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    },
+    {
+      "metadataId": "656444e328fce034985e34c2",
+      "name": "Bubble Strawberry Smoothie",
+      "image": "/img/smoothie/strawberry.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    },
+    {
+      "metadataId": "6564561028fce034985e34d1",
+      "name": "Peach Juice",
+      "image": "/img/juice/peach.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 2
+    },
+    {
+      "metadataId": "6564577d28fce034985e34da",
+      "name": "Red Thai Milktea",
+      "image": "/img/milktea/red-thailand.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ],
+  "reviewId": null
+},
+{
+  "_id": {
+    "$oid": "65951e56058a194cf01ddd84"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "REVIEWED",
+  "price": 14,
+  "paymentMethod": "INTERNET_BANKING",
+  "createdAt": {
+    "$date": "2024-01-03T08:44:06.161Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564562928fce034985e34d2",
+      "name": "Mango Juice",
+      "image": "/img/juice/mango.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "65963aba9417db4131b6fa35"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "DELIVERED",
+  "price": 14,
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2024-01-04T04:57:30.252Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564562928fce034985e34d2",
+      "name": "Mango Juice",
+      "image": "/img/juice/mango.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ],
+  "isReviewed": false
+},
+{
+  "_id": {
+    "$oid": "65963d7bfdded5b2f100e175"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "DELIVERING",
+  "price": 14,
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2024-01-04T05:09:15.199Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564576a28fce034985e34d9",
+      "name": "Black Milktea",
+      "image": "/img/milktea/black-tea.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ],
+  "reviewId": null
+},
+{
+  "_id": {
+    "$oid": "6596861eff72f2c8e060c4e7"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "REVIEWED",
+  "price": 14,
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2024-01-04T10:19:10.819Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564577d28fce034985e34da",
+      "name": "Red Thai Milktea",
+      "image": "/img/milktea/red-thailand.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "659686d0a280f887d5aa6188"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "REVIEWED",
+  "price": 14,
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2024-01-04T10:22:08.583Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "6564577d28fce034985e34da",
+      "name": "Red Thai Milktea",
+      "image": "/img/milktea/red-thailand.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ],
+  "reviewId": null
+},
+{
+  "_id": {
+    "$oid": "6596904c5ca00928177b8d38"
+  },
+  "userId": {
+    "$oid": "656e9fc8a8511be6f0c96ff2"
+  },
+  "status": "CANCELLED",
+  "price": 14,
+  "paymentMethod": "COD",
+  "isReviewed": false,
+  "createdAt": {
+    "$date": "2024-01-04T11:02:36.384Z"
+  },
+  "shippingAddress": {
+    "unitNumber": "260/1C",
+    "street": "Nguyen Thai Binh",
+    "district": "Tan Binh",
+    "city": "Ho Chi Minh"
+  },
+  "cart": [
+    {
+      "metadataId": "65644aa928fce034985e34ca",
+      "name": "Bubble Taro Tea",
+      "image": "/img/tea/taro.png",
+      "price": 4,
+      "sizeName": "S",
+      "toppingNames": [],
+      "quantity": 1
+    }
+  ],
+  "reviewId": null
+}]

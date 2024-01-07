@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "656462d228fce034985e3533"
+  },
+  "name": "Black bubble",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e3534"
+  },
+  "name": "White bubble",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e3535"
+  },
+  "name": "Jelly",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e3536"
+  },
+  "name": "Cheese cream",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e3537"
+  },
+  "name": "Strawberry",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e3538"
+  },
+  "name": "Peach",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e3539"
+  },
+  "name": "Lychee",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e353a"
+  },
+  "name": "Apple",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e353b"
+  },
+  "name": "Lemon",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e353c"
+  },
+  "name": "Mango",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e353d"
+  },
+  "name": "Taro",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e353e"
+  },
+  "name": "Almond",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "656462d228fce034985e353f"
+  },
+  "name": "Dragon Fruit",
+  "desc": "",
+  "image": "",
+  "price": 1,
+  "stock": 100
+}]

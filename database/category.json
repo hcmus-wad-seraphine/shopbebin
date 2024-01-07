@@ -1,0 +1,54 @@
+[{
+  "_id": {
+    "$oid": "6564431328fce034985e34b9"
+  },
+  "name": "Ice Cream",
+  "desc": "IC Desc",
+  "image": "",
+  "itemCount": 10
+},
+{
+  "_id": {
+    "$oid": "6564435728fce034985e34ba"
+  },
+  "name": "Milktea",
+  "desc": "",
+  "image": "",
+  "itemCount": 10
+},
+{
+  "_id": {
+    "$oid": "6564439428fce034985e34bb"
+  },
+  "name": "Tea",
+  "desc": "",
+  "image": "",
+  "itemCount": 10
+},
+{
+  "_id": {
+    "$oid": "656443cc28fce034985e34bc"
+  },
+  "name": "Coffee",
+  "desc": "",
+  "image": "",
+  "itemCount": 10
+},
+{
+  "_id": {
+    "$oid": "6564445928fce034985e34be"
+  },
+  "name": "Smoothie",
+  "desc": "",
+  "image": "",
+  "itemCount": 10
+},
+{
+  "_id": {
+    "$oid": "656455a128fce034985e34cf"
+  },
+  "name": "Juice",
+  "desc": "",
+  "image": "",
+  "itemCount": 10
+}]

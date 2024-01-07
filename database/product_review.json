@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "656ef6a4bd9c92676e117a81"
+  },
+  "reviewMetadataId": {
+    "$oid": "656ef510bd9c92676e117a7d"
+  },
+  "productMetadataId": {
+    "$oid": "656446c328fce034985e34c5"
+  }
+},
+{
+  "_id": {
+    "$oid": "656f101fbd9c92676e117a87"
+  },
+  "reviewMetadataId": {
+    "$oid": "656f0fa4bd9c92676e117a85"
+  },
+  "productMetadataId": {
+    "$oid": "656446c328fce034985e34c5"
+  }
+}]
