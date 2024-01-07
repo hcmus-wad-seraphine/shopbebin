@@ -1,5 +1,5 @@
 import { type ShopbebinProduct } from "@models/interface";
-import { type ProductSize, Size, type ToppingMetadata } from "@prisma/client";
+import { Size, type ToppingMetadata } from "@prisma/client";
 import { generateMongoObjectId } from "@utils/objectId";
 import { type FC, useState } from "react";
 
@@ -20,6 +20,8 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
 }) => {
   const [product, setProduct] = useState<ShopbebinProduct>(defaultProduct);
 
+  const currentSizes = product.availableSizes.map((size) => size.size);
+
   const handleBuild = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -31,8 +33,6 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
   };
 
   const id = product?.id ?? generateMongoObjectId();
-  const allAvailableSizes = defaultProduct?.availableSizes ?? [];
-  const sizeNames = product.availableSizes.map((size) => size.size);
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({
@@ -62,31 +62,66 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
     });
   };
 
-  const handleChangeSizes = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const options = e.target.options;
-    const selectedSizeNames: string[] = [];
+  const handleChangeSize = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const size = e.target.value as Size;
 
-    for (let i = 0; i < options.length; i++) {
-      const option = options[i];
-      if (option.selected) {
-        selectedSizeNames.push(option.value);
-      }
+    if (e.target.checked) {
+      setProduct({
+        ...product,
+        availableSizes: [
+          ...product.availableSizes,
+          {
+            id: generateMongoObjectId(),
+            size,
+            price: 0,
+            productMetadataId: product.id,
+            stock: 0,
+          },
+        ],
+      });
+    } else {
+      setProduct({
+        ...product,
+        availableSizes: product.availableSizes.filter(
+          (availableSize) => availableSize.size !== size,
+        ),
+      });
     }
+  };
 
-    const selectedSizes = selectedSizeNames
-      .map((sizeName) => {
-        const size = allAvailableSizes.find((size) => size.size === sizeName);
-        if (!size) {
-          return null;
-        }
-
-        return size;
-      })
-      .filter((size) => size !== null) as ProductSize[];
+  const handleSizePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const size = e.target.id.split("-")[2] as Size;
 
     setProduct({
       ...product,
-      availableSizes: selectedSizes,
+      availableSizes: product.availableSizes.map((availableSize) => {
+        if (availableSize.size === size) {
+          return {
+            ...availableSize,
+            price: Number(e.target.value),
+          };
+        }
+
+        return availableSize;
+      }),
+    });
+  };
+
+  const handleSizeStockChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const size = e.target.id.split("-")[2] as Size;
+
+    setProduct({
+      ...product,
+      availableSizes: product.availableSizes.map((availableSize) => {
+        if (availableSize.size === size) {
+          return {
+            ...availableSize,
+            stock: Number(e.target.value),
+          };
+        }
+
+        return availableSize;
+      }),
     });
   };
 
@@ -181,22 +216,57 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
         >
           Sizes
         </label>
-        <select
-          multiple
-          className="col-span-3"
-          value={sizeNames}
-          onChange={handleChangeSizes}
-          id={`${id}-sizes`}
-        >
+        <div className="col-span-3 flex flex-col gap-8">
           {Object.values(Size).map((size) => (
-            <option
+            <div
               key={size}
-              value={size}
+              className="flex items-center gap-8"
             >
-              {size}
-            </option>
+              <div className="flex-row items-center gap-2">
+                <input
+                  type="checkbox"
+                  id={`${id}-size-${size}`}
+                  checked={currentSizes.includes(size) ?? false}
+                  value={size}
+                  onChange={handleChangeSize}
+                />
+                <label htmlFor={`${id}-size-${size}`}>{size}</label>
+              </div>
+
+              <div className="flex-row items-center gap-2">
+                <label htmlFor={`${id}-size-${size}-price`}>Price</label>
+                <span> +</span>
+                <input
+                  type="number"
+                  className="w-16"
+                  id={`${id}-size-${size}-price`}
+                  value={
+                    product.availableSizes.find((availableSize) => availableSize.size === size)
+                      ?.price ?? 0
+                  }
+                  min={0}
+                  onChange={handleSizePriceChange}
+                />
+                <span>$</span>
+              </div>
+
+              <div className="flex-row items-center gap-2">
+                <label htmlFor={`${id}-size-${size}-stock`}>Stock</label>
+                <input
+                  type="number"
+                  className="w-16"
+                  id={`${id}-size-${size}-stock`}
+                  value={
+                    product.availableSizes.find((availableSize) => availableSize.size === size)
+                      ?.stock ?? 0
+                  }
+                  min={0}
+                  onChange={handleSizeStockChange}
+                />
+              </div>
+            </div>
           ))}
-        </select>
+        </div>
 
         <label
           htmlFor={`${id}-toppings`}
