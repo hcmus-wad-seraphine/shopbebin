@@ -107,6 +107,29 @@ const ProductsPage = () => {
     });
   };
 
+  const handleDeleteProduct = (product: ShopbebinProduct) => {
+    const deleteProduct = async () => {
+      if (!appState.profile) {
+        return;
+      }
+
+      const response = await fetch(`/api/products/${product.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${appState.profile.token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        setProducts((products) => products.filter((p) => p.id !== product.id));
+      }
+    };
+
+    deleteProduct().catch((err) => {
+      console.log(err);
+    });
+  };
+
   return (
     <div className="flex-col gap-8 w-full">
       <Title text="Products" />
@@ -158,6 +181,7 @@ const ProductsPage = () => {
           categories={categories?.map((c) => c.name) ?? []}
           toppings={toppings ?? []}
           onUpdateProduct={handleUpdateProduct}
+          onDeleteProduct={handleDeleteProduct}
         />
       ))}
 

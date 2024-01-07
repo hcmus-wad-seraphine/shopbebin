@@ -1,7 +1,7 @@
 import { type ShopbebinProduct, type ShopbebinTopping } from "@models/interface";
 import { type ProductSize, type ToppingMetadata } from "@prisma/client";
 import { shortenId } from "@utils/converter";
-import { ModalActions, ModalHeader, modalStyles } from "@views/components/Modal";
+import { ModalHeader, modalStyles } from "@views/components/Modal";
 import { type FC, useState } from "react";
 import Modal from "react-modal";
 
@@ -12,6 +12,7 @@ interface ProductRowProps {
   categories: string[];
   toppings: ToppingMetadata[];
   onUpdateProduct: (product: ShopbebinProduct) => void;
+  onDeleteProduct: (product: ShopbebinProduct) => void;
 }
 
 const sizesToString = (sizes: ProductSize[]) => {
@@ -28,7 +29,13 @@ const toppingsToString = (toppings: ShopbebinTopping[]) => {
   return toppings.map((topping) => `${topping.topping.name}`).join(", ");
 };
 
-const ProductRow: FC<ProductRowProps> = ({ product, categories, toppings, onUpdateProduct }) => {
+const ProductRow: FC<ProductRowProps> = ({
+  product,
+  categories,
+  toppings,
+  onUpdateProduct,
+  onDeleteProduct,
+}) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -87,15 +94,17 @@ const ProductRow: FC<ProductRowProps> = ({ product, categories, toppings, onUpda
           closeModal={closeDeleteModal}
         />
 
-        <p className="py-8">Are you sure you want to delete {product.name}?</p>
+        <p className="py-8 text-center">Are you sure you want to delete {product.name}?</p>
 
-        <ModalActions
-          actionName="Delete"
-          onAction={() => {
-            console.log("--> delete", product.name);
+        <button
+          className="mx-auto px-2 py-1 w-[120px] border border-primary rounded-md hover:bg-primary hover:text-white transition"
+          onClick={() => {
+            onDeleteProduct(product);
+            closeDeleteModal();
           }}
-          closeModal={closeDeleteModal}
-        />
+        >
+          Delete
+        </button>
       </Modal>
 
       <Modal
