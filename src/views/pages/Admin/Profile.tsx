@@ -73,14 +73,14 @@ const AdminProfile = () => {
       key="2"
       isDisabled={!isEditMode}
       title="Phone number"
-      value={phone}
+      value={newPhone}
       onChange={setNewPhone}
     />,
     <InfoItem
       key="3"
       isDisabled={!isEditMode}
       title="Email"
-      value={email}
+      value={newEmail}
       onChange={setNewEmail}
     />,
   ];
