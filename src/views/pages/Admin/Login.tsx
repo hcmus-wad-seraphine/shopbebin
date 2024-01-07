@@ -59,25 +59,26 @@ const AdminLoginPage = () => {
         <FormInput
           label="Email or Phone number"
           name="login--email-phone"
-          className="md:min-w-[600px]"
+          className="md:min-w-[600px] col-span-2"
         />
 
         <FormInput
           label="Password"
           name="login--password"
           type="password"
-          className="md:min-w-[600px]"
+          className="md:min-w-[600px] col-span-2"
         />
 
         {err != null && (
           <CallOut
             type="error"
             title={err}
+            className="col-span-2"
           />
         )}
 
         <button
-          className="bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
+          className="col-span-2 mx-auto w-fit bg-secondary text-white rounded-full px-10 py-2 justify-center self-center"
           type="submit"
         >
           Login
