@@ -8,7 +8,7 @@ import { createUser, getUserByEmail, getUserByPhone } from "../models/users";
 import { hashPassword } from "./utils";
 
 export const register: RequestHandler = (req, res) => {
-  const { email, phone, password } = req.body;
+  const { email, phone, name, password, unitNumber, street, district, city } = req.body;
 
   const passwordHash = hashPassword(password);
 
@@ -17,10 +17,17 @@ export const register: RequestHandler = (req, res) => {
     email,
     phone,
     passwordHash,
-    name: email,
-    avatar: "https://picsum.photos/200",
+    name,
+    avatar: "/img/default_avatar.jpg",
     role: Role.USER,
-    addresses: [],
+    addresses: [
+      {
+        unitNumber,
+        street,
+        district,
+        city,
+      },
+    ],
     cart: [],
     isBanned: false,
   };
