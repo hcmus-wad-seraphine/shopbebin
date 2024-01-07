@@ -1,4 +1,5 @@
 import { type Category } from "@prisma/client";
+import { shortenId } from "@utils/converter";
 import { appState } from "@views/valtio";
 import { useState } from "react";
 
@@ -52,11 +53,11 @@ const CategoryRow = ({ category, onDelete }: Props) => {
 
   return (
     <div className="grid grid-cols-8 gap-4 font-semibold">
-      <div className="col-span-2">{id}</div>
+      <div className="col-span-2 font-normal">{shortenId(id)}</div>
       {isEditing ? (
         <input
           type="text"
-          className="col-span-2"
+          className="col-span-2 font-normal"
           value={nameState}
           autoFocus={true}
           onChange={(text) => {
@@ -64,9 +65,9 @@ const CategoryRow = ({ category, onDelete }: Props) => {
           }}
         />
       ) : (
-        <div className="col-span-2">{nameState}</div>
+        <div className="col-span-2 font-normal">{nameState}</div>
       )}
-      <div className="col-span-2">{itemCount}</div>
+      <div className="col-span-2 font-normal">{itemCount}</div>
       <button
         className="col-span-1"
         onClick={() => {
@@ -76,13 +77,13 @@ const CategoryRow = ({ category, onDelete }: Props) => {
           setIsEditing(!isEditing);
         }}
       >
-        <i className="fa-solid fa-pen hover:text-secondary"></i>
+        <i className="fa-solid fa-pen text-primary hover:text-secondary flex self-start"></i>
       </button>
       <button
         className="col-span-1"
         onClick={handleDelete}
       >
-        <i className="fa-solid fa-trash hover:text-secondary"></i>
+        <i className="fa-solid fa-trash text-primary hover:text-secondary flex self-start"></i>
       </button>
     </div>
   );
