@@ -4,11 +4,10 @@ import { useState } from "react";
 
 interface Props {
   category: Category;
-  onChange: (name: string) => void;
-  onDelete: () => void;
+  onDelete: (id: string) => void;
 }
 
-const CategoryRow = ({ category, onChange, onDelete }: Props) => {
+const CategoryRow = ({ category, onDelete }: Props) => {
   const [currentCategory, setCurrentCategory] = useState<Category>(category);
   const { id, name, itemCount } = currentCategory;
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -30,6 +29,23 @@ const CategoryRow = ({ category, onChange, onDelete }: Props) => {
     };
 
     handleUpdateCategory().catch((err) => {
+      console.log(err);
+    });
+  };
+
+  const handleDelete = () => {
+    const handleDeleteCategory = async () => {
+      await fetch(`/api/categories/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${appState.profile?.token}`,
+        },
+      });
+    };
+
+    onDelete(id);
+
+    handleDeleteCategory().catch((err) => {
       console.log(err);
     });
   };
@@ -62,7 +78,10 @@ const CategoryRow = ({ category, onChange, onDelete }: Props) => {
       >
         <i className="fa-solid fa-pen hover:text-secondary"></i>
       </button>
-      <button className="col-span-1">
+      <button
+        className="col-span-1"
+        onClick={handleDelete}
+      >
         <i className="fa-solid fa-trash hover:text-secondary"></i>
       </button>
     </div>

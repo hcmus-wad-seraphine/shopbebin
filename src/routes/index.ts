@@ -50,5 +50,6 @@ router.post("/users/update", requireAdminAuth, profilesController.updateProfile)
 
 router.get("/categories", categoriesController.fetchCategories);
 router.post("/categories", requireAdminAuth, categoriesController.changeCategory);
+router.delete("/categories/:id", requireAdminAuth, categoriesController.removeCategory);
 
 export default router;
