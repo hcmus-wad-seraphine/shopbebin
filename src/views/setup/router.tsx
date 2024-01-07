@@ -7,7 +7,6 @@ import { createBrowserRouter, redirect } from "react-router-dom";
 
 import AdminRoot from "../pages/Admin";
 import AccountsPage from "../pages/Admin/Accounts";
-import GreetingPage from "../pages/Admin/Greeting";
 import LoginPage from "../pages/Admin/Login";
 import OrdersPage from "../pages/Admin/Orders";
 import ProductsPage from "../pages/Admin/Products";
@@ -104,17 +103,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <GreetingPage />,
+        element: <AdminDashboard />,
         loader: adminAuthLoader,
       },
       {
         path: "profile",
         element: <AdminProfile />,
-        loader: adminAuthLoader,
-      },
-      {
-        path: "dashboard",
-        element: <AdminDashboard />,
         loader: adminAuthLoader,
       },
       {
