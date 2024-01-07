@@ -52,21 +52,21 @@ const AdminLoginPage = () => {
   };
 
   return (
-    <div className="w-full h-screen place-content-center">
+    <div className="w-full place-content-center">
       <FormContainer onSubmit={handleSubmit}>
         <h2 className="font-semibold text-xl ">Login</h2>
 
         <FormInput
           label="Email or Phone number"
           name="login--email-phone"
-          className="md:min-w-[600px] col-span-2"
+          className="md:min-w-[600px] col-span-2 h-fit"
         />
 
         <FormInput
           label="Password"
           name="login--password"
           type="password"
-          className="md:min-w-[600px] col-span-2"
+          className="md:min-w-[600px] col-span-2 h-fit"
         />
 
         {err != null && (
