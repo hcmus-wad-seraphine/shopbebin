@@ -11,6 +11,7 @@ interface ProductRowProps {
   product: ShopbebinProduct;
   categories: string[];
   toppings: ToppingMetadata[];
+  onUpdateProduct: (product: ShopbebinProduct) => void;
 }
 
 const sizesToString = (sizes: ProductSize[]) => {
@@ -27,7 +28,7 @@ const toppingsToString = (toppings: ShopbebinTopping[]) => {
   return toppings.map((topping) => `${topping.topping.name}`).join(", ");
 };
 
-const ProductRow: FC<ProductRowProps> = ({ product, categories, toppings }) => {
+const ProductRow: FC<ProductRowProps> = ({ product, categories, toppings, onUpdateProduct }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -114,7 +115,8 @@ const ProductRow: FC<ProductRowProps> = ({ product, categories, toppings }) => {
           categories={categories}
           toppings={toppings}
           onBuild={(product) => {
-            console.log("--> update", product);
+            onUpdateProduct(product);
+            closeEditModal();
           }}
         />
       </Modal>

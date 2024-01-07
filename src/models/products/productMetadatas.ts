@@ -180,10 +180,22 @@ export const updateProduct = async (product: ShopbebinProduct) => {
     data: {
       ...data,
       availableSizes: {
-        set: availableSizes,
+        upsert: availableSizes.map(({ id, productMetadataId, ...data }) => ({
+          where: {
+            id,
+          },
+          update: data,
+          create: data,
+        })),
       },
       availableToppings: {
-        set: availableToppings,
+        upsert: availableToppings.map(({ id, productMetadataId, topping, ...data }) => ({
+          where: {
+            id,
+          },
+          update: data,
+          create: data,
+        })),
       },
       reviews: {
         set: product.reviews,

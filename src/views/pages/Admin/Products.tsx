@@ -73,6 +73,40 @@ const ProductsPage = () => {
     });
   }, [limit, offset, category, debouncedSearch]);
 
+  const handleUpdateProduct = (product: ShopbebinProduct) => {
+    const putProduct = async () => {
+      if (!appState.profile) {
+        return;
+      }
+
+      const response = await fetch(`/api/products/${product.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${appState.profile.token}`,
+        },
+        body: JSON.stringify(product),
+      });
+
+      if (response.status === 200) {
+        const updatedProduct = await response.json();
+        setProducts((products) =>
+          products.map((p) => {
+            if (p.id === updatedProduct.id) {
+              return updatedProduct;
+            }
+
+            return p;
+          }),
+        );
+      }
+    };
+
+    putProduct().catch((err) => {
+      console.log(err);
+    });
+  };
+
   return (
     <div className="flex-col gap-8 w-full">
       <Title text="Products" />
@@ -123,6 +157,7 @@ const ProductsPage = () => {
           product={product}
           categories={categories?.map((c) => c.name) ?? []}
           toppings={toppings ?? []}
+          onUpdateProduct={handleUpdateProduct}
         />
       ))}
 
