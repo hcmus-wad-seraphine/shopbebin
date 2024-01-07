@@ -112,7 +112,7 @@ const AccountsPage = () => {
               Ban
             </button>
           </div>
-          <div className="flex-col">
+          <div className="flex-col gap-3">
             {accounts.map((account, index) => (
               <Account
                 key={index}
@@ -136,7 +136,7 @@ const AccountsPage = () => {
               Unban
             </button>
           </div>
-          <div className="flex-col">
+          <div className="flex-col gap-3">
             {bannedAccounts.map((account, index) => (
               <Account
                 key={index}
