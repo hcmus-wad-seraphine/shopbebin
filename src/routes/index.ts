@@ -31,7 +31,9 @@ router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
 router.get("/products/toppings", productsController.fetchToppings);
 router.get("/products/:id", productsController.fetchProduct);
+router.post("/products", requireAdminAuth, productsController.postProduct);
 router.put("/products/:id", requireAdminAuth, productsController.putProduct);
+router.delete("/products/:id", requireAdminAuth, productsController.removeProduct);
 
 router.post("/checkout", requireAuth, vnpayController.handleCheckout);
 
@@ -45,7 +47,13 @@ router.post("/reviews", requireAuth, reviewsController.makeReview);
 
 router.get("/categories/total", productsController.fetchTotalCategories);
 
-router.post("/upload/avatar", requireAuth, upload.single("avatar"), storageController.uploadImage);
+router.post("/upload/avatar", requireAuth, upload.single("avatar"), storageController.uploadAvatar);
+router.post(
+  "/upload/product-images/:id",
+  requireAdminAuth,
+  upload.array("product-images"),
+  storageController.uploadProductImages,
+);
 
 router.get("/users", requireAdminAuth, usersController.fetchUsers);
 router.post("/users/update", requireAdminAuth, profilesController.updateProfile);

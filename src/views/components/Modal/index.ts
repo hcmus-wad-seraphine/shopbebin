@@ -1,6 +1,5 @@
 import type Modal from "react-modal";
 
-export { ModalActions } from "./Actions";
 export { ModalHeader } from "./Header";
 
 export const modalStyles: Modal.Styles = {

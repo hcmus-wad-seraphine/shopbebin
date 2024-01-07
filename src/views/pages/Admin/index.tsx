@@ -22,11 +22,7 @@ const NavItem = ({ to, label }: NavItemProps) => {
 
 const navItems: NavItemProps[] = [
   {
-    to: "/admin/profile",
-    label: "Profile",
-  },
-  {
-    to: "/admin/dashboard",
+    to: "/admin",
     label: "Dashboard",
   },
   {
@@ -44,6 +40,10 @@ const navItems: NavItemProps[] = [
   {
     to: "/admin/orders",
     label: "Orders management",
+  },
+  {
+    to: "/admin/profile",
+    label: "Profile",
   },
 ];
 

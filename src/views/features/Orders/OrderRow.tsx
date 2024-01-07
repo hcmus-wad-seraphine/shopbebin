@@ -53,7 +53,7 @@ const OrderRow: FC<OrderRowProps> = ({ order, updateOrder }) => {
         </div>
         <div className="col-span-1">{shortenId(order.id)}</div>
         <div className="col-span-1">{shortenId(order.userId)}</div>
-        <div className="col-span-1">{order.price}bud</div>
+        <div className="col-span-1">{order.price}</div>
         <div className="col-span-2">{addressToString(order.shippingAddress)}</div>
         <div className="col-span-2">{order.paymentMethod}</div>
         <div className="col-span-2">{new Date(order.createdAt).toLocaleString()}</div>

@@ -3,6 +3,8 @@ import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
 import {
+  createProduct,
+  deleteProduct,
   getCategories,
   getProduct,
   getProducts,
@@ -133,6 +135,26 @@ export const updateCart: RequestHandler = (req, res) => {
   });
 };
 
+export const postProduct: RequestHandler = (req, res) => {
+  const handlePatchProduct = async () => {
+    const product = req.body;
+    const updatedProduct = await createProduct(product);
+    res.json(updatedProduct);
+  };
+
+  handlePatchProduct().catch((err) => {
+    console.log("[ERROR] createProduct", err);
+
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
 export const putProduct: RequestHandler = (req, res) => {
   const handlePutProduct = async () => {
     const product = req.body;
@@ -141,6 +163,25 @@ export const putProduct: RequestHandler = (req, res) => {
   };
 
   handlePutProduct().catch((err) => {
+    console.log("[ERROR] updateProduct", err);
+
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
+export const removeProduct: RequestHandler = (req, res) => {
+  const handleDeleteProduct = async () => {
+    await deleteProduct(req.params.id);
+    res.json({ status: 200, statusText: "Product deleted successfully" });
+  };
+
+  handleDeleteProduct().catch((err) => {
     console.log("[ERROR] updateProduct", err);
 
     const errorResponse: ErrorResponse = {

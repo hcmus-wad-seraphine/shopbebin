@@ -66,7 +66,7 @@ const DetailsFeature = (product: ShopbebinProduct) => {
       <ProductInfo
         name={product.name}
         desc={product.desc}
-        price={size.price}
+        price={product.basePrice}
       />
 
       <div className="justify-start space-x-2 w-full">

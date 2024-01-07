@@ -1,7 +1,9 @@
 import { type ShopbebinProduct } from "@models/interface";
 import { Size, type ToppingMetadata } from "@prisma/client";
 import { generateMongoObjectId } from "@utils/objectId";
+import { appState } from "@views/valtio";
 import { type FC, useState } from "react";
+import { FileUploader } from "react-drag-drop-files";
 
 interface ProductBuilderProps {
   defaultProduct: ShopbebinProduct;
@@ -11,6 +13,10 @@ interface ProductBuilderProps {
   onBuild: (product: ShopbebinProduct) => void;
 }
 
+const fileTypes = ["JPG", "JPEG", "PNG", "GIF"];
+
+type ImageMap = Record<string, File | null>;
+
 const ProductBuilder: FC<ProductBuilderProps> = ({
   defaultProduct,
   buildButtonText,
@@ -19,6 +25,9 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
   onBuild,
 }) => {
   const [product, setProduct] = useState<ShopbebinProduct>(defaultProduct);
+  const [imageMaps, setImageMaps] = useState<ImageMap>(
+    Object.fromEntries(defaultProduct.images.map((image) => [image, null])),
+  );
 
   const currentSizes = product.availableSizes.map((size) => size.size);
 
@@ -29,10 +38,48 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
       return;
     }
 
-    onBuild(product);
+    const build = async () => {
+      const imagesToUpload: File[] = [];
+      const images: string[] = [];
+
+      for (const url of Object.keys(imageMaps)) {
+        if (imageMaps[url] === null) {
+          images.push(url);
+        } else {
+          imagesToUpload.push(imageMaps[url] as File);
+        }
+      }
+
+      if (imagesToUpload.length > 0) {
+        const formData = new FormData();
+        for (const image of imagesToUpload) {
+          formData.append("product-images", image);
+        }
+
+        const res = await fetch(`/api/upload/product-images/${product.id}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${appState.profile?.token}`,
+          },
+          body: formData,
+        });
+
+        const imageUrls = await res.json();
+        images.push(...imageUrls.urls);
+      }
+
+      const newProduct: ShopbebinProduct = {
+        ...product,
+        images,
+      };
+
+      onBuild(newProduct);
+    };
+
+    build().catch(console.error);
   };
 
-  const id = product?.id ?? generateMongoObjectId();
+  const id = product.id;
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({
@@ -87,6 +134,21 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
         ),
       });
     }
+  };
+
+  const handleImagesChange = (files: File[]) => {
+    if (!files) {
+      return;
+    }
+
+    const newImageMaps = { ...imageMaps };
+
+    for (const file of files) {
+      const url = URL.createObjectURL(file);
+      newImageMaps[url] = file;
+    }
+
+    setImageMaps(newImageMaps);
   };
 
   const handleSizePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,6 +221,7 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
 
   return (
     <form
+      encType="multipart/form-data"
       className="flex flex-col justify-center items-center gap-8"
       onSubmit={handleBuild}
     >
@@ -241,6 +304,52 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
             </option>
           ))}
         </select>
+
+        <label
+          htmlFor={`${id}-images`}
+          className="col-span-1"
+        >
+          Images
+        </label>
+
+        <div className="flex-col gap-2 col-span-3">
+          <FileUploader
+            multiple={true}
+            handleChange={handleImagesChange}
+            name="product-images"
+            types={fileTypes}
+          />
+
+          <div className="flex flex-row gap-2 overflow-x-scroll max-w-[400px]">
+            {Object.keys(imageMaps).map((url, idx) => (
+              <div
+                key={url}
+                className="flex-col justify-center items-center gap-2"
+              >
+                <img
+                  src={url}
+                  alt="product"
+                  className="w-24 h-24 object-cover"
+                />
+
+                {Object.keys(imageMaps).length > 1 && (
+                  <button
+                    className="rounded-full bg-primary px-2 py-1 text-sm text-white hover:bg-secondary transition"
+                    type="button"
+                    onClick={() => {
+                      const newImageMaps = { ...imageMaps };
+                      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+                      delete newImageMaps[url];
+                      setImageMaps(newImageMaps);
+                    }}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
         <label
           htmlFor={`${id}-sizes`}
