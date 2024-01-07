@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const CategoriesPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
-  const handleChange = (name: string) => {
-    console.log(name);
+  const handleDelete = (id: string) => {
+    setCategories(categories.filter((category) => category.id !== id));
   };
 
   useEffect(() => {
@@ -33,8 +33,7 @@ const CategoriesPage = () => {
         <CategoryRow
           key={category.id}
           category={category}
-          onChange={handleChange}
-          onDelete={() => {}}
+          onDelete={handleDelete}
         />
       ))}
     </div>

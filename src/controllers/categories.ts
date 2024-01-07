@@ -1,6 +1,6 @@
 import { type RequestHandler } from "express";
 
-import { getCategories, updateCategory } from "../models/products";
+import { deleteCategory, getCategories, updateCategory } from "../models/products";
 
 export const fetchCategories: RequestHandler = (req, res) => {
   const handleFetchCategories = async () => {
@@ -24,6 +24,20 @@ export const changeCategory: RequestHandler = (req, res) => {
   };
 
   handleUpdateCategory().catch((err) => {
+    console.log("[ERROR] fetchCategories", err);
+    res.status(500).json(err);
+  });
+};
+
+export const removeCategory: RequestHandler = (req, res) => {
+  const { id } = req.params;
+
+  const handleRemoveCategory = async () => {
+    await deleteCategory(id);
+    res.json();
+  };
+
+  handleRemoveCategory().catch((err) => {
     console.log("[ERROR] fetchCategories", err);
     res.status(500).json(err);
   });
