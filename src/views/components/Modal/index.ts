@@ -16,5 +16,7 @@ export const modalStyles: Modal.Styles = {
     gap: 16,
     padding: 32,
     minWidth: "50vw",
+    maxHeight: "80vh",
+    overflowY: "scroll",
   },
 };

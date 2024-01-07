@@ -1,5 +1,5 @@
 import { type ShopbebinProduct } from "@models/interface";
-import { type Category } from "@prisma/client";
+import { type Category, type ToppingMetadata } from "@prisma/client";
 import { useDebounce } from "@uidotdev/usehooks";
 import Pagination from "@views/components/Pagination";
 import Title from "@views/components/Title";
@@ -12,6 +12,7 @@ const ProductsPage = () => {
   const [products, setProducts] = useState<ShopbebinProduct[]>([]);
   const [categories, setCategories] = useState<Category[]>();
   const [category, setCategory] = useState<Category | null>(null);
+  const [toppings, setToppings] = useState<ToppingMetadata[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [offset, setOffset] = useState(0);
   const [search, setSearch] = useState("");
@@ -28,7 +29,17 @@ const ProductsPage = () => {
       setCategories(cate);
     };
 
+    const fetchToppings = async () => {
+      const data = await fetch("/api/products/toppings");
+      const toppings = await data.json();
+      setToppings(toppings);
+    };
+
     fetchCategories().catch((err) => {
+      console.log(err);
+    });
+
+    fetchToppings().catch((err) => {
       console.log(err);
     });
   }, []);
@@ -111,6 +122,7 @@ const ProductsPage = () => {
           key={product.id}
           product={product}
           categories={categories?.map((c) => c.name) ?? []}
+          toppings={toppings ?? []}
         />
       ))}
 

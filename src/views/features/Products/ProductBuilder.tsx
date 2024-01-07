@@ -125,6 +125,38 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
     });
   };
 
+  const handleToppingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const toppingId = e.target.id.split("-")[2];
+
+    if (e.target.checked) {
+      const topping = toppings.find((topping) => topping.id === toppingId);
+
+      if (!topping) {
+        return;
+      }
+
+      setProduct({
+        ...product,
+        availableToppings: [
+          ...product.availableToppings,
+          {
+            id: generateMongoObjectId(),
+            productMetadataId: product.id,
+            toppingMetadataId: toppingId,
+            topping,
+          },
+        ],
+      });
+    } else {
+      setProduct({
+        ...product,
+        availableToppings: product.availableToppings.filter(
+          (availableTopping) => availableTopping.id !== toppingId,
+        ),
+      });
+    }
+  };
+
   return (
     <form
       className="flex flex-col justify-center items-center gap-8"
@@ -274,6 +306,26 @@ const ProductBuilder: FC<ProductBuilderProps> = ({
         >
           Toppings
         </label>
+        <div className="col-span-3 flex flex-col gap-2 max-h-[200px] overflow-y-scroll">
+          {toppings.map((topping) => (
+            <div
+              key={topping.id}
+              className="flex flex-row items-center gap-2"
+            >
+              <input
+                type="checkbox"
+                id={`${id}-topping-${topping.id}`}
+                checked={
+                  product.availableToppings.find(
+                    (availableTopping) => availableTopping.topping.id === topping.id,
+                  ) !== undefined
+                }
+                onChange={handleToppingChange}
+              />
+              <label htmlFor={`${id}-topping-${topping.id}`}>{topping.name}</label>
+            </div>
+          ))}
+        </div>
       </div>
 
       <button

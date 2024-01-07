@@ -29,6 +29,7 @@ router.post("/update-cart", requireAuth, productsController.updateCart);
 
 router.get("/products", productsController.fetchProducts);
 router.get("/products/categories/:category", productsController.fetchProducts);
+router.get("/products/toppings", productsController.fetchToppings);
 router.get("/products/:id", productsController.fetchProduct);
 
 router.post("/checkout", requireAuth, vnpayController.handleCheckout);

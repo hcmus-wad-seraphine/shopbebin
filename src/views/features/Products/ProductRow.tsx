@@ -1,5 +1,5 @@
 import { type ShopbebinProduct, type ShopbebinTopping } from "@models/interface";
-import { type ProductSize } from "@prisma/client";
+import { type ProductSize, type ToppingMetadata } from "@prisma/client";
 import { shortenId } from "@utils/converter";
 import { ModalActions, ModalHeader, modalStyles } from "@views/components/Modal";
 import { type FC, useState } from "react";
@@ -10,6 +10,7 @@ import ProductBuilder from "./ProductBuilder";
 interface ProductRowProps {
   product: ShopbebinProduct;
   categories: string[];
+  toppings: ToppingMetadata[];
 }
 
 const sizesToString = (sizes: ProductSize[]) => {
@@ -26,7 +27,7 @@ const toppingsToString = (toppings: ShopbebinTopping[]) => {
   return toppings.map((topping) => `${topping.topping.name}`).join(", ");
 };
 
-const ProductRow: FC<ProductRowProps> = ({ product, categories }) => {
+const ProductRow: FC<ProductRowProps> = ({ product, categories, toppings }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -111,9 +112,9 @@ const ProductRow: FC<ProductRowProps> = ({ product, categories }) => {
           defaultProduct={product}
           buildButtonText="Update"
           categories={categories}
-          toppings={[]}
+          toppings={toppings}
           onBuild={(product) => {
-            console.log("--> update", product.name);
+            console.log("--> update", product);
           }}
         />
       </Modal>

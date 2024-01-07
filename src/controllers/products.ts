@@ -2,7 +2,7 @@ import { type CartItem, type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { type ErrorResponse } from "react-router-dom";
 
-import { getCategories, getProduct, getProducts } from "../models/products";
+import { getCategories, getProduct, getProducts, getToppings } from "../models/products";
 import { updateUser } from "../models/users";
 
 export const fetchProduct: RequestHandler = (req, res) => {
@@ -69,6 +69,23 @@ export const fetchTotalCategories: RequestHandler = (req, res) => {
   };
 
   handleFetchTotalCategories().catch((err) => {
+    const errorResponse: ErrorResponse = {
+      status: 500,
+      statusText: "Internal server error",
+      data: err,
+    };
+
+    res.status(500).json(errorResponse);
+  });
+};
+
+export const fetchToppings: RequestHandler = (req, res) => {
+  const handleFetchToppings = async () => {
+    const toppings = await getToppings();
+    res.json(toppings);
+  };
+
+  handleFetchToppings().catch((err) => {
     const errorResponse: ErrorResponse = {
       status: 500,
       statusText: "Internal server error",
