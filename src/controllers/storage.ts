@@ -1,7 +1,7 @@
 import { type User } from "@prisma/client";
 import { type RequestHandler } from "express";
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes, type UploadResult } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
-export const uploadImage: RequestHandler = (req, res) => {
+export const uploadAvatar: RequestHandler = (req, res) => {
   const handleUploadImage = async (file: Express.Multer.File, path: string) => {
     const avatarRef = ref(storage, path);
     await uploadBytes(avatarRef, file.buffer);
@@ -37,6 +37,47 @@ export const uploadImage: RequestHandler = (req, res) => {
       res.json({ url });
     })
     .catch((err) => {
+      res.status(500).json({ err });
+    });
+};
+
+export const uploadProductImages: RequestHandler = (req, res) => {
+  const handleUploadImage = async () => {
+    const images = req.files;
+
+    if (!images) {
+      return res.status(400).json({ err: "No file uploaded" });
+    }
+
+    const productRef = ref(storage, req.params.id);
+
+    const uploadPromises: Array<Promise<UploadResult>> = [];
+
+    Object.values(images).forEach((image) => {
+      const imageRef = ref(productRef, image.originalname);
+      uploadPromises.push(uploadBytes(imageRef, image.buffer));
+    });
+
+    await Promise.all(uploadPromises);
+
+    const getUrlPromises: Array<Promise<string>> = [];
+
+    Object.values(images).forEach((image) => {
+      const imageRef = ref(productRef, image.originalname);
+      getUrlPromises.push(getDownloadURL(imageRef));
+    });
+
+    const urls = await Promise.all(getUrlPromises);
+
+    return urls;
+  };
+
+  handleUploadImage()
+    .then((urls) => {
+      res.json({ urls });
+    })
+    .catch((err) => {
+      console.log("[ERROR] uploadProductImages: ", err);
       res.status(500).json({ err });
     });
 };
