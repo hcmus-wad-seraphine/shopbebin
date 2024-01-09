@@ -17,7 +17,9 @@ const DetailsFeature = (product: ShopbebinProduct) => {
   const [selectedToppings, setSelectedToppings] = useState<ShopbebinTopping[]>([]);
 
   const totalPrice =
-    size.price + selectedToppings.reduce((sum, curr) => sum + curr.topping.price, 0);
+    product.basePrice +
+    size.price +
+    selectedToppings.reduce((sum, curr) => sum + curr.topping.price, 0);
 
   const handleAddToCart = () => {
     if (!profileSnap) return;
@@ -66,7 +68,7 @@ const DetailsFeature = (product: ShopbebinProduct) => {
       <ProductInfo
         name={product.name}
         desc={product.desc}
-        price={product.basePrice}
+        price={product.basePrice + size.price}
       />
 
       <div className="justify-start space-x-2 w-full">

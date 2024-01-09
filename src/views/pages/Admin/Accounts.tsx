@@ -10,6 +10,8 @@ const AccountsPage = () => {
   const [selectedBannedAccounts, setSelectedBannedAccounts] = useState<User[]>([]);
   const [role, setRole] = useState<Role | null>(null);
 
+  console.log("selectedBannedAccounts", selectedBannedAccounts);
+
   const handleUpdateAccounts = async (account: User) => {
     await fetch("/api/users/update", {
       method: "POST",
@@ -34,7 +36,7 @@ const AccountsPage = () => {
   };
 
   const handleAddToUnbanned = () => {
-    selectedAccounts.forEach((account) => {
+    selectedBannedAccounts.forEach((account) => {
       account.isBanned = false;
       handleUpdateAccounts(account).catch((err) => {
         console.log(err);
@@ -42,7 +44,9 @@ const AccountsPage = () => {
     });
 
     setAccounts([...accounts, ...selectedBannedAccounts]);
-    setBannedAccounts(accounts.filter((account) => !selectedBannedAccounts.includes(account)));
+    setBannedAccounts(
+      bannedAccounts.filter((account) => !selectedBannedAccounts.includes(account)),
+    );
   };
 
   useEffect(() => {

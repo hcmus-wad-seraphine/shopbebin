@@ -130,6 +130,8 @@ export const patchOrder: RequestHandler = (req, res) => {
       throw new Error("Order not found");
     }
 
+    console.log("--> body", req.body);
+
     const newOrder: Order = {
       ...order,
       ...req.body,

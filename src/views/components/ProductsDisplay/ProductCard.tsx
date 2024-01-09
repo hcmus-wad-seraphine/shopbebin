@@ -46,7 +46,7 @@ const ProductCard: FC<Props> = ({ product }) => {
             rounded-tl-sm triangle"
           >
             <Price
-              num={product.basePrice}
+              num={product.basePrice + product.availableSizes[0].price}
               numSize="text-lg"
             />
           </div>

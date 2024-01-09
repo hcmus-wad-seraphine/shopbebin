@@ -4,11 +4,13 @@ import { appState } from "./../../valtio/index";
 
 export const handleCancel = (id: string, setOrder?: (order: Order) => void) => {
   const cancel = async () => {
-    const response = await fetch(`/api/orders/status/${id}?status=${OrderStatus.CANCELLED}`, {
-      method: "POST",
+    const response = await fetch(`/api/orders/${id}`, {
+      method: "PATCH",
       headers: {
         Authorization: `Bearer ${appState.profile?.token}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({ status: OrderStatus.CANCELLED }),
     });
 
     const updatedOrder: Order = await response.json();

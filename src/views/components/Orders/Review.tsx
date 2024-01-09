@@ -1,4 +1,4 @@
-import { type CartItem, type Order, type Review } from "@prisma/client";
+import { type CartItem, type Order, OrderStatus, type Review } from "@prisma/client";
 import { appState, type Profile } from "@views/valtio";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
@@ -44,11 +44,13 @@ const ReviewProduct = ({ orderId, cart, isOpen, onSetOrder }: ReviewProps) => {
   const handleUpdateReviewState = async () => {
     if (!appState.profile) return;
 
-    const response = await fetch(`/api/orders/status/${orderId}?status=REVIEWED`, {
-      method: "POST",
+    const response = await fetch(`/api/orders/${orderId}`, {
+      method: "PATCH",
       headers: {
         Authorization: `Bearer ${appState.profile.token}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({ status: OrderStatus.REVIEWED }),
     });
 
     const updatedOrder = await response.json();

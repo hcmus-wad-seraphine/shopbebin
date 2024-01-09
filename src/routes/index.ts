@@ -41,7 +41,7 @@ router.get("/orders", requireAuth, ordersController.fetchOrders);
 router.get("/orders/status/:status", requireAuth, ordersController.fetchOrdersByStatus);
 router.get("/orders/:id", requireAuth, ordersController.fetchOrderById);
 router.post("/orders", requireAuth, ordersController.putOrder);
-router.patch("/orders/:id", requireAdminAuth, ordersController.patchOrder);
+router.patch("/orders/:id", requireAuth, ordersController.patchOrder);
 
 router.post("/reviews", requireAuth, reviewsController.makeReview);
 

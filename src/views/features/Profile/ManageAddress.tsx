@@ -1,85 +1,83 @@
 import { type Address, type User } from "@prisma/client";
 import { addressToString } from "@utils/address";
-import { appActions, appState } from "@views/valtio";
-import { useEffect, useState } from "react";
-import { useSnapshot } from "valtio";
+import { appState } from "@views/valtio";
+import { useState } from "react";
 
 import AddressRow from "./AddressRow";
 import AddressTitleRow from "./AddressTitleRow";
 
-const ManageAddress = () => {
-  const { profile } = useSnapshot(appState);
-  const { addresses } = profile?.user as User;
+type AddressMap = Record<string, Address>;
 
-  const [items, setItems] = useState<string[]>([]);
-  const [newAddress, setNewAddress] = useState<Address>({
-    unitNumber: "",
-    street: "",
-    district: "",
-    city: "",
-  });
-  const [deletedAddressesIndex, setDeletedAddressesIndex] = useState<number[]>([]);
+const handleChangeAddresses = (newAddresses: Address[]) => {
+  const changeCurrentAddress = async () => {
+    if (!appState.profile) return;
 
-  const handleUpdateProfile = async (user: User) => {
+    const user: User = { ...appState.profile.user, addresses: newAddresses };
+
     await fetch("/api/profile/update", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${profile?.token}`,
+        Authorization: `Bearer ${appState.profile.token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
     });
+
+    window.location.reload();
   };
 
-  const handleChangeCurrentAddress: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    if (!profile) return;
+  changeCurrentAddress().catch(console.error);
+};
 
-    const currentAddress = event.target.value;
-    const addressStrings = addresses.map((address) => addressToString(address));
-    const index = addressStrings.indexOf(currentAddress);
-    const newAddresses = Array.from(addresses);
-    newAddresses.splice(index, 1);
-    newAddresses.unshift(addresses[index]);
+const emptyAddress: Address = {
+  unitNumber: "",
+  street: "",
+  district: "",
+  city: "",
+};
 
-    const user: User = { ...(profile.user as User), addresses: newAddresses };
+const ManageAddress = () => {
+  if (!appState.profile) return null;
 
-    appActions.updateProfile(user);
-    handleUpdateProfile(user).catch((err) => {
-      console.log(err);
-    });
+  const defaultAddressMap: AddressMap = {};
+  appState.profile.user.addresses.forEach((address) => {
+    defaultAddressMap[addressToString(address)] = address;
+  });
+
+  const [addressMap, setAddressMap] = useState<AddressMap>(defaultAddressMap);
+  const [newAddress, setNewAddress] = useState<Address>(emptyAddress);
+  const [selectedKey, setSelectedKey] = useState<string>("");
+
+  const handleSelectAddress = (key: string) => {
+    setSelectedKey(key);
   };
 
   const handleAddAddress = () => {
-    if (!profile) return;
-
-    setItems([addressToString(newAddress), ...items]);
-
-    const newAddresses = [...Array.from(addresses), newAddress];
-    const user: User = { ...(profile.user as User), addresses: newAddresses };
-
-    appActions.updateProfile(user);
-    handleUpdateProfile(user).catch((err) => {
-      console.log(err);
-    });
+    addressMap[addressToString(newAddress)] = newAddress;
+    setNewAddress(emptyAddress);
   };
 
-  const handleRemoveAddress = () => {
-    if (!profile) return;
-
-    const newAddresses = Array.from(addresses).filter(
-      (address, index) => !deletedAddressesIndex.includes(index),
-    );
-    const user: User = { ...(profile.user as User), addresses: newAddresses };
-
-    appActions.updateProfile(user);
-    handleUpdateProfile(user).catch((err) => {
-      console.log(err);
-    });
+  const handleUpdateAddress = (key: string, address: Address) => {
+    setAddressMap({ ...addressMap, [key]: address });
   };
 
-  useEffect(() => {
-    setItems(addresses.map((address) => addressToString(address)));
-  }, []);
+  const handleDeleteAddress = (key: string) => {
+    const newAddressMap = { ...addressMap };
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete newAddressMap[key];
+    setAddressMap(newAddressMap);
+  };
+
+  const handleSave = () => {
+    let newAddresses = Object.values(addressMap);
+
+    if (selectedKey !== "" && addressMap[selectedKey]) {
+      newAddresses = newAddresses.filter((address) => addressToString(address) !== selectedKey);
+      newAddresses.unshift(addressMap[selectedKey]);
+    }
+
+    handleChangeAddresses(newAddresses);
+  };
 
   return (
     <div className="flex-col gap-5">
@@ -87,17 +85,17 @@ const ManageAddress = () => {
         <h1 className="text-lg font-medium text-secondary">Select current address</h1>
         <select
           className="w-full px-2 py-1 rounded-full border-2 border-primary"
-          onChange={handleChangeCurrentAddress}
-          name="address"
-          id="address"
+          onChange={(event) => {
+            handleSelectAddress(event.target.value);
+          }}
         >
-          {items.map((item, index) => (
+          {Object.keys(addressMap).map((address, index) => (
             <option
               className="w-full px-2 py-3 rounded-full border-2 border-primary"
               key={index}
-              value={item}
+              value={address}
             >
-              {item}
+              {address}
             </option>
           ))}
         </select>
@@ -145,25 +143,23 @@ const ManageAddress = () => {
 
       <div className="flex-col gap-2 w-full mb-10">
         <h1 className="text-lg font-medium text-secondary">Update address</h1>
-        <AddressTitleRow />
-        {addresses.map((item, index) => {
-          if (deletedAddressesIndex.includes(index)) return null;
 
-          return (
-            <AddressRow
-              key={index}
-              address={item}
-              index={index}
-              setDeletedAddressesIndex={setDeletedAddressesIndex}
-              indices={deletedAddressesIndex}
-            />
-          );
-        })}
+        <AddressTitleRow />
+
+        {Object.keys(addressMap).map((key) => (
+          <AddressRow
+            key={key}
+            addressKey={key}
+            address={addressMap[key]}
+            onUpdateAddress={handleUpdateAddress}
+            onDeleteAddress={handleDeleteAddress}
+          />
+        ))}
       </div>
 
       <button
         className="text-white bg-primary font-medium text-lg rounded-full py-2"
-        onClick={handleRemoveAddress}
+        onClick={handleSave}
       >
         Save
       </button>

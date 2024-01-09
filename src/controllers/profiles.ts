@@ -7,6 +7,7 @@ import { hashPassword } from "./utils";
 
 export const changePassword: RequestHandler = (req, res) => {
   const { id, password, newPassword } = req.body;
+
   getUser(id)
     .then((user) => {
       if (user === null) {

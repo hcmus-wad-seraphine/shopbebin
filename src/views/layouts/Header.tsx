@@ -30,7 +30,7 @@ const Header = ({ isLogIn }: Props) => {
           <Navigator
             icon={<i className="fas fa-shopping-cart"></i>}
             href="/cart"
-            title={`Cart (${profile?.user.cart.length ?? 0})`}
+            title={`Cart (${profile?.user.cart ? profile.user.cart.length : 0})`}
           />
           <Navigator
             icon={<i className="fas fa-clipboard"></i>}

@@ -1,5 +1,5 @@
 import { type User } from "@prisma/client";
-import { appState } from "@views/valtio";
+import { appActions, appState } from "@views/valtio";
 import { useState } from "react";
 import { useSnapshot } from "valtio";
 
@@ -51,10 +51,8 @@ const ChangePassword = () => {
 
     if (response.ok) {
       setNoti("Change password successfully!");
-      appState.profile = {
-        token: profile?.token as string,
-        user: (await response.json()) as User,
-      };
+      const user = await response.json();
+      appActions.updateProfile(user);
       return true;
     } else {
       setNoti(response.statusText);
